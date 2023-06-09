@@ -7,11 +7,13 @@ public class PlayerCon : MonoBehaviour
 {
     // 스피드 조정 변수
     [Header("플레이어 스탯")]
+    [SerializeField] private float _hp;
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _runSpeed;
     [SerializeField] private float _crouchSpeed;
     private float _speed;
     
+
     // 점프, 대쉬 정도
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _dashForce;
@@ -79,9 +81,10 @@ public class PlayerCon : MonoBehaviour
         Move();
         CameraRotation();
         CharacterRotation();
-        Debug.Log($"{_runToggle} +{ _runTimer}");
+        
     }
 
+   
     // 지면 체크
     private void IsGround()
     {
@@ -111,8 +114,7 @@ public class PlayerCon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            _rig.velocity = _dirVector * _dashForce;
-            _runTimer = 0;
+            Dash();
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -141,12 +143,16 @@ public class PlayerCon : MonoBehaviour
         _isRun = true;
         _speed = _runSpeed;
     }
-
+    private void Dash()
+    {
+        _rig.velocity = _dirVector * _dashForce;
+    }
     // 달리기 취소
     private void RunningCancel()
     {
         _isRun = false;
         _speed = _walkSpeed;
+        _runTimer = 0;
     }
 
     // 앉기 시도

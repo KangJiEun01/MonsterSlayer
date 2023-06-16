@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class BulletCon : MonoBehaviour
 {
-    Rigidbody rb;
-    void Start()
+    public void Init()
     {
-        rb = GetComponent<Rigidbody>();
-        Invoke("BulletDestroy", 2f);
+        Invoke("BulletDestroy",0.3f);
     }
 
-    void Update()
-    {
-        
-    }
     private void OnCollisionEnter(Collision collision)
     {
         BulletDestroy();
@@ -22,6 +16,5 @@ public class BulletCon : MonoBehaviour
     void BulletDestroy()
     {
         gameObject.SetActive(false);
-        rb.velocity = Vector3.zero;
     }
 }

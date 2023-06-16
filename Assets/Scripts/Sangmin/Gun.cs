@@ -16,8 +16,10 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform _targetPosition;
     [SerializeField] GameObject _bulletParent;
     
+    bool inAttack = false;
     GameObject[] _bulletPool;
     int _poolIndex;
+    int _invokeIdx;
     void Start()
     {
         InstBullet();
@@ -44,16 +46,24 @@ public class Gun : MonoBehaviour
     }
     void Fire()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && inAttack == false)
         {
-
-            Vector3 fireP = new Vector3(_firePosition.position.x, _firePosition.position.y, _firePosition.position.z);
-            _bulletPool[_poolIndex].SetActive(true);      
-            _bulletPool[_poolIndex].transform.position = fireP;
-            Rigidbody rb = _bulletPool[_poolIndex++].GetComponent<Rigidbody>();
+            Rigidbody rb = _bulletPool[_poolIndex].GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
+            _bulletPool[_poolIndex].SetActive(true);
+            _bulletPool[_poolIndex].transform.rotation =  Quaternion.Euler(Vector3.forward);
+            _bulletPool[_poolIndex++].transform.position = _firePosition.position + _firePosition.forward;
+            rb.gameObject.GetComponent<BulletCon>().Init();
+            IndexCheck();
             transform.LookAt(_targetPosition);
             rb.AddForce(transform.forward * _bulletSpeed,ForceMode.Impulse);
-            IndexCheck();
+            inAttack = true;
+            Invoke("StopAttack", _attackSpeed);
         }
+
+    }
+    void StopAttack()
+    {
+        inAttack = false;
     }
 }

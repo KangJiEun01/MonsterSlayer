@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class PlayerCon : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerCon : MonoBehaviour
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _runSpeed;
     [SerializeField] private float _crouchSpeed;
+    [SerializeField] private float _dashTimer;
     private float _speed;
     
 
@@ -23,7 +25,7 @@ public class PlayerCon : MonoBehaviour
     //상태관리변수
     private float _runTimer;
     private bool _runToggle;
-    private float _dashTimer;
+    
     private bool _canDash = true;
     private Vector3 _dirVector;
     
@@ -76,7 +78,8 @@ public class PlayerCon : MonoBehaviour
     {
         IsGround();
         TryJump();
-        TryRunDash();
+        TryRun();
+        TryDash();
         TryCrouch();
         Move();
         CameraRotation();
@@ -110,12 +113,9 @@ public class PlayerCon : MonoBehaviour
     }
 
     // 달리기 시도
-    private void TryRunDash()
+    private void TryRun()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Dash();
-        }
+        
         if (Input.GetKey(KeyCode.LeftShift))
         {
             Running();
@@ -133,7 +133,27 @@ public class PlayerCon : MonoBehaviour
         }
 
     }
-
+    private void TryDash()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (_canDash)
+            {
+                _canDash = false;
+                Invoke("DashTimer", _dashCool); ;
+                _rig.velocity = _dirVector * _dashForce;
+            }
+            else
+            {
+                Debug.Log("대쉬 쿨 입니다");
+            }
+            
+        }
+    }
+    void DashTimer()
+    {
+        _canDash = true;
+    }
     // 달리기
     private void Running()
     {
@@ -143,10 +163,7 @@ public class PlayerCon : MonoBehaviour
         _isRun = true;
         _speed = _runSpeed;
     }
-    private void Dash()
-    {
-        _rig.velocity = _dirVector * _dashForce;
-    }
+
     // 달리기 취소
     private void RunningCancel()
     {

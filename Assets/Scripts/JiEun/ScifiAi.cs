@@ -13,7 +13,7 @@ public class ScifiAi : MonoBehaviour
     Transform _scifi;
     int _nowpoint = 0;
 
-    float WalkTime_Sumcooltime = 3; //x초 지나면 다음 포인트로 랜덤으로 바꿀 수 있으면 바꿔보기
+    float WalkTime_Sumcooltime = 3; //x초 지나면 다음 포인트로 랜덤으로  바꿔보기
     float WalkTime_current;//시간이 x초 남았나
     float WalkTime_start; //point++ 까지 남은 초
                           //방향과 같이 캐릭터 로테이션

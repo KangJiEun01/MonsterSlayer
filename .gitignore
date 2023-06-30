@@ -81,6 +81,9 @@ crashlytics-build.properties
 /Assets/Hands_Weapons_Animations_Pack_Update
 /Assets/MECHANICAL CORPS PACK
 /Assets/GrigoriyArx
+/Assets/Mech
+/Assets/Rhino
+/Assets/Wolf_Animated
 
 /Assets/AllSkyFree.meta
 /Assets/Yughues Free PBR Metal Plates.meta
@@ -92,3 +95,6 @@ crashlytics-build.properties
 /Assets/Hands_Weapons_Animations_Pack_Update.meta
 /Assets/MECHANICAL CORPS PACK.meta
 /Assets/GrigoriyArx.meta
+/Assets/Mech.meta
+/Assets/Rhino.meta
+/Assets/Wolf_Animated.meta

@@ -6,14 +6,14 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     //공격 관련 변수
-    [SerializeField] private float _attackSpeed;
-    [SerializeField] private float _attackDamage;
-    [SerializeField] private float _bulletSpeed;
+    [SerializeField] private float _attackSpeed = 0.1F;
+    [SerializeField] private float _attackDamage = 1;
+    [SerializeField] private float _bulletSpeed = 50;
 
     // 총알 발사 관리 변수
     [SerializeField] GameObject _bullet;
     [SerializeField] Transform _firePosition;
-    [SerializeField] float reloadTime;
+    [SerializeField] float reloadTime = 1;
     Transform _targetPosition;
     [SerializeField] GameObject _bulletParent;
 
@@ -29,10 +29,12 @@ public class Gun : MonoBehaviour
     Vector3 ScreenCenter;
     Ray ray1;
     Ray ray2;
+    Animator _animator;
 
 
     void Start()
-    {        
+    {   
+        _animator = GetComponent<Animator>();
         InstBullet();     
         _currentBullet = _maxBullet;
     }
@@ -74,6 +76,7 @@ public class Gun : MonoBehaviour
 
     IEnumerator ReloadBullet()
     {
+        _animator.Play("Reload");
         for(float f = reloadTime; f > 0; f-= 0.1f)
         {
             Debug.Log("장전중입니다");

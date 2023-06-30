@@ -57,10 +57,12 @@ public class PlayerCon : MonoBehaviour
     private Camera _camera;
     private Rigidbody _rig;
     private CapsuleCollider _collider;
+    [SerializeField] Animator _animator;
 
 
     void Start()
     {
+       
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         // 컴포넌트 할당
@@ -162,6 +164,7 @@ public class PlayerCon : MonoBehaviour
 
         _isRun = true;
         _speed = _runSpeed;
+        _animator.Play("Run");
     }
 
     // 달리기 취소
@@ -223,12 +226,18 @@ public class PlayerCon : MonoBehaviour
         float _moveDirZ = Input.GetAxisRaw("Vertical");
         if (_moveDirX == 0 && _moveDirZ == 0)
         {
+            _animator.Play("Idle");
             _isIdle = true;
             _runToggle = false;
         }
         else
         {
             _isIdle = false;
+            if (!_isRun)
+            {
+                _animator.Play("Walk");
+            }
+
         }
         Vector3 _moveHorizontal = transform.right * _moveDirX;
         Vector3 _moveVertical = transform.forward * _moveDirZ;

@@ -10,13 +10,20 @@ public class BossAi : MonoBehaviour
     [SerializeField] Transform player02;
     [SerializeField] Transform BossTrans;
     float BossSpeed = 20;
+    Vector3 bossCenterPoint;
+    [SerializeField] Camera cam;
+    float HP = 100;
     //[SerializeField] Transform Test;
+    //public Transform target;
+    float radius = 3f;
+    float shake=1f;
 
     void Start()
     {
         // BossTrans.position = new Vector3(521, 0, 570); 
-        
-        animator.Play("Idle"); //기본대기
+        bossCenterPoint = transform.position;
+        animator.Play("In"); //기본대기
+        Invoke("CameraSk", 4.7f);
         //animator.Play("1_Atk1"); // 두손 들어 땅치기
         //animator.Play("1_Atk2"); //손벽짝
         //animator.Play("Stage"); //부서짐 Dead랑 같음
@@ -29,23 +36,63 @@ public class BossAi : MonoBehaviour
     }
     void Update()
     {
-        if (Vector3.Distance(player02.position, BossTrans.position) > 8f)
+        Invoke("DistanceCheck", 8f);
+        //Skill1();
+        //CameraSk();
+        if(HP < 0)
         {
-            Player();
+            Dead();
         }
-        else if(Vector3.Distance(player02.position, BossTrans.position) < 8f)
+    }
+    void DistanceCheck() // 거리로 체크하지 말고 시간으로 체크합시다.
+    {
+        if (Vector3.Distance(player02.position, BossTrans.position) >8f)
+        {
+            Playerfollow();
+        }
+        else if (Vector3.Distance(player02.position, BossTrans.position) > 12f)
+        {
+            //Skill1();
+        }
+        else if (Vector3.Distance(player02.position, BossTrans.position) < 8f)
         {
             Atk02();
         }
     }
-    void Player()
+    void Playerfollow()
     {
         transform.LookAt(player02);
         transform.position = Vector3.MoveTowards(transform.position, player02.position, BossSpeed * Time.deltaTime);
     }
+    void Atk01()
+    {
+
+    }
     void Atk02()
     {
+        GetComponent<BossAttack02>().enabled = true;
         transform.LookAt(player02);
-        animator.Play("1_Atk2");// 충돌하면 HP 감소
+        Invoke("CameraSk", 1.5f);
+        //animator.Play("1_Atk2");// 충돌하면 HP 감소 추가
+        //Invoke("CameraSk", 0.5f);
+    }
+    void Skill1() //가속도로 돌게 수정 //시작 위치 수정
+    {
+        GetComponent<Skill1>().enabled = true;
+        float angle = Time.time * BossSpeed;
+        Vector3 targetPos = bossCenterPoint + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * radius;
+        transform.position = targetPos;
+    }
+    void Dead()
+    {
+        GetComponent<BossDead>().enabled = true;
+    }
+    void CameraSk()
+    {
+        cam.GetComponent<CameraShake>().enabled = true;
+    }
+    public float SetShake()
+    {
+        return shake;
     }
 }

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 using UnityEngine;
 
-public class PlayerCon : MonoBehaviour
+public class PlayerCon : GenericSingleton<PlayerCon>
 {
     // 스피드 조정 변수
     [Header("플레이어 스탯")]
@@ -28,8 +28,10 @@ public class PlayerCon : MonoBehaviour
     
     private bool _canDash = true;
     private Vector3 _dirVector;
-    
-    
+    float _moveDirX;
+    float _moveDirZ;
+
+
 
     // 상태 변수
     private bool _isRun = false;
@@ -42,10 +44,12 @@ public class PlayerCon : MonoBehaviour
     private float _crouchPosY;
     private float _originPosY;
     private float _applyCrouchPosY;
-
+    float m_HorizontalAngle, m_VerticalAngle;
     // 민감도
     [SerializeField]
     private float _lookSensitivity;
+    [SerializeField]
+    Transform CameraPosition;
 
     // 카메라 한계
     [SerializeField]
@@ -57,7 +61,7 @@ public class PlayerCon : MonoBehaviour
     private Camera _camera;
     private Rigidbody _rig;
     private CapsuleCollider _collider;
-    [SerializeField] Animator _animator;
+    Animator _animator;
 
 
     void Start()
@@ -68,7 +72,7 @@ public class PlayerCon : MonoBehaviour
         // 컴포넌트 할당
         _collider = GetComponent<CapsuleCollider>();
         _rig = GetComponent<Rigidbody>();
-
+        _animator = GenericSingleton<Gun>.Instance.GetComponent<Animator>();
         // 초기화
         _speed = _walkSpeed;
 
@@ -84,8 +88,7 @@ public class PlayerCon : MonoBehaviour
         TryDash();
         TryCrouch();
         Move();
-        CameraRotation();
-        CharacterRotation();
+        Rotate();
         
     }
 
@@ -164,7 +167,11 @@ public class PlayerCon : MonoBehaviour
 
         _isRun = true;
         _speed = _runSpeed;
-        _animator.Play("Run");
+        if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<Gun>.Instance.GetComponent<Gun>().IsReload && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().InAttack)
+        {
+            _animator.Play("Run");
+        }
+        
     }
 
     // 달리기 취소
@@ -222,18 +229,21 @@ public class PlayerCon : MonoBehaviour
 
     private void Move()
     {
-        float _moveDirX = Input.GetAxisRaw("Horizontal");
-        float _moveDirZ = Input.GetAxisRaw("Vertical");
+        _moveDirX = Input.GetAxisRaw("Horizontal");
+        _moveDirZ = Input.GetAxisRaw("Vertical");
         if (_moveDirX == 0 && _moveDirZ == 0)
         {
-            _animator.Play("Idle");
+            if (!GenericSingleton<Gun>.Instance.GetComponent<Gun>().IsReload && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().InAttack)
+            {
+                _animator.Play("Idle");
+            }
             _isIdle = true;
             _runToggle = false;
         }
         else
         {
             _isIdle = false;
-            if (!_isRun)
+            if (!_isRun && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().IsReload && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().InAttack)
             {
                 _animator.Play("Walk");
             }
@@ -247,23 +257,44 @@ public class PlayerCon : MonoBehaviour
         _rig.MovePosition(transform.position + _velocity * Time.deltaTime);
     }
 
-    private void CameraRotation()
+    //private void CameraRotation()
+    //{
+    //    float _xRotation = Input.GetAxisRaw("Mouse Y");
+    //    float _cameraRotationX = _xRotation * _lookSensitivity;
+    //    _currentCameraRotationX -= _cameraRotationX;
+    //    _currentCameraRotationX = Mathf.Clamp(_currentCameraRotationX, - _cameraRotationLimit, _cameraRotationLimit);
+
+    //    _camera.transform.localEulerAngles = new Vector3(_currentCameraRotationX, 0, 0);
+    //}
+
+    //private void CharacterRotation()
+    //{
+    //    float _yRotation = Input.GetAxisRaw("Mouse X");
+    //    Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * _lookSensitivity;
+    //    _rig.MoveRotation(_rig.rotation * Quaternion.Euler(_characterRotationY));
+    //}
+    void Rotate()
     {
-        float _xRotation = Input.GetAxisRaw("Mouse Y");
-        float _cameraRotationX = _xRotation * _lookSensitivity;
+        // Turn player
+        float turnPlayer = Input.GetAxis("Mouse X") * _lookSensitivity;
+        m_HorizontalAngle = m_HorizontalAngle + turnPlayer;
 
-        _currentCameraRotationX -= _cameraRotationX;
-        _currentCameraRotationX = Mathf.Clamp(_currentCameraRotationX, - _cameraRotationLimit, _cameraRotationLimit);
+        if (m_HorizontalAngle > 360) m_HorizontalAngle -= 360.0f;
+        if (m_HorizontalAngle < 0) m_HorizontalAngle += 360.0f;
 
-        _camera.transform.localEulerAngles = new Vector3(_currentCameraRotationX, 0f, 0f);
+        Vector3 currentAngles = transform.localEulerAngles;
+        currentAngles.y = m_HorizontalAngle;
+        transform.localEulerAngles = currentAngles;
+
+        // Camera look up/down
+        var turnCam = -Input.GetAxis("Mouse Y");
+        turnCam = turnCam * _lookSensitivity;
+        m_VerticalAngle = Mathf.Clamp(turnCam + m_VerticalAngle, -89.0f, 89.0f);
+        currentAngles = CameraPosition.transform.localEulerAngles;
+        currentAngles.x = m_VerticalAngle;
+        CameraPosition.transform.localEulerAngles = currentAngles;
     }
-
-    private void CharacterRotation()
-    {
-        float _yRotation = Input.GetAxisRaw("Mouse X");
-        Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * _lookSensitivity;
-        _rig.MoveRotation(_rig.rotation * Quaternion.Euler(_characterRotationY));
-    }
+    
 }
 
 

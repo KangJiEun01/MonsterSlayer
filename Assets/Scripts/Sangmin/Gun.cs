@@ -1,27 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
-public class Gun : MonoBehaviour
+public class Gun : GenericSingleton<Gun>
 {
     //공격 관련 변수
-    [SerializeField] private float _attackSpeed = 0.1F;
+    [SerializeField] private float _attackSpeed = 0.167f;
     [SerializeField] private float _attackDamage = 1;
     [SerializeField] private float _bulletSpeed = 50;
-
+    [SerializeField] private float _spreadAngle = 0;
     // 총알 발사 관리 변수
     [SerializeField] GameObject _bullet;
     [SerializeField] Transform _firePosition;
-    [SerializeField] float reloadTime = 1;
-    Transform _targetPosition;
+    [SerializeField] float reloadTime = 3.5f;
     [SerializeField] GameObject _bulletParent;
-
+    [SerializeField] GameObject _player;
     //재장전 관리 변수
     [SerializeField] int _maxBullet;
     int _currentBullet;
     bool _isReload;
+    public bool IsReload { get { return _isReload; } }
     bool inAttack = false;
+    public bool InAttack { get { return inAttack; } }
     GameObject[] _bulletPool;
     int _poolIndex;
     int _invokeIdx;
@@ -91,20 +94,21 @@ public class Gun : MonoBehaviour
     {
         if (_currentBullet > 0 && !_isReload)
         {
-            Debug.Log(_target);
+            inAttack = true;
+            _animator.Play("Shot");
             ray2 = new Ray(transform.position, _target);
             _currentBullet--;
             Debug.Log("현재 장탄수 : " + _currentBullet);
             Rigidbody rb = _bulletPool[_poolIndex].GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
             _bulletPool[_poolIndex].SetActive(true);
-            _bulletPool[_poolIndex].transform.rotation = Quaternion.LookRotation(transform.forward);
+            _bulletPool[_poolIndex].transform.rotation = Quaternion.LookRotation(transform.right);
             _bulletPool[_poolIndex++].transform.position = _firePosition.position + _firePosition.forward;
             rb.gameObject.GetComponent<BulletCon>().Init();
             IndexCheck();
-            transform.rotation = Quaternion.LookRotation(ray2.direction);
-            rb.AddForce(transform.forward * _bulletSpeed, ForceMode.Impulse);
-            inAttack = true;
+            //transform.rotation = Quaternion.LookRotation(ray2.direction);
+            Vector3 dir =  _target - _firePosition.position;
+            rb.AddForce(dir * _bulletSpeed, ForceMode.Impulse);
             Invoke("StopAttack", _attackSpeed);
         }
         else if(_currentBullet <= 0 && !_isReload)
@@ -118,4 +122,25 @@ public class Gun : MonoBehaviour
     {
         inAttack = false;
     }
+    //void Shot()
+    //{
+    //    float angle = Random.Range(0.0f, _spreadAngle * 0.5f);
+    //    Vector2 angleDir = Random.insideUnitCircle * Mathf.Tan(angle * Mathf.Deg2Rad);
+
+    //    Vector3 dir = Endpoint.transform.forward + (Vector3)angleDir;
+    //    dir.Normalize();
+    //    _bulletPool[_poolIndex].gameObject.SetActive(true);
+    //    _bulletPool[_poolIndex].Launch(dir, 200);
+    //}
+    //void Launch(Vector3 direction, float force)
+    //{
+    //    m_Owner = launcher;
+
+    //    transform.position = launcher.GetCorrectedMuzzlePlace();
+    //    transform.forward = launcher.EndPoint.forward;
+
+    //    gameObject.SetActive(true);
+    //    m_TimeSinceLaunch = 0.0f;
+    //    m_Rigidbody.AddForce(direction * force);
+    //}
 }

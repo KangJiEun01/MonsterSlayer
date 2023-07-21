@@ -31,6 +31,7 @@ public class NewCameraShake : MonoBehaviour
             // Èçµé¸² Á¾·á
             transform.localPosition = originalPosition;
             currentShakeDuration = 0f;
+            GetComponent<NewCameraShake>().enabled = false;
         }
     }
     void Shake()

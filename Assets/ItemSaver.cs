@@ -41,7 +41,7 @@ public class ItemData
 
 public enum ItemType
 {
-    Cube,
-    Sphere,
+    Food,
+    Steel,
 }
 

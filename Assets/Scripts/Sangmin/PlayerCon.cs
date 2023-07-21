@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCon : GenericSingleton<PlayerCon>
 {
+    //임시 serial
+    [SerializeField] GameObject Inven;
+
+
+
     // 스피드 조정 변수
     [Header("플레이어 스탯")]
     [SerializeField] private float _hp;
@@ -38,6 +45,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     private bool _isGround = true;
     private bool _isCrouch = false;
     private bool _isIdle = true;
+    private bool _helperClose = false; 
 
     // 앉았을 때 얼마나 앉을지 결정하는 변수
     [SerializeField]
@@ -89,7 +97,9 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         TryCrouch();
         Move();
         Rotate();
-        
+        OpenHelper();
+
+
     }
 
    
@@ -293,6 +303,31 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         currentAngles = CameraPosition.transform.localEulerAngles;
         currentAngles.x = m_VerticalAngle;
         CameraPosition.transform.localEulerAngles = currentAngles;
+    }
+    void OpenHelper()
+    {
+        RaycastHit hit;
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.F)) && _helperClose)
+        {
+            Debug.Log("인벤꺼짐");
+            GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("open");
+            Inven.SetActive(false);
+            _helperClose = false;
+            return;
+        }
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        if (Physics.Raycast(ray, out hit, 5f, 1 << LayerMask.NameToLayer("Helper")))
+        {
+            
+            Debug.Log("인벤열기 가능");
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("close");
+                _helperClose = true;
+                Debug.Log("인벤켜짐");
+                Inven.SetActive(true);
+            }
+        }
     }
     
 }

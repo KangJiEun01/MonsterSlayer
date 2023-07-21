@@ -123,7 +123,7 @@ public class BossAi : MonoBehaviour
     {
         Atk02();
         Patternsum = 1;
-        Time_Attack = GetComponent<BossAttack02>().setTime_Attack();
+       // Time_Attack = GetComponent<BossAttack02>().setTime_Attack();
 
     }
     void Playerfollow02()

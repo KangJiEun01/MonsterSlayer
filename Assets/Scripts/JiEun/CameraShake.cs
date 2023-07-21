@@ -10,7 +10,7 @@ public class CameraShake : MonoBehaviour
     // private float currentShakeDuration = 1f;
     //GameObject boss;
     [SerializeField] GameObject boss;
-    float currentShakeDuration;
+    float currentShakeDuration=2f;
 
 
     void Start()
@@ -18,6 +18,10 @@ public class CameraShake : MonoBehaviour
        // boss = GameObject.FindGameObjectWithTag("Boss");
         //originalPosition = transform.localPosition;
         originalPosition = transform.position;
+    }
+    private void OnEnable()
+    {
+        currentShakeDuration = 2f;
     }
 
     void Update()
@@ -65,10 +69,5 @@ public class CameraShake : MonoBehaviour
     {
         GetComponent<CameraShake>().enabled = false;
         //currentShakeDuration = 1f;
-    }
-
-    private void OnEnable()
-    {
-        currentShakeDuration=boss.GetComponent<BossAi>().SetShake();
     }
 }

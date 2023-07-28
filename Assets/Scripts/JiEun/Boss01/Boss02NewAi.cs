@@ -35,8 +35,8 @@ public class Boss02NewAi : MonoBehaviour
             StartAttack();
 
             yield return new WaitForSeconds(3f);
-            GetComponent<BossAttack02>().enabled = false;
-            GetComponent<BossAttack01>().enabled = false;
+            GetComponent<Boss02Attack02>().enabled = false;
+            GetComponent<Boss02Attack01>().enabled = false;
         }
     }
     private void StartAttack()
@@ -66,13 +66,13 @@ public class Boss02NewAi : MonoBehaviour
         }
         void Atk02()
         {
-            GetComponent<BossAttack02>().enabled = true;
+            GetComponent<Boss02Attack02>().enabled = true;
             //animator.Play("1_Atk2");// 충돌하면 HP 감소 추가
             //Invoke("CameraSk", 0.5f);
         }
         void Atk01()
         {
-            GetComponent<BossAttack01>().enabled = true;
+            GetComponent<Boss02Attack01>().enabled = true;
             //animator.Play("1_Atk2");// 충돌하면 HP 감소 추가
             //Invoke("CameraSk", 0.5f);
         }

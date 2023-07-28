@@ -7,10 +7,10 @@ public class Boss02Attack01 : MonoBehaviour
     [SerializeField] GameObject player02;
     [SerializeField] GameObject camera;
 
-    float BossSpeed = 20;
+    float BossSpeed = 5;
     private void OnEnable()
     {
-        GetComponent<Animator>().Play("3_Atk1");
+        GetComponent<Animator>().Play("2_Atk1");
         Invoke("CameraMove", 1.5f);
     }
     void Start()

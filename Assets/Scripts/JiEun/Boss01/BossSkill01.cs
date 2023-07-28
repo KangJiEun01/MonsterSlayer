@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossSkill01 : MonoBehaviour
 {
     [SerializeField] GameObject player02;
+    [SerializeField] GameObject camera;
 
     float BossSpeed = 500;
     float initialRotationSpeed = 50f; // 초기 속도
@@ -28,9 +29,13 @@ public class BossSkill01 : MonoBehaviour
     }
     void Update()
     {
+        Invoke("Skill01", 3f);
+    }
+    void Skill01()
+    {
         //transform.LookAt(player02.transform);
 
-        angle += BossSpeed * Time.deltaTime;
+        angle += BossSpeed * Time.deltaTime; //애니메이션의 일정 부분만 반복하게 하고 싶으면 새로 만들?
         if (angle >= 360f)
         {
             angle -= 360f;
@@ -46,7 +51,7 @@ public class BossSkill01 : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.LookRotation(player02.transform.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             _BossHp = 0;
         }

@@ -20,6 +20,12 @@ public class NewCameraShake : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void OnEnable()
+    {
+        currentShakeDuration = 2f;
+        Debug.Log("Ä«¸Þ¶óÄÑÁü");
+    }
+
     void Update()
     {
         if (currentShakeDuration > 0)

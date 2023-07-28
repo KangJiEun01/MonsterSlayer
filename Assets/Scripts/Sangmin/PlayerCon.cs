@@ -31,6 +31,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
 
     //상태관리변수
     private float _runTimer;
+    public float RunTimer { get { return _runTimer; } }
     private bool _runToggle;
     
     private bool _canDash = true;
@@ -133,12 +134,14 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         
         if (Input.GetKey(KeyCode.LeftShift))
         {
+            if(!_runToggle)GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().OpenRunToggleUI();
             Running();
             _runTimer += Time.deltaTime;
             if (_runTimer > 2)
             {
                 _runTimer = 0;
                 _runToggle = true;
+                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseRunToggleUI();
             }
         }
         
@@ -187,6 +190,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // 달리기 취소
     private void RunningCancel()
     {
+        GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseRunToggleUI();
         _isRun = false;
         _speed = _walkSpeed;
         _runTimer = 0;
@@ -229,12 +233,12 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         {
             count++;
             _posY = Mathf.Lerp(_posY, _applyCrouchPosY, 0.2f);
-            _camera.transform.localPosition = new Vector3(0, _posY, 0);
+            CameraPosition.localPosition = new Vector3(0, _posY, 0);
             if (count > 15)
                 break;
             yield return null;
         }
-        _camera.transform.localPosition = new Vector3(0, _applyCrouchPosY, 0);
+        CameraPosition.localPosition = new Vector3(0, _applyCrouchPosY, 0);
     }
 
     private void Move()
@@ -318,16 +322,16 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         if (Physics.Raycast(ray, out hit, 5f, 1 << LayerMask.NameToLayer("Helper")))
         {
-            
-            Debug.Log("인벤열기 가능");
+            if(!_helperClose)GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().OpenInvenCheckUI();
             if (Input.GetKeyDown(KeyCode.F))
             {
                 GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("close");
                 _helperClose = true;
                 Debug.Log("인벤켜짐");
+                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseInvenCheckUI();
                 Inven.SetActive(true);
             }
-        }
+        }else GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseInvenCheckUI();
     }
     
 }

@@ -6,6 +6,7 @@ public class UIBase : GenericSingleton<UIBase>
 {
     [SerializeField] GameObject _invenCheckUI;
     [SerializeField] GameObject _runToggle;
+    [SerializeField] GameObject _inventory;
     void Start()
     {
         
@@ -30,5 +31,13 @@ public class UIBase : GenericSingleton<UIBase>
     public void CloseRunToggleUI()
     {
         _runToggle?.SetActive(false);
+    }
+    public void OpenInvenUI()
+    {
+        _inventory.SetActive(true);
+    }
+    public void CloseInvenUI()
+    {
+        _inventory?.SetActive(false);
     }
 }

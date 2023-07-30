@@ -8,9 +8,6 @@ using UnityEngine;
 
 public class PlayerCon : GenericSingleton<PlayerCon>
 {
-    //임시 serial
-    [SerializeField] GameObject Inven;
-
 
 
     // 스피드 조정 변수
@@ -21,7 +18,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     [SerializeField] private float _crouchSpeed;
     [SerializeField] private float _dashTimer;
     private float _speed;
-    
+
 
     // 점프, 대쉬 정도
     [SerializeField] private float _jumpForce;
@@ -33,7 +30,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     private float _runTimer;
     public float RunTimer { get { return _runTimer; } }
     private bool _runToggle;
-    
+
     private bool _canDash = true;
     private Vector3 _dirVector;
     float _moveDirX;
@@ -46,7 +43,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     private bool _isGround = true;
     private bool _isCrouch = false;
     private bool _isIdle = true;
-    private bool _helperClose = false; 
+    private bool _helperClose = false;
 
     // 앉았을 때 얼마나 앉을지 결정하는 변수
     [SerializeField]
@@ -71,6 +68,11 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     private Rigidbody _rig;
     private CapsuleCollider _collider;
     Animator _animator;
+    AudioSource _audioSource;
+    int walkI;
+    float soundTimer;
+    [Header("Sounds")]
+    [SerializeField] AudioClip[] _walking;
 
 
     void Start()
@@ -82,6 +84,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _collider = GetComponent<CapsuleCollider>();
         _rig = GetComponent<Rigidbody>();
         _animator = GenericSingleton<Gun>.Instance.GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         // 초기화
         _speed = _walkSpeed;
 
@@ -144,6 +147,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
                 GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseRunToggleUI();
             }
         }
+        else if (_runToggle)  Running(); 
         
         if ((Input.GetKeyUp(KeyCode.LeftShift) && !_runToggle) || _isIdle) //달리기 토글이꺼져있거나 멈추면 달리기 끄기 
         {  
@@ -183,6 +187,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<Gun>.Instance.GetComponent<Gun>().IsReload && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().InAttack)
         {
             _animator.Play("Run");
+            MovingSound(0.25f);
         }
         
     }
@@ -260,6 +265,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
             if (!_isRun && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().IsReload && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().InAttack)
             {
                 _animator.Play("Walk");
+                MovingSound(0.3f);
             }
 
         }
@@ -315,7 +321,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         {
             Debug.Log("인벤꺼짐");
             GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("open");
-            Inven.SetActive(false);
+            GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseInvenUI();
             _helperClose = false;
             return;
         }
@@ -329,11 +335,21 @@ public class PlayerCon : GenericSingleton<PlayerCon>
                 _helperClose = true;
                 Debug.Log("인벤켜짐");
                 GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseInvenCheckUI();
-                Inven.SetActive(true);
+                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().OpenInvenUI();
             }
         }else GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseInvenCheckUI();
     }
-    
+    private void MovingSound(float delay)
+    {
+        soundTimer += Time.deltaTime;
+        if (soundTimer > delay)
+        {
+            soundTimer = 0;
+            _audioSource.PlayOneShot(_walking[walkI], 1f);
+            walkI++;
+            if (walkI == 4) walkI = 0;
+        }
+    }
 }
 
 

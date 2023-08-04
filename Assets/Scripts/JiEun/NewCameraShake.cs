@@ -20,7 +20,7 @@ public class NewCameraShake : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnEnable()
+    public void OnEnable()
     {
         currentShakeDuration = 2f;
         Debug.Log("카메라켜짐");
@@ -40,7 +40,7 @@ public class NewCameraShake : MonoBehaviour
             GetComponent<NewCameraShake>().enabled = false;
         }
     }
-    void Shake()
+    public void Shake()
     {
         transform.localPosition = originalPosition + Random.insideUnitSphere * shakeAmount;  // 카메라 위치 랜덤
         currentShakeDuration -= Time.deltaTime * decreaseFactor; //시간감소

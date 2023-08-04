@@ -20,6 +20,7 @@ public class BossCollider : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             //PlayerHP -= 10;
+            //Debug.Log("Hp--");
         }
     }
 }

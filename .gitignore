@@ -84,6 +84,8 @@ crashlytics-build.properties
 /Assets/Mech
 /Assets/Rhino
 /Assets/Wolf_Animated
+/Assets/Sci-Fi UI
+/Assets/SciFiWarriorPBRHPPolyart
 
 /Assets/AllSkyFree.meta
 /Assets/Yughues Free PBR Metal Plates.meta
@@ -99,3 +101,5 @@ crashlytics-build.properties
 /Assets/Rhino.meta
 /Assets/Wolf_Animated.meta
 /Assets/LowlyPoly
+/Assets/Sci-Fi UI.meta
+/Assets/SciFiWarriorPBRHPPolyart.meta

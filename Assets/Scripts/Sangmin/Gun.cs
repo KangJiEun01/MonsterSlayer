@@ -190,7 +190,7 @@ public class Gun : GenericSingleton<Gun>
                     currentBullet = _bulletPool[_poolIndex++];
                     currentBullet.SetActive(true);
                     currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
-                    currentBullet.transform.position = hit.point;
+                    currentBullet.transform.position = hit.point + hit.normal*0.1f;
                     IndexCheck();
                 }
                 

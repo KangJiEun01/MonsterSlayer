@@ -274,7 +274,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _dirVector = (_moveHorizontal + _moveVertical).normalized;
         Vector3 _velocity =  _dirVector * _speed;
 
-        _rig.MovePosition(transform.position + _velocity * Time.deltaTime);
+        _rig.AddForce( _velocity);
     }
 
     //private void CameraRotation()

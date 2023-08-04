@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class Boss03NewAi : MonoBehaviour
+public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스로 관리 하거나, 쿨타임 주고받기 +++++++++++
 {
     [SerializeField] Transform player;
     Animator animator;
@@ -10,7 +10,7 @@ public class Boss03NewAi : MonoBehaviour
 
     public float BossSpeed = 5f; // 보스 몬스터 이동 속도
     public float attackRange = 30f;   // 공격 범위
-    public float attackCooldown = 1f; // 공격 쿨다운 시간 //공격패턴에 따라 시간 주고 받기
+    public float attackCooldown = 4f; // 공격 쿨다운 시간 //공격패턴에 따라 시간 주고 받기
      // 플레이어의 Transform 컴포넌트
     private bool Attacking=false;       // 현재 공격 중인지
     private float attackTimer;      // 공격 쿨다운 타이머
@@ -19,7 +19,7 @@ public class Boss03NewAi : MonoBehaviour
     {
         //Transform player = player02.transform;
         animator = GetComponent<Animator>();
-        //animator.Play("In"); 테스트 후 인으로 바꿔주기
+        animator.Play("In");// 테스트 후 인으로 바꿔주기
 
         //animator.Play("Idle"); //서서대기
 
@@ -27,7 +27,7 @@ public class Boss03NewAi : MonoBehaviour
         //animator.Play("3_Skill2"); //손에 달린 총쏘기
         //animator.Play("3_Skill3"); //부르부르?
 
-        animator.Play("3_Run"); //달리기
+        //animator.Play("3_Run"); //달리기
 
         //animator.Play("3_Atk1");  //한발 들어 찍기
         //animator.Play("3_Atk2"); //어깨에 달린 총쏘기
@@ -40,8 +40,13 @@ public class Boss03NewAi : MonoBehaviour
 
     void Update()
     {
+        Invoke("DisCheck", 8.0f);
+    }   
+
+    void DisCheck()
+    {
         transform.LookAt(player.transform);
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             BossHp = 60;
         }
@@ -54,7 +59,7 @@ public class Boss03NewAi : MonoBehaviour
             BossHp = 0;
         }
 
-        if (BossHp <=0)
+        if (BossHp <= 0)
         {
             Attacking = true;
             GetComponent<Boss03Attack01>().enabled = false;
@@ -64,19 +69,23 @@ public class Boss03NewAi : MonoBehaviour
             GetComponent<Boss03Attack03>().enabled = false;
             GetComponent<Boss03Dead>().enabled = true;
         }
-        if (Attacking==false)
+        if (Attacking == false)
         {
             transform.LookAt(player.transform);
             Vector3 playerVector = new Vector3(player.transform.position.x, 0, player.transform.position.z);
-            
-            if(Vector3.Distance(player.transform.position, transform.position) > 50f)
-            {
-                Skill();
-                Attacking = true;
-                attackTimer = attackCooldown;
-            }
 
-            else if (Vector3.Distance(player.transform.position, transform.position) <= 50f && Vector3.Distance(player.transform.position, transform.position) > 14f) 
+            //if(Vector3.Distance(player.transform.position, transform.position) > 50f)
+            //{
+            //    Skill();
+            //    Attacking = true;
+            //    attackTimer = attackCooldown;
+            //}
+            //if (Vector3.Distance(player.transform.position, transform.position) <= 50f && Vector3.Distance(player.transform.position, transform.position) > 14f) 
+            //{
+            //    animator.Play("3_Run");
+            //    transform.position = Vector3.MoveTowards(transform.position, playerVector, BossSpeed * Time.deltaTime);
+            //}
+            if (Vector3.Distance(player.transform.position, transform.position) > 14f)
             {
                 animator.Play("3_Run");
                 transform.position = Vector3.MoveTowards(transform.position, playerVector, BossSpeed * Time.deltaTime);
@@ -89,45 +98,52 @@ public class Boss03NewAi : MonoBehaviour
                     Attack();
                     Attacking = true;
                     attackTimer = attackCooldown;
+                    Debug.Log("쿨타임초기화");
                 }
             }
         }
         else
         {
-         // 공격 중일 때는 공격 쿨다운 시간 감소
+            // 공격 중일 때는 공격 쿨다운 시간 감소
             if (attackTimer > 0f)
             {
                 attackTimer -= Time.deltaTime;
             }
             else
             {
-             Attacking = false;
-             GetComponent<Boss03Attack01>().enabled = false;
-             GetComponent<Boss03Skill01>().enabled = false;
-             GetComponent<Boss03Attack02>().enabled = false;
-             GetComponent<Boss03Skill02>().enabled = false;
-             GetComponent<Boss03Attack03>().enabled = false;
-
+                Attacking = false;
+                GetComponent<Boss03Attack01>().enabled = false;
+                GetComponent<Boss03Skill01>().enabled = false;
+                GetComponent<Boss03Attack02>().enabled = false;
+                GetComponent<Boss03Skill02>().enabled = false;
+                GetComponent<Boss03Attack03>().enabled = false;
             }
         }
-    }   
+    }
+
     void Skill() //거리가 멀때는 총알 발사
     {
         GetComponent<Boss03Attack02>().enabled = true;
     }
     void Attack()
     {
-        if(BossHp < 101 && BossHp > 69) 
+        if(BossHp > 69) 
         {
             int rand = Random.Range(0, 2);
             if(rand == 0)
             {
-                GetComponent<Boss03Attack01>().enabled = true;
+                if (GetComponent<Boss03Attack01>().enabled == false && GetComponent<Boss03Skill01>().enabled == false)
+                {
+                    GetComponent<Boss03Attack01>().enabled = true;
+                }
             }
             else if(rand == 1)
             {
-                GetComponent<Boss03Skill01>().enabled = true;
-                //GetComponent<Boss03Skill02>().enabled = true;
+                if (GetComponent<Boss03Attack01>().enabled == false && GetComponent<Boss03Skill01>().enabled == false)
+                {
+                    GetComponent<Boss03Skill01>().enabled = true;
+                    //GetComponent<Boss03Skill02>().enabled = true;
+                }
             }
             
         }

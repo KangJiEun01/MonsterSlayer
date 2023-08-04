@@ -9,7 +9,7 @@ public class Boss01NewAi : MonoBehaviour
     Transform BossTrans;
 
     public int BossHp = 100;
-    int PlayerHP = 100; //나중에 플레이어 코드로 이동
+   // float PlayerHP = GenericSingleton<PlayerCon>.Instance.GetComponent<PlayerCon>().HpStat;
 
     bool Mode = false; //1, 2 공격모드
     public bool _attack = false; //공격on, off상태
@@ -107,7 +107,7 @@ public class Boss01NewAi : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            PlayerHP -= 10;
+           // PlayerHP -= 10f;
         }
     }
 }

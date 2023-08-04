@@ -31,6 +31,9 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     public float RunTimer { get { return _runTimer; } }
     private bool _runToggle;
 
+    //HpUi전달 변수
+    public float HpStat { get { return _hp; } }
+
     private bool _canDash = true;
     private Vector3 _dirVector;
     float _moveDirX;

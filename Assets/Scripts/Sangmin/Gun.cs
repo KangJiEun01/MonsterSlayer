@@ -185,11 +185,15 @@ public class Gun : GenericSingleton<Gun>
                 Target target = hit.transform.GetComponent<Target>();
                 target?.OnDamage(_attackDamage);
                 hit.rigidbody?.AddForce(-hit.normal * _impactForce);
-                currentBullet = _bulletPool[_poolIndex++];
-                currentBullet.SetActive(true);
-                currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
-                currentBullet.transform.position = hit.point;
-                IndexCheck();
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                {
+                    currentBullet = _bulletPool[_poolIndex++];
+                    currentBullet.SetActive(true);
+                    currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
+                    currentBullet.transform.position = hit.point;
+                    IndexCheck();
+                }
+                
             }           
             Invoke("StopAttack", _attackSpeed);
         }

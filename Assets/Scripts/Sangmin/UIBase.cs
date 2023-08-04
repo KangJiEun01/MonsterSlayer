@@ -16,28 +16,10 @@ public class UIBase : GenericSingleton<UIBase>
     {
         
     }
-    public void OpenInvenCheckUI()
-    {
-        _invenCheckUI.SetActive(true);
-    }
-    public void CloseInvenCheckUI()
-    {
-        _invenCheckUI?.SetActive(false);
-    }
-    public void OpenRunToggleUI()
-    {
-        _runToggle.SetActive(true);
-    }
-    public void CloseRunToggleUI()
-    {
-        _runToggle?.SetActive(false);
-    }
-    public void OpenInvenUI()
-    {
-        _inventory.SetActive(true);
-    }
-    public void CloseInvenUI()
-    {
-        _inventory?.SetActive(false);
-    }
+    public void ShowInvenCheckUI(bool ShowUI) => _invenCheckUI.SetActive(ShowUI);
+   
+    public void ShowRunToggleUI(bool ShowUI) => _runToggle.SetActive(ShowUI);
+
+    public void ShowInvenUI(bool ShowUI) => _inventory.SetActive(ShowUI);
+
 }

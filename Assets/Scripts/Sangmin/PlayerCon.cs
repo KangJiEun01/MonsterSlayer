@@ -137,14 +137,14 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if(!_runToggle)GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().OpenRunToggleUI();
+            if(!_runToggle)GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowRunToggleUI(true);
             Running();
             _runTimer += Time.deltaTime;
             if (_runTimer > 2)
             {
                 _runTimer = 0;
                 _runToggle = true;
-                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseRunToggleUI();
+                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowRunToggleUI(false);
             }
         }
         else if (_runToggle)  Running(); 
@@ -195,7 +195,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // ´Þ¸®±â Ãë¼Ò
     private void RunningCancel()
     {
-        GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseRunToggleUI();
+        GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowRunToggleUI(false);
         _isRun = false;
         _speed = _walkSpeed;
         _runTimer = 0;
@@ -321,23 +321,23 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         {
             Debug.Log("ÀÎº¥²¨Áü");
             GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("open");
-            GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseInvenUI();
+            GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowInvenUI(false);
             _helperClose = false;
             return;
         }
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         if (Physics.Raycast(ray, out hit, 5f, 1 << LayerMask.NameToLayer("Helper")))
         {
-            if(!_helperClose)GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().OpenInvenCheckUI();
+            if(!_helperClose)GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowInvenCheckUI(true);
             if (Input.GetKeyDown(KeyCode.F))
             {
                 GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("close");
                 _helperClose = true;
                 Debug.Log("ÀÎº¥ÄÑÁü");
-                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseInvenCheckUI();
-                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().OpenInvenUI();
+                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowInvenCheckUI(false);
+                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowInvenUI(true);
             }
-        }else GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().CloseInvenCheckUI();
+        }else GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowInvenCheckUI(false);
     }
     private void MovingSound(float delay)
     {

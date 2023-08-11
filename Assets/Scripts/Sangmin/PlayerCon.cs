@@ -353,6 +353,13 @@ public class PlayerCon : GenericSingleton<PlayerCon>
             if (walkI == 4) walkI = 0;
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Boss"))
+        {
+            _hp -= 10;
+        }
+    }
 }
 
 

@@ -15,6 +15,7 @@ public class BulletCon : MonoBehaviour
     }
     void BulletDestroy()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

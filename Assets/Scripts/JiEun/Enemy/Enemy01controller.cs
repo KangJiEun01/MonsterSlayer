@@ -7,14 +7,26 @@ public class Enemy01controller : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] Transform spawnPoint;
     [SerializeField] Transform endPoint;
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform bulletPos;
+
+    Transform botPos;
 
     float attackRange = 7f;//인식범위
     float patrolSpeed = 3f; //순찰속도
     float chaseSpeed = 7f; //인식 후 추격 속도
+    float bulletSpeed = 15f;
 
     bool _patrol = true;
     bool movingRight = true;
     bool _collision = false;
+    bool _attack = false;
+
+    float Time_current; //남은초
+    float Time_start; //+까지 남은 초
+    float Time_Sumcooltime = 0.5f;//남은초 설정
+
+    public bool Attacker { get { return _attack; } }
 
     Vector3 patrolStartPoint;
     Vector3 patrolEndPoint;
@@ -29,6 +41,7 @@ public class Enemy01controller : MonoBehaviour
     {
         patrolEndPoint = endPoint.position;
         patrolStartPoint= spawnPoint.position;
+        botPos=GetComponent<Transform>();
 
     }
 
@@ -54,11 +67,38 @@ public class Enemy01controller : MonoBehaviour
                 Chase();
             }
         }
+        if(_attack)
+        {
+            BulletFire();
+        }
     }
 
     void Attack()
     {
+        _attack = true;
+        //transform.LookAt(player.transform);
         Debug.Log("범위 들어옴");
+        //GetComponent<Animator>().Play("Reload");
+        //Invoke("ShootAin",1.2f);
+        ShootAin();
+    }
+    void ShootAin()
+    {
+        GetComponent<Animator>().Play("Shoot_SingleShot_AR");
+    }
+    void BulletFire()
+    {
+        Time_current = Time.time - Time_start;
+        if (Time_current > Time_Sumcooltime)
+        {
+            GameObject temp = Instantiate(bullet);
+            temp.transform.position = bulletPos.transform.position;
+            //Vector3 dir =player.transform.position; 유도탄이면 이상...
+            Vector3 dir = temp.transform.forward;
+            temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
+            Time_current = Time_Sumcooltime;
+            Time_start = Time.time;
+        }
     }
     void Patrol()
     {
@@ -101,35 +141,35 @@ public class Enemy01controller : MonoBehaviour
     }
 
     // mins edit
-    void FixedUpdate()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, rayDistance))
-        {
-            if (hit.distance < avoidanceDistance)
-            {
-                _collision = true;
-                Vector3 avoid = transform.position + transform.right * Random.Range(-1.0f, 1.0f);
-                Vector3 direction = avoid - transform.position;
-                GetComponent<Rigidbody>().AddForce(direction * patrolSpeed);
-            }
-        }
-        else
-        {
-            GetComponent<Rigidbody>().AddForce(transform.right * patrolSpeed);
-            _collision = false;
-        }
-    }
+    //void FixedUpdate()
+    //{
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(transform.position, transform.forward, out hit, rayDistance))
+    //    {
+    //        if (hit.distance < avoidanceDistance)
+    //        {
+    //            _collision = true;
+    //            Vector3 avoid = transform.position + transform.right * Random.Range(-1.0f, 1.0f);
+    //            Vector3 direction = avoid - transform.position;
+    //            GetComponent<Rigidbody>().AddForce(direction * patrolSpeed);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        GetComponent<Rigidbody>().AddForce(transform.right * patrolSpeed);
+    //        _collision = false;
+    //    }
+    //}
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Obstacle")
-        {
-            Debug.Log(" 충돌");
-            Vector3 avoid = transform.position + transform.right * Random.Range(-1.0f, 1.0f);
-            Vector3 direction = avoid - transform.position;
-            GetComponent<Rigidbody>().AddForce(direction * patrolSpeed);
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Obstacle")
+    //    {
+    //        Debug.Log(" 충돌");
+    //        Vector3 avoid = transform.position + transform.right * Random.Range(-1.0f, 1.0f);
+    //        Vector3 direction = avoid - transform.position;
+    //        GetComponent<Rigidbody>().AddForce(direction * patrolSpeed);
+    //    }
+    //}
     //
 }

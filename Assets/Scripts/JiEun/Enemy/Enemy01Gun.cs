@@ -9,7 +9,7 @@ public class Enemy01Gun : MonoBehaviour
     }
     void Update()
     {
-        attack = GetComponent<Enemy01controller>().Attacker;
+        //attack = GetComponent<Enemy01controller>().Attacker;
        if(attack)
         {
             Debug.Log("°ø°ÝÁß");

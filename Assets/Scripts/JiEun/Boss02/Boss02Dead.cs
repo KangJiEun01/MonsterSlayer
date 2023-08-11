@@ -9,8 +9,9 @@ public class Boss02Dead : MonoBehaviour
 
     private void OnEnable()
     {
+        GetComponent<Animator>().Play("2_Idle");
         Boss03.transform.position = transform.position;
-        Invoke("Boss2Dead", 0.5f);
+        Invoke("Boss2Dead", 3f);
     }
     void Boss2Dead()
     {

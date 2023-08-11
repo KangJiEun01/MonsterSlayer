@@ -17,6 +17,7 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
 
     void Start()
     {
+        transform.LookAt(player.transform);
         //Transform player = player02.transform;
         animator = GetComponent<Animator>();
         animator.Play("In");// 테스트 후 인으로 바꿔주기

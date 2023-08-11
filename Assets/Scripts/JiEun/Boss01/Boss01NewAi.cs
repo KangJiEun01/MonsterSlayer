@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Boss01NewAi : MonoBehaviour
 {
     [SerializeField] GameObject player;
+    [SerializeField] GameObject camera;
 
     Animator animator;
     Transform BossTrans;
@@ -15,10 +17,12 @@ public class Boss01NewAi : MonoBehaviour
     public bool _attack = false; //공격on, off상태
     void Start()
     {
+        transform.LookAt(player.transform);
         BossTrans = GetComponent<Transform>();
         animator = GetComponent<Animator>();
         animator.Play("In");
-        StartCoroutine(BossAttackRoutine());
+        Invoke("StartRout", 4.7f);
+        Invoke("CameraMove", 4.7f);
     }
     private IEnumerator BossAttackRoutine()
     {
@@ -103,12 +107,13 @@ public class Boss01NewAi : MonoBehaviour
     {
         return BossHp;
     }
-    private void OnCollisionEnter(Collision collision)
+    void CameraMove()
     {
-        if (collision.collider.CompareTag("Player"))
-        {
-           // PlayerHP -= 10f;
-        }
+        camera.GetComponent<NewCameraShake>().enabled = true;
+    }
+    void StartRout()
+    {
+        StartCoroutine(BossAttackRoutine());
     }
 }
 

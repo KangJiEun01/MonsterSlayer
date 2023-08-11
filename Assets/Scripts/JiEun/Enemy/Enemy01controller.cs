@@ -92,9 +92,10 @@ public class Enemy01controller : MonoBehaviour
         if (Time_current > Time_Sumcooltime)
         {
             GameObject temp = Instantiate(bullet);
-            temp.transform.position = bulletPos.transform.position;
+            Vector3 worldPosition = bulletPos.TransformPoint(Vector3.zero);
+            temp.transform.position = worldPosition;
             //Vector3 dir =player.transform.position; 유도탄이면 이상...
-            Vector3 dir = temp.transform.forward;
+            Vector3 dir = transform.forward;
             temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
             Time_current = Time_Sumcooltime;
             Time_start = Time.time;

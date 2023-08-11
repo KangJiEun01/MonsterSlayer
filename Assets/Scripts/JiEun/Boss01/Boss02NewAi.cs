@@ -6,8 +6,10 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
     //º¸½º 2 : °è¼Ó µû¶ó¿Í¼­ °ø°ÝÇÏ°í ÃÑ¾Ë È÷Æ®ÇÏ¸é È÷Æ®¾Ö´Ï¸Þ´Ï¼Ç Àç»ý°ú ÇÔ²² Àá½Ã Á¤Áö. ´Ù½Ã µû¶ó¿È (¸ÂÃß¸é¼­ µµ¸ÁÃÄ¾ß Å¬¸®¾î °¡´É)
 {
     [SerializeField] Transform player02;
+    [SerializeField] GameObject camera;
     Animator animator;
     Transform BossTrans;
+
 
     public int BossHp = 100;
 
@@ -18,6 +20,7 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
 
     void Start()
     {
+        transform.LookAt(player02.transform);
         animator = GetComponent<Animator>();
         BossTrans = GetComponent<Transform>();
         animator.Play("In"); //ÃßÈÄ¿¡ ÀÎÀ¸·Î ¹Ù²Þ 
@@ -26,6 +29,7 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
         //animator.Play("2_Hit");
         //animator.Play("2_Run"); 
         //animator.Play("2_Idle");
+        Invoke("", 7f);
     }
 
     private void StartAttack()
@@ -84,11 +88,16 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
         {
             BossHp = 0;
             GetComponent<Boss02Dead>().enabled = true;
+            enabled= false;
         }
         if(Input.GetKeyDown(KeyCode.Alpha3)) //ÀÓ½Ã È÷Æ®
         {
             GetComponent<Boss02Hit>().enabled = true;
         }
+    }
+    void CameraMove()
+    {
+        camera.GetComponent<NewCameraShake>().enabled = true;
     }
 
 }

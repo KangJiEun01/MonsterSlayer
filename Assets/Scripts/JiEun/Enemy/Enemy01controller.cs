@@ -8,14 +8,15 @@ public class Enemy01controller : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     [SerializeField] Transform endPoint;
     [SerializeField] GameObject bullet;
-    [SerializeField] Transform bulletPos;
+    [SerializeField] Transform bulletPos; //-z
 
     Transform botPos;
 
     float attackRange = 7f;//인식범위
     float patrolSpeed = 3f; //순찰속도
     float chaseSpeed = 7f; //인식 후 추격 속도
-    float bulletSpeed = 15f;
+    float bulletSpeed = 20f;
+    float AttackAniSpeed = 2f; //공격 애니메이션 재생 속도
 
     bool _patrol = true;
     bool movingRight = true;
@@ -24,12 +25,13 @@ public class Enemy01controller : MonoBehaviour
 
     float Time_current; //남은초
     float Time_start; //+까지 남은 초
-    float Time_Sumcooltime = 0.5f;//남은초 설정
+    float Time_Sumcooltime = 0.2f;//남은초 설정
 
     public bool Attacker { get { return _attack; } }
 
     Vector3 patrolStartPoint;
     Vector3 patrolEndPoint;
+    Vector3 VectorbulletPos; //총알 시작위치 수정할것
 
 
     // mins edit
@@ -42,7 +44,7 @@ public class Enemy01controller : MonoBehaviour
         patrolEndPoint = endPoint.position;
         patrolStartPoint= spawnPoint.position;
         botPos=GetComponent<Transform>();
-
+        VectorbulletPos = bulletPos.position;
     }
 
     void Update()
@@ -76,6 +78,8 @@ public class Enemy01controller : MonoBehaviour
     void Attack()
     {
         _attack = true;
+        transform.LookAt(player.transform);
+        
         //transform.LookAt(player.transform);
         Debug.Log("범위 들어옴");
         //GetComponent<Animator>().Play("Reload");
@@ -91,11 +95,13 @@ public class Enemy01controller : MonoBehaviour
         Time_current = Time.time - Time_start;
         if (Time_current > Time_Sumcooltime)
         {
+            Vector3 attackst = new Vector3(VectorbulletPos.x + (-2.0f), VectorbulletPos.y+(+5.0f), VectorbulletPos.z + (-8.5f));
             GameObject temp = Instantiate(bullet);
-            Vector3 worldPosition = bulletPos.TransformPoint(Vector3.zero);
+            //Vector3 worldPosition = bulletPos.TransformPoint(Vector3.zero);
+            Vector3 worldPosition = bulletPos.TransformPoint(attackst);
             temp.transform.position = worldPosition;
-            //Vector3 dir =player.transform.position; 유도탄이면 이상...
-            Vector3 dir = transform.forward;
+           // Vector3 dir =player.transform.position; //유도탄
+            Vector3 dir = transform.forward; //앞방향
             temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
             Time_current = Time_Sumcooltime;
             Time_start = Time.time;

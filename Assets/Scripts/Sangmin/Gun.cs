@@ -4,6 +4,7 @@ using System.Net;
 using Unity.VisualScripting;
 using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 public class Gun : GenericSingleton<Gun>
@@ -22,7 +23,11 @@ public class Gun : GenericSingleton<Gun>
     [SerializeField] float reloadTime = 3.5f;
     [SerializeField] GameObject _bulletParent;
     [SerializeField] GameObject _player;
-    [SerializeField] GameObject[] _crosshair;
+    [SerializeField] RectTransform _upCrosshair;
+    [SerializeField] RectTransform _rightCrosshair;
+    [SerializeField] RectTransform _downCrosshair;
+    [SerializeField] RectTransform _leftCrosshair;
+
     GameObject currentBullet;
     //재장전 관리 변수
     [SerializeField] int _maxBullet;
@@ -54,6 +59,7 @@ public class Gun : GenericSingleton<Gun>
         recoil = GenericSingleton<Recoil>.Instance.GetComponent<Recoil>();
         InstBullet();     
         _currentBullet = _maxBullet;
+
     }
  
 
@@ -110,18 +116,19 @@ public class Gun : GenericSingleton<Gun>
     }
     void AimOpen()
     {
-        foreach (var aim in _crosshair)
-        {
-            aim.transform.Translate(Vector3.up * 0.1f);
-        }
+        _upCrosshair.anchoredPosition3D += Vector3.up * 2f;
+        _rightCrosshair.anchoredPosition3D += Vector3.left * 2f;
+        _downCrosshair.anchoredPosition3D += Vector3.down * 2f;
+        _leftCrosshair.anchoredPosition3D += Vector3.right * 2f;
     }
     void AimReturn()
     {
-        foreach (GameObject aim in _crosshair)
-        {
-            aim.transform.localPosition =new Vector3(0, 0.4f, 15.0f);
-        }
+        _upCrosshair.anchoredPosition3D = new Vector3(0, 35, 0);
+        _rightCrosshair.anchoredPosition3D = new Vector3(-40, 0, 0f);
+        _downCrosshair.anchoredPosition3D = new Vector3(0, -35, 0);
+        _leftCrosshair.anchoredPosition3D = new Vector3(40, 0, 0 );
     }
+
     IEnumerator ReloadBullet()
     {
         _animator.Play("Reload");

@@ -78,4 +78,12 @@ public class Inventory : GenericSingleton<Inventory>
             GameObject temp = Instantiate(_item, _content);
         }
     }
+    public void DrawItem(ItemData Item)
+    {
+        OrderdData = InvenData;
+        GameObject temp = Instantiate(_item, _content);
+        temp.GetComponentInChildren<Text>().text = Item.Count.ToString();
+        temp.GetComponentInChildren<Image>().sprite = _ItemIcon[Item.Idx];
+        ReDrwing(OrderdData);
+    }
 }

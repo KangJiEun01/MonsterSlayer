@@ -79,4 +79,3 @@ public class Inventory : GenericSingleton<Inventory>
         }
     }
 }
-}

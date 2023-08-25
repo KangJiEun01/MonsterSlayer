@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - Boss
+  - TdLevelManager
+  - PW - Prop
+  - PW - Nature
   layers:
   - Default
   - TransparentFX
@@ -28,7 +31,7 @@ TagManager:
   - 
   - 
   - puzzle_Keypad
-  - 
+  - WorldUI
   - 
   - 
   - 

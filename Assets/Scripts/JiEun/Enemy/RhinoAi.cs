@@ -1,0 +1,65 @@
+using UnityEngine;
+
+
+public class RhinoAi : MonoBehaviour
+{
+    [SerializeField] GameObject player;
+
+    Animator rhinoAni;
+
+    float moveSpeed = 1.0f; // 속도
+    float changeInterval = 3.0f; // 목표지점 변경주기
+
+    private Vector3 targetPosition; // 현재 목표지점
+    //private float timer = 0.0f;
+    private void Awake()
+    {
+        rhinoAni = GetComponent<Animator>();
+    }
+    private void Start()
+    {
+        //SetRandomTargetPosition();
+        //rhinoAni.Play("Walk");
+    }
+    private void OnEnable()
+    {
+        SetRandomTargetPosition();
+        rhinoAni.Play("Walk");
+    }
+
+    private void Update()
+    {
+            // 목표지점이동
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            // 도착하면 다음 목표지점
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            {
+            Debug.Log("포효중");
+            GetComponent<RhinoShout>().enabled = true;
+            GetComponent<RhinoAi>().enabled = false;
+            //rhinoAni.Play("shout");
+            //float time = Random.Range(2.0f, 4.0f);
+            //Invoke("SetRandomTargetPosition", 3.4f);
+            SetRandomTargetPosition();
+        }
+            else if(Vector3.Distance(transform.position, player.transform.position) < 10f)
+        {
+            GetComponent<RhinoRun>().enabled = true;
+            GetComponent<RhinoAi>().enabled = false;
+        }
+    }
+    private void SetRandomTargetPosition()
+    {
+        Debug.Log("순찰중");
+        // 랜덤포지션
+        float x = Random.Range(-10.0f, 10.0f);
+        float z = Random.Range(-10.0f, 10.0f);
+        targetPosition = new Vector3(x, 0.0f, z);
+        //transform.LookAt(transform.forward);
+        transform.LookAt(targetPosition); //상태전이할때도 같은 방향 보게
+    }
+    public void targetPos(Vector3 pos)
+    {
+        pos = targetPosition;
+    }
+}

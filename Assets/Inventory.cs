@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour
+public class Inventory : GenericSingleton<Inventory>
 {
     [SerializeField] GameObject _item;
     [SerializeField] ItemType _filterType;
     [SerializeField] Transform _content;
+    [SerializeField] Sprite[] _ItemIcon;
     int id = 0;
     List<ItemData> InvenData = new List<ItemData>();
     List<ItemData> OrderdData = new List<ItemData>();
@@ -20,6 +22,7 @@ public class Inventory : MonoBehaviour
     //filterType 누르면 _filterType과 같은 타입만 인벤토리에 표시 다시누르면 전체목록표시
     void Start()
     {
+        InvenData = GenericSingleton<ItemSaver>.Instance.Datas._itemList;
         OrderdData = InvenData;
     }
 

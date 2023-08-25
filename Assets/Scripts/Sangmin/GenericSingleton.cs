@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class GenericSingleton<T> : MonoBehaviour where T : class
 {
-    private static GenericSingleton<T> instance;
-    public static GenericSingleton<T> Instance { get { return instance; } }
-
+    private static T _instance;
+    public static T Instance { get { return _instance; } }
     private void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
+            OnAwake();
             DontDestroyOnLoad(gameObject);
+            _instance = GetComponent<T>();
         }
         else
         {
             Destroy(gameObject);
         }
     }
+    protected virtual void OnAwake() { }
+    
+
+   
 }

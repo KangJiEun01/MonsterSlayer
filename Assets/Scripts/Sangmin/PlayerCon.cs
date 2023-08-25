@@ -102,14 +102,15 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         TryRun();
         TryDash();
         TryCrouch();
-        Move();
         Rotate();
         OpenHelper();
-
-
+    }
+    private void FixedUpdate()
+    {
+        Move();
     }
 
-   
+
     // 지면 체크
     private void IsGround()
     {
@@ -140,14 +141,14 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if(!_runToggle)GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowRunToggleUI(true);
+            if(!_runToggle)GenericSingleton<UIBase>.Instance.ShowRunToggleUI(true);
             Running();
             _runTimer += Time.deltaTime;
-            if (_runTimer > 2)
+            if (_runTimer > 3)
             {
                 _runTimer = 0;
                 _runToggle = true;
-                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowRunToggleUI(false);
+                GenericSingleton<UIBase>.Instance.ShowRunToggleUI(false);
             }
         }
         else if (_runToggle)  Running(); 
@@ -187,7 +188,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
 
         _isRun = true;
         _speed = _runSpeed;
-        if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<Gun>.Instance.GetComponent<Gun>().IsReload && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().InAttack)
+        if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<Gun>.Instance.IsReload && !GenericSingleton<Gun>.Instance.InAttack)
         {
             _animator.Play("Run");
             MovingSound(0.25f);
@@ -198,7 +199,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // 달리기 취소
     private void RunningCancel()
     {
-        GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowRunToggleUI(false);
+        GenericSingleton<UIBase>.Instance.ShowRunToggleUI(false);
         _isRun = false;
         _speed = _walkSpeed;
         _runTimer = 0;
@@ -255,7 +256,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _moveDirZ = Input.GetAxisRaw("Vertical");
         if (_moveDirX == 0 && _moveDirZ == 0)
         {
-            if (!GenericSingleton<Gun>.Instance.GetComponent<Gun>().IsReload && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().InAttack)
+            if (!GenericSingleton<Gun>.Instance.IsReload && !GenericSingleton<Gun>.Instance.InAttack)
             {
                 _animator.Play("Idle");
             }
@@ -265,7 +266,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         else
         {
             _isIdle = false;
-            if (!_isRun && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().IsReload && !GenericSingleton<Gun>.Instance.GetComponent<Gun>().InAttack)
+            if (!_isRun && !GenericSingleton<Gun>.Instance.IsReload && !GenericSingleton<Gun>.Instance.InAttack)
             {
                 _animator.Play("Walk");
                 MovingSound(0.3f);
@@ -324,23 +325,23 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         {
             Debug.Log("인벤꺼짐");
             GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("open");
-            GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowInvenUI(false);
+            GenericSingleton<UIBase>.Instance.ShowInvenUI(false);
             _helperClose = false;
             return;
         }
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         if (Physics.Raycast(ray, out hit, 5f, 1 << LayerMask.NameToLayer("Helper")))
         {
-            if(!_helperClose)GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowInvenCheckUI(true);
+            if(!_helperClose)GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(true);
             if (Input.GetKeyDown(KeyCode.F))
             {
                 GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("close");
                 _helperClose = true;
                 Debug.Log("인벤켜짐");
-                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowInvenCheckUI(false);
-                GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowInvenUI(true);
+                GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(false);
+                GenericSingleton<UIBase>.Instance.ShowInvenUI(true);
             }
-        }else GenericSingleton<UIBase>.Instance.GetComponent<UIBase>().ShowInvenCheckUI(false);
+        }else GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(false);
     }
     private void MovingSound(float delay)
     {
@@ -358,6 +359,10 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         if (collision.collider.CompareTag("Boss"))
         {
             _hp -= 10;
+        }
+        if (collision.collider.CompareTag("Item"))
+        {
+            collision.collider.GetComponent<Item>()?.getItem();
         }
     }
 }

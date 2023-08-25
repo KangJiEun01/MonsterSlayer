@@ -8,6 +8,6 @@ public class RunToggleUI : MonoBehaviour
     [SerializeField] Image _backImage;
     void Update()
     {
-        _backImage.fillAmount = GenericSingleton<PlayerCon>.Instance.GetComponent<PlayerCon>().RunTimer / 2;
+        _backImage.fillAmount = GenericSingleton<PlayerCon>.Instance.RunTimer / 2;
     }
 }

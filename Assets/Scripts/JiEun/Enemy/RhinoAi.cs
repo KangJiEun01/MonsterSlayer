@@ -4,6 +4,7 @@ using UnityEngine;
 public class RhinoAi : MonoBehaviour
 {
     [SerializeField] GameObject player;
+    [SerializeField] GameObject detectionUi;
 
     Animator rhinoAni;
 
@@ -15,6 +16,7 @@ public class RhinoAi : MonoBehaviour
     private void Awake()
     {
         rhinoAni = GetComponent<Animator>();
+        detectionUi.SetActive(false);
     }
     private void Start()
     {
@@ -23,6 +25,7 @@ public class RhinoAi : MonoBehaviour
     }
     private void OnEnable()
     {
+        detectionUi.SetActive(false);
         SetRandomTargetPosition();
         rhinoAni.Play("Walk");
     }
@@ -44,9 +47,10 @@ public class RhinoAi : MonoBehaviour
         }
             else if(Vector3.Distance(transform.position, player.transform.position) < 10f)
         {
-            GetComponent<RhinoRun>().enabled = true;
-            GetComponent<RhinoAi>().enabled = false;
-        }
+            transform.LookAt(player.transform);
+            detectionUi.SetActive(true);
+            RunTrue();
+        }    
     }
     private void SetRandomTargetPosition()
     {
@@ -57,6 +61,12 @@ public class RhinoAi : MonoBehaviour
         targetPosition = new Vector3(x, 0.0f, z);
         //transform.LookAt(transform.forward);
         transform.LookAt(targetPosition); //상태전이할때도 같은 방향 보게
+    }
+    void RunTrue()
+    {
+       // detectionUi.SetActive(false);
+        GetComponent<RhinoRun>().enabled = true;
+        GetComponent<RhinoAi>().enabled = false;
     }
     public void targetPos(Vector3 pos)
     {

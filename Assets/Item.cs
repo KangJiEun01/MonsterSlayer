@@ -2,6 +2,7 @@
 //using System.Collections;
 //using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 //using static UnityEditor.Progress;
 
 public class Item : MonoBehaviour
@@ -9,9 +10,17 @@ public class Item : MonoBehaviour
     [SerializeField] ItemType _type;
     [SerializeField] int _count = 1;
     [SerializeField] int _idx = 1;
+    [SerializeField] Image _image;
+    [SerializeField] Text _text;
+
+
     public ItemType Type { get { return _type; } }
+    public int Count { get { return _count; } }
+    public int idx { get { return _idx; } }
     ItemData _itemData;
     public ItemData ItemData { get { return _itemData; } }
+    public Image Image { get { return _image; } }
+    public Text Text { get { return _text; } }
     public void getItem()
     {
         GenericSingleton<ItemSaver>.Instance.Datas._itemList.Add(_itemData);

@@ -9,6 +9,8 @@ TagManager:
   - TdLevelManager
   - PW - Prop
   - PW - Nature
+  - Item
+  - Recipe
   layers:
   - Default
   - TransparentFX

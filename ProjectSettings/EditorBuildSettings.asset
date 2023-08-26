@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/YDcity/YDUnderCity.unity
-    guid: 0a9a285371745fb4199a46ffd646b535
+    path: Assets/Scenes/YDcity/YDDesert.unity
+    guid: ed56124f16b79ad48b80ad8570299663
   m_configObjects: {}

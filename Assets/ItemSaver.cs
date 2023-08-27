@@ -10,7 +10,8 @@ public class ItemSaver : GenericSingleton<ItemSaver>
     protected override void OnAwake()
     {
         datas._itemList = new List<ItemData>();
-        Debug.Log("»ý¼º");
+        datas._itemList.Add(new ItemData(ItemType.Food, 0, 3));
+        datas._itemList.Add(new ItemData(ItemType.Food, 2, 2));
     }
 
 }

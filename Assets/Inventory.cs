@@ -24,6 +24,7 @@ public class Inventory : GenericSingleton<Inventory>
     {
         InvenData = GenericSingleton<ItemSaver>.Instance.Datas._itemList;
         OrderdData = InvenData;
+        ReDrwing(InvenData);
     }
 
     void Update()
@@ -75,15 +76,13 @@ public class Inventory : GenericSingleton<Inventory>
         }
         foreach (var item in InvenData)
         {
-            GameObject temp = Instantiate(_item, _content);
+            DrawItem(item);
         }
     }
     public void DrawItem(ItemData Item)
     {
-        OrderdData = InvenData;
         GameObject temp = Instantiate(_item, _content);
-        temp.GetComponentInChildren<Text>().text = Item.Count.ToString();
-        temp.GetComponentInChildren<Image>().sprite = _ItemIcon[Item.Idx];
-        ReDrwing(OrderdData);
+        temp.GetComponent<Item>().Text.text = "X"+Item.Count.ToString();
+        temp.GetComponent<Item>().Image.sprite = _ItemIcon[Item.Idx];
     }
 }

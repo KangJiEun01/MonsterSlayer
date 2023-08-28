@@ -81,8 +81,12 @@ public class Inventory : GenericSingleton<Inventory>
     }
     public void DrawItem(ItemData Item)
     {
-        GameObject temp = Instantiate(_item, _content);
-        temp.GetComponent<Item>().Text.text = "X"+Item.Count.ToString();
-        temp.GetComponent<Item>().Image.sprite = _ItemIcon[Item.Idx];
+        if(Item.Count > 0)
+        {
+            GameObject temp = Instantiate(_item, _content);
+            temp.GetComponent<Item>().Text.text = "X" + Item.Count.ToString();
+            temp.GetComponent<Item>().Image.sprite = _ItemIcon[Item.Idx];
+        }
+        
     }
 }

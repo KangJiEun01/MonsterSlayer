@@ -31,7 +31,7 @@ public class Item : MonoBehaviour
     }
     private void Start()
     {
-         _itemData = new ItemData(_type,_idx, _count);
+         _itemData = new ItemData(_idx, _count);
     }
 }
 

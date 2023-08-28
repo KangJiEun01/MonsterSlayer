@@ -523,6 +523,8 @@ MonoBehaviour:
   _type: 0
   _count: 10
   _idx: 1
+  _image: {fileID: 0}
+  _text: {fileID: 0}
 --- !u!65 &803144513
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -778,6 +780,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1553662700, guid: e9ed3708865d50840a54291976007152, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553662700, guid: e9ed3708865d50840a54291976007152, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1704357616, guid: e9ed3708865d50840a54291976007152, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -878,6 +888,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIBase
       objectReference: {fileID: 0}
+    - target: {fileID: 6246212127975407754, guid: e9ed3708865d50840a54291976007152, type: 3}
+      propertyPath: _item
+      value: 
+      objectReference: {fileID: 2133123514134074567, guid: a41ead8d5d040e74284a5ae5dd01484d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9ed3708865d50840a54291976007152, type: 3}
 --- !u!1 &2055061598 stripped

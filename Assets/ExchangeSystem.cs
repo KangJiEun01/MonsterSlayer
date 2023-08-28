@@ -60,8 +60,56 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
             {
                 if (item.Count >= recipe.FourthM.count) mats[3] = true;
             }
+            
+        }
+        if (mats[0] && mats[1] && mats[2] && mats[3])                       //거래가능할경우
+        {
+            recipe.SetCanExchange(true);
+        }
+        else
+        {
+            recipe.SetCanExchange(false);
         }
         return mats;
+    }
+    public void Exchange(Recipe recipe)
+    {
+        bool _ishaving = false;
+        foreach (ItemData item in _invenData)
+        {
+            if (recipe.FirstM.idx == item.Idx)
+            {
+                item.SetCount(item.Count- recipe.FirstM.count);
+            }
+
+            if (recipe.SecondM.idx == item.Idx)
+            {
+                item.SetCount(item.Count - recipe.SecondM.count);
+            }
+
+            if (recipe.ThirdM.idx == item.Idx)
+            {
+                item.SetCount(item.Count - recipe.ThirdM.count);
+            }
+
+            if (recipe.FourthM.idx == item.Idx)
+            {
+                item.SetCount(item.Count - recipe.FourthM.count);
+            }
+
+            if (recipe.Result.idx == item.Idx)
+            {
+                _ishaving = true;
+                item.SetCount(item.Count + recipe.Result.count);
+            }
+        }
+        if (!_ishaving)
+        {
+            _invenData.Add(new ItemData(recipe.Result.idx, recipe.Result.count));
+        }
+        GenericSingleton<Inventory>.Instance.ReDrwing(_invenData);
+        GenericSingleton<ExchangeUI>.Instance.Init();
+            
     }
     
 }

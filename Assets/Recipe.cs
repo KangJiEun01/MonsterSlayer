@@ -16,7 +16,12 @@ public class Recipe : MonoBehaviour
     public (int idx, int count) FourthM { get { return _fourthM; } }
     (int idx, int count) _result;
     public (int idx, int count) Result { get { return _result; } }
-    
+
+    bool _canExchange;
+    public bool CanExchange { get { return _canExchange; } }
+
+    public void SetCanExchange(bool canExchange) => _canExchange = canExchange;
+
     public Recipe((int idx, int count) first, (int idx, int count) second, (int idx, int count) third, (int idx, int count) fourth, (int idx, int count) result)
     {
         _firstM = first;

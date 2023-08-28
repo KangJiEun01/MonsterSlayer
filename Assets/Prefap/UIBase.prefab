@@ -408,8 +408,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 173628470320744130}
   - {fileID: 859781756}
+  - {fileID: 173628470320744130}
   - {fileID: 527475819}
   m_Father: {fileID: 2112954514}
   m_RootOrder: 3
@@ -1038,7 +1038,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 512626688}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2600,6 +2600,9 @@ MonoBehaviour:
   _ItemIcon:
   - {fileID: 21300036, guid: 56d84991286850f428b4e7df0cca7380, type: 3}
   - {fileID: 21300038, guid: 56d84991286850f428b4e7df0cca7380, type: 3}
+  _resultItem: {fileID: 173628470320744131}
+  _resultText: {fileID: 527475820}
+  ExchangeBtn: {fileID: 8369429696148478132}
 --- !u!1 &2139181046
 GameObject:
   m_ObjectHideFlags: 0
@@ -8215,7 +8218,7 @@ GameObject:
   - component: {fileID: 8326100067339025645}
   - component: {fileID: 5785880430867934061}
   m_Layer: 5
-  m_Name: Btn_Restart
+  m_Name: Btn_Exchange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8323,7 +8326,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8326100067339025645}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4394223784145408168}
+        m_TargetAssemblyTypeName: ExchangeUI, Assembly-CSharp
+        m_MethodName: ExChangeBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8613882245936871615
 GameObject:
   m_ObjectHideFlags: 0
@@ -9020,7 +9035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2133123514134074566, guid: a41ead8d5d040e74284a5ae5dd01484d, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2133123514134074566, guid: a41ead8d5d040e74284a5ae5dd01484d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -9098,10 +9113,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: item
       objectReference: {fileID: 0}
+    - target: {fileID: 2133123514134074567, guid: a41ead8d5d040e74284a5ae5dd01484d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a41ead8d5d040e74284a5ae5dd01484d, type: 3}
 --- !u!224 &173628470320744130 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2133123514134074566, guid: a41ead8d5d040e74284a5ae5dd01484d, type: 3}
+  m_PrefabInstance: {fileID: 2302107574312522244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &173628470320744131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2133123514134074567, guid: a41ead8d5d040e74284a5ae5dd01484d, type: 3}
   m_PrefabInstance: {fileID: 2302107574312522244}
   m_PrefabAsset: {fileID: 0}

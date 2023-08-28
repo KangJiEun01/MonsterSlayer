@@ -1,18 +1,24 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
-public class ExchangeUI : MonoBehaviour
+public class ExchangeUI : GenericSingleton<ExchangeUI>
 {
     [SerializeField] GameObject _item;
     [SerializeField] GameObject _recipe;
     [SerializeField] Transform _content;
     [SerializeField] Sprite[] _ItemIcon;
+    [SerializeField] GameObject _resultItem;
+    [SerializeField] Text _resultText;
+    [SerializeField] GameObject ExchangeBtn;
     int id = 0;
     List<ItemData> InvenData;
     List<Recipe> Recipe;
     Recipe _currentRecipe;
+    Action exchangeBtn;
     public Recipe CurrentRecipe { get { return _currentRecipe; } }
     // 좌클릭하면 아이템 데이터 랜덤생산해서 인벤토리에 추가하고 표현
     //orderCount 누르면 count의 내림차순, 오름차순 순서 정렬이 스위칭되서 표현 -> 인벤토리에 있는 아이템이 재정렬
@@ -21,7 +27,7 @@ public class ExchangeUI : MonoBehaviour
     void Start()
     {
         Init();
-        Debug.Log("UI");
+        
     }
 
     void Update()
@@ -33,10 +39,14 @@ public class ExchangeUI : MonoBehaviour
     {
         InvenData = GenericSingleton<ItemSaver>.Instance.Datas._itemList;
         Recipe = GenericSingleton<ExchangeSystem>.Instance.Recipes;
+        SetAlpha(_resultItem.GetComponent<Item>().Image, 0.2f);
+        SetAlpha(ExchangeBtn.GetComponent<Image>(), 0.2f);
+        ExchangeBtn.GetComponent<Button>().interactable = false;
         foreach (Transform recipe in _content)
         {
             Destroy(recipe.gameObject);
         }
+
         
         foreach (Recipe recipe in Recipe)
         {
@@ -44,12 +54,12 @@ public class ExchangeUI : MonoBehaviour
             GameObject temp = Instantiate(_recipe, _content);
             foreach (var a in bools) Debug.Log(a);
             Item[] items = temp.GetComponentsInChildren<Item>();
-            if(recipe.FirstM.idx == -1) items[0].gameObject.SetActive(false);   //재료가 4가지보다 적게 필요한경우임
+            if (recipe.FirstM.idx == -1) items[0].gameObject.SetActive(false);   //재료가 4가지보다 적게 필요한경우임
             else
             {
-                
+
                 if (!bools[0]) SetAlpha(items[0].Image, 0.2f);     // 각재료가 부족하다면 레시피가 반투명해짐     
-                else SetAlpha(items[0].Image, 1);                                          
+                else SetAlpha(items[0].Image, 1);
                 items[0].Image.sprite = _ItemIcon[recipe.FirstM.idx];
                 items[0].Text.text = "X" + recipe.FirstM.count.ToString();
             }
@@ -80,17 +90,16 @@ public class ExchangeUI : MonoBehaviour
             }
             items[4].Image.sprite = _ItemIcon[recipe.Result.idx];
             items[4].Text.text = "X" + recipe.Result.count.ToString();
-            if (bools[0] && bools[1] && bools[2] && bools[3])                       //거래가능할경우
+            Button recipeButton = temp.GetComponent<Button>();
+            recipeButton.onClick.AddListener(() => OnRecipeButtonClick(recipe));
+            if (recipe.CanExchange)                       //거래가능할경우
             {
                 SetAlpha(items[4].Image, 1f);
-                Button recipeButton = temp.GetComponent<Button>();
-                recipeButton.onClick.AddListener(() => OnRecipeButtonClick(recipe));  
             }
             else
             {
                 SetAlpha(items[4].Image, 0.2f);
             }
-            
         }
     }
     public void SetAlpha(Image img, float alpha)
@@ -102,10 +111,27 @@ public class ExchangeUI : MonoBehaviour
     private void OnRecipeButtonClick(Recipe recipe)
     { 
         _currentRecipe = recipe;
-    }
-    public void Exchange()
-    {
+        _resultItem.GetComponent<Item>().Image.sprite = _ItemIcon[_currentRecipe.Result.idx];
+        _resultItem.GetComponent<Item>().Text.text = "X" + _currentRecipe.Result.count;
+        if (recipe.CanExchange)                      //거래가능할경우
+        {
+            
+            SetAlpha(_resultItem.GetComponent<Item>().Image, 1f);
+            SetAlpha(ExchangeBtn.GetComponent<Image>(), 1);
+            ExchangeBtn.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            SetAlpha(_resultItem.GetComponent<Item>().Image, 0.2f);
+            SetAlpha(ExchangeBtn.GetComponent<Image>(), 0.2f);
+            ExchangeBtn.GetComponent<Button>().interactable = false;
+        }
 
     }
+    public void ExChangeBtn()
+    {
+        GenericSingleton<ExchangeSystem>.Instance.Exchange(_currentRecipe);
+    }
+
 
 }

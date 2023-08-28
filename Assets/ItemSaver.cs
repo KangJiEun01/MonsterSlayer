@@ -10,8 +10,8 @@ public class ItemSaver : GenericSingleton<ItemSaver>
     protected override void OnAwake()
     {
         datas._itemList = new List<ItemData>();
-        datas._itemList.Add(new ItemData(ItemType.Food, 0, 3));
-        datas._itemList.Add(new ItemData(ItemType.Food, 2, 2));
+        datas._itemList.Add(new ItemData( 0, 3));
+        datas._itemList.Add(new ItemData(2, 2));
     }
 
 }
@@ -31,9 +31,8 @@ public class ItemData
     public int Idx { get { return _itemIdx; } }
     int _count;
     public int Count { get { return _count; } }
-    public ItemData(ItemType type, int idx,int count)
+    public ItemData(int idx,int count)
     {
-        _type = type;
         _itemIdx = idx;
         _count = count;
     }

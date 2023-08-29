@@ -616,6 +616,7 @@ MonoBehaviour:
   endPoint: {fileID: 0}
   bullet: {fileID: 2516759553313999166, guid: d53d55bccbc81ff40990002d3415e075, type: 3}
   bulletPos: {fileID: 1060164488254806804}
+  detectionUi: {fileID: 0}
   avoidanceDistance: 1
   rayDistance: 1
 --- !u!1 &1060164488255162114

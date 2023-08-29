@@ -9,13 +9,15 @@ public class Enemy01controller : MonoBehaviour
     [SerializeField] Transform endPoint;
     [SerializeField] GameObject bullet;
     [SerializeField] Transform bulletPos; //-z
+    [SerializeField] GameObject detectionUi;
 
     Transform botPos;
+    Animator anim;
 
     float attackRange = 7f;//인식범위
-    float patrolSpeed = 3f; //순찰속도
-    float chaseSpeed = 7f; //인식 후 추격 속도
-    float bulletSpeed = 20f;
+    float patrolSpeed = 2f; //순찰속도
+    float chaseSpeed = 5f; //인식 후 추격 속도
+    float bulletSpeed = 2f;
     float AttackAniSpeed = 2f; //공격 애니메이션 재생 속도
 
     bool _patrol = true;
@@ -38,13 +40,18 @@ public class Enemy01controller : MonoBehaviour
     public float avoidanceDistance = 1.0f;
     public float rayDistance = 1.0f;
     //
-
+    private void Awake()
+    {
+        detectionUi.SetActive(false);
+    }
     void Start()
     {
         patrolEndPoint = endPoint.position;
         patrolStartPoint= spawnPoint.position;
         botPos=GetComponent<Transform>();
+        anim = GetComponent<Animator>();
         VectorbulletPos = bulletPos.position;
+        anim.Play("WalkFront_Shoot_AR");
     }
 
     void Update()
@@ -72,6 +79,7 @@ public class Enemy01controller : MonoBehaviour
         if(_attack)
         {
             BulletFire();
+            detectionUi.SetActive(true);
         }
     }
 
@@ -88,19 +96,22 @@ public class Enemy01controller : MonoBehaviour
     }
     void ShootAin()
     {
-        GetComponent<Animator>().Play("Shoot_SingleShot_AR");
+        //GetComponent<Animator>().Play("Shoot_SingleShot_AR");
+        anim.Play("Shoot_BurstShot_AR");
+        //anim.Play("Shoot_Autoshot_AR");
     }
     void BulletFire()
     {
         Time_current = Time.time - Time_start;
         if (Time_current > Time_Sumcooltime)
         {
-            Vector3 attackst = new Vector3(VectorbulletPos.x + (-2.0f), VectorbulletPos.y+(+5.0f), VectorbulletPos.z + (-8.5f));
+            //Vector3 attackst = new Vector3(VectorbulletPos.x + (-2.0f), VectorbulletPos.y+(+5.0f), VectorbulletPos.z + (-8.5f));
+            Vector3 attackst = new Vector3(VectorbulletPos.x , VectorbulletPos.y , VectorbulletPos.z);
             GameObject temp = Instantiate(bullet);
             //Vector3 worldPosition = bulletPos.TransformPoint(Vector3.zero);
             Vector3 worldPosition = bulletPos.TransformPoint(attackst);
             temp.transform.position = worldPosition;
-           // Vector3 dir =player.transform.position; //유도탄
+            //Vector3 dir =player.transform.position; 
             Vector3 dir = transform.forward; //앞방향
             temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
             Time_current = Time_Sumcooltime;
@@ -109,9 +120,10 @@ public class Enemy01controller : MonoBehaviour
     }
     void Patrol()
     {
+        detectionUi.SetActive(false);
         float distanceToStart = Vector3.Distance(transform.position, patrolStartPoint);
         float distanceToEnd = Vector3.Distance(transform.position, patrolEndPoint);
-
+        anim.Play("WalkFront_Shoot_AR");
         if (movingRight == true)
         {
             // 오른쪽으로 이동

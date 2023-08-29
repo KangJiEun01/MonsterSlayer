@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class Inventory : GenericSingleton<Inventory>
 {
     [SerializeField] GameObject _item;
-    [SerializeField] ItemType _filterType;
+    ItemType _weaponType = ItemType.Weapon;
     [SerializeField] Transform _content;
     [SerializeField] Sprite[] _ItemIcon;
+    public Sprite[] ItemIcon { get { return _ItemIcon; } } 
     int id = 0;
     List<ItemData> InvenData = new List<ItemData>();
     List<ItemData> OrderdData = new List<ItemData>();
@@ -56,7 +57,7 @@ public class Inventory : GenericSingleton<Inventory>
         if (filter)
         {
             var datas = from data in OrderdData
-                        where data.Type == _filterType
+                        where data.Type == _weaponType
                         select data;
             ReDrwing(datas.ToList());
         }
@@ -69,12 +70,16 @@ public class Inventory : GenericSingleton<Inventory>
     }
     public void ReDrwing(List<ItemData> InvenData)
     {
+        
         GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
         foreach (var item in items)
         {
             Destroy(item.gameObject);
         }
-        foreach (var item in InvenData)
+        var datas = from data in InvenData
+                    where data.Type != _weaponType
+                    select data;
+        foreach (var item in datas.ToList())
         {
             DrawItem(item);
         }

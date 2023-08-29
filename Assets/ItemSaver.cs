@@ -49,7 +49,7 @@ public class ItemData
     {
         // CSV 파일 로드 및 파싱
         TextAsset itemDataCSV = Resources.Load<TextAsset>("ItemData"); // "ItemData"는 CSV 파일명
-        Debug.Log(itemDataCSV);
+        
         StringReader reader = new StringReader(itemDataCSV.text);
         reader.ReadLine();
         while (reader.Peek() != -1)

@@ -120,6 +120,7 @@ public class Enemy01controller : MonoBehaviour
     }
     void Patrol()
     {
+        _attack = false;
         detectionUi.SetActive(false);
         float distanceToStart = Vector3.Distance(transform.position, patrolStartPoint);
         float distanceToEnd = Vector3.Distance(transform.position, patrolEndPoint);

@@ -1,6 +1,7 @@
 //using System;
 //using System.Collections;
 //using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 //using static UnityEditor.Progress;
@@ -11,7 +12,10 @@ public class Item : MonoBehaviour
     [SerializeField] int _count = 1;
     [SerializeField] int _idx = 1;
     [SerializeField] Image _image;
-    [SerializeField] Text _text;
+    //[SerializeField] Text _text;
+    [SerializeField] TextMeshProUGUI _text;
+    //[SerializeField] TextMesh _text;
+
 
 
     public ItemType Type { get { return _type; } }
@@ -20,7 +24,7 @@ public class Item : MonoBehaviour
     ItemData _itemData;
     public ItemData ItemData { get { return _itemData; } }
     public Image Image { get { return _image; } }
-    public Text Text { get { return _text; } }
+    public TextMeshProUGUI Text { get { return _text; } }
     public void getItem()
     {
         GenericSingleton<ItemSaver>.Instance.Datas._itemList.Add(_itemData);

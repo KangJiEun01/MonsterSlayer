@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Recipe : MonoBehaviour
 {
- 
+    
     ItemData _first;
     public ItemData First { get { return _first; } }
     ItemData _second;

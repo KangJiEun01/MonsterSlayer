@@ -11,6 +11,7 @@ TagManager:
   - PW - Nature
   - Item
   - Recipe
+  - PlusIcon
   layers:
   - Default
   - TransparentFX

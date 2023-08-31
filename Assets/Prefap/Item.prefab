@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2133123514134074566}
   - component: {fileID: 2133123514134074564}
   - component: {fileID: 2133123514134074565}
-  - component: {fileID: 7986443323223380149}
+  - component: {fileID: 7828975175420977406}
   m_Layer: 5
   m_Name: Item
   m_TagString: Item
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 37, y: -36}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2133123514134074564
 CanvasRenderer:
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7986443323223380149
+--- !u!114 &7828975175420977406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2133123514134074567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efb107dfed5adcb4f9a8e6d6c7d0ad80, type: 3}
+  m_Script: {fileID: 11500000, guid: ed15fb8b9dc8045499df9e44cc128fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
@@ -124,7 +124,7 @@ RectTransform:
   m_GameObject: {fileID: 2183236148269885254}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 0.75}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2133123514134074566}
@@ -259,7 +259,7 @@ RectTransform:
   m_GameObject: {fileID: 2645344744624489985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 0.75}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2133123514134074566}
@@ -268,7 +268,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 9.299988, y: -6.200012}
-  m_SizeDelta: {x: 141, y: 136}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2248815263930417784
 CanvasRenderer:
@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 1031610208481971950}
   - component: {fileID: 4863463448639534703}
   m_Layer: 5
-  m_Name: Scifi reward circle
+  m_Name: BackImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,7 +335,7 @@ RectTransform:
   m_GameObject: {fileID: 6579717551633745823}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 0.75}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2133123514134074566}

@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YDcity/YDDesert.unity
     guid: ed56124f16b79ad48b80ad8570299663
+  - enabled: 1
+    path: Assets/Scenes/GameStart.unity
+    guid: 50000ddc5cc1dce4792fc73bb0faad55
+  - enabled: 1
+    path: Assets/Scenes/MapSelect.unity
+    guid: fda3eb680557e4c418bc4d5bd628e44e
+  - enabled: 1
+    path: Assets/Scenes/YDcity/YDNeonCity.unity
+    guid: 007b7b5275cafe14d8470c8785e59fb9
   m_configObjects: {}

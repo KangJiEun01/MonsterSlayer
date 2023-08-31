@@ -3653,7 +3653,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 767123192}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1556394578}
+        m_TargetAssemblyTypeName: ButtonControll, Assembly-CSharp
+        m_MethodName: ClickbackButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &767123192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5250,6 +5262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Btn_Map1
       objectReference: {fileID: 0}
+    - target: {fileID: 1740511268507392225, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1740511268507392226, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5333,6 +5349,34 @@ PrefabInstance:
     - target: {fileID: 1740511268507392226, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740511268507392227, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740511268507392227, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740511268507392227, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1556394578}
+    - target: {fileID: 1740511268507392227, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740511268507392227, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClickLevelMapButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740511268507392227, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ButtonControll, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740511268507392227, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8082251900598307243, guid: 0b6c37f74ed208a41b8a09643b21dd1d, type: 3}
       propertyPath: m_TextStyleHashCode
@@ -5933,6 +5977,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466196666}
   m_CullTransparentMesh: 0
+--- !u!1 &1556394577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556394579}
+  - component: {fileID: 1556394578}
+  m_Layer: 0
+  m_Name: Btncontroll
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1556394578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556394577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1af8fb293aded4f949f7157b80bd56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1556394579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556394577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 478.255, y: 829.5797, z: -9.893852}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1648113317
 GameObject:
   m_ObjectHideFlags: 0
@@ -7853,7 +7941,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2105553091}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1556394578}
+        m_TargetAssemblyTypeName: ButtonControll, Assembly-CSharp
+        m_MethodName: ClickLevelMapButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2105553091
 MonoBehaviour:
   m_ObjectHideFlags: 0

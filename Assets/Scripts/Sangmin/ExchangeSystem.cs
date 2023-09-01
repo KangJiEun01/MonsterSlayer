@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
 {
     List<Recipe> _recipes = new List<Recipe>();
     public List<Recipe> Recipes { get { return _recipes; } }
-    List<ItemData> _invenData = new List<ItemData>();
+    Dictionary<int, ItemData> _invenData = new Dictionary<int, ItemData>();
     //약초 = 0
     //고기 = 1
     //익힌 고기 = 2
@@ -29,16 +30,49 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
     {
         //최대 4가지재료 (첫번째 재료,갯수) (두번째 재료,갯수) (세번째 재료,갯수) (네번째 재료,갯수) (결과,갯수)
         //재료가 적게필요하면 -1 넣기
-        _invenData = GenericSingleton<ItemSaver>.Instance.Datas._itemList;
-        _recipes.Add(new Recipe(new ItemData(0, 3), new ItemData(-1, 0), new ItemData(-1, 0), new ItemData(-1, 0), new ItemData(2, 1))); //허브3개 비타500 1개
-        _recipes.Add(new Recipe(new ItemData(2, 3), new ItemData(-1, 0), new ItemData(-1, 0), new ItemData(-1, 0), new ItemData(3, 1))); //비타500 3개 과자1개
-        _recipes.Add(new Recipe(new ItemData(2, 3), new ItemData(0, 2), new ItemData(-1, 0), new ItemData(-1, 0), new ItemData(3, 3))); //비타500 3개 허브2개 과자 3개 테스트용
+        _invenData = GenericSingleton<ItemSaver>.Instance.Datas._items;
+        LoadRecipeData();
+        CalExchange();
 
     }
-    public bool[] ExchangeEnable(Recipe recipe)
+    void LoadRecipeData()
+    {
+        // CSV 파일 로드 및 파싱
+        TextAsset RecipeDataCSV = Resources.Load<TextAsset>("RecipeData"); // "ItemData"는 CSV 파일명
+
+        StringReader reader = new StringReader(RecipeDataCSV.text);
+        reader.ReadLine();
+        while (reader.Peek() != -1)
+        {
+            string line = reader.ReadLine();
+            string[] values = line.Split(',');
+            Debug.Log(values[1]);
+            int firstItemIdx = int.Parse(values[1]);    
+            int firstItemCount = int.Parse(values[2]);
+            int SecondItemIdx = int.Parse(values[4]);
+            int SecondItemCount = int.Parse(values[5]);
+            int ThirdItemIdx = int.Parse(values[7]);
+            int ThirdItemCount = int.Parse(values[8]);
+            int FourthItemIdx = int.Parse(values[10]);
+            int FourthItemCount = int.Parse(values[11]);
+            int ResultItemIdx = int.Parse(values[13]);
+            int ResultItemCount = int.Parse(values[14]);
+            _recipes.Add(new Recipe(new ItemData(firstItemIdx, firstItemCount), new ItemData(SecondItemIdx, SecondItemCount), new ItemData(ThirdItemIdx, ThirdItemCount), new ItemData(FourthItemIdx, FourthItemCount), new ItemData(ResultItemIdx, ResultItemCount)));
+
+        }
+        reader.Close();
+    }
+    public void CalExchange()
+    {
+        foreach(Recipe recipe in _recipes)
+        {
+            ExchangeEnable(recipe);
+        }
+    }
+    void ExchangeEnable(Recipe recipe)
     {
         bool[] mats = new bool[] { false, false, false, false };
-        foreach (ItemData item in _invenData)
+        foreach (ItemData item in _invenData.Values)
         {
             if (recipe.First.Idx == -1) mats[0] = true;
             else if (recipe.First.Idx == item.Idx)
@@ -60,7 +94,9 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
             {
                 if (item.Count >= recipe.Fourth.Count) mats[3] = true;
             }
-            
+
+
+
         }
         if (mats[0] && mats[1] && mats[2] && mats[3])                       //거래가능할경우
         {
@@ -70,46 +106,21 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         {
             recipe.SetCanExchange(false);
         }
-        return mats;
+        recipe.SetBools(mats);
     }
     public void Exchange(Recipe recipe)
     {
-        bool _ishaving = false;
-        foreach (ItemData item in _invenData)
-        {
-            if (recipe.First.Idx == item.Idx)
-            {
-                item.SetCount(item.Count- recipe.First.Count);
-            }
+        GenericSingleton<ItemSaver>.Instance.SubItem(recipe.First);
+        GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Second);
+        GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Third);
+        GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth);
 
-            if (recipe.Second.Idx == item.Idx)
-            {
-                item.SetCount(item.Count - recipe.Second.Count);
-            }
+        GenericSingleton<ItemSaver>.Instance.AddItem(recipe.Result);
 
-            if (recipe.Third.Idx == item.Idx)
-            {
-                item.SetCount(item.Count - recipe.Third.Count);
-            }
-
-            if (recipe.Fourth.Idx == item.Idx)
-            {
-                item.SetCount(item.Count - recipe.Fourth.Count);
-            }
-
-            if (recipe.Result.Idx == item.Idx)
-            {
-                _ishaving = true;
-                item.SetCount(item.Count + recipe.Result.Count);
-            }
-        }
-        if (!_ishaving)
-        {
-            _invenData.Add(new ItemData(recipe.Result.Idx, recipe.Result.Count));
-        }
+        CalExchange();
         GenericSingleton<Inventory>.Instance.ReDrwing(_invenData);
         GenericSingleton<ExchangeUI>.Instance.Init();
-            
+    
     }
     
 }

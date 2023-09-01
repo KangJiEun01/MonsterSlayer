@@ -362,7 +362,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         }
         if (collision.collider.CompareTag("Item"))
         {
-            collision.collider.GetComponent<Item>()?.getItem();
+            GenericSingleton<ItemSaver>.Instance.AddItem(collision.collider.GetComponent<Item>().GetItem());
         }
     }
 }

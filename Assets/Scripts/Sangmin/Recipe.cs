@@ -17,10 +17,14 @@ public class Recipe : MonoBehaviour
     public ItemData Fourth { get {  return _fourth; } }
     ItemData _result;
     public ItemData Result { get { return _result; } }
+    bool[] _bools = new bool[0];
+    public bool[] Bools { get { return _bools; } }
     bool _canExchange;
     public bool CanExchange { get { return _canExchange; } }
-
-    public void SetCanExchange(bool canExchange) => _canExchange = canExchange;
+    [SerializeField] GameObject[] _plus;
+    public GameObject[] Plus { get { return _plus; } }
+     public void SetCanExchange(bool canExchange) => _canExchange = canExchange;
+     public void SetBools(bool[] bools) => _bools = bools;
 
     public Recipe(ItemData first, ItemData second,ItemData third, ItemData fourth, ItemData result)
     {

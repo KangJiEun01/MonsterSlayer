@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Rendering.Universal;
+using System.Linq;
 using UnityEngine.UI;
 using TMPro;
 
@@ -18,8 +17,8 @@ public class ExchangeUI : GenericSingleton<ExchangeUI>
     [SerializeField] GameObject _resultEffect;
     Sprite[] _ItemIcon;
     int id = 0;
-    List<ItemData> InvenData;
     List<Recipe> Recipe;
+
     Recipe _currentRecipe;
     Action exchangeBtn;
     public Recipe CurrentRecipe { get { return _currentRecipe; } }
@@ -40,7 +39,7 @@ public class ExchangeUI : GenericSingleton<ExchangeUI>
 
     public void Init()
     {
-        InvenData = GenericSingleton<ItemSaver>.Instance.Datas._itemList;
+  
         Recipe = GenericSingleton<ExchangeSystem>.Instance.Recipes;
         _ItemIcon = GenericSingleton<Inventory>.Instance.ItemIcon;
         _resultText.text = "";
@@ -54,28 +53,28 @@ public class ExchangeUI : GenericSingleton<ExchangeUI>
         {
             Destroy(recipe.gameObject);
         }
-
-        
+        var datas = from data in Recipe
+                    orderby data.CanExchange descending
+                    select data;
+        Recipe = datas.ToList();
         foreach (Recipe recipe in Recipe)
         {
-            bool[] bools = GenericSingleton<ExchangeSystem>.Instance.ExchangeEnable(recipe);       //각각의 재료마다 거래가 가능한지 판단여부
             GameObject temp = Instantiate(_recipe, _content);
-            foreach (var a in bools) Debug.Log(a);
+            bool[] bools = recipe.Bools;
             Item[] items = temp.GetComponentsInChildren<Item>();
             if (!bools[0]) SetAlpha(items[0].Image, 0.2f);     // 각재료가 부족하다면 레시피가 반투명해짐     
             else SetAlpha(items[0].Image, 1);
             items[0].Image.sprite = _ItemIcon[recipe.First.Idx];
             items[0].Text.text = "X" + recipe.First.Count.ToString();
-            GameObject[] _plusImg = GameObject.FindGameObjectsWithTag("PlusIcon");
-            Debug.Log(_plusImg.Length);
-            _plusImg[0].SetActive(false);
-            _plusImg[1].SetActive(false);
-            _plusImg[2].SetActive(false);
+
+            temp.GetComponent<Recipe>().Plus[0].SetActive(false);
+            temp.GetComponent<Recipe>().Plus[1].SetActive(false);
+            temp.GetComponent<Recipe>().Plus[2].SetActive(false);
 
             if (recipe.Second.Idx == -1)
             {
                 items[1].gameObject.SetActive(false);
-                _plusImg[0].SetActive(true);
+                temp.GetComponent<Recipe>().Plus[0].SetActive(true);
 
             }
             else
@@ -88,8 +87,8 @@ public class ExchangeUI : GenericSingleton<ExchangeUI>
             if (recipe.Third.Idx == -1)
             {
                 items[2].gameObject.SetActive(false);
-                _plusImg[0].SetActive(true);
-                _plusImg[1].SetActive(true);
+                temp.GetComponent<Recipe>().Plus[0].SetActive(true);
+                temp.GetComponent<Recipe>().Plus[1].SetActive(true);
             }
             else
             {
@@ -101,9 +100,9 @@ public class ExchangeUI : GenericSingleton<ExchangeUI>
             if (recipe.Fourth.Idx == -1)
             {
                 items[3].gameObject.SetActive(false);
-                _plusImg[0].SetActive(true);
-                _plusImg[1].SetActive(true);
-                _plusImg[2].SetActive(true);
+                temp.GetComponent<Recipe>().Plus[0].SetActive(true);
+                temp.GetComponent<Recipe>().Plus[1].SetActive(true);
+                temp.GetComponent<Recipe>().Plus[2].SetActive(true);
             }
             else
             {

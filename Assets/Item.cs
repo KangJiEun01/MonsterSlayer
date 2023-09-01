@@ -25,12 +25,10 @@ public class Item : MonoBehaviour
     public ItemData ItemData { get { return _itemData; } }
     public Image Image { get { return _image; } }
     public TextMeshProUGUI Text { get { return _text; } }
-    public void getItem()
+    public ItemData GetItem()
     {
-        GenericSingleton<ItemSaver>.Instance.Datas._itemList.Add(_itemData);
-        Debug.Log(GenericSingleton<ItemSaver>.Instance.Datas._itemList[0].Count);
-        GenericSingleton<Inventory>.Instance.DrawItem(_itemData);
         Destroy(gameObject);
+        return _itemData;
 
     }
     private void Start()

@@ -1,26 +1,44 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class ItemSaver : GenericSingleton<ItemSaver>
 {
-    ItemDataList datas = new ItemDataList();
-    public ItemDataList Datas { get { return datas; } }
+    ItemDataWrapper  datas = new ItemDataWrapper();
+    public ItemDataWrapper Datas { get { return datas; } }
     protected override void OnAwake()
     {
-        datas._itemList = new List<ItemData>();
-        datas._itemList.Add(new ItemData(0, 3));
-        datas._itemList.Add(new ItemData(2, 2));
+        datas._items = new Dictionary<int, ItemData>();
+        datas._items.Add(0, new ItemData(0, 3));
+        datas._items.Add(2, new ItemData(2, 2));
+    }
+    public void SubItem(ItemData item)
+    {
+        if (datas._items.TryGetValue(item.Idx, out ItemData data))
+        {
+            data.SetCount(data.Count - item.Count);
+            if (data.Count == 0) datas._items.Remove(item.Idx);
+        }
+        else return;
+
+    }
+    public void AddItem(ItemData item)
+    {
+        if (datas._items.TryGetValue(item.Idx, out ItemData data))
+        {
+            data.SetCount(data.Count + item.Count);
+        }
+        else datas._items.Add(item.Idx, item);
     }
 
 }
 
 [Serializable]
-public class ItemDataList
+public class ItemDataWrapper
 {
-    public List<ItemData> _itemList = new List<ItemData>();
-    
+    public Dictionary<int, ItemData> _items = new Dictionary<int, ItemData>();
 }
 [Serializable]
 public class ItemData

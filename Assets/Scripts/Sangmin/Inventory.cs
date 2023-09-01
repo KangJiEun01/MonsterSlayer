@@ -12,8 +12,8 @@ public class Inventory : GenericSingleton<Inventory>
     [SerializeField] Sprite[] _ItemIcon;
     public Sprite[] ItemIcon { get { return _ItemIcon; } } 
     int id = 0;
-    List<ItemData> InvenData = new List<ItemData>();
-    List<ItemData> OrderdData = new List<ItemData>();
+    Dictionary<int, ItemData> InvenData = new Dictionary<int, ItemData>();
+    Dictionary<int, ItemData> OrderdData = new Dictionary<int, ItemData>();
     bool orderCount = true;
     bool orderScale = true;
     bool filter = true;
@@ -23,7 +23,7 @@ public class Inventory : GenericSingleton<Inventory>
     //filterType 누르면 _filterType과 같은 타입만 인벤토리에 표시 다시누르면 전체목록표시
     void Start()
     {
-        InvenData = GenericSingleton<ItemSaver>.Instance.Datas._itemList;
+        InvenData = GenericSingleton<ItemSaver>.Instance.Datas._items;
         OrderdData = InvenData;
         ReDrwing(InvenData);
     }
@@ -32,43 +32,43 @@ public class Inventory : GenericSingleton<Inventory>
     {
         
     }
-    public void OrderCount()
-    {
-        if (orderCount)//오름차순
-        {
-            var datas = from data in OrderdData
-                        orderby data.Count ascending
-                        select data;
-            OrderdData = datas.ToList();
-        }
-        else //내림차순
-        {
-            var datas = from data in OrderdData
-                        orderby data.Count descending
-                        select data;
-            OrderdData = datas.ToList();
-        }
-        orderCount = !orderCount;
-        ReDrwing(OrderdData);
-    }
+    //public void OrderCount()
+    //{
+    //    if (orderCount)//오름차순
+    //    {
+    //        var datas = from data in OrderdData
+    //                    orderby data.Count ascending
+    //                    select data;
+    //        OrderdData = datas.ToList();
+    //    }
+    //    else //내림차순
+    //    {
+    //        var datas = from data in OrderdData
+    //                    orderby data.Count descending
+    //                    select data;
+    //        OrderdData = datas.ToList();
+    //    }
+    //    orderCount = !orderCount;
+    //    ReDrwing(OrderdData);
+    //}
 
-    public void Filter()
-    {
-        if (filter)
-        {
-            var datas = from data in OrderdData
-                        where data.Type == _weaponType
-                        select data;
-            ReDrwing(datas.ToList());
-        }
-        else
-        {
-            ReDrwing(OrderdData);
-        }
-        filter = !filter;
+    //public void Filter()
+    //{
+    //    if (filter)
+    //    {
+    //        var datas = from data in OrderdData
+    //                    where data.Type == _weaponType
+    //                    select data;
+    //        ReDrwing(datas.ToList());
+    //    }
+    //    else
+    //    {
+    //        ReDrwing(OrderdData);
+    //    }
+    //    filter = !filter;
 
-    }
-    public void ReDrwing(List<ItemData> InvenData)
+    //}
+    public void ReDrwing(Dictionary<int, ItemData> InvenData)
     {
         
         GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
@@ -76,10 +76,10 @@ public class Inventory : GenericSingleton<Inventory>
         {
             Destroy(item.gameObject);
         }
-        var datas = from data in InvenData
-                    where data.Type != _weaponType
-                    select data;
-        foreach (var item in datas.ToList())
+        var datas = from data in InvenData.Values
+                                          where data.Type != _weaponType
+                                          select data;
+        foreach (ItemData item in datas)
         {
             DrawItem(item);
         }

@@ -18,7 +18,6 @@ public class UIBase : GenericSingleton<UIBase>
     }
     public void ShowInvenCheckUI(bool ShowUI) => _invenCheckUI.SetActive(ShowUI);
    
-    public void ShowRunToggleUI(bool ShowUI) => _runToggle.SetActive(ShowUI);
 
     public void ShowInvenUI(bool ShowUI) => _inventory.SetActive(ShowUI);
 

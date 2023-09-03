@@ -1,49 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class Gun : GenericSingleton<Gun>
+public class Rifle : WeaponBase
 {
-    //공격 관련 변수
-
-    [SerializeField] private float _attackSpeed = 0.167f;
-    [SerializeField] private float _attackDamage = 1;
-    [SerializeField] private float _impactForce = 30;
-    [SerializeField] private float _bulletSpeed = 50;
-    [SerializeField] private float _spreadAngle = 0;
-    // 총알 발사 관리 변수
-    [SerializeField] GameObject _bullet;
-    [SerializeField] GameObject _bulletHole;
-    [SerializeField] Transform _firePosition;
-    [SerializeField] float reloadTime = 3.5f;
-    [SerializeField] GameObject _bulletParent;
-    [SerializeField] GameObject _player;
-    [SerializeField] RectTransform _upCrosshair;
-    [SerializeField] RectTransform _rightCrosshair;
-    [SerializeField] RectTransform _downCrosshair;
-    [SerializeField] RectTransform _leftCrosshair;
-
-    GameObject currentBullet;
-    //재장전 관리 변수
-    [SerializeField] int _maxBullet;
-    int _currentBullet;
-    bool _isReload;
-    public bool IsReload { get { return _isReload; } }
-    bool inAttack = false;
-    public bool InAttack { get { return inAttack; } }
-    GameObject[] _bulletPool;
-    int _poolIndex;
-    float aimTime;
-    int _invokeIdx;
-    Vector3 _target;
-    Vector3 ScreenCenter;
-    Ray ray1;
-    Recoil recoil;
-    Animator _animator;
-    ParticleSystem _effect;
-    AudioSource audioSource;
-    [Header("Sound")]
-    [SerializeField] AudioClip _shotSound;
-    [SerializeField] AudioClip _reloadSound;
+    
+   
 
     void Start()
     {   
@@ -52,7 +13,7 @@ public class Gun : GenericSingleton<Gun>
         audioSource = GetComponent<AudioSource>();
         recoil = GenericSingleton<Recoil>.Instance.GetComponent<Recoil>();
         InstBullet();     
-        _currentBullet = _maxBullet;
+        _currentIdx = _maxBullet;
 
     }
  
@@ -76,7 +37,7 @@ public class Gun : GenericSingleton<Gun>
             aimTime = 0;
            AimReturn();
         }
-        if (Input.GetKeyDown(KeyCode.R) && _currentBullet < _maxBullet && !_isReload)
+        if (Input.GetKeyDown(KeyCode.R) && _currentIdx < _maxBullet && !_isReload)
         {
             _isReload = true;
             StartCoroutine(ReloadBullet());
@@ -135,7 +96,7 @@ public class Gun : GenericSingleton<Gun>
         }
         Debug.Log("장전완료");
         _isReload = false;
-        _currentBullet = _maxBullet;
+        _currentIdx = _maxBullet;
     }
     //void Fire()
     //{
@@ -167,10 +128,10 @@ public class Gun : GenericSingleton<Gun>
     //}
     void RaycastShot()
     {
-        if (_currentBullet > 0 && !_isReload)
+        if (_currentIdx > 0 && !_isReload)
         {
             RaycastHit hit;
-            _currentBullet--;
+            _currentIdx--;
             _effect.Play();
             audioSource.PlayOneShot(_shotSound, 1f);
             _animator.Play("Shot");
@@ -198,7 +159,7 @@ public class Gun : GenericSingleton<Gun>
             }           
             Invoke("StopAttack", _attackSpeed);
         }
-        else if (_currentBullet <= 0 && !_isReload)
+        else if (_currentIdx <= 0 && !_isReload)
         {
             _isReload = true;
             StartCoroutine(ReloadBullet());

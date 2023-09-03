@@ -30,6 +30,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     private float _runTimer;
     public float RunTimer { get { return _runTimer; } }
     private bool _runToggle;
+    public bool RunToggle {  get { return _runToggle; } }
 
     //HpUi전달 변수
     public float HpStat { get { return _hp; } }
@@ -86,7 +87,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         // 컴포넌트 할당
         _collider = GetComponent<CapsuleCollider>();
         _rig = GetComponent<Rigidbody>();
-        _animator = GenericSingleton<Gun>.Instance.GetComponent<Animator>();
+        _animator = GenericSingleton<WeaponBase>.Instance.GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         // 초기화
         _speed = _walkSpeed;
@@ -141,14 +142,14 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if(!_runToggle)GenericSingleton<UIBase>.Instance.ShowRunToggleUI(true);
+            //if(!_runToggle)GenericSingleton<UIBase>.Instance.ShowRunToggleUI(true);
             Running();
             _runTimer += Time.deltaTime;
-            if (_runTimer > 3)
+            if (_runTimer > 2)
             {
                 _runTimer = 0;
                 _runToggle = true;
-                GenericSingleton<UIBase>.Instance.ShowRunToggleUI(false);
+                //GenericSingleton<UIBase>.Instance.ShowRunToggleUI(false);
             }
         }
         else if (_runToggle)  Running(); 
@@ -188,7 +189,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
 
         _isRun = true;
         _speed = _runSpeed;
-        if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<Gun>.Instance.IsReload && !GenericSingleton<Gun>.Instance.InAttack)
+        if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<WeaponBase>.Instance.IsReload && !GenericSingleton<WeaponBase>.Instance.InAttack)
         {
             _animator.Play("Run");
             MovingSound(0.25f);
@@ -199,7 +200,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // 달리기 취소
     private void RunningCancel()
     {
-        GenericSingleton<UIBase>.Instance.ShowRunToggleUI(false);
+        //GenericSingleton<UIBase>.Instance.ShowRunToggleUI(false);
         _isRun = false;
         _speed = _walkSpeed;
         _runTimer = 0;
@@ -256,7 +257,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _moveDirZ = Input.GetAxisRaw("Vertical");
         if (_moveDirX == 0 && _moveDirZ == 0)
         {
-            if (!GenericSingleton<Gun>.Instance.IsReload && !GenericSingleton<Gun>.Instance.InAttack)
+            if (!GenericSingleton<WeaponBase>.Instance.IsReload && !GenericSingleton<WeaponBase>.Instance.InAttack)
             {
                 _animator.Play("Idle");
             }
@@ -266,7 +267,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         else
         {
             _isIdle = false;
-            if (!_isRun && !GenericSingleton<Gun>.Instance.IsReload && !GenericSingleton<Gun>.Instance.InAttack)
+            if (!_isRun && !GenericSingleton<WeaponBase>.Instance.IsReload && !GenericSingleton<WeaponBase>.Instance.InAttack)
             {
                 _animator.Play("Walk");
                 MovingSound(0.3f);

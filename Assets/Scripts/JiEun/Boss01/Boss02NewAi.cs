@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Boss02NewAi : MonoBehaviour //보스 1 : 3초마다 따라와서 공격하고 3초 대기

@@ -6,6 +6,16 @@ public class Pistol : WeaponBase
 
 
 
+    void Start()
+    {
+        _animator = GetComponent<Animator>();
+        _effect = GetComponentInChildren<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
+        recoil = GenericSingleton<Recoil>.Instance.GetComponent<Recoil>();
+        InstBullet();
+        _currentIdx = _maxBullet;
+
+    }
 
 
     void Update()

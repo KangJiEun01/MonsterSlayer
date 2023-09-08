@@ -851,6 +851,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIBase
       objectReference: {fileID: 0}
+    - target: {fileID: 6246212127510323548, guid: e9ed3708865d50840a54291976007152, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6246212127510323550, guid: e9ed3708865d50840a54291976007152, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 2560
+      objectReference: {fileID: 0}
+    - target: {fileID: 6246212127510323550, guid: e9ed3708865d50840a54291976007152, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1440
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9ed3708865d50840a54291976007152, type: 3}
 --- !u!1 &2055061598 stripped
@@ -1968,6 +1980,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1404284177, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
+      propertyPath: _bulletParent
+      value: 
+      objectReference: {fileID: 2111746502}
+    - target: {fileID: 1501321753, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
+      propertyPath: _bulletParent
+      value: 
+      objectReference: {fileID: 2111746502}
     - target: {fileID: 2794337727044448787, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2015,30 +2035,6 @@ PrefabInstance:
     - target: {fileID: 2794337727044448797, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2794337727491717258, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2794337727846376760, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-      propertyPath: reloadTime
-      value: 2.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2794337727846376760, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-      propertyPath: _bulletParent
-      value: 
-      objectReference: {fileID: 2111746502}
-    - target: {fileID: 4793024558777611828, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-      propertyPath: reloadTime
-      value: 1.567
-      objectReference: {fileID: 0}
-    - target: {fileID: 4793024558777611828, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-      propertyPath: _bulletParent
-      value: 
-      objectReference: {fileID: 2111746502}
-    - target: {fileID: 5814451402890108424, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}

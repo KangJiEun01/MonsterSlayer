@@ -4,10 +4,6 @@ public class FireBullet : MonoBehaviour
 {
     Vector3 _dir;
     float _speed;
-    void Start()
-    {
-        
-    }
     void Update()
     {
         transform.position += _dir * Time.deltaTime * _speed;

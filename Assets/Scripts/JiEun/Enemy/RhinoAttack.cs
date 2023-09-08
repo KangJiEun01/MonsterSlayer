@@ -33,6 +33,7 @@ public class RhinoAttack : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
+            Debug.Log("Ä«¸Þ¶ó");
             CameraMove();
         }
     }

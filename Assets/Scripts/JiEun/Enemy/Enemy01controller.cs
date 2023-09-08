@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy01controller : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    GameObject player;
     [SerializeField] Transform spawnPoint;
     [SerializeField] Transform endPoint;
     [SerializeField] GameObject bullet;
@@ -16,7 +16,7 @@ public class Enemy01controller : MonoBehaviour
     float attackRange = 7f;//인식범위
     float patrolSpeed = 2f; //순찰속도
     float chaseSpeed = 5f; //인식 후 추격 속도
-    float bulletSpeed = 2f;
+    float bulletSpeed = 5f;
     float AttackAniSpeed = 2f; //공격 애니메이션 재생 속도
 
     bool _patrol = true;
@@ -45,6 +45,7 @@ public class Enemy01controller : MonoBehaviour
     }
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         patrolEndPoint = endPoint.position;
         patrolStartPoint= spawnPoint.position;
         botPos=GetComponent<Transform>();

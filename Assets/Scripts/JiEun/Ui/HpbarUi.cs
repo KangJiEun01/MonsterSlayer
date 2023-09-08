@@ -8,11 +8,6 @@ public class HpbarUi : MonoBehaviour
     [SerializeField] Image _hpbar02;
     [SerializeField] Transform _hpbar02trans;
     [SerializeField] Transform _hpbar03trans;
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         float _hpbar02pos = GenericSingleton<PlayerCon>.Instance.GetComponent<PlayerCon>().HpStat * 0.01f;

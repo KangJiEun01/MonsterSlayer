@@ -20,8 +20,8 @@ public class Recoil : GenericSingleton<Recoil>
         currentRotation = Vector3.Slerp(currentRotation, targetRotation, snappiness * Time.fixedDeltaTime);
         transform.localRotation = Quaternion.Euler(currentRotation);
     }
-    public void RecoilFire()
+    public void RecoilFire(float recoil)
     {
-        targetRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
+        targetRotation += new Vector3(-recoil, Random.Range(-recoil, recoil), Random.Range(-recoilZ, recoilZ));
     }
 }

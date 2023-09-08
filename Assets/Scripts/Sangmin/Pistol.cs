@@ -6,19 +6,13 @@ public class Pistol : WeaponBase
 
 
 
-    void Start()
+    protected override void OnStart()
     {
-        _animator = GetComponent<Animator>();
-        _effect = GetComponentInChildren<ParticleSystem>();
-        audioSource = GetComponent<AudioSource>();
-        recoil = GenericSingleton<Recoil>.Instance.GetComponent<Recoil>();
         InstBullet();
-        _currentIdx = _maxBullet;
-
     }
 
 
-    void Update()
+    protected override void OnUpdate()
     {
         ray1 = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
@@ -35,7 +29,7 @@ public class Pistol : WeaponBase
         if (Input.GetMouseButtonUp(0))
         {
             aimTime = 0;
-            AimReturn();
+
         }
         if (Input.GetKeyDown(KeyCode.R) && _currentIdx < _maxBullet && !_isReload)
         {
@@ -69,20 +63,7 @@ public class Pistol : WeaponBase
             gameObject.SetActive(false);
         }
     }
-    void AimOpen()
-    {
-        _upCrosshair.anchoredPosition3D += Vector3.up * 2.5f;
-        _rightCrosshair.anchoredPosition3D += Vector3.left * 2.5f;
-        _downCrosshair.anchoredPosition3D += Vector3.down * 2.5f;
-        _leftCrosshair.anchoredPosition3D += Vector3.right * 2.5f;
-    }
-    void AimReturn()
-    {
-        _upCrosshair.anchoredPosition3D = new Vector3(0, 35, 0);
-        _rightCrosshair.anchoredPosition3D = new Vector3(-40, 0, 0f);
-        _downCrosshair.anchoredPosition3D = new Vector3(0, -35, 0);
-        _leftCrosshair.anchoredPosition3D = new Vector3(40, 0, 0);
-    }
+
 
     IEnumerator ReloadBullet()
     {
@@ -138,8 +119,8 @@ public class Pistol : WeaponBase
             inAttack = true;
             if (aimTime > 0.15f)
             {
-                recoil.RecoilFire(); //¹Ýµ¿
-                AimOpen();           // aim¹ú¾îÁü
+                recoil.RecoilFire(_recoil); //¹Ýµ¿
+
             }
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100f))
             {

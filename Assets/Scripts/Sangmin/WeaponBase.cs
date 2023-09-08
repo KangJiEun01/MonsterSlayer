@@ -12,16 +12,13 @@ public class WeaponBase : GenericSingleton<WeaponBase>
     [SerializeField] protected float _bulletSpeed = 50;
     [SerializeField] protected float _spreadAngle = 0;
     // 총알 발사 관리 변수
-
+    [SerializeField] protected float _recoil;
     [SerializeField] protected GameObject _bulletHole;
     [SerializeField] protected Transform _firePosition;
     [SerializeField] protected float reloadTime = 3.5f;
     [SerializeField] protected GameObject _bulletParent;
     [SerializeField] protected GameObject _player;
-    [SerializeField] protected RectTransform _upCrosshair;
-    [SerializeField] protected  RectTransform _rightCrosshair;
-    [SerializeField] protected RectTransform _downCrosshair;
-    [SerializeField] protected RectTransform _leftCrosshair;
+  
 
     protected GameObject currentBullet;
     //재장전 관리 변수
@@ -45,5 +42,26 @@ public class WeaponBase : GenericSingleton<WeaponBase>
     [Header("Sound")]
     [SerializeField] protected  AudioClip _shotSound;
     [SerializeField] protected  AudioClip _reloadSound;
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+        _effect = GetComponentInChildren<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
+        recoil = GenericSingleton<Recoil>.Instance.GetComponent<Recoil>();
+        OnStart();
+        _currentIdx = _maxBullet;
+    }
+    protected virtual void OnStart()
+    {
+
+    }
+    private void Update()
+    {
+        OnUpdate();
+    }
+    protected virtual void OnUpdate()
+    {
+
+    }
 
 }

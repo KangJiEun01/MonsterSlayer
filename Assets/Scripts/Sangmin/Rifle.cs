@@ -3,22 +3,19 @@ using UnityEngine;
 
 public class Rifle : WeaponBase
 {
-    
-   
+    [SerializeField] protected RectTransform _upCrosshair;
+    [SerializeField] protected RectTransform _rightCrosshair;
+    [SerializeField] protected RectTransform _downCrosshair;
+    [SerializeField] protected RectTransform _leftCrosshair;
 
-    void Start()
-    {   
-        _animator = GetComponent<Animator>();
-        _effect = GetComponentInChildren<ParticleSystem>();
-        audioSource = GetComponent<AudioSource>();
-        recoil = GenericSingleton<Recoil>.Instance.GetComponent<Recoil>();
+
+    protected override void OnStart()
+    {         
         InstBullet();     
-        _currentIdx = _maxBullet;
-
     }
- 
 
-    void Update()
+
+    protected override void OnUpdate()
     {
         ray1 = new Ray(Camera.main.transform.position,Camera.main.transform.forward);
         RaycastHit hit;
@@ -138,7 +135,7 @@ public class Rifle : WeaponBase
             inAttack = true;
             if(aimTime > 0.3f)
             {
-                recoil.RecoilFire(); //¹Ýµ¿
+                recoil.RecoilFire(_recoil); //¹Ýµ¿
                 AimOpen();           // aim¹ú¾îÁü
             }
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100f))

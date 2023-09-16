@@ -7,19 +7,7 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
     List<Recipe> _recipes = new List<Recipe>();
     public List<Recipe> Recipes { get { return _recipes; } }
     Dictionary<int, ItemData> _invenData = new Dictionary<int, ItemData>();
-    //약초 = 0
-    //고기 = 1
-    //익힌 고기 = 2
-    //비타500 = 3
-    //과자 = 4
-    //도시락 = 5 
-    //톱니 = 6
-    //건전지 = 7 
-    //렌치 = 8
-    //화약 = 9
-    //라이터 = 10
-    //열쇠 = 11
-    //철판 = 12
+  
     void Start()
     {
         Init();

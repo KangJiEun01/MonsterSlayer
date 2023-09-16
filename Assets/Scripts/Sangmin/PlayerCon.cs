@@ -87,7 +87,8 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         // 컴포넌트 할당
         _collider = GetComponent<CapsuleCollider>();
         _rig = GetComponent<Rigidbody>();
-        _animator = GenericSingleton<WeaponBase>.Instance.GetComponent<Animator>();
+        Debug.Log(GenericSingleton<WeaponManager>.Instance.CurrentWeapon);
+        _animator = GenericSingleton<WeaponManager>.Instance.CurrentWeapon._animator;
         _audioSource = GetComponent<AudioSource>();
         // 초기화
         _speed = _walkSpeed;
@@ -98,6 +99,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
 
     void Update()
     {
+        
         IsGround();
         TryJump();
         TryRun();
@@ -189,7 +191,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
 
         _isRun = true;
         _speed = _runSpeed;
-        if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<WeaponBase>.Instance.IsReload && !GenericSingleton<WeaponBase>.Instance.InAttack)
+        if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.IsReload && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.InAttack)
         {
             _animator.Play("Run");
             MovingSound(0.25f);
@@ -257,7 +259,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _moveDirZ = Input.GetAxisRaw("Vertical");
         if (_moveDirX == 0 && _moveDirZ == 0)
         {
-            if (!GenericSingleton<WeaponBase>.Instance.IsReload && !GenericSingleton<WeaponBase>.Instance.InAttack)
+            if (!GenericSingleton<WeaponManager>.Instance.CurrentWeapon.IsReload && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.InAttack)
             {
                 _animator.Play("Idle");
             }
@@ -267,7 +269,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         else
         {
             _isIdle = false;
-            if (!_isRun && !GenericSingleton<WeaponBase>.Instance.IsReload && !GenericSingleton<WeaponBase>.Instance.InAttack)
+            if (!_isRun && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.IsReload && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.InAttack)
             {
                 _animator.Play("Walk");
                 MovingSound(0.3f);

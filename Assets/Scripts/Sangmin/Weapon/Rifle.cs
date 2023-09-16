@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Rifle : WeaponBase
+public class Rifle : HitScan
 {
 
     [SerializeField] protected RectTransform _upCrosshair;
@@ -10,64 +10,10 @@ public class Rifle : WeaponBase
     [SerializeField] protected RectTransform _leftCrosshair;
     
 
-    protected override void OnStart()
-    {         
-        InstBullet();
-        _currentIdx = _maxBullet;
-    }
 
 
-    protected override void OnUpdate()
-    {
-        ray1 = new Ray(Camera.main.transform.position,Camera.main.transform.forward);
-        RaycastHit hit;
-        if(Physics.Raycast(ray1, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Target")))
-        {
-            _target = hit.point;
-        }
-        if (Input.GetMouseButton(0))
-        {
-            aimTime += Time.deltaTime;
-            if(inAttack ==false) RaycastShot();
-           // Fire();
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            aimTime = 0;
-           AimReturn();
-        }
-        if (Input.GetKeyDown(KeyCode.R) && _currentIdx < _maxBullet && !_isReload)
-        {
-            _isReload = true;
-            StartCoroutine(ReloadBullet());
-        }
-       
-    }
 
-    //void InstBullet()
-    //{
-    //    _bulletPool = new GameObject[100];
-    //    for (int i = 0; i < _bulletPool.Length; i++)
-    //    {
-    //        GameObject gameObject = Instantiate(_bullet, _bulletParent.transform);
-    //        _bulletPool[i] = gameObject;
-    //        gameObject.SetActive(false);
-    //    }
-    //}
-    void IndexCheck()
-    {
-        if (_poolIndex == 100) _poolIndex = 0;
-    }
-    void InstBullet()
-    {
-        _bulletPool = new GameObject[100];
-        for (int i = 0; i < _bulletPool.Length; i++)
-        {
-            GameObject gameObject = Instantiate(_bulletHole, _bulletParent.transform);
-            _bulletPool[i] = gameObject;
-            gameObject.SetActive(false);
-        }
-    }
+    
     void AimOpen()
     {
         _upCrosshair.anchoredPosition3D += Vector3.up * 2f;
@@ -83,61 +29,21 @@ public class Rifle : WeaponBase
         _leftCrosshair.anchoredPosition3D = new Vector3(40, 0, 0 );
     }
 
-    IEnumerator ReloadBullet()
-    {
-        _animator.Play("Reload");
-        audioSource.PlayOneShot(_reloadSound,1f);
-        for(float f = reloadTime; f > 0; f-= 0.1f)
-        {
-            Debug.Log("장전중입니다");
-            yield return new WaitForSeconds(0.1f);
-            
-        }
-        Debug.Log("장전완료");
-        _isReload = false;
-        _currentIdx = _maxBullet;
-    }
-    //void Fire()
-    //{
-    //    if (_currentBullet > 0 && !_isReload)
-    //    {
-    //        inAttack = true;
-    //        _animator.Play("Shot");
-    //        ray2 = new Ray(transform.position, _target);
-    //        _currentBullet--;
-    //        Debug.Log("현재 장탄수 : " + _currentBullet);
-    //        Rigidbody rb = _bulletPool[_poolIndex].GetComponent<Rigidbody>();
-    //        rb.velocity = Vector3.zero;
-    //        _bulletPool[_poolIndex].SetActive(true);
-    //        _bulletPool[_poolIndex].transform.rotation = Quaternion.LookRotation(transform.right);
-    //        _bulletPool[_poolIndex++].transform.position = _firePosition.position + _firePosition.forward;
-    //        rb.gameObject.GetComponent<BulletCon>().Init();
-    //        IndexCheck();
-    //        //transform.rotation = Quaternion.LookRotation(ray2.direction);
-    //        Vector3 dir =  _target - _firePosition.position;
-    //        rb.AddForce(dir * _bulletSpeed, ForceMode.Impulse);
-    //        Invoke("StopAttack", _attackSpeed);
-    //    }
-    //    else if(_currentBullet <= 0 && !_isReload)
-    //    {
-    //        _isReload = true;
-    //        StartCoroutine(ReloadBullet());
-    //    }
-
-    //}
-    void RaycastShot()
+   
+   
+    public override void Fire()
     {
         if (_currentIdx > 0 && !_isReload)
         {
             RaycastHit hit;
             _currentIdx--;
             _effect.Play();
-            audioSource.PlayOneShot(_shotSound[Random.RandomRange(0,_shotSound.Length)], 1f);
+            _audioSource.PlayOneShot(_shotSound[Random.RandomRange(0,_shotSound.Length)], 1f);
             _animator.Play("Shot");
             inAttack = true;
-            if(aimTime > 0.3f)
+            if(_aimTime > 0.3f)
             {
-                recoil.RecoilFire(_recoil); //반동
+                _recoil.RecoilFire(_recoilForce); //반동
                 AimOpen();           // aim벌어짐
             }
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100f))
@@ -148,10 +54,10 @@ public class Rifle : WeaponBase
                 hit.rigidbody?.AddForce(-hit.normal * _impactForce);
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
                 {
-                    currentBullet = _bulletPool[_poolIndex++];
-                    currentBullet.SetActive(true);
-                    currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
-                    currentBullet.transform.position = hit.point + hit.normal*0.1f;
+                    _currentBullet = _bulletPool[_poolIndex++];
+                    _currentBullet.SetActive(true);
+                    _currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
+                    _currentBullet.transform.position = hit.point + hit.normal*0.1f;
                     IndexCheck();
                 }
                 
@@ -161,7 +67,7 @@ public class Rifle : WeaponBase
         else if (_currentIdx <= 0 && !_isReload)
         {
             _isReload = true;
-            StartCoroutine(ReloadBullet());
+            StartCoroutine(Reload());
         }
 
     }

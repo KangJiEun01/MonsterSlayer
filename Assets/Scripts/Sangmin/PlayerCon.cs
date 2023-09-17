@@ -107,6 +107,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         TryCrouch();
         Rotate();
         OpenHelper();
+        Debug.Log(_isGround);
     }
     private void FixedUpdate()
     {
@@ -117,9 +118,11 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // 지면 체크
     private void IsGround()
     {
-        _isGround = Physics.Raycast(transform.position, Vector3.down, _collider.bounds.extents.y + 0.1f);
+        Vector3 colliderOffset = _collider.bounds.center - transform.position;
+        _isGround = Physics.Raycast(transform.position + colliderOffset, Vector3.down, _collider.bounds.extents.y + 0.1f);
     }
-
+    
+   
     // 점프 시도
     private void TryJump()
     {

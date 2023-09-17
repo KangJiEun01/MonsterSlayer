@@ -38,7 +38,7 @@ public class Rifle : HitScan
             RaycastHit hit;
             _currentIdx--;
             _effect.Play();
-            _audioSource.PlayOneShot(_shotSound[Random.RandomRange(0,_shotSound.Length)], 1f);
+            _audioSource.PlayOneShot(_shotSound[Random.Range(0,_shotSound.Length)], 1f);
             _animator.Play("Shot");
             inAttack = true;
             if(_aimTime > 0.3f)

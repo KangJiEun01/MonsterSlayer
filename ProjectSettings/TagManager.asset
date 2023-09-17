@@ -12,6 +12,7 @@ TagManager:
   - Item
   - Recipe
   - PlusIcon
+  - Arrow
   layers:
   - Default
   - TransparentFX

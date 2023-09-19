@@ -24,6 +24,6 @@ public class ButtonControll : MonoBehaviour
     }
     public void ClickLevelMapButton()
     {
-        SceneManager.LoadScene("YDNeonCity");
+        SceneManager.LoadScene("LoadingScene");
     }
 }

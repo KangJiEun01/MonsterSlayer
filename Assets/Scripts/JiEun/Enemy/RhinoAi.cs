@@ -1,11 +1,11 @@
 using UnityEngine;
-
+using UnityEngine.Pool;
 
 public class RhinoAi : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] GameObject detectionUi;
-
+    
     Animator rhinoAni;
 
     float moveSpeed = 1.0f; // 속도
@@ -13,6 +13,7 @@ public class RhinoAi : MonoBehaviour
 
     private Vector3 targetPosition; // 현재 목표지점
     //private float timer = 0.0f;
+
     private void Awake()
     {
         rhinoAni = GetComponent<Animator>();

@@ -2,25 +2,34 @@ using UnityEngine;
 using UnityEngine.Pool;
 public class RhinoController : MonoBehaviour
 {
-    [SerializeField] GameObject _RhinoItem;
+    [SerializeField] GameObject _rhino;
+    //[SerializeField] GameObject _RhinoItem;
 
     float _rhinoHp = 100;
-    IObjectPool<RhinoController> _pool;
-    public void SetPool(IObjectPool<RhinoController> pool)
-    { _pool = pool; }
-    void Update()
+    int _rhinoCount = 30;
+
+    IObjectPool<RhinoItemDrop> _pool;
+    //public void SetPool(IObjectPool<RhinoController> pool){ _pool = pool; }
+    void Awake()
     {
-        if(Input.GetKeyUp(KeyCode.Alpha1))
-        {
-            _rhinoHp = 0;
-        }
-        if (_rhinoHp <= 0)
-        {
-            _pool.Release(this);
-            Instantiate(_RhinoItem);
-        }
+        _pool = new ObjectPool<RhinoItemDrop>(CreatRhino, OnGetRhino, OnReleaseRhino, OnDestroyRhino, maxSize: _rhinoCount);
     }
-    private void FixedUpdate()
+    RhinoItemDrop CreatRhino()
     {
+        RhinoItemDrop temp = Instantiate(_rhino).GetComponent<RhinoItemDrop>();
+        temp.SetPool(_pool);
+        return temp;
+    }
+    void OnGetRhino(RhinoItemDrop rhi)
+    {
+        rhi.gameObject.SetActive(true);
+    }
+    void OnReleaseRhino(RhinoItemDrop rhi)
+    {
+        rhi.gameObject.SetActive(false);
+    }
+    void OnDestroyRhino(RhinoItemDrop rhi)
+    {
+        Destroy(rhi.gameObject);
     }
 }

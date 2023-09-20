@@ -16,7 +16,7 @@ public class Crossbow : Projectile
             inAttack = true;
             _currentBullet = _bulletPool[_poolIndex++];
             _currentBullet.SetActive(true);
-            _currentBullet.transform.rotation = Quaternion.LookRotation(Vector3.down);
+            _currentBullet.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.up);
             _currentBullet.transform.position = _firePosition.position;
             _currentBullet.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * _bulletSpeed, ForceMode.Impulse);
             IndexCheck();

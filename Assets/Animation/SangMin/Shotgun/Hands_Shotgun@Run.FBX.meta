@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6012530341afb154e96a2b1626737cc2
+guid: a86704783b06ec940900be638bd09c6f
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
@@ -8,166 +8,166 @@ ModelImporter:
     second: Arm_mesh001
   - first:
       1: 100002
-    second: B_Arrow
+    second: Bn_Shogun_Base_mesh
   - first:
       1: 100004
-    second: B_Body
+    second: Bn_Shogun_Fore-End_mesh
   - first:
       1: 100006
-    second: B_String
+    second: Bn_Shogun_Gate_mesh001
   - first:
       1: 100008
-    second: B_Trigger
+    second: Bn_Shogun_Patron_mesh
   - first:
       1: 100010
-    second: Camera001
+    second: Bn_Shogun_Patron_mesh001
   - first:
       1: 100012
-    second: Character001
+    second: Bn_Shogun_Staple_mesh
   - first:
       1: 100014
-    second: Character001Hub001
+    second: Bn_Shogun_Triger_mesh
   - first:
       1: 100016
-    second: Character001LArm1
+    second: Camera001
   - first:
       1: 100018
-    second: Character001LArm21
+    second: Character001
   - first:
       1: 100020
-    second: Character001LArm22
+    second: Character001Hub001
   - first:
       1: 100022
-    second: Character001LArmCollarbone
+    second: Character001LArm1
   - first:
       1: 100024
-    second: Character001LArmDigit11
+    second: Character001LArm21
   - first:
       1: 100026
-    second: Character001LArmDigit12
+    second: Character001LArm22
   - first:
       1: 100028
-    second: Character001LArmDigit13
+    second: Character001LArmCollarbone
   - first:
       1: 100030
-    second: Character001LArmDigit21
+    second: Character001LArmDigit11
   - first:
       1: 100032
-    second: Character001LArmDigit22
+    second: Character001LArmDigit12
   - first:
       1: 100034
-    second: Character001LArmDigit23
+    second: Character001LArmDigit13
   - first:
       1: 100036
-    second: Character001LArmDigit31
+    second: Character001LArmDigit21
   - first:
       1: 100038
-    second: Character001LArmDigit32
+    second: Character001LArmDigit22
   - first:
       1: 100040
-    second: Character001LArmDigit33
+    second: Character001LArmDigit23
   - first:
       1: 100042
-    second: Character001LArmDigit41
+    second: Character001LArmDigit31
   - first:
       1: 100044
-    second: Character001LArmDigit42
+    second: Character001LArmDigit32
   - first:
       1: 100046
-    second: Character001LArmDigit43
+    second: Character001LArmDigit33
   - first:
       1: 100048
-    second: Character001LArmDigit51
+    second: Character001LArmDigit41
   - first:
       1: 100050
-    second: Character001LArmDigit52
+    second: Character001LArmDigit42
   - first:
       1: 100052
-    second: Character001LArmDigit53
+    second: Character001LArmDigit43
   - first:
       1: 100054
-    second: Character001LArmIKTarget
+    second: Character001LArmDigit51
   - first:
       1: 100056
-    second: Character001LArmPalm
+    second: Character001LArmDigit52
   - first:
       1: 100058
-    second: Character001RArm1
+    second: Character001LArmDigit53
   - first:
       1: 100060
-    second: Character001RArm21
+    second: Character001LArmIKTarget
   - first:
       1: 100062
-    second: Character001RArm22
+    second: Character001LArmPalm
   - first:
       1: 100064
-    second: Character001RArmCollarbone
+    second: Character001RArm1
   - first:
       1: 100066
-    second: Character001RArmDigit11
+    second: Character001RArm21
   - first:
       1: 100068
-    second: Character001RArmDigit12
+    second: Character001RArm22
   - first:
       1: 100070
-    second: Character001RArmDigit13
+    second: Character001RArmCollarbone
   - first:
       1: 100072
-    second: Character001RArmDigit21
+    second: Character001RArmDigit11
   - first:
       1: 100074
-    second: Character001RArmDigit22
+    second: Character001RArmDigit12
   - first:
       1: 100076
-    second: Character001RArmDigit23
+    second: Character001RArmDigit13
   - first:
       1: 100078
-    second: Character001RArmDigit31
+    second: Character001RArmDigit21
   - first:
       1: 100080
-    second: Character001RArmDigit32
+    second: Character001RArmDigit22
   - first:
       1: 100082
-    second: Character001RArmDigit33
+    second: Character001RArmDigit23
   - first:
       1: 100084
-    second: Character001RArmDigit41
+    second: Character001RArmDigit31
   - first:
       1: 100086
-    second: Character001RArmDigit42
+    second: Character001RArmDigit32
   - first:
       1: 100088
-    second: Character001RArmDigit43
+    second: Character001RArmDigit33
   - first:
       1: 100090
-    second: Character001RArmDigit51
+    second: Character001RArmDigit41
   - first:
       1: 100092
-    second: Character001RArmDigit52
+    second: Character001RArmDigit42
   - first:
       1: 100094
-    second: Character001RArmDigit53
+    second: Character001RArmDigit43
   - first:
       1: 100096
-    second: Character001RArmIKTarget
+    second: Character001RArmDigit51
   - first:
       1: 100098
-    second: Character001RArmPalm
+    second: Character001RArmDigit52
   - first:
       1: 100100
-    second: Crossbow_Aim_Mesh
+    second: Character001RArmDigit53
   - first:
       1: 100102
-    second: Crossbow_Arrow_Mesh
+    second: Character001RArmIKTarget
   - first:
       1: 100104
-    second: Crossbow_Body_Mesh
+    second: Character001RArmPalm
   - first:
       1: 100106
-    second: Crossbow_Glasses_Mesh
+    second: Glove_mesh
   - first:
       1: 100108
-    second: Glove_mesh
+    second: Group001
   - first:
       1: 100110
     second: Group_arms
@@ -176,187 +176,196 @@ ModelImporter:
     second: //RootNode
   - first:
       1: 100114
-    second: P_Arrow
+    second: Hp_Shogun_Base_mesh
   - first:
       1: 100116
-    second: P_Body
+    second: Rectangle001
   - first:
       1: 100118
-    second: P_String
+    second: Shogun_Base_mesh
   - first:
       1: 100120
-    second: P_Trigger
+    second: Shogun_Fore-End_mesh
   - first:
       1: 100122
-    second: Particle View 001
+    second: Shogun_Gate_mesh
   - first:
       1: 100124
-    second: Rectangle001
+    second: Shogun_Patron_mesh
+  - first:
+      1: 100126
+    second: Shogun_Patron_mesh001
+  - first:
+      1: 100128
+    second: Shogun_Staple_mesh
+  - first:
+      1: 100130
+    second: Shogun_Triger_mesh
   - first:
       4: 400000
     second: Arm_mesh001
   - first:
       4: 400002
-    second: B_Arrow
+    second: Bn_Shogun_Base_mesh
   - first:
       4: 400004
-    second: B_Body
+    second: Bn_Shogun_Fore-End_mesh
   - first:
       4: 400006
-    second: B_String
+    second: Bn_Shogun_Gate_mesh001
   - first:
       4: 400008
-    second: B_Trigger
+    second: Bn_Shogun_Patron_mesh
   - first:
       4: 400010
-    second: Camera001
+    second: Bn_Shogun_Patron_mesh001
   - first:
       4: 400012
-    second: Character001
+    second: Bn_Shogun_Staple_mesh
   - first:
       4: 400014
-    second: Character001Hub001
+    second: Bn_Shogun_Triger_mesh
   - first:
       4: 400016
-    second: Character001LArm1
+    second: Camera001
   - first:
       4: 400018
-    second: Character001LArm21
+    second: Character001
   - first:
       4: 400020
-    second: Character001LArm22
+    second: Character001Hub001
   - first:
       4: 400022
-    second: Character001LArmCollarbone
+    second: Character001LArm1
   - first:
       4: 400024
-    second: Character001LArmDigit11
+    second: Character001LArm21
   - first:
       4: 400026
-    second: Character001LArmDigit12
+    second: Character001LArm22
   - first:
       4: 400028
-    second: Character001LArmDigit13
+    second: Character001LArmCollarbone
   - first:
       4: 400030
-    second: Character001LArmDigit21
+    second: Character001LArmDigit11
   - first:
       4: 400032
-    second: Character001LArmDigit22
+    second: Character001LArmDigit12
   - first:
       4: 400034
-    second: Character001LArmDigit23
+    second: Character001LArmDigit13
   - first:
       4: 400036
-    second: Character001LArmDigit31
+    second: Character001LArmDigit21
   - first:
       4: 400038
-    second: Character001LArmDigit32
+    second: Character001LArmDigit22
   - first:
       4: 400040
-    second: Character001LArmDigit33
+    second: Character001LArmDigit23
   - first:
       4: 400042
-    second: Character001LArmDigit41
+    second: Character001LArmDigit31
   - first:
       4: 400044
-    second: Character001LArmDigit42
+    second: Character001LArmDigit32
   - first:
       4: 400046
-    second: Character001LArmDigit43
+    second: Character001LArmDigit33
   - first:
       4: 400048
-    second: Character001LArmDigit51
+    second: Character001LArmDigit41
   - first:
       4: 400050
-    second: Character001LArmDigit52
+    second: Character001LArmDigit42
   - first:
       4: 400052
-    second: Character001LArmDigit53
+    second: Character001LArmDigit43
   - first:
       4: 400054
-    second: Character001LArmIKTarget
+    second: Character001LArmDigit51
   - first:
       4: 400056
-    second: Character001LArmPalm
+    second: Character001LArmDigit52
   - first:
       4: 400058
-    second: Character001RArm1
+    second: Character001LArmDigit53
   - first:
       4: 400060
-    second: Character001RArm21
+    second: Character001LArmIKTarget
   - first:
       4: 400062
-    second: Character001RArm22
+    second: Character001LArmPalm
   - first:
       4: 400064
-    second: Character001RArmCollarbone
+    second: Character001RArm1
   - first:
       4: 400066
-    second: Character001RArmDigit11
+    second: Character001RArm21
   - first:
       4: 400068
-    second: Character001RArmDigit12
+    second: Character001RArm22
   - first:
       4: 400070
-    second: Character001RArmDigit13
+    second: Character001RArmCollarbone
   - first:
       4: 400072
-    second: Character001RArmDigit21
+    second: Character001RArmDigit11
   - first:
       4: 400074
-    second: Character001RArmDigit22
+    second: Character001RArmDigit12
   - first:
       4: 400076
-    second: Character001RArmDigit23
+    second: Character001RArmDigit13
   - first:
       4: 400078
-    second: Character001RArmDigit31
+    second: Character001RArmDigit21
   - first:
       4: 400080
-    second: Character001RArmDigit32
+    second: Character001RArmDigit22
   - first:
       4: 400082
-    second: Character001RArmDigit33
+    second: Character001RArmDigit23
   - first:
       4: 400084
-    second: Character001RArmDigit41
+    second: Character001RArmDigit31
   - first:
       4: 400086
-    second: Character001RArmDigit42
+    second: Character001RArmDigit32
   - first:
       4: 400088
-    second: Character001RArmDigit43
+    second: Character001RArmDigit33
   - first:
       4: 400090
-    second: Character001RArmDigit51
+    second: Character001RArmDigit41
   - first:
       4: 400092
-    second: Character001RArmDigit52
+    second: Character001RArmDigit42
   - first:
       4: 400094
-    second: Character001RArmDigit53
+    second: Character001RArmDigit43
   - first:
       4: 400096
-    second: Character001RArmIKTarget
+    second: Character001RArmDigit51
   - first:
       4: 400098
-    second: Character001RArmPalm
+    second: Character001RArmDigit52
   - first:
       4: 400100
-    second: Crossbow_Aim_Mesh
+    second: Character001RArmDigit53
   - first:
       4: 400102
-    second: Crossbow_Arrow_Mesh
+    second: Character001RArmIKTarget
   - first:
       4: 400104
-    second: Crossbow_Body_Mesh
+    second: Character001RArmPalm
   - first:
       4: 400106
-    second: Crossbow_Glasses_Mesh
+    second: Glove_mesh
   - first:
       4: 400108
-    second: Glove_mesh
+    second: Group001
   - first:
       4: 400110
     second: Group_arms
@@ -365,28 +374,37 @@ ModelImporter:
     second: //RootNode
   - first:
       4: 400114
-    second: P_Arrow
+    second: Hp_Shogun_Base_mesh
   - first:
       4: 400116
-    second: P_Body
+    second: Rectangle001
   - first:
       4: 400118
-    second: P_String
+    second: Shogun_Base_mesh
   - first:
       4: 400120
-    second: P_Trigger
+    second: Shogun_Fore-End_mesh
   - first:
       4: 400122
-    second: Particle View 001
+    second: Shogun_Gate_mesh
   - first:
       4: 400124
-    second: Rectangle001
+    second: Shogun_Patron_mesh
+  - first:
+      4: 400126
+    second: Shogun_Patron_mesh001
+  - first:
+      4: 400128
+    second: Shogun_Staple_mesh
+  - first:
+      4: 400130
+    second: Shogun_Triger_mesh
   - first:
       21: 2100000
     second: 09 - Default
   - first:
       21: 2100002
-    second: 13 - Default
+    second: 02 - Default
   - first:
       43: 4300000
     second: Arm_mesh001
@@ -395,19 +413,28 @@ ModelImporter:
     second: Glove_mesh
   - first:
       43: 4300004
-    second: Crossbow_Arrow_Mesh
+    second: Shogun_Patron_mesh
   - first:
       43: 4300006
-    second: Crossbow_Glasses_Mesh
+    second: Shogun_Base_mesh
   - first:
       43: 4300008
-    second: Crossbow_Aim_Mesh
+    second: Shogun_Triger_mesh
   - first:
       43: 4300010
-    second: Crossbow_Body_Mesh
+    second: Shogun_Gate_mesh
+  - first:
+      43: 4300012
+    second: Shogun_Staple_mesh
+  - first:
+      43: 4300014
+    second: Shogun_Fore-End_mesh
+  - first:
+      43: 4300016
+    second: Shogun_Patron_mesh001
   - first:
       74: 7400000
-    second: Walk
+    second: Run
   - first:
       95: 9500000
     second: //RootNode
@@ -416,19 +443,28 @@ ModelImporter:
     second: Arm_mesh001
   - first:
       137: 13700002
-    second: Crossbow_Aim_Mesh
+    second: Glove_mesh
   - first:
       137: 13700004
-    second: Crossbow_Arrow_Mesh
+    second: Shogun_Base_mesh
   - first:
       137: 13700006
-    second: Crossbow_Body_Mesh
+    second: Shogun_Fore-End_mesh
   - first:
       137: 13700008
-    second: Crossbow_Glasses_Mesh
+    second: Shogun_Gate_mesh
   - first:
       137: 13700010
-    second: Glove_mesh
+    second: Shogun_Patron_mesh
+  - first:
+      137: 13700012
+    second: Shogun_Patron_mesh001
+  - first:
+      137: 13700014
+    second: Shogun_Staple_mesh
+  - first:
+      137: 13700016
+    second: Shogun_Triger_mesh
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -459,11 +495,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walk
+      name: Run
       takeName: Take 001
       internalID: 7400000
       firstFrame: 0
-      lastFrame: 27
+      lastFrame: 22
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

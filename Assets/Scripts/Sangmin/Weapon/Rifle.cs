@@ -41,11 +41,10 @@ public class Rifle : HitScan
             _audioSource.PlayOneShot(_shotSound[Random.Range(0,_shotSound.Length)], 1f);
             _animator.Play("Shot");
             inAttack = true;
-            if(_aimTime > 0.3f)
-            {
-                _recoil.RecoilFire(_recoilForce); //¹Ýµ¿
-                AimOpen();           // aim¹ú¾îÁü
-            }
+            
+            _recoil.RecoilFire(_recoilForce); //¹Ýµ¿
+            AimOpen();           // aim¹ú¾îÁü
+            
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100f))
             {
                 Debug.Log(hit.transform.name);
@@ -63,6 +62,11 @@ public class Rifle : HitScan
                 
             }           
             Invoke("StopAttack", _attackSpeed);
+            if (_currentIdx == 0)
+            {
+                _isReload = true;
+                StartCoroutine(Reload());
+            }
         }
         else if (_currentIdx <= 0 && !_isReload)
         {

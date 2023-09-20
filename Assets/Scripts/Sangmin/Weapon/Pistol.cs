@@ -13,11 +13,10 @@ public class Pistol : HitScan
             _audioSource.PlayOneShot(_shotSound[Random.Range(0, _shotSound.Length)], 1f);
             _animator.Play("Shot");
             inAttack = true;
-            if (_aimTime > 0.3f)
-            {
-                _recoil.RecoilFire(_recoilForce); //반동 
-            }
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100f))
+            
+             _recoil.RecoilFire(_recoilForce); //반동 
+            
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 3f))
             {
                 Debug.Log(hit.transform.name);
                 Target target = hit.transform.GetComponent<Target>();
@@ -34,6 +33,11 @@ public class Pistol : HitScan
 
             }
             Invoke("StopAttack", _attackSpeed);
+            if (_currentIdx == 0)
+            {
+                _isReload = true;
+                StartCoroutine(Reload());
+            }
         }
         else if (_currentIdx <= 0 && !_isReload)
         {

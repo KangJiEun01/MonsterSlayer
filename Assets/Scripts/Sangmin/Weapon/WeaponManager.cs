@@ -59,7 +59,7 @@ public abstract class WeaponBase :MonoBehaviour
     [SerializeField] protected AudioClip _reloadSound;
     public virtual void  Init()
     {
-      
+       
         _animator = GetComponentInChildren<Animator>();
         
         _effect = GetComponentInChildren<ParticleSystem>();
@@ -73,7 +73,7 @@ public abstract class WeaponBase :MonoBehaviour
 
     }
     public abstract void Fire();
-    public IEnumerator Reload()
+    public virtual IEnumerator Reload()
     {
         _animator.Play("Reload");
         _audioSource.PlayOneShot(_reloadSound, 1f);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Arrow : MonoBehaviour
 {
-    public float stickForce = 10f; // 화살이 박힐 때의 힘
+    
     private bool isStuck = false; // 화살이 박혀 있는지 여부
 
     void OnCollisionEnter(Collision collision)

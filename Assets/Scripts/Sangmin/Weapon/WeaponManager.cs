@@ -17,20 +17,68 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     void Update()
     {
         _currentWeapon.OnUpdate();
+        SwapWeapon();
+        
     }
     void Init()
     {
-        
         _weapons = GetComponentsInChildren<WeaponBase>();
+        _activeWeapons = new WeaponBase[5];
         foreach (WeaponBase weapon in _weapons)
         {
             weapon.Init();
             weapon.Weapon.SetActive(false);
         }
-        _currentWeapon = _weapons[0];
-        Debug.Log(_weapons[0]);
+        
+        _currentWeapon = _activeWeapons[1];
         _currentWeapon.Weapon.SetActive(true);
-        Debug.Log(_currentWeapon._animator);
+        
+    }
+    void SwapWeapon()
+    {
+
+        switch (Input.inputString)
+        {
+            case "1":
+                _currentWeapon = _activeWeapons[0];
+                AllOff();
+                _currentWeapon.Weapon.SetActive(true); 
+                break;
+            case "2":
+                _currentWeapon = _activeWeapons[1];
+                AllOff();
+                _currentWeapon.Weapon.SetActive(true);
+                break;
+            case "3":
+                _currentWeapon = _activeWeapons[2];
+                AllOff();
+                _currentWeapon.Weapon.SetActive(true);
+                break;
+            case "4":
+                _currentWeapon = _activeWeapons[3];
+                AllOff();
+                _currentWeapon.Weapon.SetActive(true);
+                break;
+            case "5":
+                _currentWeapon = _activeWeapons[4];
+                AllOff();
+                _currentWeapon.Weapon.SetActive(true);
+                break;
+            default:
+                
+                break;
+        }
+    }
+    void AllOff()
+    {
+        foreach (WeaponBase weapon in _activeWeapons)
+        {
+            weapon.Weapon.SetActive(false);
+        }
+    }
+    public void SetWeapon(WeaponBase weapon, int idx)
+    {
+        _activeWeapons[idx] = weapon;
     }
 }
 public abstract class WeaponBase :MonoBehaviour
@@ -44,13 +92,15 @@ public abstract class WeaponBase :MonoBehaviour
     [SerializeField] protected float _recoilForce;
     [SerializeField] protected GameObject _weapon;
     [SerializeField] protected float _reloadTime = 3.5f;
+    
     public GameObject Weapon { get { return _weapon; } }
     protected int _currentIdx;
     protected bool _isReload = false;
     public bool IsReload { get { return _isReload; } }
     protected bool inAttack = false;
-    public bool InAttack { get { return inAttack; } } 
-    
+    public bool InAttack { get { return inAttack; } }
+    protected WeaponBase[] _currentWeapons;
+    public WeaponBase[] CurrentWeapons;
     public Animator _animator;
     public ParticleSystem _effect;
     public AudioSource _audioSource;
@@ -68,6 +118,7 @@ public abstract class WeaponBase :MonoBehaviour
         _audioSource = GetComponentInChildren<AudioSource>();
         _recoil = GenericSingleton<Recoil>.Instance.GetComponent<Recoil>();
         _currentIdx = _maxBullet;
+        Debug.Log(gameObject.name);
     }
     public virtual void OnUpdate()
     {

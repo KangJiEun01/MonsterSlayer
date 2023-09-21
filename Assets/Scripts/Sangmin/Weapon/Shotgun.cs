@@ -6,6 +6,11 @@ public class Shotgun : HitScan
 {
     [SerializeField] float _reloadDelay = 1.2f;
     [SerializeField] float _spread = 0.05f;
+    public override void Init()
+    {
+        base.Init();
+        GenericSingleton<WeaponManager>.Instance.SetWeapon(this, 3);
+    }
     public override void Fire()
     {
         if (_currentIdx > 0 && !_isReload)
@@ -20,7 +25,7 @@ public class Shotgun : HitScan
             int spread = 0;
             while (spread < 10)
             {
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-_spread, _spread), Random.Range(-_spread, _spread), Random.Range(-_spread, _spread)), out hit, 100f))
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-_spread, _spread), Random.Range(-_spread, _spread), Random.Range(-_spread, _spread)), out hit, 15f))
                 {
                     Debug.Log(hit.transform.name);
                     Target target = hit.transform.GetComponent<Target>();
@@ -32,6 +37,7 @@ public class Shotgun : HitScan
                         _currentBullet.SetActive(true);
                         _currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
                         _currentBullet.transform.position = hit.point + hit.normal * 0.1f;
+                        _currentBullet.transform.parent = hit.transform;
                         IndexCheck();
                     }
                 }

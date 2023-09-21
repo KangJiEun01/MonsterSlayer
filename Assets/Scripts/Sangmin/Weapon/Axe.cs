@@ -5,6 +5,13 @@ using UnityEngine;
 public class Axe : Melee
 {
     Vector3 _target;
+    public override void Init()
+    {
+        base.Init();
+        
+        GenericSingleton<WeaponManager>.Instance.SetWeapon(this, 2);
+        Debug.Log("근접무기 설정");
+    }
     public override void Fire()
     {
 
@@ -18,6 +25,7 @@ public class Axe : Melee
             Debug.Log(hit.transform.name);
             Target target = hit.transform.GetComponent<Target>();
             target?.OnDamage(_attackDamage);
+            hit.transform.parent = hit.transform;
             hit.rigidbody?.AddForce(-hit.normal * _impactForce);
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
             {
@@ -26,6 +34,7 @@ public class Axe : Melee
             }
 
         }
+        
         Invoke("StopAttack", _attackSpeed);
     }
     void HitTarget()
@@ -35,6 +44,7 @@ public class Axe : Melee
     }
     void StopAttack()
     {
+        _animator.Play("Idle");
         inAttack = false;
     }
 }

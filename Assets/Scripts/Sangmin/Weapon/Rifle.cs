@@ -8,12 +8,16 @@ public class Rifle : HitScan
     [SerializeField] protected RectTransform _rightCrosshair;
     [SerializeField] protected RectTransform _downCrosshair;
     [SerializeField] protected RectTransform _leftCrosshair;
-    
+
+    public override void Init()
+    {
+        base.Init();
+        GenericSingleton<WeaponManager>.Instance.SetWeapon(this, 0);
+    }
 
 
 
 
-    
     void AimOpen()
     {
         _upCrosshair.anchoredPosition3D += Vector3.up * 2f;
@@ -45,20 +49,20 @@ public class Rifle : HitScan
             _recoil.RecoilFire(_recoilForce); //¹Ýµ¿
             AimOpen();           // aim¹ú¾îÁü
             
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100f))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 50f))
             {
                 Debug.Log(hit.transform.name);
                 Target target = hit.transform.GetComponent<Target>();
                 target?.OnDamage(_attackDamage);
                 hit.rigidbody?.AddForce(-hit.normal * _impactForce);
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
-                {
-                    _currentBullet = _bulletPool[_poolIndex++];
-                    _currentBullet.SetActive(true);
-                    _currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
-                    _currentBullet.transform.position = hit.point + hit.normal*0.1f;
-                    IndexCheck();
-                }
+                
+                _currentBullet = _bulletPool[_poolIndex++];
+                _currentBullet.SetActive(true);
+                _currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
+                _currentBullet.transform.position = hit.point + hit.normal*0.1f;
+                _currentBullet.transform.parent = hit.transform;
+                IndexCheck();
+                
                 
             }           
             Invoke("StopAttack", _attackSpeed);

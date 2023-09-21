@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class Pistol : HitScan
 {
+    public override void Init()
+    {
+        base.Init();
+        GenericSingleton<WeaponManager>.Instance.SetWeapon(this,1);
+    }
     public override void Fire()
     {
         if (_currentIdx > 0 && !_isReload)
@@ -16,7 +21,7 @@ public class Pistol : HitScan
             
              _recoil.RecoilFire(_recoilForce); //¹Ýµ¿ 
             
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 3f))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 30f))
             {
                 Debug.Log(hit.transform.name);
                 Target target = hit.transform.GetComponent<Target>();
@@ -28,6 +33,7 @@ public class Pistol : HitScan
                     _currentBullet.SetActive(true);
                     _currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
                     _currentBullet.transform.position = hit.point + hit.normal * 0.1f;
+                    _currentBullet.transform.parent = hit.transform;
                     IndexCheck();
                 }
 

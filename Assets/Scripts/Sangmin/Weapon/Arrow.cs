@@ -16,21 +16,16 @@ public class Arrow : MonoBehaviour
 
     void StickToTarget(Transform target)
     {
-     
+
+        Debug.Log("벽과 충돌");
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         rb.velocity = Vector3.zero;
+        GetComponent<BoxCollider>().enabled = false;
 
        
         transform.parent = target;
         isStuck = true;
-
-        
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.forward, out hit))
-        {
-            transform.position = hit.point;
-        }
 
     }
 }

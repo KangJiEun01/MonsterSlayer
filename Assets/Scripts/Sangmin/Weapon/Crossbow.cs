@@ -1,4 +1,5 @@
 
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Crossbow : Projectile
@@ -21,8 +22,9 @@ public class Crossbow : Projectile
             inAttack = true;
             _currentBullet = _bulletPool[_poolIndex++];
             _currentBullet.SetActive(true);
-            _currentBullet.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.up);
+            _currentBullet.transform.rotation = Quaternion.LookRotation(Camera.main.transform.up);
             _currentBullet.transform.position = _firePosition.position;
+            _currentBullet.GetComponent<BoxCollider>().enabled = true;
             _currentBullet.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * _bulletSpeed, ForceMode.Impulse);
             IndexCheck();
             Invoke("StopAttack", _attackSpeed);

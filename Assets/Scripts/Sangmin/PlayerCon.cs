@@ -106,7 +106,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         TryDash();
         TryCrouch();
         Rotate();
-        OpenHelper();
+       // OpenHelper();
         Debug.Log(_isGround);
     }
     private void FixedUpdate()
@@ -324,31 +324,31 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         currentAngles.x = m_VerticalAngle;
         CameraPosition.transform.localEulerAngles = currentAngles;
     }
-    void OpenHelper()
-    {
-        RaycastHit hit;
-        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.F)) && _helperClose)
-        {
-            Debug.Log("ÀÎº¥²¨Áü");
-            GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("open");
-            GenericSingleton<UIBase>.Instance.ShowInvenUI(false);
-            _helperClose = false;
-            return;
-        }
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-        if (Physics.Raycast(ray, out hit, 5f, 1 << LayerMask.NameToLayer("Helper")))
-        {
-            if(!_helperClose)GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(true);
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("close");
-                _helperClose = true;
-                Debug.Log("ÀÎº¥ÄÑÁü");
-                GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(false);
-                GenericSingleton<UIBase>.Instance.ShowInvenUI(true);
-            }
-        }else GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(false);
-    }
+    //void OpenHelper()
+    //{
+    //    RaycastHit hit;
+    //    if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.F)) && _helperClose)
+    //    {
+    //        Debug.Log("ÀÎº¥²¨Áü");
+    //        GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("open");
+    //        GenericSingleton<UIBase>.Instance.ShowInvenUI(false);
+    //        _helperClose = false;
+    //        return;
+    //    }
+    //    Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+    //    if (Physics.Raycast(ray, out hit, 5f, 1 << LayerMask.NameToLayer("Helper")))
+    //    {
+    //        if(!_helperClose)GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(true);
+    //        if (Input.GetKeyDown(KeyCode.F))
+    //        {
+    //            GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("close");
+    //            _helperClose = true;
+    //            Debug.Log("ÀÎº¥ÄÑÁü");
+    //            GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(false);
+    //            GenericSingleton<UIBase>.Instance.ShowInvenUI(true);
+    //        }
+    //    }else GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(false);
+    //}
     private void MovingSound(float delay)
     {
         soundTimer += Time.deltaTime;

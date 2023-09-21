@@ -6,11 +6,7 @@ public class Shotgun : HitScan
 {
     [SerializeField] float _reloadDelay = 1.2f;
     [SerializeField] float _spread = 0.05f;
-    public override void Init()
-    {
-        base.Init();
-        GenericSingleton<WeaponManager>.Instance.SetWeapon(this, 3);
-    }
+
     public override void Fire()
     {
         if (_currentIdx > 0 && !_isReload)
@@ -56,7 +52,7 @@ public class Shotgun : HitScan
             _isReload = true;
             StartCoroutine(Reload());
         }
-
+        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
     }
     public override IEnumerator Reload()
     {
@@ -90,7 +86,7 @@ public class Shotgun : HitScan
 
         Debug.Log("장전완료");
         _isReload = false;
-        
+        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
     }
     void StopAttack()
     {

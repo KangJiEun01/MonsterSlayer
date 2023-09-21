@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine.UI;
 using TMPro;
 
-public class ExchangeUI : GenericSingleton<ExchangeUI>
+public class ExchangeUI : MonoBehaviour
 {
     [SerializeField] GameObject _item;
     [SerializeField] GameObject _recipe;
@@ -26,22 +26,11 @@ public class ExchangeUI : GenericSingleton<ExchangeUI>
     //orderCount 누르면 count의 내림차순, 오름차순 순서 정렬이 스위칭되서 표현 -> 인벤토리에 있는 아이템이 재정렬
     // orderFilter 똑같이 filter의 내림차순,오름차순 순서 정렬이 스위칭되며 인벤토리에 갱신되어 표시
     //filterType 누르면 _filterType과 같은 타입만 인벤토리에 표시 다시누르면 전체목록표시
-    void Start()
-    {
-        Init();
-        
-    }
-
-    void Update()
-    {
-       
-    }
 
     public void Init()
     {
-  
         Recipe = GenericSingleton<ExchangeSystem>.Instance.Recipes;
-        _ItemIcon = GenericSingleton<Inventory>.Instance.ItemIcon;
+        _ItemIcon = GenericSingleton<UIBase>.Instance.InventoryUI.GetComponent<Inventory>().ItemIcon;
         _resultText.text = "";
         _resultName.text = "";
         _resultItem.SetActive(false);

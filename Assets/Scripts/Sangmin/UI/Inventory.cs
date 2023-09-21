@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : GenericSingleton<Inventory>
+public class Inventory : MonoBehaviour
 {
     [SerializeField] GameObject _item;
     ItemType _weaponType = ItemType.Weapon;
@@ -21,16 +21,12 @@ public class Inventory : GenericSingleton<Inventory>
     //orderCount 누르면 count의 내림차순, 오름차순 순서 정렬이 스위칭되서 표현 -> 인벤토리에 있는 아이템이 재정렬
     // orderFilter 똑같이 filter의 내림차순,오름차순 순서 정렬이 스위칭되며 인벤토리에 갱신되어 표시
     //filterType 누르면 _filterType과 같은 타입만 인벤토리에 표시 다시누르면 전체목록표시
-    void Start()
+
+    public void Init()
     {
         InvenData = GenericSingleton<ItemSaver>.Instance.Datas._items;
         OrderdData = InvenData;
         ReDrwing(InvenData);
-    }
-
-    void Update()
-    {
-        
     }
     //public void OrderCount()
     //{

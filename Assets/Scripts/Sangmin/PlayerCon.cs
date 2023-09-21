@@ -78,10 +78,8 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     [Header("Sounds")]
     [SerializeField] AudioClip[] _walking;
 
-
-    void Start()
+    public void Init()
     {
-       
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         // 컴포넌트 할당
@@ -97,9 +95,10 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _applyCrouchPosY = _originPosY;
     }
 
+
     void Update()
     {
-        
+        if (GenericSingleton<GameManager>.Instance.CurrentState != GameManager.GameState.InGame) return;
         IsGround();
         TryJump();
         TryRun();
@@ -107,10 +106,11 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         TryCrouch();
         Rotate();
        // OpenHelper();
-        Debug.Log(_isGround);
+
     }
     private void FixedUpdate()
     {
+        if (GenericSingleton<GameManager>.Instance.CurrentState != GameManager.GameState.InGame) return;
         Move();
     }
 

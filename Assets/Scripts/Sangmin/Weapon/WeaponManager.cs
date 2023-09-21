@@ -5,34 +5,38 @@ using UnityEngine;
 public class WeaponManager : GenericSingleton<WeaponManager>
 {
     WeaponBase[] _weapons;
-    protected WeaponBase[] _activeWeapons;
+    protected List<WeaponBase> _activeWeapons;
+    WeaponBase[] _currentWeapons = new WeaponBase[3];
     WeaponBase _currentWeapon;
     public WeaponBase CurrentWeapon { get { return _currentWeapon; } }
 
-    void Start()
-    {
-        Init();
-    }
+    //_weapons 전체무기 
+    //AcitiveWeapons 언락된 무기
+    //CurrentWeapons[] 현재장착중인 무기 주,보조,근접
+    //CurrentWeapon 현재 들고있는 무기
+
 
     void Update()
     {
+        if (GenericSingleton<GameManager>.Instance.CurrentState != GameManager.GameState.InGame) return;
         _currentWeapon.OnUpdate();
         SwapWeapon();
-        
     }
-    void Init()
+
+    public void Init()
     {
         _weapons = GetComponentsInChildren<WeaponBase>();
-        _activeWeapons = new WeaponBase[5];
+        _activeWeapons = new List<WeaponBase> ();
         foreach (WeaponBase weapon in _weapons)
         {
             weapon.Init();
             weapon.Weapon.SetActive(false);
         }
-        
-        _currentWeapon = _activeWeapons[1];
+        _currentWeapons[1] = _activeWeapons[1];                //권총기본무기설정
+        _currentWeapons[2] = _activeWeapons[0];                //근접기본무기설정
+        _currentWeapon = _currentWeapons[1];                   //권총 들기
         _currentWeapon.Weapon.SetActive(true);
-        
+        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(_currentWeapon);
     }
     void SwapWeapon()
     {
@@ -40,46 +44,56 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         switch (Input.inputString)
         {
             case "1":
-                _currentWeapon = _activeWeapons[0];
-                AllOff();
-                _currentWeapon.Weapon.SetActive(true); 
+                if (_currentWeapons[0] != null)
+                {
+                    if(_currentWeapon != _currentWeapons[0])
+                    {
+                        _currentWeapon = _currentWeapons[0];
+                        AllOff();
+                        _currentWeapon.Weapon.SetActive(true);
+                        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(_currentWeapon);
+                    }                
+                }
                 break;
+
             case "2":
-                _currentWeapon = _activeWeapons[1];
-                AllOff();
-                _currentWeapon.Weapon.SetActive(true);
+                if (_currentWeapon != _currentWeapons[1])
+                {
+                    _currentWeapon = _currentWeapons[1];
+                    AllOff();
+                    _currentWeapon.Weapon.SetActive(true);
+                    GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(_currentWeapon);
+                }
                 break;
+
             case "3":
-                _currentWeapon = _activeWeapons[2];
-                AllOff();
-                _currentWeapon.Weapon.SetActive(true);
-                break;
-            case "4":
-                _currentWeapon = _activeWeapons[3];
-                AllOff();
-                _currentWeapon.Weapon.SetActive(true);
-                break;
-            case "5":
-                _currentWeapon = _activeWeapons[4];
-                AllOff();
-                _currentWeapon.Weapon.SetActive(true);
-                break;
-            default:
-                
+                if (_currentWeapon != _currentWeapons[2])
+                {
+                    _currentWeapon = _currentWeapons[2];
+                    AllOff();
+                    _currentWeapon.Weapon.SetActive(true);
+                    GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetMelee();
+                }
                 break;
         }
     }
     void AllOff()
     {
-        foreach (WeaponBase weapon in _activeWeapons)
+        foreach (WeaponBase weapon in _weapons)
         {
             weapon.Weapon.SetActive(false);
         }
     }
-    public void SetWeapon(WeaponBase weapon, int idx)
+    public void UnlockWeapon(WeaponBase weapon)
     {
-        _activeWeapons[idx] = weapon;
+        _activeWeapons.Add(weapon);
     }
+    public void SetMainWeapon(WeaponBase weapon)
+    {
+        _currentWeapons[0] = weapon;
+    }
+
+    
 }
 public abstract class WeaponBase :MonoBehaviour
 {
@@ -88,13 +102,17 @@ public abstract class WeaponBase :MonoBehaviour
     [SerializeField] protected float _attackSpeed = 0.167f;
     [SerializeField] protected float _attackDamage = 1;
     [SerializeField] protected int _maxBullet;
+    public int MaxBullet { get { return _maxBullet; } }
     [SerializeField] protected float _impactForce = 30;
     [SerializeField] protected float _recoilForce;
     [SerializeField] protected GameObject _weapon;
     [SerializeField] protected float _reloadTime = 3.5f;
-    
+
+    [SerializeField] int _weaponIdx;
+    public int WeaponIdx { get { return _weaponIdx; } }
     public GameObject Weapon { get { return _weapon; } }
     protected int _currentIdx;
+    public int CurrentIdx { get { return _currentIdx; } }
     protected bool _isReload = false;
     public bool IsReload { get { return _isReload; } }
     protected bool inAttack = false;
@@ -118,7 +136,7 @@ public abstract class WeaponBase :MonoBehaviour
         _audioSource = GetComponentInChildren<AudioSource>();
         _recoil = GenericSingleton<Recoil>.Instance.GetComponent<Recoil>();
         _currentIdx = _maxBullet;
-        Debug.Log(gameObject.name);
+        
     }
     public virtual void OnUpdate()
     {
@@ -138,7 +156,9 @@ public abstract class WeaponBase :MonoBehaviour
         Debug.Log("장전완료");
         _isReload = false;
         _currentIdx = _maxBullet;
+        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
     }
+   
 
 
 }

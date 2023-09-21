@@ -9,11 +9,7 @@ public class Rifle : HitScan
     [SerializeField] protected RectTransform _downCrosshair;
     [SerializeField] protected RectTransform _leftCrosshair;
 
-    public override void Init()
-    {
-        base.Init();
-        GenericSingleton<WeaponManager>.Instance.SetWeapon(this, 0);
-    }
+  
 
 
 
@@ -77,7 +73,7 @@ public class Rifle : HitScan
             _isReload = true;
             StartCoroutine(Reload());
         }
-
+        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
     }
 
     void StopAttack()

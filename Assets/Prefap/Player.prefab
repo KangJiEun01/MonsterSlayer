@@ -62,7 +62,7 @@ Transform:
   m_Children:
   - {fileID: 8650486265492794407}
   m_Father: {fileID: 7019329207775881247}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &992702511
 MonoBehaviour:
@@ -83,6 +83,7 @@ MonoBehaviour:
   _recoilForce: 4
   _weapon: {fileID: 8650486265492303879}
   _reloadTime: 3.5
+  _weaponIdx: 3
   CurrentWeapons: []
   _animator: {fileID: 0}
   _effect: {fileID: 0}
@@ -12171,16 +12172,17 @@ MonoBehaviour:
   _recoilForce: 2.5
   _weapon: {fileID: 1790144493256398073}
   _reloadTime: 2.5
+  _weaponIdx: 2
   CurrentWeapons: []
   _animator: {fileID: 0}
   _effect: {fileID: 0}
   _audioSource: {fileID: 0}
   _recoil: {fileID: 0}
   _shotSound:
-  - {fileID: 8300000, guid: 8018acccaecddce498259f8e5a93b440, type: 3}
-  - {fileID: 8300000, guid: 9fac002407092764e8936cb3d0387616, type: 3}
-  - {fileID: 8300000, guid: 73e3ceb9aff1022448528283abfd07c3, type: 3}
-  _reloadSound: {fileID: 8300000, guid: cc988050393583047ad560d1ce931d72, type: 3}
+  - {fileID: 8300000, guid: 5be8a72178ac38448a8ac1f09aaf87c9, type: 3}
+  - {fileID: 8300000, guid: 86edcf168f8dd8f4db3a34425dafe462, type: 3}
+  - {fileID: 8300000, guid: e86f382edaa5585468739d11b6d29c6a, type: 3}
+  _reloadSound: {fileID: 8300000, guid: 0190f85a9b46c814083405f52fec89f4, type: 3}
   _bulletHole: {fileID: 1124433708220401334, guid: b6e729f02b913964db0cb3a7cf344f09, type: 3}
   _firePosition: {fileID: 1790144493360532829}
   _bulletParent: {fileID: 0}
@@ -12484,17 +12486,18 @@ MonoBehaviour:
   _recoilForce: 3
   _weapon: {fileID: 7971847478737613435}
   _reloadTime: 1.7
+  _weaponIdx: 1
   CurrentWeapons: []
   _animator: {fileID: 0}
   _effect: {fileID: 0}
   _audioSource: {fileID: 0}
   _recoil: {fileID: 0}
   _shotSound:
-  - {fileID: 8300000, guid: 2c76645032b52534b957cbd9b430e3a3, type: 3}
-  - {fileID: 8300000, guid: 7736ebd0e468eb843a27e996b7c014a1, type: 3}
-  - {fileID: 8300000, guid: 00d6c854d736b274692325c410bbdcc7, type: 3}
-  - {fileID: 8300000, guid: 57be9f76b7fd1914fbb8a53e7ad41c53, type: 3}
-  _reloadSound: {fileID: 8300000, guid: 5352c7bdf44b11141ba87d35e6e5a45a, type: 3}
+  - {fileID: 8300000, guid: 7292a38da27669444a54b903e8c2fea0, type: 3}
+  - {fileID: 8300000, guid: 7129c3c9c8ce0384daf402587ec316a1, type: 3}
+  - {fileID: 8300000, guid: bca5a049f49fa674cbea5f51b3338611, type: 3}
+  - {fileID: 8300000, guid: fe08e463bd574e4449a05fde5513257c, type: 3}
+  _reloadSound: {fileID: 8300000, guid: aa52fa2111d1a8b488dc49016efc9b80, type: 3}
   _bulletHole: {fileID: 1124433708220401334, guid: b6e729f02b913964db0cb3a7cf344f09, type: 3}
   _firePosition: {fileID: 1879748597336412963}
   _bulletParent: {fileID: 0}
@@ -12550,13 +12553,14 @@ MonoBehaviour:
   _recoilForce: 0
   _weapon: {fileID: 3914121559471148655}
   _reloadTime: 0
+  _weaponIdx: 0
   CurrentWeapons: []
   _animator: {fileID: 0}
   _effect: {fileID: 0}
   _audioSource: {fileID: 0}
   _recoil: {fileID: 0}
   _shotSound:
-  - {fileID: 8300000, guid: 301b1a6d792de4b46bad9cf8f893d773, type: 3}
+  - {fileID: 8300000, guid: d0786c23a0561ad44bd47f3fa0b156a8, type: 3}
   _reloadSound: {fileID: 0}
   _hitEffect: {fileID: 5334228485563152753, guid: 0134bdc80242c974b88f68d7bb298ed9, type: 3}
   _attackRange: 3
@@ -12591,7 +12595,7 @@ Transform:
   m_Children:
   - {fileID: 6230414520363701704}
   m_Father: {fileID: 7019329207775881247}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1790144493994522219
 MonoBehaviour:
@@ -12612,6 +12616,7 @@ MonoBehaviour:
   _recoilForce: 0
   _weapon: {fileID: 6230414520363337768}
   _reloadTime: 1.67
+  _weaponIdx: 4
   CurrentWeapons: []
   _animator: {fileID: 0}
   _effect: {fileID: 0}
@@ -12958,8 +12963,8 @@ Transform:
   - {fileID: 1790144493893198494}
   - {fileID: 1790144493494746154}
   - {fileID: 1790144493420384764}
-  - {fileID: 1790144493994522218}
   - {fileID: 992702510}
+  - {fileID: 1790144493994522218}
   m_Father: {fileID: 7639334554892565094}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -18,6 +18,7 @@ public class HelperAI : GenericSingleton<HelperAI>
 
     void Update()
     {
+        if (GenericSingleton<GameManager>.Instance.CurrentState != GameManager.GameState.InGame) return;
         if (Physics.CheckSphere(transform.position, 2, 1 << LayerMask.NameToLayer("Player")))
         {
             nav.SetDestination(transform.position);

@@ -9,8 +9,8 @@ public class Axe : Melee
     {
         base.Init();
         
-        GenericSingleton<WeaponManager>.Instance.SetWeapon(this, 2);
-        Debug.Log("근접무기 설정");
+        GenericSingleton<WeaponManager>.Instance.UnlockWeapon(this);
+        
     }
     public override void Fire()
     {

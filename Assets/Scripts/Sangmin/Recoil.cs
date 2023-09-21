@@ -16,6 +16,7 @@ public class Recoil : GenericSingleton<Recoil>
 
     void Update()
     {
+        if (GenericSingleton<GameManager>.Instance.CurrentState != GameManager.GameState.InGame) return;
         targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
         currentRotation = Vector3.Slerp(currentRotation, targetRotation, snappiness * Time.fixedDeltaTime);
         transform.localRotation = Quaternion.Euler(currentRotation);

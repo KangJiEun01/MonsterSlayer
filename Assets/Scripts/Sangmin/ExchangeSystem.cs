@@ -8,10 +8,7 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
     public List<Recipe> Recipes { get { return _recipes; } }
     Dictionary<int, ItemData> _invenData = new Dictionary<int, ItemData>();
   
-    void Start()
-    {
-        Init();
-    }
+
     public void Init()
     {
         //최대 4가지재료 (첫번째 재료,갯수) (두번째 재료,갯수) (세번째 재료,갯수) (네번째 재료,갯수) (결과,갯수)
@@ -104,8 +101,8 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         GenericSingleton<ItemSaver>.Instance.AddItem(recipe.Result);
 
         CalExchange();
-        GenericSingleton<Inventory>.Instance.ReDrwing(_invenData);
-        GenericSingleton<ExchangeUI>.Instance.Init();
+        GenericSingleton<UIBase>.Instance.InventoryUI.GetComponent<Inventory>().ReDrwing(_invenData);
+        GenericSingleton<UIBase>.Instance.ExchangeUI.GetComponent<ExchangeUI>().Init();
     
     }
     

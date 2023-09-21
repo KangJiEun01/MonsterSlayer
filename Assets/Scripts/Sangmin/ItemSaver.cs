@@ -8,7 +8,8 @@ public class ItemSaver : GenericSingleton<ItemSaver>
 {
     ItemDataWrapper  datas = new ItemDataWrapper();
     public ItemDataWrapper Datas { get { return datas; } }
-    protected override void OnAwake()
+
+    public void Init()
     {
         datas._items = new Dictionary<int, ItemData>();
         datas._items.Add(0, new ItemData(0, 3));

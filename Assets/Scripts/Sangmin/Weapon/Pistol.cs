@@ -6,7 +6,7 @@ public class Pistol : HitScan
     public override void Init()
     {
         base.Init();
-        GenericSingleton<WeaponManager>.Instance.SetWeapon(this,1);
+        GenericSingleton<WeaponManager>.Instance.UnlockWeapon(this);
     }
     public override void Fire()
     {
@@ -50,7 +50,7 @@ public class Pistol : HitScan
             _isReload = true;
             StartCoroutine(Reload());
         }
-
+        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
     }
 
     void StopAttack()

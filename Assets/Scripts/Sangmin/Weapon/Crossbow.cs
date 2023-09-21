@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class Crossbow : Projectile
 {
-    public override void Init()
-    {
-        base.Init();
-        GenericSingleton<WeaponManager>.Instance.SetWeapon(this, 4);
-    }
+
 
     public override void Fire()
     {
@@ -34,7 +30,7 @@ public class Crossbow : Projectile
             _isReload = true;
             StartCoroutine(Reload());
         }
-
+        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
     }
 
     void StopAttack()

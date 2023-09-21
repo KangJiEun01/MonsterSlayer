@@ -7,9 +7,8 @@ public class RhinoItemDrop : MonoBehaviour
     [SerializeField] GameObject _rhino;
     float _rhinohp = 100;
 
-
-    IObjectPool<RhinoItemDrop> _pool;
-    public void SetPool(IObjectPool<RhinoItemDrop> pool) { _pool = pool; }
+    //IObjectPool<RhinoItemDrop> _pool;
+    //public void SetPool(IObjectPool<RhinoItemDrop> pool) { _pool = pool; }
 
     void Update()
     {
@@ -22,6 +21,7 @@ public class RhinoItemDrop : MonoBehaviour
             Destroy(_rhino);
             //_pool.Release(this);
             Instantiate(_itemMeat);
+
         }
     }
 }

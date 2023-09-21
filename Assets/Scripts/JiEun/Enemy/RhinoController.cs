@@ -17,7 +17,7 @@ public class RhinoController : MonoBehaviour
     RhinoItemDrop CreatRhino()
     {
         RhinoItemDrop temp = Instantiate(_rhino).GetComponent<RhinoItemDrop>();
-        temp.SetPool(_pool);
+       // temp.SetPool(_pool);
         return temp;
     }
     void OnGetRhino(RhinoItemDrop rhi)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponManager : GenericSingleton<WeaponManager>
 {
     WeaponBase[] _weapons;
+    protected WeaponBase[] _activeWeapons;
     WeaponBase _currentWeapon;
     public WeaponBase CurrentWeapon { get { return _currentWeapon; } }
 

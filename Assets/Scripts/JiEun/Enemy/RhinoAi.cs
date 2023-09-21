@@ -11,9 +11,11 @@ public class RhinoAi : MonoBehaviour
     [SerializeField] float RandposZmax;
 
     Animator rhinoAni;
+    Rigidbody rhinoRigidbody;
 
     float moveSpeed = 1.0f; // 속도
     float changeInterval = 3.0f; // 목표지점 변경주기
+    float maxangle = 50.0f;
 
     private Vector3 targetPosition; // 현재 목표지점
     //private float timer = 0.0f;
@@ -21,7 +23,10 @@ public class RhinoAi : MonoBehaviour
     private void Awake()
     {
         rhinoAni = GetComponent<Animator>();
+        rhinoRigidbody = GetComponent<Rigidbody>();
         detectionUi.SetActive(false);
+
+        rhinoRigidbody.freezeRotation = true;
     }
     private void Start()
     {
@@ -37,8 +42,10 @@ public class RhinoAi : MonoBehaviour
 
     private void Update()
     {
-            // 목표지점이동
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        transform.LookAt(transform.forward);
+        //transform.forward = Vector3.forward;
+        // 목표지점이동
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             // 도착하면 다음 목표지점
             if (Vector3.Distance(transform.position, targetPosition) < 0.8f)
             {
@@ -57,6 +64,18 @@ public class RhinoAi : MonoBehaviour
             RunTrue();
         }    
     }
+    //private void FixedUpdate()
+    //{
+    //    RaycastHit hit;
+    //    if(Physics.Raycast(transform.position, Vector3.down, out hit)) //올라가는 경사 
+    //    {
+    //        float angle = Vector3.Angle(hit.normal, Vector3.up);
+    //        if(angle > maxangle)
+    //        {
+    //            rhinoRigidbody.velocity = Vector3.zero;
+    //        }
+    //    }
+    //}
     private void SetRandomTargetPosition()
     {
         Debug.Log("순찰중");

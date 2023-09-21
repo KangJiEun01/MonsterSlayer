@@ -5,81 +5,139 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-
 public class ZombieAI : MonoBehaviour
 {
-    
     public Transform target;
     NavMeshAgent agent;
-
     public Animator anim;
 
-    enum State
-    {
-        Idle,
-        Run,
-        Attack
-    }
-    State state;
+    private bool _isRun = false;
+    private bool _isIdle = false;
+    private bool _isWalking = false;
+    private bool _isAttack = false;
+    private bool _isShootGun = false;
+    private bool _attackTimerActive = false;
+    private float _attackTimerDuration = 0.5f;
+    private float _attackTimer = 0.0f;
+    private float _shootGunCheckInterval = 1.0f;
+    private float _shootGunCheckTimer = 0.0f;
 
     void Start()
     {
-        state = State.Idle;
+        _isRun = false;
+        _isIdle = false;
+        _isWalking = true;
+        _isAttack = false;
+        _isShootGun = false;
 
         agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        if (state == State.Idle)
+        UpdateAnimation();
+        
+        if (_attackTimerActive)
         {
-            UpdateIdle();
-        }else if (state == State.Run)
+            _attackTimer -= Time.deltaTime;
+            if (_attackTimer <= 0)
+            {
+                _attackTimerActive = false;
+            }
+        }
+
+        
+        if (_isShootGun && _shootGunCheckTimer > 0)
+        {
+            _shootGunCheckTimer -= Time.deltaTime;
+            if (_shootGunCheckTimer <= 0)
+            {
+                _shootGunCheckTimer = 0;
+                
+                float distance = Vector3.Distance(transform.position, target.transform.position);
+                if (distance <= 2)
+                {
+                    _isShootGun = true;
+                }
+            }
+        }
+
+        //if (_isIdle)
+        //{
+        //    UpdateIdle();
+        //}
+        else if (_isRun)
         {
             UpdateRun();
         }
-        else if (state == State.Attack)
+        else if (_isWalking)
         {
-            UpdateAttack();
+            UpdateWalking();
         }
-        
+        else if (_isAttack)
+        {
+            if (!_attackTimerActive)
+            {
+                Attack();
+                _attackTimerActive = true;
+                _attackTimer = _attackTimerDuration;
+            }
+        }
     }
-   
-    private void UpdateAttack()
+
+    private void UpdateAnimation()
     {
-        agent.speed = 0;
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance > 2)
-        {
-            state = State.Run;
-            anim.SetTrigger("Run");
-        }
+        anim.SetBool("isRun", _isRun);
+        anim.SetBool("isIdle", _isIdle);
+        anim.SetBool("isWalking", _isWalking);
+        anim.SetBool("isAttack", _isAttack);
+        anim.SetBool("isShootGun", _isShootGun);
     }
 
     private void UpdateRun()
     {
-        
-
         float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance <= 2)
+        if (distance <= 0.5f)
         {
-            state = State.Attack;
-            anim.SetTrigger("sword attack");
+            Attack();
         }
-
-        agent.speed = 3.5f;
-        agent.destination = target.transform.position;
-
+        else if (distance <= 2 && !_isShootGun)
+        {
+            _isShootGun = true;
+            _shootGunCheckTimer = _shootGunCheckInterval;
+        }
+        else
+        {
+            _isRun = true;
+            agent.speed = 2.5f;
+            agent.destination = target.transform.position;
+        }
     }
 
-    private void UpdateIdle()
+    private void UpdateWalking()
     {
-        agent.speed = 0;
-        target = GameObject.Find("Player").transform;
-        if (target != null)
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        if (distance <= 8)
         {
-            state = State.Run;
-            anim.SetTrigger("Run");
+            _isRun = true; 
+            _isWalking = false;
+        }
+    }
+
+    private void Attack()
+    {
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        if (distance <= 0.5f)
+        {
+            _isAttack = true;
+            agent.speed = 0; 
+        }
+        else
+        {
+            _isRun = false;
+            _isShootGun = false;
+            _isAttack = true;
+            agent.speed = 0; 
         }
     }
 }

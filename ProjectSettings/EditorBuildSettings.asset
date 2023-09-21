@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YDcity/YDUnderCity.unity
     guid: 0a9a285371745fb4199a46ffd646b535
+  - enabled: 1
+    path: Assets/Scenes/NeonCityLoadingScene.unity
+    guid: 44437ed22e628f848a490c7c86fe90b6
   m_configObjects: {}

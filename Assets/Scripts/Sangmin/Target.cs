@@ -1,17 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Target : MonoBehaviour
 {
     [SerializeField] float Hp;
+    [SerializeField] Animator animator;
     public void OnDamage(float damage)
     {
         Hp -= damage;
         if (Hp  <= 0)
         {
-            Die();
+            DieAni();
         }
+    }
+    void DieAni()
+    {
+        animator.Play("death1"); //이름 맞춰주기
+        Invoke("Die", 2f);
     }
     void Die()
     {

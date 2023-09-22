@@ -159,7 +159,6 @@ public class Enemy01controller : MonoBehaviour
     {
         _patrol = false;
     }
-
     // mins edit
     //void FixedUpdate()
     //{

@@ -7,6 +7,7 @@ public class Target : MonoBehaviour
     public void OnDamage(float damage)
     {
         Hp -= damage;
+        Debug.Log("피해입음");
         if (Hp  <= 0)
         {
             DieAni();
@@ -14,7 +15,7 @@ public class Target : MonoBehaviour
     }
     void DieAni()
     {
-        animator.Play("death1"); //이름 맞춰주기
+       // animator.Play("death1"); //이름 맞춰주기
         Invoke("Die", 2f);
     }
     void Die()

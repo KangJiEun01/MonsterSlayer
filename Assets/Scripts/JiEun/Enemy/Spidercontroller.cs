@@ -20,15 +20,22 @@ public class Spidercontroller : MonoBehaviour
         animator.Play("walk");
     }
 
+    float timer = 4;
+
     void Update()
     {
         if (!attack) 
         {
-            animator.Play("walk");
-            SetRandomTargetPosition();
-            if(Vector3.Distance(transform.position, player.transform.position) < 5f)
+            timer += Time.deltaTime;
+            if(timer > 4)
             {
-                attack = true;
+                timer = 0;
+                animator.Play("walk");
+                SetRandomTargetPosition();
+                if (Vector3.Distance(transform.position, player.transform.position) < 5f)
+                {
+                    attack = true;
+                }
             }
         }
         if(attack)
@@ -45,10 +52,10 @@ public class Spidercontroller : MonoBehaviour
     }
     private void SetRandomTargetPosition()
     {
-        float x = Random.Range(0, 10);
-        float z = Random.Range(0, 10);
+        float x = Random.Range(-10f, 10f);
+        float z = Random.Range(-10f, 10f);
         agent.SetDestination(new Vector3(spiderpos.position.x - x, spiderpos.position.y, spiderpos.position.z - z));
-        transform.LookAt(transform.forward);
+        //transform.LookAt(transform.forward);
     }
     void walk()
     {

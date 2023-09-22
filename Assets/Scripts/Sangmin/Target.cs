@@ -3,7 +3,11 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     [SerializeField] float Hp;
-    [SerializeField] Animator animator;
+    Animator animator;
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
     public void OnDamage(float damage)
     {
         Hp -= damage;

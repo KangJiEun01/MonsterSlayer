@@ -22,7 +22,13 @@ public class ZombieAI : MonoBehaviour
     private float _shootGunCheckInterval = 1.0f;
     private float _shootGunCheckTimer = 0.0f;
 
-    void Start()
+
+    public List<Transform> wayPoints;
+    public int nextIdx = 0;
+
+
+
+    private void Start()
     {
         _isRun = false;
         _isIdle = false;
@@ -31,11 +37,40 @@ public class ZombieAI : MonoBehaviour
         _isShootGun = false;
 
         agent = GetComponent<NavMeshAgent>();
+
+        agent.autoBraking= false;
+
+        var group = GameObject.Find("WayPointGroup");
+
+        if(group != null)
+        {
+            group.GetComponentsInChildren<Transform>(wayPoints);
+            wayPoints.RemoveAt(0);
+        }
+
+        MoveWayPoint();
     }
 
-    void Update()
+    private void MoveWayPoint()
     {
-        UpdateAnimation();
+        if(agent.isPathStale)
+        {
+            return;
+        }
+
+        agent.destination = wayPoints[nextIdx].position;   
+        agent.isStopped= false;
+    }
+
+    private void Update()
+    {
+        if(agent.remainingDistance <= 0.5f)
+        {
+            nextIdx = UnityEngine.Random.Range(0, wayPoints.Count);
+            MoveWayPoint();
+        }
+        //UpdateAnimation();
+
         
         if (_attackTimerActive)
         {

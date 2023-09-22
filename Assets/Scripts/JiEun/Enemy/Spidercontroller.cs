@@ -4,9 +4,9 @@ using UnityEngine.AI;
 
 public class Spidercontroller : MonoBehaviour
 {
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject camera;
-    [SerializeField] GameObject redWaring;
+     GameObject player;
+     GameObject camera;
+     GameObject redWaring;
     NavMeshAgent agent;
     Transform spiderpos;
     Animator animator;
@@ -14,6 +14,10 @@ public class Spidercontroller : MonoBehaviour
     bool attack = false;
     void Start()
     {
+        camera = Camera.main.gameObject;
+        player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log(player);
+        redWaring = GenericSingleton<UIBase>.Instance.WarningUI;
         agent = GetComponent<NavMeshAgent>();
         spiderpos = GetComponent<Transform>();
         animator = GetComponent<Animator>();

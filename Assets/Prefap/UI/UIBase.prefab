@@ -17506,7 +17506,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00011094966}
+  m_AnchoredPosition: {x: 0, y: 0.00004573024}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3567865712397448651
@@ -27800,6 +27800,7 @@ MonoBehaviour:
   _exchangeUI: {fileID: 3567865711427791301}
   _runToggleUI: {fileID: 0}
   _inventoryUI: {fileID: 3567865711770188644}
+  _warningUI: {fileID: 1600504322116526294}
 --- !u!1 &7174244917627514303
 GameObject:
   m_ObjectHideFlags: 0

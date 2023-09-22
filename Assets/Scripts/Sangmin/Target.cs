@@ -7,6 +7,7 @@ public class Target : MonoBehaviour
     public void OnDamage(float damage)
     {
         Hp -= damage;
+        animator.Play("hit1");//이름 맞춰주기
         Debug.Log("피해입음");
         if (Hp  <= 0)
         {

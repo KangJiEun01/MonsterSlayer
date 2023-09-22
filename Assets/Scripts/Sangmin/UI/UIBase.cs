@@ -13,6 +13,8 @@ public class UIBase : GenericSingleton<UIBase>
 
     [SerializeField] GameObject _inventoryUI;
     public GameObject InventoryUI { get { return _inventoryUI; } }
+    [SerializeField] GameObject _warningUI;
+    public GameObject WarningUI { get { return _warningUI; } }
     public void Init()
     {
         _inventoryUI.GetComponent<Inventory>().Init();

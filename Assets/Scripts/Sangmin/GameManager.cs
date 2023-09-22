@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class GameManager : GenericSingleton<GameManager>
 {
+    [SerializeField] GameState _currentState;
     public enum GameState
     {
         InGame,
         Paused,
         GameOver,
     }
-
-    GameState _currentState;
     public GameState CurrentState { get { return _currentState; } }
     public bool _exchangeUI;
     protected override void OnAwake()

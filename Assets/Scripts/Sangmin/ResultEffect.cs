@@ -9,6 +9,6 @@ public class ResultEffect : MonoBehaviour
  
 	void Update ()
 	{
-		transform.Rotate(speed*Vector3.forward*Time.deltaTime);
+		transform.Rotate(speed*Vector3.forward*Time.unscaledDeltaTime);
 	}
 }

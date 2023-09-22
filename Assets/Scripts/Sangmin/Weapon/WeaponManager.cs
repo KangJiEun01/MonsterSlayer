@@ -32,6 +32,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
             weapon.Init();
             weapon.Weapon.SetActive(false);
         }
+        _currentWeapons[0] = _activeWeapons[2];
         _currentWeapons[1] = _activeWeapons[1];                //권총기본무기설정
         _currentWeapons[2] = _activeWeapons[0];                //근접기본무기설정
         _currentWeapon = _currentWeapons[1];                   //권총 들기

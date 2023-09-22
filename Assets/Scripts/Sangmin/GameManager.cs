@@ -20,6 +20,10 @@ public class GameManager : GenericSingleton<GameManager>
     }
     void Init()
     {
+        GameObject _itemSaver = new GameObject();
+        _itemSaver.AddComponent<ItemSaver>();
+        GameObject _exchangeSystem = new GameObject();
+        _exchangeSystem.AddComponent<ExchangeSystem>();
         GenericSingleton<ItemSaver>.Instance.Init();
         GenericSingleton<ExchangeSystem>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();

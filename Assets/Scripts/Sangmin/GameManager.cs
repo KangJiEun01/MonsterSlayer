@@ -12,7 +12,7 @@ public class GameManager : GenericSingleton<GameManager>
         GameOver,
     }
     public GameState CurrentState { get { return _currentState; } }
-    public bool _exchangeUI;
+     bool _exchangeUI;
     protected override void OnAwake()
     {
         Init();
@@ -39,24 +39,36 @@ public class GameManager : GenericSingleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (!_exchangeUI)
+            if (!GenericSingleton<UIBase>.Instance.ExchangeOn)
             {
                 SetGameState(GameState.Paused);
-                _exchangeUI = true;
                 GenericSingleton<UIBase>.Instance.ShowExchangeUI(true);
             }
             else
             {
                 SetGameState(GameState.InGame);
-                _exchangeUI = false;
                 GenericSingleton<UIBase>.Instance.ShowExchangeUI(false);
             }
         }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            if (!GenericSingleton<UIBase>.Instance.WeaponOn)
+            {
+                SetGameState(GameState.Paused);
+                GenericSingleton<UIBase>.Instance.ShowWeaponUI(true);
+            }
+            else
+            {
+                SetGameState(GameState.InGame);
+                GenericSingleton<UIBase>.Instance.ShowWeaponUI(false);
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SetGameState(GameState.InGame);
-            _exchangeUI = false;
             GenericSingleton<UIBase>.Instance.ShowExchangeUI(false);
+            GenericSingleton<UIBase>.Instance.ShowWeaponUI(false);
         }
     }
     public void SetGameState(GameState newState)

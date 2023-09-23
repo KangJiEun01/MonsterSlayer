@@ -40,7 +40,8 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
             int FourthItemCount = int.Parse(values[11]);
             int ResultItemIdx = int.Parse(values[13]);
             int ResultItemCount = int.Parse(values[14]);
-            _recipes.Add(new Recipe(new ItemData(firstItemIdx, firstItemCount), new ItemData(SecondItemIdx, SecondItemCount), new ItemData(ThirdItemIdx, ThirdItemCount), new ItemData(FourthItemIdx, FourthItemCount), new ItemData(ResultItemIdx, ResultItemCount)));
+            bool isWeapon = bool.Parse(values[15]);
+            _recipes.Add(new Recipe(new ItemData(firstItemIdx, firstItemCount), new ItemData(SecondItemIdx, SecondItemCount), new ItemData(ThirdItemIdx, ThirdItemCount), new ItemData(FourthItemIdx, FourthItemCount), new ItemData(ResultItemIdx, ResultItemCount),isWeapon));
 
         }
         reader.Close();

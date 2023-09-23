@@ -1,12 +1,10 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-
 public class Spidercontroller : MonoBehaviour
 {
-     GameObject player;
-     GameObject camera;
-     GameObject redWaring;
+    GameObject player;
+    GameObject camera;
+    GameObject redWaring;
     NavMeshAgent agent;
     Transform spiderpos;
     Animator animator;

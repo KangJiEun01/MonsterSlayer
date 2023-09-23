@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class Enemy01controller : MonoBehaviour
@@ -16,19 +15,24 @@ public class Enemy01controller : MonoBehaviour
     float attackRange = 7f;//인식범위
     float patrolSpeed = 2f; //순찰속도
     float chaseSpeed = 5f; //인식 후 추격 속도
-    float bulletSpeed = 5f;
+    float bulletSpeed = 8f;
     float AttackAniSpeed = 2f; //공격 애니메이션 재생 속도
 
     bool _patrol = true;
     bool movingRight = true;
     bool _collision = false;
     bool _attack = false;
+    //bool bulletFire = false;
 
     float Time_current; //남은초
     float Time_start; //+까지 남은 초
-    float Time_Sumcooltime = 0.2f;//남은초 설정
+    float Time_Sumcooltime = 0.15f;//남은초 설정
+    float Time_bulletfire = 2f;
+    float Time_cool = 2f;
+    float Time_LastShot = 0f;
 
     public bool Attacker { get { return _attack; } }
+    public bool _damage = false;
 
     Vector3 patrolStartPoint;
     Vector3 patrolEndPoint;
@@ -36,9 +40,9 @@ public class Enemy01controller : MonoBehaviour
 
 
     // mins edit
-    public float avoidanceDistance = 1.0f;
-    public float rayDistance = 1.0f;
-    //
+    float avoidanceDistance = 1.0f;
+    float rayDistance = 1.0f;
+    
     private void Awake()
     {
         detectionUi.SetActive(false);
@@ -89,7 +93,6 @@ public class Enemy01controller : MonoBehaviour
         transform.LookAt(player.transform);
         
         //transform.LookAt(player.transform);
-        Debug.Log("범위 들어옴");
         //GetComponent<Animator>().Play("Reload");
         //Invoke("ShootAin",1.2f);
         ShootAin();
@@ -106,7 +109,7 @@ public class Enemy01controller : MonoBehaviour
         if (Time_current > Time_Sumcooltime)
         {
             //Vector3 attackst = new Vector3(VectorbulletPos.x + (-2.0f), VectorbulletPos.y+(+5.0f), VectorbulletPos.z + (-8.5f));
-            Vector3 attackst = new Vector3(VectorbulletPos.x , VectorbulletPos.y , VectorbulletPos.z);
+            Vector3 attackst = new Vector3(VectorbulletPos.x, VectorbulletPos.y, VectorbulletPos.z); ;
             GameObject temp = Instantiate(bullet);
             //Vector3 worldPosition = bulletPos.TransformPoint(Vector3.zero);
             Vector3 worldPosition = bulletPos.TransformPoint(attackst);
@@ -116,6 +119,31 @@ public class Enemy01controller : MonoBehaviour
             temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
             Time_current = Time_Sumcooltime;
             Time_start = Time.time;
+        }
+    }
+    void BulletFire2()
+    {
+        Time_LastShot += Time.deltaTime;
+        if (Time_LastShot < Time_cool) return;
+        while(Time_LastShot < Time_bulletfire + Time_cool)
+        {
+                Time_current = Time.time - Time_start;
+                    if (Time_current > Time_Sumcooltime)
+                    {
+         
+                       Vector3 attackst = new Vector3(VectorbulletPos.x, VectorbulletPos.y, VectorbulletPos.z); ;
+                        GameObject temp = Instantiate(bullet);
+
+                        Vector3 worldPosition = bulletPos.TransformPoint(attackst);
+                        temp.transform.position = worldPosition;
+
+                       Vector3 dir = transform.forward; //앞방향
+                       temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
+                       Time_current = Time_Sumcooltime;
+                       Time_start = Time.time;
+             }
+
+            Time_LastShot = Time_bulletfire + Time_cool;
         }
     }
     void Patrol()
@@ -133,8 +161,6 @@ public class Enemy01controller : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, patrolEndPoint, patrolSpeed * Time.deltaTime);
             }
             transform.LookAt(endPoint.transform);
-            Debug.Log("EndPoint 이동 중");
-            // patrolEndPoint에 도달하면 이동 방향을 왼쪽으로 변경
             if (distanceToEnd < 2f)
             {
                 movingRight = false;

@@ -26,7 +26,7 @@ public class Spidercontroller : MonoBehaviour
 
     void Update()
     {
-        if (!attack) 
+        if (!attack&& !GetComponent<Target>().InDamage) 
         {
             timer += Time.deltaTime;
             if(timer > 4)
@@ -40,7 +40,7 @@ public class Spidercontroller : MonoBehaviour
                 }
             }
         }
-        if(attack)
+        if(attack && !GetComponent<Target>().InDamage)
         {
             animator.Play("run");
             agent.SetDestination(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z));
@@ -50,6 +50,10 @@ public class Spidercontroller : MonoBehaviour
                 animator.Play("attack1");
                 Invoke("walk",2f);
             }
+        }
+        if (GetComponent<Target>().InDamage)
+        {
+            //피해입는 애니메이션
         }
     }
     private void SetRandomTargetPosition()

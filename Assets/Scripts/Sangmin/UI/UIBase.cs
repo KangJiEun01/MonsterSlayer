@@ -4,6 +4,8 @@ public class UIBase : GenericSingleton<UIBase>
 {
     [SerializeField] GameObject _weaponUI;
     public GameObject WeaponUI { get { return _weaponUI; } }
+    [SerializeField] GameObject _weaponSelectUI;
+    public GameObject WeaponSelectUI { get { return _weaponSelectUI; } }
 
     [SerializeField] GameObject _exchangeUI;
     public GameObject ExchangeUI { get { return _exchangeUI; } }
@@ -24,20 +26,11 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _inventoryUI.GetComponent<Inventory>().Init();
         _exchangeUI.GetComponent<ExchangeUI>().Init();
-        ShowExchangeUI(false);
+        AllUIOff();
     }
-    void Start()
+    public void ShowWeaponSelectUI(bool ShowUI)
     {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-    public void ShowWeaponUI(bool ShowUI)
-    {
-        _weaponUI.SetActive(ShowUI);
+        _weaponSelectUI.SetActive(ShowUI);
         _weaponOn = ShowUI;
     }
 
@@ -52,10 +45,15 @@ public class UIBase : GenericSingleton<UIBase>
         _exchangeOn = false;
         GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
     }
-    public void WeaponOff()
+    public void WeaponSelectOff()
     {
-        _weaponUI.SetActive(false);
+        _weaponSelectUI.SetActive(false);
         _weaponOn = false;
         GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
+    }
+    public void AllUIOff()
+    {
+        ShowExchangeUI(false);
+        ShowWeaponSelectUI(false);
     }
 }

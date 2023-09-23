@@ -42,6 +42,7 @@ public class GameManager : GenericSingleton<GameManager>
             if (!GenericSingleton<UIBase>.Instance.ExchangeOn)
             {
                 SetGameState(GameState.Paused);
+                GenericSingleton<UIBase>.Instance.AllUIOff();
                 GenericSingleton<UIBase>.Instance.ShowExchangeUI(true);
             }
             else
@@ -55,20 +56,20 @@ public class GameManager : GenericSingleton<GameManager>
             if (!GenericSingleton<UIBase>.Instance.WeaponOn)
             {
                 SetGameState(GameState.Paused);
-                GenericSingleton<UIBase>.Instance.ShowWeaponUI(true);
+                GenericSingleton<UIBase>.Instance.AllUIOff();
+                GenericSingleton<UIBase>.Instance.ShowWeaponSelectUI(true);
             }
             else
             {
                 SetGameState(GameState.InGame);
-                GenericSingleton<UIBase>.Instance.ShowWeaponUI(false);
-            }
+                GenericSingleton<UIBase>.Instance.ShowWeaponSelectUI(false);
+            }   
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SetGameState(GameState.InGame);
-            GenericSingleton<UIBase>.Instance.ShowExchangeUI(false);
-            GenericSingleton<UIBase>.Instance.ShowWeaponUI(false);
+            GenericSingleton<UIBase>.Instance.AllUIOff();
         }
     }
     public void SetGameState(GameState newState)

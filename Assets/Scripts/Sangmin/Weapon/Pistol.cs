@@ -6,7 +6,7 @@ public class Pistol : HitScan
     public override void Init()
     {
         base.Init();
-        GenericSingleton<WeaponManager>.Instance.UnlockWeapon(this);
+        GenericSingleton<WeaponManager>.Instance.SetDefaultWeapon(this);
     }
     public override void Fire()
     {

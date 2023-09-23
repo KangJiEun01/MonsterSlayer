@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class Crossbow : Projectile
 {
-    public override void Init()
-    {
-        base.Init();
-        GenericSingleton<WeaponManager>.Instance.UnlockWeapon(this);
-    }
+
 
     public override void Fire()
     {

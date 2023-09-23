@@ -63,11 +63,12 @@ public class ExchangeUI : MonoBehaviour
             if (recipe.Second.Idx == -1)
             {
                 items[1].gameObject.SetActive(false);
-                temp.GetComponent<Recipe>().Plus[0].SetActive(true);
+                
 
             }
             else
             {
+                temp.GetComponent<Recipe>().Plus[0].SetActive(true);
                 if (!bools[1]) SetAlpha(items[1].Image, 0.2f);
                 else SetAlpha(items[1].Image, 1);
                 items[1].Image.sprite = _ItemIcon[recipe.Second.Idx];
@@ -75,12 +76,12 @@ public class ExchangeUI : MonoBehaviour
             }   
             if (recipe.Third.Idx == -1)
             {
-                items[2].gameObject.SetActive(false);
-                temp.GetComponent<Recipe>().Plus[0].SetActive(true);
-                temp.GetComponent<Recipe>().Plus[1].SetActive(true);
+                items[2].gameObject.SetActive(false);         
+                
             }
             else
             {
+                temp.GetComponent<Recipe>().Plus[1].SetActive(true);
                 if (!bools[2]) SetAlpha(items[2].Image, 0.2f);
                 else SetAlpha(items[2].Image, 1);
                 items[2].Image.sprite = _ItemIcon[recipe.Third.Idx];
@@ -89,12 +90,12 @@ public class ExchangeUI : MonoBehaviour
             if (recipe.Fourth.Idx == -1)
             {
                 items[3].gameObject.SetActive(false);
-                temp.GetComponent<Recipe>().Plus[0].SetActive(true);
-                temp.GetComponent<Recipe>().Plus[1].SetActive(true);
-                temp.GetComponent<Recipe>().Plus[2].SetActive(true);
+
+               
             }
             else
             {
+                temp.GetComponent<Recipe>().Plus[2].SetActive(true);gus
                 if (!bools[3]) SetAlpha(items[3].Image, 0.2f);
                 else SetAlpha(items[3].Image, 1);
                 items[3].Image.sprite = _ItemIcon[recipe.Fourth.Idx];
@@ -113,6 +114,7 @@ public class ExchangeUI : MonoBehaviour
     }
     private void OnRecipeButtonClick(Recipe recipe)
     { 
+        Debug.Log(recipe.Result.Idx);
         _currentRecipe = recipe;
         _resultItem.SetActive(true);
         

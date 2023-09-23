@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -40,7 +41,7 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
             int FourthItemCount = int.Parse(values[11]);
             int ResultItemIdx = int.Parse(values[13]);
             int ResultItemCount = int.Parse(values[14]);
-            bool isWeapon = bool.Parse(values[15]);
+            bool isWeapon = (values[15] == "1") ? true : false;
             _recipes.Add(new Recipe(new ItemData(firstItemIdx, firstItemCount), new ItemData(SecondItemIdx, SecondItemCount), new ItemData(ThirdItemIdx, ThirdItemCount), new ItemData(FourthItemIdx, FourthItemCount), new ItemData(ResultItemIdx, ResultItemCount),isWeapon));
 
         }
@@ -94,17 +95,32 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
     }
     public void Exchange(Recipe recipe)
     {
-        GenericSingleton<ItemSaver>.Instance.SubItem(recipe.First);
-        GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Second);
-        GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Third);
-        GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth);
+        if (recipe.IsWeapon)
+        {
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.First);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Second);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Third);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth);
 
-        GenericSingleton<ItemSaver>.Instance.AddItem(recipe.Result);
+            GenericSingleton<WeaponManager>.Instance.UnlockWeapon(recipe.Result);
+            _recipes.Remove(recipe); // 무기는 교환 한번만
+
+        }
+        else
+        {
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.First);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Second);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Third);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth);
+
+            GenericSingleton<ItemSaver>.Instance.AddItem(recipe.Result);
+        }
+        
 
         CalExchange();
         GenericSingleton<UIBase>.Instance.InventoryUI.GetComponent<Inventory>().ReDrwing(_invenData);
         GenericSingleton<UIBase>.Instance.ExchangeUI.GetComponent<ExchangeUI>().Init();
     
     }
-    
+
 }

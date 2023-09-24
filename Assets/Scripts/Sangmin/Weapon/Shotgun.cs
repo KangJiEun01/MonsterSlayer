@@ -66,6 +66,7 @@ public class Shotgun : HitScan
         for (int i = _currentIdx; i < _maxBullet; i++)
         {
             _currentIdx++;
+            GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
             _animator.Play("Recharge");
             _audioSource.PlayOneShot(_reloadSound, 1f);
             for (float f = 0.7f; f > 0; f -= 0.1f)

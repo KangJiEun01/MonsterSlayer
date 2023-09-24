@@ -13,6 +13,10 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     int _currentIdx;  //현재 들고있는 무기가 주/보조/근접 무기인지 판별
     public WeaponBase CurrentWeapon { get { return _currentWeapon; } }
 
+    [SerializeField] GameObject _syringe;
+    bool _isHeal;
+
+    
     //_weapons 전체무기 
     //AcitiveWeapons 언락된 무기
     //CurrentWeapons[] 현재장착중인 무기 주,보조,근접
@@ -22,10 +26,27 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     void Update()
     {
         if (GenericSingleton<GameManager>.Instance.CurrentState != GameManager.GameState.InGame) return;
-        _currentWeapon.OnUpdate();
-        SwapWeapon();
+        if (!_isHeal)
+        {
+            _currentWeapon.OnUpdate();
+            SwapWeapon();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            AllOff();
+            _isHeal = true;
+            _syringe.SetActive(true);
+            _syringe.GetComponent<Animator>().Play("First_Aid");
+            Invoke("SyringeOff",2.3f);
+        }
     }
-
+    void SyringeOff()
+    {
+        _isHeal = false;
+        _syringe.SetActive(false);
+        _currentWeapon.Weapon.SetActive(true);
+        _currentWeapon.Animator.Play("Get");
+    }
     public void Init()
     {
         _weapons = GetComponentsInChildren<WeaponBase>();
@@ -58,6 +79,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                         _currentWeapon = _currentWeapons[_currentIdx];
                         AllOff();
                         _currentWeapon.Weapon.SetActive(true);
+                        _currentWeapon.Animator.Play("Get");
                         GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(_currentWeapon);
                     }                
                 }
@@ -70,6 +92,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                     _currentWeapon = _currentWeapons[_currentIdx];
                     AllOff();
                     _currentWeapon.Weapon.SetActive(true);
+                    _currentWeapon.Animator.Play("Get");
                     GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(_currentWeapon);
                 }
                 break;
@@ -81,6 +104,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                     _currentWeapon = _currentWeapons[_currentIdx];
                     AllOff();
                     _currentWeapon.Weapon.SetActive(true);
+                    _currentWeapon.Animator.Play("Get");
                     GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetMelee();
                 }
                 break;
@@ -126,6 +150,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
             _currentWeapon = _currentWeapons[_currentIdx];
             AllOff();
             _currentWeapon.Weapon.SetActive(true);
+            _currentWeapon.Animator.Play("Get");
             GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(_currentWeapon);
         }
     }
@@ -166,11 +191,17 @@ public abstract class WeaponBase :MonoBehaviour
     protected bool inAttack = false;
     public bool InAttack { get { return inAttack; } }
     protected WeaponBase[] _currentWeapons;
-    public WeaponBase[] CurrentWeapons;
-    public Animator _animator;
-    public ParticleSystem _effect;
-    public AudioSource _audioSource;
-    public Recoil _recoil;
+    public WeaponBase[] CurrentWeapons { get { return _currentWeapons; } }
+    protected Animator _animator;
+    public Animator Animator { get { return _animator; } }
+    protected ParticleSystem _effect;
+    public ParticleSystem Effect { get { return _effect; } }
+
+    protected AudioSource _audioSource;
+    public AudioSource AudioSource { get { return _audioSource; } }
+
+    protected Recoil _recoil;
+    public Recoil Recoil { get {  return _recoil; } }
     [Header("Sound")]
     [SerializeField] protected AudioClip[] _shotSound;
     [SerializeField] protected AudioClip _reloadSound;

@@ -5,10 +5,12 @@ using UnityEngine;
 public class Axe : Melee
 {
     Vector3 _target;
+    
     public override void Init()
     {
         base.Init();
         GenericSingleton<WeaponManager>.Instance.SetDefaultWeapon(this);
+        _isReload = false;
         
     }
     public override void Fire()

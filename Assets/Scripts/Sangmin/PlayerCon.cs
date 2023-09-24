@@ -86,7 +86,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _collider = GetComponent<CapsuleCollider>();
         _rig = GetComponent<Rigidbody>();
         Debug.Log(GenericSingleton<WeaponManager>.Instance.CurrentWeapon);
-        _animator = GenericSingleton<WeaponManager>.Instance.CurrentWeapon._animator;
+        _animator = GenericSingleton<WeaponManager>.Instance.CurrentWeapon.Animator;
         _audioSource = GetComponent<AudioSource>();
         // √ ±‚»≠
         _speed = _walkSpeed;

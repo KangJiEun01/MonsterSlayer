@@ -1,178 +1,125 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 public class ZombieAI : MonoBehaviour
 {
-    public Transform target;
-    NavMeshAgent agent;
-    public Animator anim;
+    public WayPointGroup wayPointGroup; // WayPointGroup 스크립트
+    public Transform player; // 플레이어의 위치
+    private Animator animator; 
+    private NavMeshAgent navMeshAgent; 
+    private int currentWaypointIndex = 0;
+    private float attackRange = 1.0f; // 공격 범위
+    private float chaseRange = 10.0f; // 추적 범위
+    private float returnRange = 11.0f; // 되돌아가는 범위
+    private float idleDuration = 1.0f; // Idle 상태 지속
+    private CharacterState characterState = CharacterState.Idle;
 
-    private bool _isRun = false;
-    private bool _isIdle = false;
-    private bool _isWalking = false;
-    private bool _isAttack = false;
-    private bool _isShootGun = false;
-    private bool _attackTimerActive = false;
-    private float _attackTimerDuration = 0.5f;
-    private float _attackTimer = 0.0f;
-    private float _shootGunCheckInterval = 1.0f;
-    private float _shootGunCheckTimer = 0.0f;
-
-
-    public List<Transform> wayPoints;
-    public int nextIdx = 0;
-
-
+    private enum CharacterState
+    {
+        Idle,
+        Walk,
+        Run,
+        Attack
+    }
 
     private void Start()
     {
-        _isRun = false;
-        _isIdle = false;
-        _isWalking = true;
-        _isAttack = false;
-        _isShootGun = false;
+        animator = GetComponent<Animator>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
 
-        agent = GetComponent<NavMeshAgent>();
-
-        agent.autoBraking= false;
-
-        var group = GameObject.Find("WayPointGroup");
-
-        if(group != null)
+        // 초기 포인트로 이동
+        if (wayPointGroup.IsValid(currentWaypointIndex))
         {
-            group.GetComponentsInChildren<Transform>(wayPoints);
-            wayPoints.RemoveAt(0);
+            navMeshAgent.SetDestination(wayPointGroup.GetPoint(currentWaypointIndex));
+            SetCharacterState(CharacterState.Walk);
         }
-
-        MoveWayPoint();
-    }
-
-    private void MoveWayPoint()
-    {
-        if(agent.isPathStale)
-        {
-            return;
-        }
-
-        agent.destination = wayPoints[nextIdx].position;   
-        agent.isStopped= false;
     }
 
     private void Update()
     {
-        if(agent.remainingDistance <= 0.5f)
-        {
-            nextIdx = UnityEngine.Random.Range(0, wayPoints.Count);
-            MoveWayPoint();
-        }
-        //UpdateAnimation();
+        // 현재 위치와 목표 위치 사이의 거리
+        float distanceToTarget = Vector3.Distance(transform.position, wayPointGroup.GetPoint(currentWaypointIndex));
 
-        
-        if (_attackTimerActive)
+        // 추적 범위 내에 플레이어가 있을 때
+        if (Vector3.Distance(transform.position, player.position) <= chaseRange)
         {
-            _attackTimer -= Time.deltaTime;
-            if (_attackTimer <= 0)
+            // 공격 범위 내에 플레이어가 있을 때
+            if (Vector3.Distance(transform.position, player.position) <= attackRange)
             {
-                _attackTimerActive = false;
+                SetCharacterState(CharacterState.Attack);
+                AttackPlayer(); // 플레이어를 공격하는 함수
             }
-        }
-
-        
-        if (_isShootGun && _shootGunCheckTimer > 0)
-        {
-            _shootGunCheckTimer -= Time.deltaTime;
-            if (_shootGunCheckTimer <= 0)
+            else
             {
-                _shootGunCheckTimer = 0;
-                
-                float distance = Vector3.Distance(transform.position, target.transform.position);
-                if (distance <= 2)
-                {
-                    _isShootGun = true;
-                }
+                // 플레이어를 향해 뛰기
+                SetCharacterState(CharacterState.Run);
+                navMeshAgent.SetDestination(player.position);
             }
-        }
-
-        //if (_isIdle)
-        //{
-        //    UpdateIdle();
-        //}
-        else if (_isRun)
-        {
-            UpdateRun();
-        }
-        else if (_isWalking)
-        {
-            UpdateWalking();
-        }
-        else if (_isAttack)
-        {
-            if (!_attackTimerActive)
-            {
-                Attack();
-                _attackTimerActive = true;
-                _attackTimer = _attackTimerDuration;
-            }
-        }
-    }
-
-    private void UpdateAnimation()
-    {
-        anim.SetBool("isRun", _isRun);
-        anim.SetBool("isIdle", _isIdle);
-        anim.SetBool("isWalking", _isWalking);
-        anim.SetBool("isAttack", _isAttack);
-        anim.SetBool("isShootGun", _isShootGun);
-    }
-
-    private void UpdateRun()
-    {
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance <= 0.5f)
-        {
-            Attack();
-        }
-        else if (distance <= 2 && !_isShootGun)
-        {
-            _isShootGun = true;
-            _shootGunCheckTimer = _shootGunCheckInterval;
         }
         else
         {
-            _isRun = true;
-            agent.speed = 2.5f;
-            agent.destination = target.transform.position;
+            // 추적 범위 밖에 있을 때
+            if (distanceToTarget > returnRange)
+            {
+                // 걷기 애니메이션 실행하고 포인트 돌기
+                SetCharacterState(CharacterState.Walk);
+                navMeshAgent.SetDestination(wayPointGroup.GetPoint(currentWaypointIndex));
+            }
+            else
+            {
+                // 서있기 ? ??
+                SetCharacterState(CharacterState.Idle);
+            }
         }
     }
 
-    private void UpdateWalking()
+    // 캐릭터 상태 설정
+    private void SetCharacterState(CharacterState state)
     {
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance <= 8)
+        if (characterState != state)
         {
-            _isRun = true; 
-            _isWalking = false;
+            characterState = state;
+            // 애니메이션 상태
+            switch (state)
+            {
+                case CharacterState.Idle:
+                    animator.SetTrigger("Idle");
+                    break;
+                case CharacterState.Walk:
+                    animator.SetTrigger("Walking");
+                    navMeshAgent.speed = 1.5f; //속도
+                    break;
+                case CharacterState.Run:
+                    animator.SetTrigger("Run");
+                    navMeshAgent.speed = 3.0f; //속도
+                    break;
+                case CharacterState.Attack:
+                    animator.SetTrigger("Attack");
+                    break;
+            }
         }
     }
 
-    private void Attack()
+    // 플레이어를 공격
+    private void AttackPlayer()
     {
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance <= 0.5f)
+        // 플레이어와의 거리가 1 이하
+        if (Vector3.Distance(transform.position, player.position) <= 1.0f)
         {
-            _isAttack = true;
-            agent.speed = 0; 
+            SetCharacterState(CharacterState.Attack);
+            //데미지 넣어야도ㅓㅣㅁ
+            
         }
         else
         {
-            _isRun = false;
-            _isShootGun = false;
-            _isAttack = true;
-            agent.speed = 0; 
+            // 플레이어가 멀어지면 다시 쫓아가기
+            SetCharacterState(CharacterState.Run);
+            navMeshAgent.SetDestination(player.position);
         }
+    }
+
+    private void Death()
+    {
+
     }
 }

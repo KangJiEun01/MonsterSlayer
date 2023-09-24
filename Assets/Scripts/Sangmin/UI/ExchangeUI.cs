@@ -95,7 +95,7 @@ public class ExchangeUI : MonoBehaviour
             }
             else
             {
-                temp.GetComponent<Recipe>().Plus[2].SetActive(true);gus
+                //temp.GetComponent<Recipe>().Plus[2].SetActive(true);gus******주석풀기
                 if (!bools[3]) SetAlpha(items[3].Image, 0.2f);
                 else SetAlpha(items[3].Image, 1);
                 items[3].Image.sprite = _ItemIcon[recipe.Fourth.Idx];

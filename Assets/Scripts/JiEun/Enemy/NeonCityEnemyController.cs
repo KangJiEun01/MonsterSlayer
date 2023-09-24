@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class NeonCityEnemyController : MonoBehaviour
 {
     [SerializeField] GameObject[] Enemys;
@@ -27,7 +26,7 @@ public class NeonCityEnemyController : MonoBehaviour
                 Instantiate(DropItem[num]);
                 DropItem[num].transform.position = ItemDrop.transform.position;
                 Debug.Log(ItemDrop + "»ý¼º");
-               // itemSpawn[i] = true;
+                itemSpawn[i] = true;
             }
         }
     }

@@ -4,6 +4,7 @@ public class Target : MonoBehaviour
 {
     [SerializeField] float Hp;
     [SerializeField] float damageDelay = 2f;
+    [SerializeField] GameObject[] DropItem;
     Animator animator;
     bool inDamage;
     
@@ -18,7 +19,7 @@ public class Target : MonoBehaviour
         inDamage= true;
         Hp -= damage;
         Debug.Log("피해입음");
-        if (Hp  <= 0)
+        if (Hp  == 0)
         {
             DieAni();
         }
@@ -31,6 +32,12 @@ public class Target : MonoBehaviour
     }
     void Die()
     {
+        int num = Random.Range(0, 4);
+        //for(int i = 0; i < 1; i++) 
+        //{
+            Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z), Quaternion.identity);
+            //i++;
+        //}
         gameObject.SetActive(false);
     }
     void DamageEnd()

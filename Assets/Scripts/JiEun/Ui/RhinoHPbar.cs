@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-
-
 public class RhinoHPbar : MonoBehaviour
 {
     [SerializeField] GameObject HpBar;

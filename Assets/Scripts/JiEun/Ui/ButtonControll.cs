@@ -26,4 +26,8 @@ public class ButtonControll : MonoBehaviour
     {
         SceneManager.LoadScene("LoadingScene");
     }
+    public void ClickDemeVersion()
+    {
+        SceneManager.LoadScene("BossStageLoadingScene");
+    }
 }

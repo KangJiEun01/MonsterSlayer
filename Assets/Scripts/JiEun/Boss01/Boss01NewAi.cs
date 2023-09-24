@@ -9,7 +9,7 @@ public class Boss01NewAi : MonoBehaviour
     Animator animator;
     Transform BossTrans;
 
-    public int BossHp = 100;
+    public float BossHp;
    // float PlayerHP = GenericSingleton<PlayerCon>.Instance.GetComponent<PlayerCon>().HpStat;
 
     bool Mode = false; //1, 2 공격모드
@@ -22,6 +22,7 @@ public class Boss01NewAi : MonoBehaviour
         animator.Play("In");
         Invoke("StartRout", 4.7f);
         Invoke("CameraMove", 4.7f);
+        BossHp = GetComponent<Target>().GetHP();
     }
     private IEnumerator BossAttackRoutine()
     {
@@ -102,7 +103,7 @@ public class Boss01NewAi : MonoBehaviour
         //animator.Play("1_Atk2");// 충돌하면 HP 감소 추가
         //Invoke("CameraSk", 0.5f);
     }
-    public int getBossHP()
+    public float getBossHP()
     {
         return BossHp;
     }

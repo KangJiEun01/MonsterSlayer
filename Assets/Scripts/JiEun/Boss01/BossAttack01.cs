@@ -7,6 +7,7 @@ public class BossAttack01 : MonoBehaviour
     [SerializeField] GameObject camera;
 
     float BossSpeed = 20;
+    float _BossHp;
 
     private void OnEnable()
     {
@@ -15,7 +16,7 @@ public class BossAttack01 : MonoBehaviour
     }
     void Start()
     {
-
+        _BossHp = GetComponent<Boss01NewAi>().getBossHP();
     }
     void Update()
     {

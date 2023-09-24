@@ -7,6 +7,7 @@ public class BossAttack02 : MonoBehaviour
     [SerializeField] GameObject camera;
 
     float BossSpeed = 20;
+    float _BossHp;
     private void OnEnable()
     {
         GetComponent<Animator>().Play("1_Atk2");
@@ -14,7 +15,7 @@ public class BossAttack02 : MonoBehaviour
     }
     void Start()
     {
-
+        _BossHp = GetComponent<Boss01NewAi>().getBossHP();
     }
 
     // Update is called once per frame

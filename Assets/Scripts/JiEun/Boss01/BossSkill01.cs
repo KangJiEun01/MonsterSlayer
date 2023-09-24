@@ -14,7 +14,7 @@ public class BossSkill01 : MonoBehaviour
     float angle;
     float rotationSpeed;
 
-    int _BossHp;
+    float _BossHp;
     void Start()
     {
 

@@ -371,6 +371,13 @@ public class PlayerCon : GenericSingleton<PlayerCon>
             GenericSingleton<ItemSaver>.Instance.AddItem(collision.collider.GetComponent<Item>().GetItem());
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Boss"))
+        {
+            _hp -= 1;
+        }
+    }
 }
 
 

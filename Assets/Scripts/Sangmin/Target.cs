@@ -18,7 +18,7 @@ public class Target : MonoBehaviour
     {
         inDamage= true;
         Hp -= damage;
-        Debug.Log("피해입음");
+        Debug.Log(Hp);
         if (Hp  == 0)
         {
             DieAni();

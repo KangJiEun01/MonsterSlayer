@@ -3012,6 +3012,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4641443098536080793, guid: 7dab5f21259510646b95887cbb32ba1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4829367478585930540, guid: 7dab5f21259510646b95887cbb32ba1a, type: 3}
       propertyPath: m_Name
       value: YDNeonCity
@@ -3033,6 +3037,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6238581963303220947, guid: 7dab5f21259510646b95887cbb32ba1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494554159778512591, guid: 7dab5f21259510646b95887cbb32ba1a, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -6537,7 +6545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3567865712397448652, guid: e9ed3708865d50840a54291976007152, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000034570694
+      value: 300.00003
       objectReference: {fileID: 0}
     - target: {fileID: 3567865712594914752, guid: e9ed3708865d50840a54291976007152, type: 3}
       propertyPath: m_AnchorMax.x
@@ -12770,7 +12778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentState: 0
-  _exchangeUI: 0
 --- !u!4 &1970048653
 Transform:
   m_ObjectHideFlags: 0

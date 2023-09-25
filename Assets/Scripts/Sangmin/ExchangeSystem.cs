@@ -103,7 +103,9 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
             GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth);
 
             GenericSingleton<WeaponManager>.Instance.UnlockWeapon(recipe.Result);
+            Debug.Log(recipe.Result.Idx);
             _recipes.Remove(recipe); // 무기는 교환 한번만
+            Debug.Log(recipe.Result.Idx);
 
         }
         else

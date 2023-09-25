@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BossSkill01 : MonoBehaviour
 {
-    [SerializeField] GameObject player02;
-    [SerializeField] GameObject camera;
+    GameObject player02;
+    GameObject camera;
 
     float BossSpeed = 500;
     float initialRotationSpeed = 50f; // 초기 속도
@@ -17,7 +17,8 @@ public class BossSkill01 : MonoBehaviour
     float _BossHp;
     void Start()
     {
-
+        player02 = GameObject.FindGameObjectWithTag("Player");
+        camera = Camera.main.gameObject;
     }
     private void OnEnable()
     {

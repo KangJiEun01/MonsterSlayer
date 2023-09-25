@@ -23,12 +23,12 @@ public class Target : MonoBehaviour
         {
             DieAni();
         }
-        Invoke("DamageEnd", damageDelay);
+        //Invoke("DamageEnd", damageDelay);@@
     }
     void DieAni()
     {
-        animator.Play("Die"); //이름 맞춰주기
-        Invoke("Die", 2f);
+        //animator.Play("Die"); //이름 맞춰주기@@
+        //Invoke("Die", 2f);@@
     }
     void Die()
     {

@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class Boss01NewAi : MonoBehaviour
 {
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject camera;
-
+    GameObject player;
+    GameObject camera;
     Animator animator;
     Transform BossTrans;
 
@@ -16,13 +15,15 @@ public class Boss01NewAi : MonoBehaviour
     public bool _attack = false; //공격on, off상태
     void Start()
     {
-        transform.LookAt(player.transform);
+        player = GameObject.FindGameObjectWithTag("Player");
+        camera = Camera.main.gameObject;
         BossTrans = GetComponent<Transform>();
+        transform.LookAt(player.transform);
+        BossHp = GetComponent<Target>().GetHP();
         animator = GetComponent<Animator>();
         animator.Play("In");
         Invoke("StartRout", 4.7f);
         Invoke("CameraMove", 4.7f);
-        BossHp = GetComponent<Target>().GetHP();
     }
     private IEnumerator BossAttackRoutine()
     {
@@ -51,7 +52,7 @@ public class Boss01NewAi : MonoBehaviour
                 }
                 Mode = true;
             }
-            else if (Mode == true)//1번 공격
+            else if (Mode == true)//1번 공격 뒤 돌게 모션
             {
                 if (_attack == false)
                 {
@@ -80,15 +81,19 @@ public class Boss01NewAi : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    BossHp = 10;
+        //    GetComponent<BossSkill01>().enabled = true;
+        //}
+        float BossHp = GetComponent<Target>().GetHP();
+        if (BossHp <= 0)
         {
-            BossHp = 10;
-            GetComponent<BossSkill01>().enabled = true;
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            BossHp = 0;
             GetComponent<Boss01Dead>().enabled = true;
+            GetComponent<Boss01NewAi>().enabled = false;
+            GetComponent<BossAttack01>().enabled = false;
+            GetComponent<BossAttack02>().enabled = false;
+            GetComponent<BossSkill01>().enabled = false;
         }
     }
     void Atk02()

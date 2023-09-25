@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BossAttack01 : MonoBehaviour
 {
-    [SerializeField] GameObject player02;
-    [SerializeField] GameObject camera;
+    GameObject player02;
+    GameObject camera;
 
     float BossSpeed = 20;
     float _BossHp;
@@ -13,10 +13,12 @@ public class BossAttack01 : MonoBehaviour
     {
         GetComponent<Animator>().Play("1_Atk1");
         Invoke("CameraMove", 1.7f);
+        _BossHp = GetComponent<Boss01NewAi>().getBossHP();
     }
     void Start()
     {
-        _BossHp = GetComponent<Boss01NewAi>().getBossHP();
+        player02 = GameObject.FindGameObjectWithTag("Player");
+        camera = Camera.main.gameObject;
     }
     void Update()
     {

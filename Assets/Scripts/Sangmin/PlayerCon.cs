@@ -96,7 +96,14 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _applyCrouchPosY = _originPosY;
     }
 
-
+    public void SetPosition(Vector3 pos)
+    {
+        transform.position = pos;
+    }
+    public void SetRotation(float rotY)
+    {
+        m_HorizontalAngle = rotY;
+    }
     void Update()
     {
         if (GenericSingleton<GameManager>.Instance.CurrentState != GameManager.GameState.InGame) return;

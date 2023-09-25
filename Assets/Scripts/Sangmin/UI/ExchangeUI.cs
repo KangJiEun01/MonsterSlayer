@@ -49,6 +49,7 @@ public class ExchangeUI : MonoBehaviour
         foreach (Recipe recipe in Recipe)
         {
             GameObject temp = Instantiate(_recipe, _content);
+            temp.name = recipe.Result.Name;
             bool[] bools = recipe.Bools;
             Item[] items = temp.GetComponentsInChildren<Item>();
             if (!bools[0]) SetAlpha(items[0].Image, 0.2f);     // 각재료가 부족하다면 레시피가 반투명해짐     
@@ -81,6 +82,7 @@ public class ExchangeUI : MonoBehaviour
             }
             else
             {
+                Debug.Log(recipe.Third.Name);
                 temp.GetComponent<Recipe>().Plus[1].SetActive(true);
                 if (!bools[2]) SetAlpha(items[2].Image, 0.2f);
                 else SetAlpha(items[2].Image, 1);
@@ -91,11 +93,10 @@ public class ExchangeUI : MonoBehaviour
             {
                 items[3].gameObject.SetActive(false);
 
-               
             }
             else
             {
-                //temp.GetComponent<Recipe>().Plus[2].SetActive(true);gus******주석풀기
+                temp.GetComponent<Recipe>().Plus[2].SetActive(true);
                 if (!bools[3]) SetAlpha(items[3].Image, 0.2f);
                 else SetAlpha(items[3].Image, 1);
                 items[3].Image.sprite = _ItemIcon[recipe.Fourth.Idx];

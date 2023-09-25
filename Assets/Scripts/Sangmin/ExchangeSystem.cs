@@ -30,7 +30,6 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         {
             string line = reader.ReadLine();
             string[] values = line.Split(',');
-            Debug.Log(values[1]);
             int firstItemIdx = int.Parse(values[1]);    
             int firstItemCount = int.Parse(values[2]);
             int SecondItemIdx = int.Parse(values[4]);
@@ -42,8 +41,9 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
             int ResultItemIdx = int.Parse(values[13]);
             int ResultItemCount = int.Parse(values[14]);
             bool isWeapon = (values[15] == "1") ? true : false;
+    
             _recipes.Add(new Recipe(new ItemData(firstItemIdx, firstItemCount), new ItemData(SecondItemIdx, SecondItemCount), new ItemData(ThirdItemIdx, ThirdItemCount), new ItemData(FourthItemIdx, FourthItemCount), new ItemData(ResultItemIdx, ResultItemCount),isWeapon));
-
+  
         }
         reader.Close();
     }
@@ -103,9 +103,14 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
             GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth);
 
             GenericSingleton<WeaponManager>.Instance.UnlockWeapon(recipe.Result);
-            Debug.Log(recipe.Result.Idx);
-            _recipes.Remove(recipe); // 무기는 교환 한번만
-            Debug.Log(recipe.Result.Idx);
+            for(int i = 0; i < _recipes.Count; i++)
+            {
+                if (_recipes[i].Result.Idx == recipe.Result.Idx)
+                {
+                    _recipes.RemoveAt(i);// 무기는 교환 한번만
+                    break;
+                }
+            }
 
         }
         else

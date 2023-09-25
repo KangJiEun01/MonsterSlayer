@@ -10,7 +10,7 @@ public class Recipe : MonoBehaviour
     ItemData _second;
     public ItemData Second { get { return _second; } }
     ItemData _third;
-    public ItemData Third { get { return _second; } }
+    public ItemData Third { get { return _third; } }
     ItemData _fourth;
     public ItemData Fourth { get {  return _fourth; } }
     ItemData _result;

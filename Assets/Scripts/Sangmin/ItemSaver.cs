@@ -81,6 +81,7 @@ public class ItemData
             if (itemIndex == _itemIdx)
             {
                 _name = values[1];
+                Debug.Log(_name);
                 _text = values[2];
                 _type = (ItemType)int.Parse(values[3]);
                 break;

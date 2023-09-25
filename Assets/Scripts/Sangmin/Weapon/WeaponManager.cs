@@ -37,7 +37,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
             _isHeal = true;
             _syringe.SetActive(true);
             _syringe.GetComponent<Animator>().Play("First_Aid");
-            Invoke("SyringeOff",2.3f);
+            Invoke("SyringeOff",3.5f);
         }
     }
     void SyringeOff()
@@ -126,7 +126,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
    
         foreach(WeaponBase weapon in _weapons)
         {
-            if(weapon.WeaponIdx == item.Idx - 13)
+            if(weapon.WeaponIdx == item.Idx - 7)
             {
                 _activeWeapons.Add(weapon);
                 GenericSingleton<UIBase>.Instance.WeaponSelectUI.GetComponent<WeaponSelectUI>().WeaponUnlock(weapon.WeaponIdx - 2);

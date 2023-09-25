@@ -54,6 +54,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     private float _crouchPosY;
     private float _originPosY;
     private float _applyCrouchPosY;
+    [SerializeField] float _startRotY;
     float m_HorizontalAngle, m_VerticalAngle;
     // 민감도
     [SerializeField]
@@ -90,7 +91,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _audioSource = GetComponent<AudioSource>();
         // 초기화
         _speed = _walkSpeed;
-
+        transform.localEulerAngles = new Vector3(0, _startRotY,0);
         _originPosY = _camera.transform.localPosition.y;
         _applyCrouchPosY = _originPosY;
     }

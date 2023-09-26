@@ -183,19 +183,19 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 7400004, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
   m_Animations:
-  - {fileID: 7400000, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400002, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400004, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400006, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400008, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400010, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400014, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400012, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400016, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400018, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400020, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400022, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
-  - {fileID: 7400024, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
+  - {fileID: 7400024, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400006, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400008, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400020, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400022, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400012, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400016, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400010, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400018, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400000, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400004, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400014, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
+  - {fileID: 7400002, guid: 11c7f9c078980fc4f81796ff8bec4d61, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -286,7 +286,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 3
-  animator: {fileID: 0}
+  damageDelay: 2
+  DropItem: []
 --- !u!114 &3154058630348729517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,9 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4aaa462c028274884672bd05f9fbb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  camera: {fileID: 0}
-  redWaring: {fileID: 0}
 --- !u!1 &3154058630349156492
 GameObject:
   m_ObjectHideFlags: 0

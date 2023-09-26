@@ -12,8 +12,16 @@ public class ItemSaver : GenericSingleton<ItemSaver>
     public void Init()
     {
         datas._items = new Dictionary<int, ItemData>();
-        datas._items.Add(0, new ItemData(0, 3));
-        datas._items.Add(2, new ItemData(2, 2));
+        datas._items.Add(0, new ItemData(0, 10));
+        datas._items.Add(1, new ItemData(1, 10));
+        datas._items.Add(2, new ItemData(2, 10));
+        datas._items.Add(3, new ItemData(3, 10));
+        datas._items.Add(4, new ItemData(4, 10));
+        datas._items.Add(5, new ItemData(5, 10));
+        datas._items.Add(6, new ItemData(6, 10));
+        datas._items.Add(7, new ItemData(7, 10));
+
+
     }
     public void SubItem(ItemData item)
     {

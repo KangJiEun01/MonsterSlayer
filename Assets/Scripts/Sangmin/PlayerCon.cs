@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using static GameManager;
 
 public class PlayerCon : GenericSingleton<PlayerCon>
 {
@@ -79,6 +80,41 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     [Header("Sounds")]
     [SerializeField] AudioClip[] _walking;
 
+    //PlayerState _currentState;
+    //public enum PlayerState
+    //{
+    //    Idle,
+    //    Walk,
+    //    Run,
+    //    Attack,
+    //    Reload,
+    //    Get,
+    //}
+    //public void SetPlayerState(PlayerState newState)
+    //{
+    //    _currentState = newState;
+    //    switch (_currentState)
+    //    {
+    //        case PlayerState.Idle:
+    //            _animator.Play("Idle");
+    //            break;
+    //        case PlayerState.Walk:
+    //            _animator.Play("Walk");
+    //            break;
+    //        case PlayerState.Run:
+    //            _animator.Play("Run");
+    //            break;
+    //        case PlayerState.Attack:
+    //            _animator.Play("Shot");
+    //            break;
+    //        case PlayerState.Reload:
+    //            _animator.Play("Reload");
+    //            break;
+    //        case PlayerState.Get:
+    //            _animator.Play("Get");
+    //            break;
+    //    }
+    //}
     public void Init()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -86,7 +122,6 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         // 컴포넌트 할당
         _collider = GetComponent<CapsuleCollider>();
         _rig = GetComponent<Rigidbody>();
-        Debug.Log(GenericSingleton<WeaponManager>.Instance.CurrentWeapon);
         _animator = GenericSingleton<WeaponManager>.Instance.CurrentWeapon.Animator;
         _audioSource = GetComponent<AudioSource>();
         // 초기화
@@ -95,7 +130,10 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _originPosY = _camera.transform.localPosition.y;
         _applyCrouchPosY = _originPosY;
     }
-
+    public void AnimatorUpdate()
+    {
+        _animator = GenericSingleton<WeaponManager>.Instance.CurrentWeapon.Animator;
+    }
     public void SetPosition(Vector3 pos)
     {
         transform.position = pos;
@@ -202,7 +240,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
 
         _isRun = true;
         _speed = _runSpeed;
-        if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.IsReload && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.InAttack)
+        if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.IsReload && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.InAttack && !GenericSingleton<WeaponManager>.Instance.IsSwap)
         {
             _animator.Play("Run");
             MovingSound(0.25f);
@@ -270,7 +308,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _moveDirZ = Input.GetAxisRaw("Vertical");
         if (_moveDirX == 0 && _moveDirZ == 0)
         {
-            if (!GenericSingleton<WeaponManager>.Instance.CurrentWeapon.IsReload && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.InAttack)
+            if (!GenericSingleton<WeaponManager>.Instance.CurrentWeapon.IsReload && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.InAttack && !GenericSingleton<WeaponManager>.Instance.IsSwap)
             {
                 _animator.Play("Idle");
             }
@@ -280,7 +318,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         else
         {
             _isIdle = false;
-            if (!_isRun && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.IsReload && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.InAttack)
+            if (!_isRun && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.IsReload && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.InAttack && !GenericSingleton<WeaponManager>.Instance.IsSwap)
             {
                 _animator.Play("Walk");
                 MovingSound(0.3f);

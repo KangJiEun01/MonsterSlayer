@@ -22,7 +22,7 @@ public class WeaponUI : MonoBehaviour
     {
         _maxBullet.text = " /" + maxBullet.ToString();
     }
-    public void SetMelee()
+     void SetMelee()
     {
         _weaponImage.sprite = _weaponSprites[0];
         _currentBullet.text = "¡Ä";
@@ -30,8 +30,15 @@ public class WeaponUI : MonoBehaviour
     }
     public void UIUpdate(WeaponBase weapon)
     {
-        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetWeaponImage(weapon.WeaponIdx);
-        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetMaxBullet(weapon.MaxBullet);
-        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(weapon.CurrentIdx);
+        if (weapon.WeaponIdx == 0)
+        {
+            SetMelee();
+        }
+        else
+        {
+            GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetWeaponImage(weapon.WeaponIdx);
+            GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetMaxBullet(weapon.MaxBullet);
+            GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(weapon.CurrentIdx);
+        }
     }
 }

@@ -15,6 +15,8 @@ public class WeaponManager : GenericSingleton<WeaponManager>
 
     [SerializeField] GameObject _syringe;
     bool _isHeal;
+    bool _isSwap;
+    public bool IsSwap { get { return _isSwap; } }
 
     
     //_weapons 전체무기 
@@ -77,10 +79,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                     if(_currentWeapon != _currentWeapons[_currentIdx])
                     {
                         _currentWeapon = _currentWeapons[_currentIdx];
-                        AllOff();
-                        _currentWeapon.Weapon.SetActive(true);
-                        _currentWeapon.Animator.Play("Get");
-                        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(_currentWeapon);
+                        SetCurrentWeapon(_currentWeapon);
                     }                
                 }
                 break;
@@ -90,10 +89,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                 if (_currentWeapon != _currentWeapons[_currentIdx])
                 {
                     _currentWeapon = _currentWeapons[_currentIdx];
-                    AllOff();
-                    _currentWeapon.Weapon.SetActive(true);
-                    _currentWeapon.Animator.Play("Get");
-                    GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(_currentWeapon);
+                    SetCurrentWeapon(_currentWeapon);
                 }
                 break;
 
@@ -102,26 +98,23 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                 if (_currentWeapon != _currentWeapons[_currentIdx])
                 {
                     _currentWeapon = _currentWeapons[_currentIdx];
-                    AllOff();
-                    _currentWeapon.Weapon.SetActive(true);
-                    _currentWeapon.Animator.Play("Get");
-                    GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetMelee();
+                    SetCurrentWeapon(_currentWeapon);
                 }
                 break;
         }
     }
-    void AllOff()
+    void AllOff()   //모든 무기 끄기
     {
         foreach (WeaponBase weapon in _weapons)
         {
             weapon.Weapon.SetActive(false);
         }
     }
-    public void SetDefaultWeapon(WeaponBase weapon)
+    public void SetDefaultWeapon(WeaponBase weapon)   //기본무기 초기화
     {
         _activeWeapons.Add(weapon);
     }
-    public void UnlockWeapon(ItemData item)
+    public void UnlockWeapon(ItemData item)   //교환시 아이템 끄기
     {
    
         foreach(WeaponBase weapon in _weapons)
@@ -133,6 +126,20 @@ public class WeaponManager : GenericSingleton<WeaponManager>
             }
         }
 
+    }
+    public void SetCurrentWeapon(WeaponBase weapon)
+    {
+        AllOff();
+        weapon.Weapon.SetActive(true);
+        GenericSingleton<PlayerCon>.Instance.AnimatorUpdate();
+        _isSwap = true;
+        Invoke("SwapEnd",1f);
+        weapon.Animator.Play("Get");
+        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(weapon);
+    }
+    void SwapEnd()
+    {
+        _isSwap = false;
     }
     public void SetMainWeapon(int idx)
     {
@@ -148,10 +155,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         if (_currentIdx == 0)
         {
             _currentWeapon = _currentWeapons[_currentIdx];
-            AllOff();
-            _currentWeapon.Weapon.SetActive(true);
-            _currentWeapon.Animator.Play("Get");
-            GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(_currentWeapon);
+            SetCurrentWeapon(_currentWeapon);
         }
     }
     void AllUnlock()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class UIBase : GenericSingleton<UIBase>
 {
@@ -17,11 +18,27 @@ public class UIBase : GenericSingleton<UIBase>
     public GameObject InventoryUI { get { return _inventoryUI; } }
     [SerializeField] GameObject _warningUI;
     public GameObject WarningUI { get { return _warningUI; } }
+    [SerializeField] TextMeshProUGUI _fpsUI;
 
     bool _weaponOn;
     public bool WeaponOn { get { return _weaponOn; } }
     bool _exchangeOn;
     public bool ExchangeOn { get { return _exchangeOn;} }
+
+    float _timer = 0;
+    int _frame = 0;
+    private void Update()
+    {
+
+        _timer += Time.deltaTime;
+        _frame++;
+        if(_timer > 1)
+        {
+            _fpsUI.text = $"FPS : {_frame}";
+            _timer = 0;
+            _frame = 0;
+        }
+    }
     public void Init()
     {
         _inventoryUI.GetComponent<Inventory>().Init();

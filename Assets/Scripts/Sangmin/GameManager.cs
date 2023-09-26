@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : GenericSingleton<GameManager>
 {
     [SerializeField] GameState _currentState;
+    
     public enum GameState
     {
         InGame,
@@ -71,6 +72,13 @@ public class GameManager : GenericSingleton<GameManager>
             SetGameState(GameState.InGame);
             GenericSingleton<UIBase>.Instance.AllUIOff();
         }
+        float deltaTime = 0.0f;
+
+        void Update()
+        {
+            deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        }
+
     }
     public void SetGameState(GameState newState)
     {

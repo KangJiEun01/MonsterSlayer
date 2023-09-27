@@ -17,12 +17,4 @@ public class Boss02Dead : MonoBehaviour
         Boss03.GetComponent<Boss03NewAi>().enabled = true;
         Boss03.SetActive(true);
     }
-    void Start()
-    {
-        
-    }
-    void Update()
-    {
-
-    }
 }

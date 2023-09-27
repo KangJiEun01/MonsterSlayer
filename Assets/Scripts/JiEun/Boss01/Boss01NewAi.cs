@@ -6,7 +6,6 @@ public class Boss01NewAi : MonoBehaviour
     GameObject player;
     GameObject camera;
     Animator animator;
-    Transform BossTrans;
 
     public float BossHp;
    // float PlayerHP = GenericSingleton<PlayerCon>.Instance.GetComponent<PlayerCon>().HpStat;
@@ -17,7 +16,6 @@ public class Boss01NewAi : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         camera = Camera.main.gameObject;
-        BossTrans = GetComponent<Transform>();
         transform.LookAt(player.transform);
         BossHp = GetComponent<Target>().GetHP();
         animator = GetComponent<Animator>();

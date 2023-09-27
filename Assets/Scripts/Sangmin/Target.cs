@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    [SerializeField] float Hp;
+    [SerializeField] public float Hp;
     [SerializeField] float damageDelay = 2f;
     [SerializeField] GameObject[] DropItem;
     Animator animator;
@@ -18,15 +18,16 @@ public class Target : MonoBehaviour
     {
         inDamage= true;
         Hp -= damage;
-        Debug.Log(Hp);
-        if (Hp  == 0)
-        {
-            DieAni();
-        }
-        //Invoke("DamageEnd", damageDelay);@@
+        //Debug.Log(Hp);
+        //if (Hp  == 0)
+        //{
+        //    DieAni();
+        //}
+        Invoke("DamageEnd", damageDelay);
     }
     void DieAni()
     {
+        gameObject.SetActive(false);
         //animator.Play("Die"); //이름 맞춰주기@@
         //Invoke("Die", 2f);@@
     }

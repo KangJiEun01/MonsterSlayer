@@ -80,41 +80,20 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     [Header("Sounds")]
     [SerializeField] AudioClip[] _walking;
 
-    //PlayerState _currentState;
-    //public enum PlayerState
-    //{
-    //    Idle,
-    //    Walk,
-    //    Run,
-    //    Attack,
-    //    Reload,
-    //    Get,
-    //}
-    //public void SetPlayerState(PlayerState newState)
-    //{
-    //    _currentState = newState;
-    //    switch (_currentState)
-    //    {
-    //        case PlayerState.Idle:
-    //            _animator.Play("Idle");
-    //            break;
-    //        case PlayerState.Walk:
-    //            _animator.Play("Walk");
-    //            break;
-    //        case PlayerState.Run:
-    //            _animator.Play("Run");
-    //            break;
-    //        case PlayerState.Attack:
-    //            _animator.Play("Shot");
-    //            break;
-    //        case PlayerState.Reload:
-    //            _animator.Play("Reload");
-    //            break;
-    //        case PlayerState.Get:
-    //            _animator.Play("Get");
-    //            break;
-    //    }
-    //}
+    PlayerState _currentState;
+    public enum PlayerState
+    {
+        Idle,
+        Walk,
+        Run,
+        Attack,
+        Reload,
+        Get,
+    }
+    public void SetPlayerState(PlayerState newState)
+    {
+        _currentState = newState;
+    }
     public void Init()
     {
         Cursor.lockState = CursorLockMode.Locked;

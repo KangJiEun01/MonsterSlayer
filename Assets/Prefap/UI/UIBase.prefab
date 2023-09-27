@@ -24418,6 +24418,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 2183236148269885254, guid: a41ead8d5d040e74284a5ae5dd01484d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2554963565818602972, guid: a41ead8d5d040e74284a5ae5dd01484d, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 4

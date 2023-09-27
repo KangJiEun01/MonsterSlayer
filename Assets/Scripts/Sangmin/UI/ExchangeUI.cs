@@ -120,9 +120,9 @@ public class ExchangeUI : MonoBehaviour
         _resultItem.SetActive(true);
         
         _resultItem.GetComponent<Item>().Image.sprite = _itemIcon[_currentRecipe.Result.Idx];
-        _resultItem.GetComponent<Item>().Text.text = "X" + _currentRecipe.Result.Count;
-        _resultText.text = _currentRecipe.Result.Text;
-        _resultName.text = _currentRecipe.Result.Name;
+        
+      //  _resultText.text = _currentRecipe.Result.Text;
+        _resultName.text = _currentRecipe.Result.Name + "X" + _currentRecipe.Result.Count;
         
         if (recipe.CanExchange)                      //거래가능할경우
         {

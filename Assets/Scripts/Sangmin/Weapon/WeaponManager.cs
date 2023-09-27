@@ -64,7 +64,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         _currentIdx = 1;
         _currentWeapon = _currentWeapons[_currentIdx];                   //권총 들기
         _currentWeapon.Weapon.SetActive(true);
-        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(_currentWeapon);
+        GenericSingleton<UIBase>.Instance.WeaponUIInit(_currentWeapon);
         //AllUnlock();                                //테스트용 모두 잠금해제
     }
     void SwapWeapon()
@@ -122,7 +122,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
             if(weapon.WeaponIdx == item.Idx - 7)
             {
                 _activeWeapons.Add(weapon);
-                GenericSingleton<UIBase>.Instance.WeaponSelectUI.GetComponent<WeaponSelectUI>().WeaponUnlock(weapon.WeaponIdx - 2);
+                GenericSingleton<UIBase>.Instance.WeaponSelectUIInit(weapon);
             }
         }
 
@@ -135,7 +135,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         _isSwap = true;
         Invoke("SwapEnd",1f);
         weapon.Animator.Play("Get");
-        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().UIUpdate(weapon);
+        GenericSingleton<UIBase>.Instance.WeaponUIInit(weapon);
     }
     void SwapEnd()
     {
@@ -165,7 +165,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
             if (!_activeWeapons.Contains(weapon))
             {
                 _activeWeapons.Add(weapon);
-                GenericSingleton<UIBase>.Instance.WeaponSelectUI.GetComponent<WeaponSelectUI>().WeaponUnlock(weapon.WeaponIdx - 2);
+                GenericSingleton<UIBase>.Instance.WeaponSelectUIInit(weapon);
             }
         }
         }
@@ -239,7 +239,7 @@ public abstract class WeaponBase :MonoBehaviour
         Debug.Log("장전완료");
         _isReload = false;
         _currentIdx = _maxBullet;
-        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
+        GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
     }
    
 

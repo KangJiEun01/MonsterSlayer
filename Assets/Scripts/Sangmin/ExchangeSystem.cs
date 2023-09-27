@@ -125,8 +125,8 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         
 
         CalExchange();
-        GenericSingleton<UIBase>.Instance.InventoryUI.GetComponent<Inventory>().ReDrwing(_invenData);
-        GenericSingleton<UIBase>.Instance.ExchangeUI.GetComponent<ExchangeUI>().Init();
+        GenericSingleton<UIBase>.Instance.InventoryInit(_invenData);
+        GenericSingleton<UIBase>.Instance.ExchangeUIInit();
     
     }
 

@@ -37,7 +37,7 @@ public class Crossbow : Projectile
             _isReload = true;
             StartCoroutine(Reload());
         }
-        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
+        GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
     }
 
     void StopAttack()

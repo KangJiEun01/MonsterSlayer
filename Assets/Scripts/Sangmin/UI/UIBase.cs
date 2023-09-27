@@ -1,24 +1,21 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class UIBase : GenericSingleton<UIBase>
 {
     [SerializeField] GameObject _weaponUI;
-    public GameObject WeaponUI { get { return _weaponUI; } }
     [SerializeField] GameObject _weaponSelectUI;
-    public GameObject WeaponSelectUI { get { return _weaponSelectUI; } }
-
     [SerializeField] GameObject _exchangeUI;
-    public GameObject ExchangeUI { get { return _exchangeUI; } }
-
+    [SerializeField] GameObject _gamoverUI;
     [SerializeField] GameObject _runToggleUI;
     public GameObject RunToggleUI { get { return _runToggleUI; } }
 
     [SerializeField] GameObject _inventoryUI;
-    public GameObject InventoryUI { get { return _inventoryUI; } }
     [SerializeField] GameObject _warningUI;
-    public GameObject WarningUI { get { return _warningUI; } }
     [SerializeField] TextMeshProUGUI _fpsUI;
+    [SerializeField] Sprite[] _itemIcon; 
+    public Sprite[] ItemIcon { get { return _itemIcon; } }
 
     bool _weaponOn;
     public bool WeaponOn { get { return _weaponOn; } }
@@ -29,10 +26,13 @@ public class UIBase : GenericSingleton<UIBase>
     int _frame = 0;
     private void Update()
     {
-
+        CalFPS();
+    }
+    void CalFPS()
+    {
         _timer += Time.deltaTime;
         _frame++;
-        if(_timer > 1)
+        if (_timer > 1)
         {
             _fpsUI.text = $"FPS : {_frame}";
             _timer = 0;
@@ -45,6 +45,19 @@ public class UIBase : GenericSingleton<UIBase>
         _exchangeUI.GetComponent<ExchangeUI>().Init();
         AllUIOff();
     }
+    
+    public void ExchangeOff()             //닫기 버튼에 연결되는 함수
+    {
+        _exchangeUI.SetActive(false);
+        _exchangeOn = false;
+        GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
+    }
+    public void WeaponSelectOff()          //닫기 버튼에 연결되는 함수
+    {
+        _weaponSelectUI.SetActive(false);
+        _weaponOn = false;
+        GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
+    }
     public void ShowWeaponSelectUI(bool ShowUI)
     {
         _weaponSelectUI.SetActive(ShowUI);
@@ -56,21 +69,40 @@ public class UIBase : GenericSingleton<UIBase>
         _exchangeUI.SetActive(ShowUI);
         _exchangeOn = ShowUI;
     }
-    public void ExchangeOff()
+    public void ShowWarningUI(bool isShow)                         //데미지 받을때 UI
     {
-        _exchangeUI.SetActive(false);
-        _exchangeOn = false;
-        GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
+        _warningUI.SetActive(isShow);
     }
-    public void WeaponSelectOff()
+    public void GameOverUI(bool isShow)
     {
-        _weaponSelectUI.SetActive(false);
-        _weaponOn = false;
-        GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
+        _gamoverUI.SetActive(isShow);
     }
-    public void AllUIOff()
+    public void AllUIOff()                                         //모든 UI끄기
     {
         ShowExchangeUI(false);
         ShowWeaponSelectUI(false);
+        GameOverUI(false);
+    }    
+    
+    public void InventoryInit(Dictionary<int, ItemData> InvenData)  //인벤 갱신
+    {
+        _inventoryUI.GetComponent<Inventory>().ReDrwing(InvenData);
     }
+    public void ExchangeUIInit()                                  //거래 UI 갱신
+    {
+        _exchangeUI.GetComponent<ExchangeUI>().Init();
+    }
+    public void SetCurrentBullet(int currentBullet)                //무기UI 갱신(현재 총알)
+    {
+        _weaponUI.GetComponent<WeaponUI>().SetCurrentBullet(currentBullet);
+    }
+    public void WeaponSelectUIInit(WeaponBase weapon)              //무기 선택 UI갱신
+    {
+        GetComponent<WeaponSelectUI>().WeaponUnlock(weapon.WeaponIdx - 2);
+    }
+    public void WeaponUIInit(WeaponBase weapon)                    //무기UI 갱신
+    {
+        _weaponUI.GetComponent<WeaponUI>().UIUpdate(weapon);
+    }
+    
 }

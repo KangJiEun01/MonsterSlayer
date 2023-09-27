@@ -15,7 +15,6 @@ public class Spidercontroller : MonoBehaviour
         camera = Camera.main.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log(player);
-        redWaring = GenericSingleton<UIBase>.Instance.WarningUI;
         agent = GetComponent<NavMeshAgent>();
         spiderpos = GetComponent<Transform>();
         animator = GetComponent<Animator>();
@@ -81,11 +80,11 @@ public class Spidercontroller : MonoBehaviour
     }
     void RedWaring()
     {
-        redWaring.SetActive(true);
+        GenericSingleton<UIBase>.Instance.ShowWarningUI(true);
         Invoke("RedWaringActFalse", 0.3f);
     }
     void RedWaringActFalse()
     {
-        redWaring.SetActive(false);
+        GenericSingleton<UIBase>.Instance.ShowWarningUI(false);
     }
 }

@@ -52,7 +52,7 @@ public class Shotgun : HitScan
             _isReload = true;
             StartCoroutine(Reload());
         }
-        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
+        GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
     }
     public override IEnumerator Reload()
     {
@@ -66,7 +66,7 @@ public class Shotgun : HitScan
         for (int i = _currentIdx; i < _maxBullet; i++)
         {
             _currentIdx++;
-            GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
+            GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
             _animator.Play("Recharge");
             _audioSource.PlayOneShot(_reloadSound, 1f);
             for (float f = 0.7f; f > 0; f -= 0.1f)
@@ -87,7 +87,7 @@ public class Shotgun : HitScan
 
         Debug.Log("장전완료");
         _isReload = false;
-        GenericSingleton<UIBase>.Instance.WeaponUI.GetComponent<WeaponUI>().SetCurrentBullet(_currentIdx);
+        GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
     }
     void StopAttack()
     {

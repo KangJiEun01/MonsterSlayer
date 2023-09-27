@@ -15,7 +15,7 @@ public class ExchangeUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI _resultName;
     [SerializeField] GameObject ExchangeBtn;
     [SerializeField] GameObject _resultEffect;
-    Sprite[] _ItemIcon;
+    Sprite[] _itemIcon;
     int id = 0;
     List<Recipe> Recipe;
 
@@ -30,7 +30,7 @@ public class ExchangeUI : MonoBehaviour
     public void Init()
     {
         Recipe = GenericSingleton<ExchangeSystem>.Instance.Recipes;
-        _ItemIcon = GenericSingleton<UIBase>.Instance.InventoryUI.GetComponent<Inventory>().ItemIcon;
+        _itemIcon = GenericSingleton<UIBase>.Instance.ItemIcon;
         _resultText.text = "";
         _resultName.text = "";
         _resultItem.SetActive(false);
@@ -54,7 +54,7 @@ public class ExchangeUI : MonoBehaviour
             Item[] items = temp.GetComponentsInChildren<Item>();
             if (!bools[0]) SetAlpha(items[0].Image, 0.2f);     // 각재료가 부족하다면 레시피가 반투명해짐     
             else SetAlpha(items[0].Image, 1);
-            items[0].Image.sprite = _ItemIcon[recipe.First.Idx];
+            items[0].Image.sprite = _itemIcon[recipe.First.Idx];
             items[0].Text.text = "X" + recipe.First.Count.ToString();
 
             temp.GetComponent<Recipe>().Plus[0].SetActive(false);
@@ -72,7 +72,7 @@ public class ExchangeUI : MonoBehaviour
                 temp.GetComponent<Recipe>().Plus[0].SetActive(true);
                 if (!bools[1]) SetAlpha(items[1].Image, 0.2f);
                 else SetAlpha(items[1].Image, 1);
-                items[1].Image.sprite = _ItemIcon[recipe.Second.Idx];
+                items[1].Image.sprite = _itemIcon[recipe.Second.Idx];
                 items[1].Text.text = "X" + recipe.Second.Count.ToString();
             }   
             if (recipe.Third.Idx == -1)
@@ -86,7 +86,7 @@ public class ExchangeUI : MonoBehaviour
                 temp.GetComponent<Recipe>().Plus[1].SetActive(true);
                 if (!bools[2]) SetAlpha(items[2].Image, 0.2f);
                 else SetAlpha(items[2].Image, 1);
-                items[2].Image.sprite = _ItemIcon[recipe.Third.Idx];
+                items[2].Image.sprite = _itemIcon[recipe.Third.Idx];
                 items[2].Text.text = "X" + recipe.Third.Count.ToString();
             }
             if (recipe.Fourth.Idx == -1)
@@ -99,7 +99,7 @@ public class ExchangeUI : MonoBehaviour
                 temp.GetComponent<Recipe>().Plus[2].SetActive(true);
                 if (!bools[3]) SetAlpha(items[3].Image, 0.2f);
                 else SetAlpha(items[3].Image, 1);
-                items[3].Image.sprite = _ItemIcon[recipe.Fourth.Idx];
+                items[3].Image.sprite = _itemIcon[recipe.Fourth.Idx];
                 items[3].Text.text = "X" + recipe.Fourth.Count.ToString();
             }
             Button recipeButton = temp.GetComponent<Button>();
@@ -119,7 +119,7 @@ public class ExchangeUI : MonoBehaviour
         _currentRecipe = recipe;
         _resultItem.SetActive(true);
         
-        _resultItem.GetComponent<Item>().Image.sprite = _ItemIcon[_currentRecipe.Result.Idx];
+        _resultItem.GetComponent<Item>().Image.sprite = _itemIcon[_currentRecipe.Result.Idx];
         _resultItem.GetComponent<Item>().Text.text = "X" + _currentRecipe.Result.Count;
         _resultText.text = _currentRecipe.Result.Text;
         _resultName.text = _currentRecipe.Result.Name;

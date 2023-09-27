@@ -4,11 +4,10 @@ public class BossCollider : MonoBehaviour
 {
     float _playerHp;
     [SerializeField] GameObject camera;
-    GameObject redWaring;
+   
 
     private void Start()
     {
-        redWaring = GenericSingleton<UIBase>.Instance.WarningUI;
         _playerHp = GenericSingleton<PlayerCon>.Instance.GetComponent<PlayerCon>().HpStat;
         //camera = Camera.main;
     }
@@ -27,11 +26,11 @@ public class BossCollider : MonoBehaviour
     }
     void RedWaring()
     {
-        redWaring.SetActive(true);
+        GenericSingleton<UIBase>.Instance.ShowWarningUI(true);
         Invoke("RedWaringActFalse", 0.3f);
     }
     void RedWaringActFalse()
     {
-        redWaring.SetActive(false);
+        GenericSingleton<UIBase>.Instance.ShowWarningUI(false);
     }
 }

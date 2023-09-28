@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerCon;
 
 public class Axe : Melee
 {
@@ -20,7 +21,7 @@ public class Axe : Melee
         _audioSource.PlayOneShot(_shotSound[Random.Range(0, _shotSound.Length)], 1f);
         _animator.Play("Attack");
         inAttack = true;
-
+     
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, _attackRange))
         {
             Debug.Log(hit.transform.name);
@@ -45,7 +46,6 @@ public class Axe : Melee
     }
     void StopAttack()
     {
-        _animator.Play("Idle");
         inAttack = false;
     }
 }

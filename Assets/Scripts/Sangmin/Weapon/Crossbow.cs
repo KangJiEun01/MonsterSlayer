@@ -42,6 +42,7 @@ public class Crossbow : Projectile
 
     void StopAttack()
     {
+        
         inAttack = false;
     }
 

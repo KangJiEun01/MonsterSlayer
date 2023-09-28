@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static PlayerCon;
 
 public class Rifle : HitScan
 {
@@ -41,7 +42,7 @@ public class Rifle : HitScan
             _audioSource.PlayOneShot(_shotSound[Random.Range(0,_shotSound.Length)], 1f);
             _animator.Play("Shot");
             inAttack = true;
-            
+       
             _recoil.RecoilFire(_recoilForce); //¹Ýµ¿
             AimOpen();           // aim¹ú¾îÁü
             
@@ -78,6 +79,7 @@ public class Rifle : HitScan
 
     void StopAttack()
     {
+      
         inAttack = false;
     }
     //void Shot()

@@ -9,6 +9,7 @@ public class UIBase : GenericSingleton<UIBase>
     [SerializeField] GameObject _exchangeUI;
     [SerializeField] GameObject _gamoverUI;
     [SerializeField] GameObject _runToggleUI;
+    [SerializeField] GameObject _HPBarUI;
     public GameObject RunToggleUI { get { return _runToggleUI; } }
 
     [SerializeField] GameObject _inventoryUI;
@@ -83,7 +84,10 @@ public class UIBase : GenericSingleton<UIBase>
         ShowWeaponSelectUI(false);
         GameOverUI(false);
     }    
-    
+    public void HpUIInit()
+    {
+        _HPBarUI.GetComponent<HpUI>().Init();
+    }
     public void InventoryInit(Dictionary<int, ItemData> InvenData)  //인벤 갱신
     {
         _inventoryUI.GetComponent<Inventory>().ReDrwing(InvenData);
@@ -98,7 +102,7 @@ public class UIBase : GenericSingleton<UIBase>
     }
     public void WeaponSelectUIInit(WeaponBase weapon)              //무기 선택 UI갱신
     {
-        GetComponent<WeaponSelectUI>().WeaponUnlock(weapon.WeaponIdx - 2);
+        _weaponSelectUI.GetComponent<WeaponSelectUI>().WeaponUnlock(weapon.WeaponIdx - 2);
     }
     public void WeaponUIInit(WeaponBase weapon)                    //무기UI 갱신
     {

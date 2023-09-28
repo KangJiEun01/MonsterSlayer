@@ -31,6 +31,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     private float _runTimer;
     public float RunTimer { get { return _runTimer; } }
     private bool _runToggle;
+    bool _onDamage;
     public bool RunToggle {  get { return _runToggle; } }
 
     //HpUi전달 변수
@@ -80,20 +81,41 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     [Header("Sounds")]
     [SerializeField] AudioClip[] _walking;
 
-    PlayerState _currentState;
-    public enum PlayerState
-    {
-        Idle,
-        Walk,
-        Run,
-        Attack,
-        Reload,
-        Get,
-    }
-    public void SetPlayerState(PlayerState newState)
-    {
-        _currentState = newState;
-    }
+    //PlayerState _currentState;
+    //public enum PlayerState
+    //{
+    //    Idle,
+    //    Walk,
+    //    Run,
+    //    Attack,
+    //    Reload,
+    //    Get,
+    //}
+    //public void SetPlayerState(PlayerState newState)
+    //{
+    //    _currentState = newState;
+    //    switch (_currentState)
+    //    {
+    //        case PlayerState.Idle:
+    //            _animator.Play("Idle");
+    //            break;
+    //        case PlayerState.Walk:
+    //            _animator.Play("Walk");
+    //            break;
+    //        case PlayerState.Run:
+    //            _animator.Play("Run");
+    //            break;
+    //        case PlayerState.Attack:
+    //            _animator.Play("Shot");
+    //            break;
+    //        case PlayerState.Reload:
+    //            _animator.Play("Reload");
+    //            break;
+    //        case PlayerState.Get:
+    //            _animator.Play("Get");
+    //            break;
+    //    }
+    //}
     public void Init()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -374,6 +396,33 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     //        }
     //    }else GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(false);
     //}
+    void OnDamage(float damage)
+    {
+        if (!_onDamage)
+        {
+            _hp = _hp - damage;
+            GenericSingleton<UIBase>.Instance.ShowWarningUI(true);
+            GenericSingleton<UIBase>.Instance.HpUIInit();
+            if (_hp > 0)
+            {
+                _camera.GetComponent<NewCameraShake>().enabled = true;
+                _onDamage = true;
+                Invoke("DamageEnd", 0.5f);
+            }
+            else
+            {
+                GenericSingleton<GameManager>.Instance.SetGameState(GameState.GameOver);
+                GenericSingleton<UIBase>.Instance.GameOverUI(true);
+                GenericSingleton<WeaponManager>.Instance.CurrentWeapon.Weapon.SetActive(false);
+                
+            }
+        }
+    }
+    void DamageEnd()
+    {
+        GenericSingleton<UIBase>.Instance.ShowWarningUI(false);
+        _onDamage = false;
+    }
     private void MovingSound(float delay)
     {
         soundTimer += Time.deltaTime;
@@ -389,7 +438,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     {
         if (collision.collider.CompareTag("Boss"))
         {
-            _hp -= 10;
+            OnDamage(10);
         }
         if (collision.collider.CompareTag("Item"))
         {

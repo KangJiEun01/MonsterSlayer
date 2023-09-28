@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static PlayerCon;
 
 public class WeaponManager : GenericSingleton<WeaponManager>
 {
@@ -228,15 +229,17 @@ public abstract class WeaponBase :MonoBehaviour
     public abstract void Fire();
     public virtual IEnumerator Reload()
     {
+        
         _animator.Play("Reload");
         _audioSource.PlayOneShot(_reloadSound, 1f);
+        
         for (float f = _reloadTime; f > 0; f -= 0.1f)
         {
             Debug.Log("장전중입니다");
             yield return new WaitForSeconds(0.1f);
-
         }
         Debug.Log("장전완료");
+        
         _isReload = false;
         _currentIdx = _maxBullet;
         GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);

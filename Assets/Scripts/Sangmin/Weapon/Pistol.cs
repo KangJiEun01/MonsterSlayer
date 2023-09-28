@@ -18,8 +18,8 @@ public class Pistol : HitScan
             _audioSource.PlayOneShot(_shotSound[Random.Range(0, _shotSound.Length)], 1f);
             _animator.Play("Shot");
             inAttack = true;
-            
-             _recoil.RecoilFire(_recoilForce); //반동 
+      
+            _recoil.RecoilFire(_recoilForce); //반동 
 
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward*30, Color.red, 3f);
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 30f))
@@ -57,6 +57,7 @@ public class Pistol : HitScan
 
     void StopAttack()
     {
+       
         inAttack = false;
     }
    

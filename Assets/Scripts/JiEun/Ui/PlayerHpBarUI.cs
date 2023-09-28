@@ -4,9 +4,10 @@ using UnityEngine.UI;
 public class PlayerHpBarUI : MonoBehaviour
 {
     Slider _hpbar01;
-    void Start()
+
+    void Init()
     {
-        _hpbar01= GetComponent<Slider>();
+        _hpbar01 = GetComponent<Slider>();
     }
     void Update()
     {

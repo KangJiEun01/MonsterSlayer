@@ -4,8 +4,8 @@ public class NewCameraShake : MonoBehaviour
 {
     //[SerializeField] GameObject pos;
     //public float shakeDuration = 0.2f;  // 흔들림 지속 시간
-    public float shakeAmount = 0.3f;    // 흔들림 정도
-    public float decreaseFactor = 3f;   // 흔들림 감소 비율
+    [SerializeField] float shakeAmount = 0.2f;    // 흔들림 정도
+    [SerializeField] float decreaseFactor = 3f;   // 흔들림 감소 비율
     private Vector3 originalPosition;
     // private float currentShakeDuration = 1f;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerCon;
 
 public class Shotgun : HitScan
 {
@@ -91,6 +92,7 @@ public class Shotgun : HitScan
     }
     void StopAttack()
     {
+     
         inAttack = false;
     }
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3ÃÊ ´ë±â
@@ -7,12 +8,12 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
     GameObject camera;
     Animator animator;
 
-    public int BossHp = 100;
     bool startAtt = false;
     bool Mode = false; //1, 2 °ø°Ý¸ðµå
     public bool _attack = false; //°ø°Ýon, off»óÅÂ
 
     float BossSpeed = 6;
+    float _hp = 5;
 
     void Start()
     {
@@ -72,7 +73,21 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
     }
         void Update()
     {
-        if (startAtt)
+        _hp = GetComponent<Target>().Hp;
+        if (_hp > 0 && GetComponent<Target>().InDamage)
+        {
+            GetComponent<Boss02Hit>().enabled = true;
+        }
+        else if(_hp == 0)
+        {
+            GetComponent<Boss02Dead>().enabled = true;
+            GetComponent<Boss02NewAi>().enabled = false;
+            GetComponent<Boss02Attack01>().enabled = false;
+            GetComponent<Boss02Attack02>().enabled = false;
+            GetComponent<Boss02Hit>().enabled = false;
+            GetComponent<Target>().enabled = false;
+        }
+        if (_hp > 0 && startAtt)
         {
             transform.LookAt(player.transform);
             Vector3 playerVector = new Vector3(player.transform.position.x, 0, player.transform.position.z);
@@ -80,22 +95,13 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
             {
                 if (Vector3.Distance(player.transform.position, transform.position) > 10f) //YÃà »©°í µû¶ó¿À°Ô ¹Ù²Ù±â new Ve3
                 {
+                    animator.Play("2_Run");
                     transform.position = Vector3.MoveTowards(transform.position, playerVector, BossSpeed * Time.deltaTime);
                 }
                 else
                 {
                     StartAttack();
                 }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2)) //ÀÓ½Ã HP=0
-            {
-                BossHp = 0;
-                GetComponent<Boss02Dead>().enabled = true;
-                enabled = false;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3)) //ÀÓ½Ã È÷Æ®
-            {
-                GetComponent<Boss02Hit>().enabled = true;
             }
         } 
     }

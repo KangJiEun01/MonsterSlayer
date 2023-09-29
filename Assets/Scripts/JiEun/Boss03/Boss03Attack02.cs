@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Boss03Attack02 : MonoBehaviour
 {
-    [SerializeField] GameObject player02;
-    [SerializeField] GameObject camera;
+    GameObject player;
+    GameObject camera;
     private void OnEnable()
     {
         GetComponent<Animator>().Play("3_Atk2");
@@ -13,7 +13,8 @@ public class Boss03Attack02 : MonoBehaviour
     }
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
+        camera = Camera.main.gameObject;
     }
     void Update()
     {

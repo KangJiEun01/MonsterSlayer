@@ -1,11 +1,10 @@
-
 using UnityEngine;
 
 public class Boss03Attack03 : MonoBehaviour
-{ 
-    [SerializeField] GameObject player02;
-    [SerializeField] GameObject camera;
-private void OnEnable()
+{
+    GameObject player;
+    GameObject camera;
+    private void OnEnable()
 {
     GetComponent<Animator>().Play("3_Atk3");
     Invoke("CameraMove", 1.6f);
@@ -13,7 +12,8 @@ private void OnEnable()
 }
 void Start()
 {
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        camera = Camera.main.gameObject;
 }
 
 void Update()

@@ -1,8 +1,11 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss01NewAi : MonoBehaviour
 {
+    [SerializeField] GameObject bossMat;
+    Renderer bossRend;
     GameObject player;
     GameObject camera;
     Animator animator;
@@ -16,6 +19,7 @@ public class Boss01NewAi : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         camera = Camera.main.gameObject;
+        bossRend = bossMat.GetComponent<Renderer>();
         transform.LookAt(player.transform);
         BossHp = GetComponent<Target>().GetHP();
         animator = GetComponent<Animator>();
@@ -76,7 +80,6 @@ public class Boss01NewAi : MonoBehaviour
 
         //}
     }
-
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -93,18 +96,23 @@ public class Boss01NewAi : MonoBehaviour
             GetComponent<BossAttack02>().enabled = false;
             GetComponent<BossSkill01>().enabled = false;
         }
+        else if (BossHp > 0 && GetComponent<Target>().InDamage)
+        {
+            bossRend.material.color = Color.gray;
+            Invoke("MatColor", 0.3f);
+        }
+    }
+    void MatColor()
+    {
+        bossRend.material.color = Color.white;
     }
     void Atk02()
     {
         GetComponent<BossAttack02>().enabled = true;
-        //animator.Play("1_Atk2");// 충돌하면 HP 감소 추가
-        //Invoke("CameraSk", 0.5f);
     }
     void Atk01()
     {
         GetComponent<BossAttack01>().enabled = true;
-        //animator.Play("1_Atk2");// 충돌하면 HP 감소 추가
-        //Invoke("CameraSk", 0.5f);
     }
     public float getBossHP()
     {

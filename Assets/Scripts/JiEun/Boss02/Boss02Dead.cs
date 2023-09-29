@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class Boss02Dead : MonoBehaviour
@@ -7,14 +6,19 @@ public class Boss02Dead : MonoBehaviour
 
     private void OnEnable()
     {
-        GetComponent<Animator>().Play("2_Idle");
+        GetComponent<Animator>().Play("Idle");
         Boss03.transform.position = transform.position;
-        Invoke("Boss2Dead", 3f);
+        Invoke("Boss2Dead", 2f);
+        //Invoke("Boss3On", 4f);
     }
     void Boss2Dead()
     {
-        Destroy(gameObject);
         Boss03.GetComponent<Boss03NewAi>().enabled = true;
         Boss03.SetActive(true);
+        Destroy(gameObject);
+    }
+    void Boss3On()
+    {
+        Destroy(gameObject);
     }
 }

@@ -12584,7 +12584,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3567865712191685900}
   - component: {fileID: 3567865712191685898}
-  - component: {fileID: 3567865712191685899}
   m_Layer: 5
   m_Name: Hp
   m_TagString: Untagged
@@ -12667,18 +12666,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3567865712191685899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3567865712191685901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4811ddec1882bdc49963066269007ef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3567865712195047154
 GameObject:
   m_ObjectHideFlags: 0
@@ -20592,7 +20579,6 @@ GameObject:
   - component: {fileID: 3567865713218188909}
   - component: {fileID: 3567865713218188906}
   - component: {fileID: 3567865713218188907}
-  - component: {fileID: 3567865713218188908}
   m_Layer: 5
   m_Name: HPText
   m_TagString: Untagged
@@ -20717,18 +20703,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3567865713218188908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3567865713218188910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 939a0cbaf61575845ad0a95afa9b0cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3567865713224561566
 GameObject:
   m_ObjectHideFlags: 0
@@ -22455,6 +22429,7 @@ MonoBehaviour:
   _exchangeUI: {fileID: 3567865711427791301}
   _gamoverUI: {fileID: 3567865711662533779}
   _runToggleUI: {fileID: 0}
+  _HPBarUI: {fileID: 0}
   _inventoryUI: {fileID: 3567865711770188644}
   _warningUI: {fileID: 1600504322116526294}
   _fpsUI: {fileID: 148085645}

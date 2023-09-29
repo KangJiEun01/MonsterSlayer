@@ -1,9 +1,9 @@
-
 using UnityEngine;
 
 public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스로 관리 하거나, 쿨타임 주고받기 +++++++++++
 {
-    [SerializeField] Transform player;
+    GameObject player;
+    GameObject camera;
     Animator animator;
     public int BossHp = 100;
 
@@ -17,6 +17,8 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        camera = Camera.main.gameObject;
         transform.LookAt(player.transform);
         //Transform player = player02.transform;
         animator = GetComponent<Animator>();
@@ -38,12 +40,10 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
 
         //animator.Play("Dead"); //죽음 히트랑 연결
     }
-
     void Update()
     {
         Invoke("DisCheck", 8.0f);
     }   
-
     void DisCheck()
     {
         transform.LookAt(player.transform);
@@ -163,7 +163,6 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
         else if(BossHp < 51)
         {
             int rand = Random.Range(0, 2);
-
             if (rand == 0)
             {
                 GetComponent<Boss03Skill02>().enabled = true;

@@ -449,7 +449,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     {
         if (other.CompareTag("Boss"))
         {
-            _hp -= 1;
+            OnDamage(10);
         }
     }
 }

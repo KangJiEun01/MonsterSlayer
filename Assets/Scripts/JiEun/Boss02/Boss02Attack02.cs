@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class Boss02Attack02 : MonoBehaviour

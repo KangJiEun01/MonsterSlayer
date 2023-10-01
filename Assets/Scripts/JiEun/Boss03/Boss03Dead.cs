@@ -5,6 +5,6 @@ public class Boss03Dead : MonoBehaviour
 {
     private void OnEnable()
     {
-        SceneManager.LoadScene("YDBossStage02");
+        SceneManager.LoadScene("Boss02Scece");
     }
 }

@@ -9,7 +9,7 @@ public class boss01ontrigger : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             //bossPrefab.SetActive(true);
-            SceneManager.LoadScene("Boss01Scece");
+            SceneManager.LoadScene("Boss01Scece 1");
             //Debug.Log("ÄÆ¾ÀÀÌµ¿");
         } 
     }

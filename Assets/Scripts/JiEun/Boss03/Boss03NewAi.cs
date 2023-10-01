@@ -42,6 +42,16 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
     void Update()
     {
         _hp = GetComponent<Target>().Hp;
+        if (_hp <= 0)
+        {
+            Attacking = true;
+            GetComponent<Boss03Attack01>().enabled = false;
+            GetComponent<Boss03Skill01>().enabled = false;
+            GetComponent<Boss03Attack02>().enabled = false;
+            GetComponent<Boss03Skill02>().enabled = false;
+            GetComponent<Boss03Attack03>().enabled = false;
+            GetComponent<Boss03Dead>().enabled = true;
+        }
         if (_hp > 0 && attackAtart)
         {
             DisCheck();
@@ -58,16 +68,7 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
     void DisCheck()
     {
         transform.LookAt(player.transform);
-        if (_hp <= 0)
-        {
-            Attacking = true;
-            GetComponent<Boss03Attack01>().enabled = false;
-            GetComponent<Boss03Skill01>().enabled = false;
-            GetComponent<Boss03Attack02>().enabled = false;
-            GetComponent<Boss03Skill02>().enabled = false;
-            GetComponent<Boss03Attack03>().enabled = false;
-            GetComponent<Boss03Dead>().enabled = true;
-        }
+       
         if (Attacking == false && !GetComponent<Target>().InDamage)
         {
             transform.LookAt(player.transform);

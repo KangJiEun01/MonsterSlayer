@@ -1,27 +1,40 @@
-
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Boss03Attack02 : MonoBehaviour
 {
-    GameObject player;
-    GameObject camera;
+    [SerializeField] GameObject player; //플레이어만 태그 찾아서 수정
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform bulletPos;
+    [SerializeField] float bulletSpeed;
+
+    Vector3 VectorbulletPos;
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        VectorbulletPos = bulletPos.position;
+    }
     private void OnEnable()
     {
         GetComponent<Animator>().Play("3_Atk2");
-        //Invoke("CameraMove", 1.6f);
-        //Invoke("EnabledFalse", 1.8f);
+        Invoke("BulletFire", 1f);
+        Invoke("EnabledFalse", 4.24f);
     }
-    void Start()
+    void BulletFire()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        camera = Camera.main.gameObject;
+        //Vector3 attackst = new Vector3(VectorbulletPos.x + (-2.0f), VectorbulletPos.y+(+5.0f), VectorbulletPos.z + (-8.5f));
+       // Vector3 attackst = new Vector3(VectorbulletPos.x, VectorbulletPos.y, VectorbulletPos.z); ;
+        GameObject temp = Instantiate(bullet);
+        //Vector3 worldPosition = bulletPos.TransformPoint(Vector3.zero);
+        //Vector3 worldPosition = bulletPos.TransformPoint(attackst);
+        //temp.transform.position = worldPosition;
+        temp.transform.position = new Vector3(bulletPos.position.x, bulletPos.position.y+10f, bulletPos.position.z);
+        Vector3 dir =player.transform.position; 
+        //Vector3 dir = transform.forward; //앞방향
+        temp.GetComponent<Boss03Bullet>().Init(dir, bulletSpeed);
     }
-    void Update()
+    void EnabledFalse()
     {
-        
-    }
-    void CameraMove()
-    {
-        camera.GetComponent<NewCameraShake>().enabled = true;
+        GetComponent<Boss03Attack02>().enabled = false;
     }
 }

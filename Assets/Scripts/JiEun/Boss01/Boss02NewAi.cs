@@ -5,7 +5,6 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
     //º¸½º 2 : °è¼Ó µû¶ó¿Í¼­ °ø°ÝÇÏ°í ÃÑ¾Ë È÷Æ®ÇÏ¸é È÷Æ®¾Ö´Ï¸Þ´Ï¼Ç Àç»ý°ú ÇÔ²² Àá½Ã Á¤Áö. ´Ù½Ã µû¶ó¿È (¸ÂÃß¸é¼­ µµ¸ÁÃÄ¾ß Å¬¸®¾î °¡´É)
 {
     GameObject player;
-    GameObject camera;
     Animator animator;
 
     bool startAtt = false;
@@ -18,7 +17,6 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        camera = Camera.main.gameObject;
         transform.LookAt(player.transform);
         animator = GetComponent<Animator>();
         animator.Play("In"); //ÃßÈÄ¿¡ ÀÎÀ¸·Î ¹Ù²Þ 
@@ -104,9 +102,5 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
                 }
             }
         } 
-    }
-    void CameraMove()
-    {
-        camera.GetComponent<NewCameraShake>().enabled = true;
     }
 }

@@ -7,11 +7,14 @@ using static PlayerCon;
 public class WeaponManager : GenericSingleton<WeaponManager>
 {
     WeaponBase[] _weapons;
+    int _currentIdx;  //현재 들고있는 무기가 주/보조/근접 무기인지 판별
     
     protected List<WeaponBase> _activeWeapons;
+    public List<WeaponBase> ActiveWeapons { get { return _activeWeapons; } }
     WeaponBase[] _currentWeapons = new WeaponBase[3];
+    public WeaponBase[] CurrentWeapons { get { return _currentWeapons; } }
+
     WeaponBase _currentWeapon;
-    int _currentIdx;  //현재 들고있는 무기가 주/보조/근접 무기인지 판별
     public WeaponBase CurrentWeapon { get { return _currentWeapon; } }
 
     [SerializeField] GameObject _syringe;
@@ -169,8 +172,15 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                 GenericSingleton<UIBase>.Instance.WeaponSelectUIInit(weapon);
             }
         }
-        }
     }
+    public void LoadWeaponData(List<WeaponBase> activeWeapons, WeaponBase[] currentWeapons, WeaponBase currentWeapon)
+    {
+        _activeWeapons = activeWeapons;
+        _currentWeapons = currentWeapons;
+        _currentWeapon = currentWeapon;
+    }
+}
+
     
 
 public abstract class WeaponBase :MonoBehaviour

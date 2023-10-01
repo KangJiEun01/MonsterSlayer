@@ -20,24 +20,35 @@ public class GameManager : GenericSingleton<GameManager>
     }
     void Init()
     {
-        GameObject _itemSaver = new GameObject();
-        _itemSaver.AddComponent<ItemSaver>();
-        GameObject _exchangeSystem = new GameObject();
-        _exchangeSystem.AddComponent<ExchangeSystem>();
+        GameObject dataManager = new GameObject();
+        dataManager.name = "DataManager";
+        dataManager.AddComponent<DataManager>();
+        GameObject itemSaver = new GameObject();
+        itemSaver.name = "ItemSaver";
+        itemSaver.AddComponent<ItemSaver>();
+        GameObject exchangeSystem = new GameObject();
+        exchangeSystem.name = "ExchangeSystem";
+        exchangeSystem.AddComponent<ExchangeSystem>();
         GenericSingleton<ItemSaver>.Instance.Init();
         GenericSingleton<ExchangeSystem>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
         GenericSingleton<WeaponManager>.Instance.Init();
         GenericSingleton<PlayerCon>.Instance.Init();
+        GenericSingleton<DataManager>.Instance.Init();
         SetGameState(GameState.InGame);
-    }
-    void Start()
-    {
-        
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            GenericSingleton<DataManager>.Instance.SaveData(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            GenericSingleton<DataManager>.Instance.LoadData(0);
+        }
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (!GenericSingleton<UIBase>.Instance.ExchangeOn)

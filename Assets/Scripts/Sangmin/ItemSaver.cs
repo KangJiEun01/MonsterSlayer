@@ -41,6 +41,10 @@ public class ItemSaver : GenericSingleton<ItemSaver>
         }
         else datas._items.Add(item.Idx, item);
     }
+    public void LoadItemData(Dictionary<int, ItemData> items)
+    {
+        datas._items = items;
+    }
 
 }
 

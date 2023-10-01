@@ -129,5 +129,9 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         GenericSingleton<UIBase>.Instance.ExchangeUIInit();
     
     }
+    public void LoadRecipesData(List<Recipe> recipes)
+    {
+        _recipes = recipes;
+    }
 
 }

@@ -11,6 +11,7 @@ public class Spidercontroller : MonoBehaviour
     float _hp;
 
     bool attack = false;
+    bool spiderDeath = false;
     void Start()
     {
         spider = GetComponent<GameObject>();
@@ -30,37 +31,41 @@ public class Spidercontroller : MonoBehaviour
         _hp = GetComponent<Target>().Hp;
         if (_hp <= 0)
         {
+            spiderDeath=true;
             Ani.Play("death1");
             Invoke("Death", 1.3f);
         }
-
-        if (_hp > 0 && !attack && !GetComponent<Target>().InDamage)
+        if (!spiderDeath)
         {
-            timer += Time.deltaTime;
-            if (timer > 4)
+            if (_hp > 0 && !attack && !GetComponent<Target>().InDamage)
             {
-                timer = 0;
-                SetRandomTargetPosition();
-                if (Vector3.Distance(transform.position, player.transform.position) < 5f)
+                timer += Time.deltaTime;
+                if (timer > 4)
                 {
-                    attack = true;
+                    Ani.Play("run");//걷는 모션 수정
+                    timer = 0;
+                    SetRandomTargetPosition();
+                    if (Vector3.Distance(transform.position, player.transform.position) < 5f)
+                    {
+                        attack = true;
+                    }
                 }
             }
-        }
-        if (_hp > 0 && attack && !GetComponent<Target>().InDamage)
-        {
-            Ani.Play("run");
-            agent.SetDestination(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z));
-            if (Vector3.Distance(transform.position, player.transform.position) < 3f)
+            if (_hp > 0 && attack && !GetComponent<Target>().InDamage)
             {
-                Debug.Log("어택");
-                //Ani.Play("attack2");
-                Invoke("walk", 2f);
+                Ani.Play("run");
+                agent.SetDestination(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z));
+                if (Vector3.Distance(transform.position, player.transform.position) < 3f)
+                {
+                    Debug.Log("어택");
+                    //Ani.Play("attack2");
+                    Invoke("walk", 2f);
+                }
             }
-        }
-        if (_hp > 0 && GetComponent<Target>().InDamage)
-        {
-            Ani.Play("hit1");
+            if (_hp > 0 && GetComponent<Target>().InDamage)
+            {
+                Ani.Play("hit1");
+            }
         }
     }
     private void SetRandomTargetPosition()
@@ -77,7 +82,8 @@ public class Spidercontroller : MonoBehaviour
     }
     void Death()
     {
-        spider.SetActive(false);
+        Destroy(gameObject);
+        //spider.SetActive(false); //오류****
     }
     private void OnCollisionEnter(Collision collision)
     {

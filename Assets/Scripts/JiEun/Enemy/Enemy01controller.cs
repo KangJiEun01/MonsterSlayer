@@ -15,7 +15,7 @@ public class Enemy01controller : MonoBehaviour
     float attackRange = 7f;//인식범위
     float patrolSpeed = 2f; //순찰속도
     float chaseSpeed = 5f; //인식 후 추격 속도
-    float bulletSpeed = 8f;
+    float bulletSpeed = 12f;
     float AttackAniSpeed = 2f; //공격 애니메이션 재생 속도
 
     bool _patrol = true;
@@ -57,7 +57,6 @@ public class Enemy01controller : MonoBehaviour
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
     }
-
     void Update()
     {
         if (player != null)

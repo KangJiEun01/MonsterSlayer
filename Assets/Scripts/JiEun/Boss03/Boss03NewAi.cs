@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스로 관리 하거나, 쿨타임 주고받기 +++++++++++
 {
@@ -44,6 +43,7 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
         _hp = GetComponent<Target>().Hp;
         if (_hp <= 0)
         {
+            //GetComponent<UIBase>().AllUIOff();********오류보기
             Attacking = true;
             GetComponent<Boss03Attack01>().enabled = false;
             GetComponent<Boss03Skill01>().enabled = false;

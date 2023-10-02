@@ -11,9 +11,12 @@ public class Target : MonoBehaviour
     public bool InDamage { get { return inDamage; } }
     public void OnDamage(float damage)
     {
-        inDamage= true;
-        Hp -= damage;
-        Invoke("DamageEnd", damageDelay);
+        if (Hp > 0)
+        {
+            inDamage = true;
+            Hp -= damage;
+            Invoke("DamageEnd", damageDelay);
+        }
     }
     void Die()
     {

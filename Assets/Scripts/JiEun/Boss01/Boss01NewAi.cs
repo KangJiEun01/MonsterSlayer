@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss01NewAi : MonoBehaviour
@@ -7,7 +6,6 @@ public class Boss01NewAi : MonoBehaviour
     [SerializeField] GameObject bossMat;
     Renderer bossRend;
     GameObject player;
-    GameObject camera;
     Animator animator;
 
     public float BossHp;
@@ -18,14 +16,12 @@ public class Boss01NewAi : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        camera = Camera.main.gameObject;
         bossRend = bossMat.GetComponent<Renderer>();
         transform.LookAt(player.transform);
         BossHp = GetComponent<Target>().GetHP();
         animator = GetComponent<Animator>();
         animator.Play("In");
         Invoke("StartRout", 4.7f);
-        Invoke("CameraMove", 4.7f);
     }
     private IEnumerator BossAttackRoutine()
     {
@@ -42,7 +38,7 @@ public class Boss01NewAi : MonoBehaviour
     }
     private void StartAttack()
     {
-        if (BossHp > 30)
+        if (BossHp > 0)
         {
             if (Mode == false) //2¹ø °ø°Ý
             {
@@ -117,10 +113,6 @@ public class Boss01NewAi : MonoBehaviour
     public float getBossHP()
     {
         return BossHp;
-    }
-    void CameraMove()
-    {
-        camera.GetComponent<NewCameraShake>().enabled = true;
     }
     void StartRout()
     {

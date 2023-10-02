@@ -1,10 +1,8 @@
-
 using UnityEngine;
 
 public class BossAttack01 : MonoBehaviour
 {
     GameObject player02;
-    GameObject camera;
 
     float BossSpeed = 20;
     float _BossHp;
@@ -18,7 +16,6 @@ public class BossAttack01 : MonoBehaviour
     void Start()
     {
         player02 = GameObject.FindGameObjectWithTag("Player");
-        camera = Camera.main.gameObject;
     }
     void Update()
     {
@@ -28,10 +25,6 @@ public class BossAttack01 : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, playerVector, BossSpeed * Time.deltaTime);
         }
-    }
-    void CameraMove()
-    {
-        camera.GetComponent<NewCameraShake>().enabled = true;
     }
 }
 

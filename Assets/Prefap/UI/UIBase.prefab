@@ -11258,6 +11258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3567865712001620372}
+  - component: {fileID: 311651653}
   m_Layer: 5
   m_Name: HP
   m_TagString: Untagged
@@ -11286,6 +11287,20 @@ RectTransform:
   m_AnchoredPosition: {x: 14, y: -416}
   m_SizeDelta: {x: 810, y: 210}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &311651653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3567865712001620373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bedea382da5cebc42a054964aaf71aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hpBar: {fileID: 3567865712191685898}
+  _hpText: {fileID: 3567865713218188907}
 --- !u!1 &3567865712009736154
 GameObject:
   m_ObjectHideFlags: 0
@@ -12662,7 +12677,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.848
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -22429,7 +22444,7 @@ MonoBehaviour:
   _exchangeUI: {fileID: 3567865711427791301}
   _gamoverUI: {fileID: 3567865711662533779}
   _runToggleUI: {fileID: 0}
-  _HPBarUI: {fileID: 0}
+  _HPBarUI: {fileID: 3567865712001620373}
   _inventoryUI: {fileID: 3567865711770188644}
   _warningUI: {fileID: 1600504322116526294}
   _fpsUI: {fileID: 148085645}

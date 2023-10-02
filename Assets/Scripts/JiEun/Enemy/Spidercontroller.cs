@@ -3,7 +3,6 @@ using UnityEngine.AI;
 public class Spidercontroller : MonoBehaviour
 {
     GameObject player;
-    GameObject spider;
     GameObject camera;
     NavMeshAgent agent;
     Transform spiderpos;
@@ -14,7 +13,6 @@ public class Spidercontroller : MonoBehaviour
     bool spiderDeath = false;
     void Start()
     {
-        spider = GetComponent<GameObject>();
         camera = Camera.main.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log(player);
@@ -82,8 +80,8 @@ public class Spidercontroller : MonoBehaviour
     }
     void Death()
     {
-        Destroy(gameObject);
-        //spider.SetActive(false); //오류****
+        //Destroy(gameObject);
+        gameObject.SetActive(false); //오류****
     }
     private void OnCollisionEnter(Collision collision)
     {

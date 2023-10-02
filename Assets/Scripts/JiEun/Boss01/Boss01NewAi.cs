@@ -91,6 +91,7 @@ public class Boss01NewAi : MonoBehaviour
             GetComponent<BossAttack01>().enabled = false;
             GetComponent<BossAttack02>().enabled = false;
             GetComponent<BossSkill01>().enabled = false;
+            StopCoroutine(_co);
         }
         else if (BossHp > 0 && GetComponent<Target>().InDamage)
         {
@@ -114,9 +115,10 @@ public class Boss01NewAi : MonoBehaviour
     {
         return BossHp;
     }
+    Coroutine _co;
     void StartRout()
     {
-        StartCoroutine(BossAttackRoutine());
+        _co = StartCoroutine(BossAttackRoutine());
     }
 }
 

@@ -137,7 +137,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     }
     public void SetPosition(Vector3 pos)
     {
-        transform.position = pos;
+        transform.localPosition = pos;
     }
     public void SetRotation(float rotY)
     {

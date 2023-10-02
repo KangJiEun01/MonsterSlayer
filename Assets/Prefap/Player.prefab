@@ -14419,6 +14419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1790144493475995232}
   - component: {fileID: 7947791340181331444}
+  - component: {fileID: 1786656068}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -14454,6 +14455,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8effedbd0ae424e4f881c160f9d58591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1786656068
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790144493475995246}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1790144493494746165
 GameObject:
   m_ObjectHideFlags: 0
@@ -15005,7 +15027,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 288
+    m_Bits: 289
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

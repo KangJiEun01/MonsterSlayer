@@ -7,9 +7,10 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
     GameObject player;
     Animator animator;
 
+    bool startAttackHP = false;
     bool startAtt = false;
     bool Mode = false; //1, 2 °ø°Ý¸ðµå
-    public bool _attack = false; //°ø°Ýon, off»óÅÂ
+    bool _attack = false; //°ø°Ýon, off»óÅÂ
 
     float BossSpeed = 6;
     float _hp = 5;
@@ -29,6 +30,7 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
     }
     void UpdateAttack()
     {
+        startAttackHP = true;
         startAtt = true;
         animator.Play("2_Run");
     }
@@ -71,36 +73,39 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
     }
         void Update()
     {
-        _hp = GetComponent<Target>().Hp;
-        if (_hp > 0 && GetComponent<Target>().InDamage)
+        if (startAttackHP)
         {
-            GetComponent<Boss02Hit>().enabled = true;
-        }
-        else if(_hp == 0)
-        {
-            GetComponent<Boss02Dead>().enabled = true;
-            GetComponent<Boss02NewAi>().enabled = false;
-            GetComponent<Boss02Attack01>().enabled = false;
-            GetComponent<Boss02Attack02>().enabled = false;
-            GetComponent<Boss02Hit>().enabled = false;
-            GetComponent<Target>().enabled = false;
-        }
-        if (_hp > 0 && startAtt)
-        {
-            transform.LookAt(player.transform);
-            Vector3 playerVector = new Vector3(player.transform.position.x, 0, player.transform.position.z);
-            if (GetComponent<Boss02Attack01>().enabled == false && GetComponent<Boss02Attack02>().enabled == false && GetComponent<Boss02Hit>().enabled == false && GetComponent<Boss02Dead>().enabled == false)
+            _hp = GetComponent<Target>().Hp;
+            if (_hp > 0 && GetComponent<Target>().InDamage)
             {
-                if (Vector3.Distance(player.transform.position, transform.position) > 10f) //YÃà »©°í µû¶ó¿À°Ô ¹Ù²Ù±â new Ve3
+                GetComponent<Boss02Hit>().enabled = true;
+            }
+            else if (_hp == 0)
+            {
+                GetComponent<Boss02Dead>().enabled = true;
+                GetComponent<Boss02NewAi>().enabled = false;
+                GetComponent<Boss02Attack01>().enabled = false;
+                GetComponent<Boss02Attack02>().enabled = false;
+                GetComponent<Boss02Hit>().enabled = false;
+                GetComponent<Target>().enabled = false;
+            }
+            if (_hp > 0 && startAtt)
+            {
+                transform.LookAt(player.transform);
+                Vector3 playerVector = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+                if (GetComponent<Boss02Attack01>().enabled == false && GetComponent<Boss02Attack02>().enabled == false && GetComponent<Boss02Hit>().enabled == false && GetComponent<Boss02Dead>().enabled == false)
                 {
-                    animator.Play("2_Run");
-                    transform.position = Vector3.MoveTowards(transform.position, playerVector, BossSpeed * Time.deltaTime);
-                }
-                else
-                {
-                    StartAttack();
+                    if (Vector3.Distance(player.transform.position, transform.position) > 10f) //YÃà »©°í µû¶ó¿À°Ô ¹Ù²Ù±â new Ve3
+                    {
+                        animator.Play("2_Run");
+                        transform.position = Vector3.MoveTowards(transform.position, playerVector, BossSpeed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        StartAttack();
+                    }
                 }
             }
-        } 
+        }
     }
 }

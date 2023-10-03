@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MapSelect.unity
     guid: fda3eb680557e4c418bc4d5bd628e44e
   - enabled: 1
-    path: Assets/Scenes/LoadingScene.unity
+    path: Assets/Scenes/Loding/LoadingScene.unity
     guid: 31ca080a1f9953b4d89d06155fcbb0c2
   - enabled: 1
     path: Assets/Scenes/YDcity/YDDesert.unity
@@ -27,8 +27,11 @@ EditorBuildSettings:
     path: Assets/Scenes/YDcity/YDUnderCity.unity
     guid: 0a9a285371745fb4199a46ffd646b535
   - enabled: 1
-    path: Assets/Scenes/NeonCityLoadingScene.unity
+    path: Assets/Scenes/Loding/NeonCityLoadingScene.unity
     guid: 44437ed22e628f848a490c7c86fe90b6
+  - enabled: 1
+    path: Assets/Scenes/Loding/UnderCityLoadingScene.unity
+    guid: 6ff227ed4d11859408a4a3e2a563dfb4
   - enabled: 1
     path: Assets/Scenes/BossStageLoadingScene.unity
     guid: 5a0345438d592194fbb1e8bcc224d92f

@@ -49,13 +49,14 @@ public class Enemy01controller : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
         patrolEndPoint = endPoint.position;
         patrolStartPoint= spawnPoint.position;
         botPos=GetComponent<Transform>();
         anim = GetComponent<Animator>();
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
+        Invoke("find", 1f);
     }
     void Update()
     {
@@ -119,6 +120,10 @@ public class Enemy01controller : MonoBehaviour
             Time_current = Time_Sumcooltime;
             Time_start = Time.time;
         }
+    }
+    void find()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
     }
     void BulletFire2()
     {

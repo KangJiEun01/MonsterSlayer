@@ -9,8 +9,8 @@ public class Boss01NewAi : MonoBehaviour
     Animator animator;
 
     public float BossHp;
-   // float PlayerHP = GenericSingleton<PlayerCon>.Instance.GetComponent<PlayerCon>().HpStat;
-
+    //float PlayerHP = GenericSingleton<PlayerCon>.Instance.GetComponent<PlayerCon>().HpStat;
+    bool startAttack = false;
     bool Mode = false; //1, 2 공격모드
     public bool _attack = false; //공격on, off상태
     void Start()
@@ -83,20 +83,23 @@ public class Boss01NewAi : MonoBehaviour
         //    BossHp = 10;
         //    GetComponent<BossSkill01>().enabled = true;
         //}
-        float BossHp = GetComponent<Target>().GetHP();
-        if (BossHp <= 0)
+        if (startAttack)
         {
-            GetComponent<Boss01Dead>().enabled = true;
-            GetComponent<Boss01NewAi>().enabled = false;
-            GetComponent<BossAttack01>().enabled = false;
-            GetComponent<BossAttack02>().enabled = false;
-            GetComponent<BossSkill01>().enabled = false;
-            StopCoroutine(_co);
-        }
-        else if (BossHp > 0 && GetComponent<Target>().InDamage)
-        {
-            bossRend.material.color = Color.gray;
-            Invoke("MatColor", 0.3f);
+            float BossHp = GetComponent<Target>().GetHP();
+            if (BossHp <= 0)
+            {
+                GetComponent<Boss01Dead>().enabled = true;
+                GetComponent<Boss01NewAi>().enabled = false;
+                GetComponent<BossAttack01>().enabled = false;
+                GetComponent<BossAttack02>().enabled = false;
+                GetComponent<BossSkill01>().enabled = false;
+                StopCoroutine(_co);
+            }
+            else if (BossHp > 0 && GetComponent<Target>().InDamage)
+            {
+                bossRend.material.color = Color.gray;
+                Invoke("MatColor", 0.3f);
+            }
         }
     }
     void MatColor()
@@ -118,6 +121,7 @@ public class Boss01NewAi : MonoBehaviour
     Coroutine _co;
     void StartRout()
     {
+        startAttack = true;
         _co = StartCoroutine(BossAttackRoutine());
     }
 }

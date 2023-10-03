@@ -14,9 +14,10 @@ public class ButtonControll : MonoBehaviour
     }
     public void ClickStartButton()
     {
-        Debug.Log("게임스타트");
-        SceneManager.LoadScene("MapSelect");
-        
+        SceneManager.LoadScene("LoadingScene");
+        // Debug.Log("게임스타트");
+        //SceneManager.LoadScene("MapSelect");
+
     }
     public void ClickbackButton() 
     {

@@ -12,6 +12,7 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
     bool HpMode = false; //1, 2 공격모드
     float attackTimer;      // 공격 쿨다운 타이머
     bool attackAtart = false;
+    bool startAttackHP = false;
 
     void Start()
     {
@@ -40,29 +41,33 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
     }
     void Update()
     {
-        _hp = GetComponent<Target>().Hp;
-        if (_hp <= 0)
+        if (startAttackHP)
         {
-            //GetComponent<UIBase>().AllUIOff();********오류보기
-            Attacking = true;
-            GetComponent<Boss03Attack01>().enabled = false;
-            GetComponent<Boss03Skill01>().enabled = false;
-            GetComponent<Boss03Attack02>().enabled = false;
-            GetComponent<Boss03Skill02>().enabled = false;
-            GetComponent<Boss03Attack03>().enabled = false;
-            GetComponent<Boss03Dead>().enabled = true;
-        }
-        if (_hp > 0 && attackAtart)
-        {
-            DisCheck();
-        }
-        if (_hp > 0 && GetComponent<Target>().InDamage)
-        {
-            animator.Play("3_Hit");
+            _hp = GetComponent<Target>().Hp;
+            if (_hp <= 0)
+            {
+                //GetComponent<UIBase>().AllUIOff();********오류보기
+                Attacking = true;
+                GetComponent<Boss03Attack01>().enabled = false;
+                GetComponent<Boss03Skill01>().enabled = false;
+                GetComponent<Boss03Attack02>().enabled = false;
+                GetComponent<Boss03Skill02>().enabled = false;
+                GetComponent<Boss03Attack03>().enabled = false;
+                GetComponent<Boss03Dead>().enabled = true;
+            }
+            if (_hp > 0 && attackAtart)
+            {
+                DisCheck();
+            }
+            if (_hp > 0 && GetComponent<Target>().InDamage)
+            {
+                animator.Play("3_Hit");
+            }
         }
     }
     void AttackStart()
     {
+        startAttackHP = true;
         attackAtart = true;
     }
     void DisCheck()
@@ -121,7 +126,7 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
     void Attackhp00()
     {
         Invoke("HpModeTrue", 3.2f);
-        int rand = Random.Range(0, 2); // 매번 호출될 때마다 새로운 랜덤 값 생성
+        int rand = Random.Range(0, 2); //공격랜덤
         if (rand == 0 && GetComponent<Boss03Skill01>().enabled == false)
         {
             GetComponent<Boss03Attack03>().enabled = true;
@@ -137,14 +142,14 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
     {
         Invoke("HpModeTrue", 3.2f);
         int rand = Random.Range(0, 2);
-        if (rand == 0 && GetComponent<Boss03Skill02>().enabled == false)
+        if (rand == 0 && GetComponent<Boss03Attack01>().enabled == false)
         {
             GetComponent<Boss03Skill01>().enabled = true;
-            GetComponent<Boss03Skill02>().enabled = false;
+            GetComponent<Boss03Attack01>().enabled = false;
         }
         else if (rand == 1 && GetComponent<Boss03Skill01>().enabled == false)
         {
-            GetComponent<Boss03Skill02>().enabled = true;
+            GetComponent<Boss03Attack01>().enabled = true;
             GetComponent<Boss03Skill01>().enabled = false;
         }
     }
@@ -154,13 +159,13 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
         int rand = Random.Range(0, 2);
         if (rand == 0&& GetComponent<Boss03Attack03>().enabled == false)
         {
-            GetComponent<Boss03Skill02>().enabled = true;
+            GetComponent<Boss03Attack01>().enabled = true;
             GetComponent<Boss03Attack03>().enabled = false;
         }
-        else if (rand == 1&& GetComponent<Boss03Skill02>().enabled == false)
+        else if (rand == 1&& GetComponent<Boss03Attack01>().enabled == false)
         {
             GetComponent<Boss03Attack03>().enabled = true;
-            GetComponent<Boss03Skill02>().enabled = false;
+            GetComponent<Boss03Attack01>().enabled = false;
         }
     }
     void HpModeTrue()

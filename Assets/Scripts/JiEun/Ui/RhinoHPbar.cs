@@ -5,7 +5,7 @@ public class RhinoHPbar : MonoBehaviour
     [SerializeField] GameObject HpBar;
     [SerializeField] GameObject detection;
     [SerializeField] GameObject Rhino;
-    [SerializeField] GameObject camera;
+    GameObject camera;
 
     Target targetScript;
     Image target;
@@ -13,6 +13,7 @@ public class RhinoHPbar : MonoBehaviour
     private void Start()
     {
         target=GetComponent<Image>();
+        camera = Camera.main.gameObject;
     }
     void Update()
     {

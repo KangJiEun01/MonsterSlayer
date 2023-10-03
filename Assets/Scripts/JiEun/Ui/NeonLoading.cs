@@ -35,7 +35,8 @@ public class NeonLoading : MonoBehaviour
         }
         asyncLoad.allowSceneActivation = true;
         //GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(14.8f, 3f, 50.59f)); //언더시티
-        GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(-15.47f, 4f, 2.26f)); //네온시티
-        GenericSingleton<PlayerCon>.Instance.SetRotation(180);
+        //GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(-15.47f, 4f, 2.26f)); //구네온시티
+        GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(31f, -6f, 380f));
+        GenericSingleton<PlayerCon>.Instance.SetRotation(0);
     }
 }

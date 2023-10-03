@@ -22,7 +22,7 @@ public class ItemSaver : GenericSingleton<ItemSaver>
         datas._items.Add(7, new ItemData(7, 10));
         foreach(var item in datas._itemDatas)
         {
-            datas._items.Add(item.Idx, new ItemData(item.Idx,item.Count));
+            datas._items.Add(item._idx, new ItemData(item._idx,item._count));
         }
 
     }
@@ -49,26 +49,16 @@ public class ItemSaver : GenericSingleton<ItemSaver>
         datas._items.Clear();
         foreach (var item in items)
         {
-            if (!datas._items.ContainsKey(item.Idx))
+            if (!datas._items.ContainsKey(item._idx))
             {
-                datas._items.Add(item.Idx, new ItemData(item.Idx, item.Count));
+                datas._items.Add(item._idx, new ItemData(item._idx, item._count));
             }
         }   
     }
 
 }
 
-[Serializable]
-public class ItemSource
-{
-    public int Idx;
-    public int Count;
-    public ItemSource(int idx, int count)
-    {
-        Idx = idx;
-        Count = count;
-    }
-}
+
 [Serializable]
 public class ItemDataWrapper
 {
@@ -121,7 +111,6 @@ public class ItemData
             if (itemIndex == _itemIdx)
             {
                 _name = values[1];
-                Debug.Log(_name);
                 _text = values[2];
                 _type = (ItemType)int.Parse(values[3]);
                 break;

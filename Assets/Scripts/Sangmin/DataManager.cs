@@ -14,11 +14,9 @@ public class DataManager : GenericSingleton<DataManager>
     {
         Debug.Log("데이터 저장");
         GameData data = _gameDatas._datas[idx];
-        WeaponManager wm = GenericSingleton<WeaponManager>.Instance;
-        data.SaveWeaponData(wm.ActiveWeapons, wm.CurrentWeapons, wm.CurrentWeapon);
+        data.SaveWeaponData();
         data.SaveRecipeData(GenericSingleton<ExchangeSystem>.Instance.Recipes);
         data.SaveItemData(GenericSingleton<ItemSaver>.Instance.Datas._items);
-        Debug.Log(_gameDatas);
         string json = JsonUtility.ToJson(_gameDatas);
         Debug.Log(json);
         string filePath = Path.Combine(Application.persistentDataPath, "GameData.json");
@@ -35,12 +33,13 @@ public class DataManager : GenericSingleton<DataManager>
         Debug.Log("데이터 로드");
 
         GameData data = _gameDatas._datas[idx];
-        GenericSingleton<WeaponManager>.Instance.LoadWeaponData(data._activeWeapons, data._currentWeapons, data._currentWeapon);
         GenericSingleton<ExchangeSystem>.Instance.LoadRecipesData(data._recipeDatas);
         GenericSingleton<ItemSaver>.Instance.LoadItemData(data._itemDatas);
-        GenericSingleton<WeaponManager>.Instance.WeaponLoad();
+        GenericSingleton<ExchangeSystem>.Instance.RecipeUpdate();
+        GenericSingleton<WeaponManager>.Instance.LoadWeaponData(data._weaponData);
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
+        GenericSingleton<WeaponManager>.Instance.UIUpdate();
 
 
 
@@ -56,24 +55,10 @@ public class GameDataWrapper
 [Serializable]
 public class GameData
 {
-    public List<WeaponBase> _activeWeapons;
-    public WeaponBase _currentWeapon;
-
-    public WeaponBase[] _currentWeapons;
-
 
     public List<ItemSource> _itemDatas = new List<ItemSource>();
     public List<RecipeData> _recipeDatas = new List<RecipeData>();
-
-
-
-    public void SaveWeaponData(List<WeaponBase> activeWeapons, WeaponBase[] currentWeapons, WeaponBase currentWeapon)
-    {
-        _activeWeapons = activeWeapons;
-        _currentWeapon = currentWeapon;
-        _currentWeapons = currentWeapons;
-    }
-
+    public WeaponData _weaponData;
 
     public void SaveRecipeData(List<Recipe> recipes)
     {
@@ -94,6 +79,57 @@ public class GameData
             _itemDatas.Add(new ItemSource(item.Value.ItemIdx,item.Value.Count));
         }
     }
+    public void SaveWeaponData()
+    {
+        _weaponData = new WeaponData();
+        _weaponData._activeWeaponIdx = GenericSingleton<WeaponManager>.Instance.ActiveWeaponIdx;
+        if (GenericSingleton<WeaponManager>.Instance.CurrentWeapons[0] != null)
+        {
+            _weaponData._currentMainIdx = GenericSingleton<WeaponManager>.Instance.CurrentWeapons[0].WeaponIdx;
+        }
+        else _weaponData._currentMainIdx = 0;
+    }
 
+}
+[Serializable]
+public class WeaponData
+{
+    public List<int> _activeWeaponIdx;
+    public int _currentMainIdx;
+}
+[Serializable]
+public class ItemSource
+{
+    public int _idx;
+    public int _count;
+    public ItemSource(int idx, int count)
+    {
+        _idx = idx;
+        _count = count;
+    }
+}
+[Serializable]
+public class RecipeData
+{
+    public ItemSource _first;
+
+    public ItemSource _second;
+
+    public ItemSource _third;
+
+    public ItemSource _fourth;
+
+    public ItemSource _result;
+
+    public bool _isWeapon;
+    public RecipeData(ItemData first, ItemData second, ItemData third, ItemData fourth, ItemData result, bool isWeapon)
+    {
+        _first = new ItemSource(first.ItemIdx, first.Count);
+        _second = new ItemSource(second.ItemIdx, second.Count);
+        _third = new ItemSource(third.ItemIdx, third.Count);
+        _fourth = new ItemSource(fourth.ItemIdx, fourth.Count);
+        _result = new ItemSource(result.ItemIdx, result.Count);
+        _isWeapon = isWeapon;
+    }
 }
 

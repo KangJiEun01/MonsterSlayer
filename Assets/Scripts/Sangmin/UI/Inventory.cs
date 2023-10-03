@@ -25,11 +25,10 @@ public class Inventory : MonoBehaviour
    
     public void ReDrwing(Dictionary<int, ItemData> InvenData)
     {
-        
-        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
-        foreach (var item in items)
+
+        foreach (Transform child in _content.transform)
         {
-            Destroy(item.gameObject);
+            Destroy(child.gameObject);
         }
         var datas = from data in InvenData.Values
                                           where data.Type != _weaponType

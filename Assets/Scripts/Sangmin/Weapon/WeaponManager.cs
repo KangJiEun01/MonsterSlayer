@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static PlayerCon;
 
 public class WeaponManager : GenericSingleton<WeaponManager>
 {
     WeaponBase[] _weapons;
     int _currentIdx;  //현재 들고있는 무기가 주/보조/근접 무기인지 판별
+    public int CurrentIdx { get { return _currentIdx; } }
     
-    protected List<WeaponBase> _activeWeapons;
-    public List<WeaponBase> ActiveWeapons { get { return _activeWeapons; } }
+    protected List<int> _activeWeaponsIdx;
+    public List<int> ActiveWeaponIdx { get { return _activeWeaponsIdx; } }
+
     WeaponBase[] _currentWeapons = new WeaponBase[3];
     public WeaponBase[] CurrentWeapons { get { return _currentWeapons; } }
 
@@ -18,6 +18,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     public WeaponBase CurrentWeapon { get { return _currentWeapon; } }
 
     [SerializeField] GameObject _syringe;
+    
     bool _isHeal;
     bool _isSwap;
     public bool IsSwap { get { return _isSwap; } }
@@ -39,12 +40,16 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            AllOff();
-            _isHeal = true;
-            _syringe.SetActive(true);
-            _syringe.GetComponent<Animator>().Play("First_Aid");
-            Invoke("SyringeOff",3.5f);
+            Heal();
         }
+    }
+    void Heal()
+    {
+        AllOff();
+        _isHeal = true;
+        _syringe.SetActive(true);
+        _syringe.GetComponent<Animator>().Play("First_Aid");
+        Invoke("SyringeOff", 3.5f);
     }
     void SyringeOff()
     {
@@ -56,31 +61,21 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     public void Init()
     {
         _weapons = GetComponentsInChildren<WeaponBase>();
-        _activeWeapons = new List<WeaponBase> ();
+        _activeWeaponsIdx = new List<int> {0,1};
         foreach (WeaponBase weapon in _weapons)
         {
             weapon.Init();
             weapon.Weapon.SetActive(false);
         }
-
-        _currentWeapons[1] = _activeWeapons[1];                //권총기본무기설정
-        _currentWeapons[2] = _activeWeapons[0];                //근접기본무기설정
+        _currentWeapons[1] = _weapons[1];                //권총기본무기설정
+        _currentWeapons[2] = _weapons[0];                //근접기본무기설정
         _currentIdx = 1;
         _currentWeapon = _currentWeapons[_currentIdx];                   //권총 들기
         _currentWeapon.Weapon.SetActive(true);
         GenericSingleton<UIBase>.Instance.WeaponUIInit(_currentWeapon);
         //AllUnlock();                                //테스트용 모두 잠금해제
     }
-    public void WeaponLoad()
-    {
-        _currentWeapons[1] = _activeWeapons[1];                //권총기본무기설정
-        _currentWeapons[2] = _activeWeapons[0];                //근접기본무기설정
-        if (_currentWeapons[0] != null) _currentIdx = 0;
-        else _currentIdx = 1;
-        _currentWeapon = _currentWeapons[_currentIdx];                   //권총 들기
-        SetCurrentWeapon(_currentWeapon);
-        GenericSingleton<UIBase>.Instance.WeaponUIInit(_currentWeapon);
-    }
+   
     void SwapWeapon()
     {
 
@@ -92,8 +87,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                 {
                     if(_currentWeapon != _currentWeapons[_currentIdx])
                     {
-                        _currentWeapon = _currentWeapons[_currentIdx];
-                        SetCurrentWeapon(_currentWeapon);
+                        SetCurrentWeapon(_currentWeapons[_currentIdx]);
                     }                
                 }
                 break;
@@ -102,8 +96,8 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                 _currentIdx = 1;
                 if (_currentWeapon != _currentWeapons[_currentIdx])
                 {
-                    _currentWeapon = _currentWeapons[_currentIdx];
-                    SetCurrentWeapon(_currentWeapon);
+
+                    SetCurrentWeapon(_currentWeapons[_currentIdx]);
                 }
                 break;
 
@@ -111,8 +105,8 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                 _currentIdx = 2;
                 if (_currentWeapon != _currentWeapons[_currentIdx])
                 {
-                    _currentWeapon = _currentWeapons[_currentIdx];
-                    SetCurrentWeapon(_currentWeapon);
+
+                    SetCurrentWeapon(_currentWeapons[_currentIdx]);
                 }
                 break;
         }
@@ -124,19 +118,15 @@ public class WeaponManager : GenericSingleton<WeaponManager>
             weapon.Weapon.SetActive(false);
         }
     }
-    public void SetDefaultWeapon(WeaponBase weapon)   //기본무기 초기화
-    {
-        _activeWeapons.Add(weapon);
-    }
-    public void UnlockWeapon(ItemData item)   //교환시 아이템 끄기
+    public void UnlockWeapon(ItemData item)   // 무기 언락
     {
    
         foreach(WeaponBase weapon in _weapons)
         {
             if(weapon.WeaponIdx == item.ItemIdx - 7)
             {
-                _activeWeapons.Add(weapon);
-                GenericSingleton<UIBase>.Instance.WeaponSelectUIInit(weapon);
+                _activeWeaponsIdx.Add(weapon.WeaponIdx);
+                GenericSingleton<UIBase>.Instance.WeaponSelectUIUnlock(weapon);
             }
         }
 
@@ -144,11 +134,15 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     public void SetCurrentWeapon(WeaponBase weapon)
     {
         AllOff();
+        Debug.Log(weapon.name);
+        _currentWeapon = weapon;
+        Debug.Log(weapon.name);
         weapon.Weapon.SetActive(true);
         GenericSingleton<PlayerCon>.Instance.AnimatorUpdate();
         _isSwap = true;
         Invoke("SwapEnd",1f);
-        weapon.Animator.Play("Get");
+        
+        weapon.Animator.Play("Get"); 
         GenericSingleton<UIBase>.Instance.WeaponUIInit(weapon);
     }
     void SwapEnd()
@@ -157,38 +151,67 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     }
     public void SetMainWeapon(int idx)
     {
-        foreach (WeaponBase weapon in _activeWeapons)
-        {
-            Debug.Log(weapon.name);
-            if (weapon.WeaponIdx == idx)
+        foreach (int weapon in _activeWeaponsIdx)
+        {   
+           
+            if (weapon == idx)
             {
-                _currentWeapons[0] = weapon;
+                _currentWeapons[0] = _weapons[idx];
                 Debug.Log($"{idx}번 무기 장착완료");
             }
         }
+        Debug.Log(_currentIdx);
         if (_currentIdx == 0)
         {
-            _currentWeapon = _currentWeapons[_currentIdx];
-            SetCurrentWeapon(_currentWeapon);
+            SetCurrentWeapon(_currentWeapons[_currentIdx]);
         }
     }
     void AllUnlock()
     {
         foreach (WeaponBase weapon in _weapons)
         {
-            if (!_activeWeapons.Contains(weapon))
+            if (!_activeWeaponsIdx.Contains(weapon.WeaponIdx))
             {
-                _activeWeapons.Add(weapon);
-                GenericSingleton<UIBase>.Instance.WeaponSelectUIInit(weapon);
+                _activeWeaponsIdx.Add(weapon.WeaponIdx);
+                GenericSingleton<UIBase>.Instance.WeaponSelectUIUnlock(weapon);
             }
         }
     }
-    public void LoadWeaponData(List<WeaponBase> activeWeapons, WeaponBase[] currentWeapons, WeaponBase currentWeapon)
+   
+    public void LoadWeaponData(WeaponData data)
     {
-        _activeWeapons = activeWeapons;
-        _currentWeapons = currentWeapons;
-        _currentWeapon = currentWeapon;
+        _activeWeaponsIdx.Clear();
+        _activeWeaponsIdx = data._activeWeaponIdx;
+        CurrentWeapons[0] = null;
+        foreach (int i in data._activeWeaponIdx)
+        {
+            Debug.Log(i);
+        }
+        Debug.Log(data._currentMainIdx);
+        if (data._currentMainIdx != 0)
+        {
+            SetMainWeapon(data._currentMainIdx);
+            _currentIdx = 0;
+            SetCurrentWeapon(_currentWeapons[0]);
+        }
+        else
+        {
+            SetCurrentWeapon(_currentWeapons[1]);
+            Debug.Log(_currentWeapons[1].name);
+        }
+
     }
+    public void UIUpdate()
+    {
+        foreach (WeaponBase weapon in _weapons)
+        {
+            if (_activeWeaponsIdx.Contains(weapon.WeaponIdx) && weapon.WeaponIdx > 1)
+            {
+                GenericSingleton<UIBase>.Instance.WeaponSelectUIUnlock(weapon);
+            }
+        }
+    }
+
 }
 
     

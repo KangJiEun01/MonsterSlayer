@@ -83,7 +83,7 @@ public class ExchangeUI : MonoBehaviour
             }
             else
             {
-                Debug.Log(recipe.Third.Name);
+               
                 temp.GetComponent<RecipeUI>().Plus[1].SetActive(true);
                 if (!bools[2]) SetAlpha(items[2].Image, 0.2f);
                 else SetAlpha(items[2].Image, 1);

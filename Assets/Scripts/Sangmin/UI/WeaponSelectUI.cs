@@ -33,4 +33,29 @@ public class WeaponSelectUI : MonoBehaviour
             button.GetComponent<Image>().sprite = _defaultImage;
         }
     }
+    public void Init()
+    {
+        foreach (var temp in _locks)
+        {
+            temp.SetActive(true);
+        }
+        foreach (var temp in _redButtons)
+        {
+            temp.SetActive(true);
+        }
+        foreach(var temp in _blackMasks)
+        {
+            temp.SetActive(true);
+        }
+        AllOff();
+        if (GenericSingleton<WeaponManager>.Instance.CurrentWeapons[0] != null)
+        {
+            int idx = GenericSingleton<WeaponManager>.Instance.CurrentWeapons[0].WeaponIdx;
+            _buttons[idx - 2].GetComponent<Button>().interactable = false;
+            _buttons[idx - 2].GetComponent<Image>().sprite = _blueImage;
+        }
+        
+
+
+    }
 }

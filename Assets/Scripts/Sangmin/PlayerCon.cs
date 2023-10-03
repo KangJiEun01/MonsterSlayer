@@ -72,6 +72,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // 필요한 컴포넌트
     [SerializeField]
     private Camera _camera;
+    [SerializeField] Camera _weaponCamera;
     private Rigidbody _rig;
     private CapsuleCollider _collider;
     Animator _animator;
@@ -405,7 +406,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
             GenericSingleton<UIBase>.Instance.HpUIInit();
             if (_hp > 0)
             {
-                _camera.GetComponent<NewCameraShake>().enabled = true;
+                _weaponCamera.GetComponent<NewCameraShake>().enabled = true;
                 _onDamage = true;
                 Invoke("DamageEnd", 0.5f);
             }

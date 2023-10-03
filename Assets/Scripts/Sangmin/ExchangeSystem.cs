@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ExchangeSystem : GenericSingleton<ExchangeSystem>
@@ -18,6 +19,11 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         LoadRecipeData();
         CalExchange();
 
+    }
+    public void RecipeUpdate()
+    {
+        _invenData = GenericSingleton<ItemSaver>.Instance.Datas._items;
+        CalExchange();
     }
     void LoadRecipeData()
     {
@@ -46,7 +52,6 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
   
         }
         reader.Close();
-        Debug.Log("reader : "+_recipes.ToString());
     }
     public void CalExchange()
     {
@@ -135,42 +140,15 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         _recipes.Clear();
         foreach(RecipeData recipe in recipes)
         {
-            _recipes.Add(new Recipe(recipe._first, recipe._second, recipe._third, recipe._fourth, recipe._result, recipe._isWeapon));
+       
+           _recipes.Add(new Recipe(new ItemData(recipe._first._idx, recipe._first._count), new ItemData(recipe._second._idx, recipe._second._count), new ItemData(recipe._third._idx, recipe._third._count), new ItemData(recipe._fourth._idx, recipe._fourth._count), new ItemData(recipe._result._idx, recipe._result._count), recipe._isWeapon));
+
         }
+
     }
 
 }
 
-[Serializable]
-public class RecipeWrapper
-{
-    public List<RecipeData> _datas = new List<RecipeData>();
-}
-
-[Serializable]
-public class RecipeData
-{
-    public ItemData _first;
-
-    public ItemData _second;
-
-    public ItemData _third;
-
-    public ItemData _fourth;
-
-    public  ItemData _result;
-
-    public  bool _isWeapon;
-    public RecipeData(ItemData first, ItemData second, ItemData third, ItemData fourth, ItemData result, bool isWeapon)
-    {
-        _first = first;
-        _second = second;
-        _third = third;
-        _fourth = fourth;
-        _result = result;
-        _isWeapon = isWeapon;
-    }
-}
 [Serializable]
 public class Recipe
 {

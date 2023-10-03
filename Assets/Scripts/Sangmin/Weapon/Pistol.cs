@@ -3,11 +3,7 @@ using UnityEngine;
 
 public class Pistol : HitScan
 {
-    public override void Init()
-    {
-        base.Init();
-        GenericSingleton<WeaponManager>.Instance.SetDefaultWeapon(this);
-    }
+
     public override void Fire()
     {
         if (_currentIdx > 0 && !_isReload)

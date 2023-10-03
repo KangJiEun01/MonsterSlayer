@@ -44,6 +44,7 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _inventoryUI.GetComponent<Inventory>().Init();
         _exchangeUI.GetComponent<ExchangeUI>().Init();
+        WeaponSelectUIInit();
         AllUIOff();
     }
     
@@ -100,7 +101,11 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _weaponUI.GetComponent<WeaponUI>().SetCurrentBullet(currentBullet);
     }
-    public void WeaponSelectUIInit(WeaponBase weapon)              //무기 선택 UI갱신
+    public void WeaponSelectUIInit()              //무기 선택 UI갱신
+    {
+        _weaponSelectUI.GetComponent<WeaponSelectUI>().Init();
+    }
+    public void WeaponSelectUIUnlock(WeaponBase weapon)              //무기 선택 UI갱신
     {
         _weaponSelectUI.GetComponent<WeaponSelectUI>().WeaponUnlock(weapon.WeaponIdx - 2);
     }

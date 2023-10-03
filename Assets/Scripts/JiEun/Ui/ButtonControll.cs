@@ -3,14 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class ButtonControll : MonoBehaviour
 {
-    void Start()
+    [SerializeField] GameObject manualUi;
+    private void Start()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        manualUi.SetActive(false);
     }
     public void ClickStartButton()
     {
@@ -30,5 +26,13 @@ public class ButtonControll : MonoBehaviour
     public void ClickDemeVersion()
     {
         SceneManager.LoadScene("BossStageLoadingScene");
+    }
+    public void ClickManual()
+    {
+        manualUi.SetActive(true);
+    }
+    public void ManualActive()
+    {
+        manualUi.SetActive(false);
     }
 }

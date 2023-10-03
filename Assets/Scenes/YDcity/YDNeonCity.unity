@@ -4535,6 +4535,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1943046018560198573, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2311522325297017035, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
       propertyPath: bullet
       value: 
@@ -4555,6 +4559,26 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 169341566}
+    - target: {fileID: 2311522325297017035, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: DropItem.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311522325297017035, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: DropItem.Array.data[0]
+      value: 
+      objectReference: {fileID: 5797131901648441459, guid: 2ad9a6f2a5fbc6e41b8910870090b6c9, type: 3}
+    - target: {fileID: 2311522325297017035, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: DropItem.Array.data[1]
+      value: 
+      objectReference: {fileID: 3890862329684329592, guid: c03ffa163d47feb4e8048047f1220e52, type: 3}
+    - target: {fileID: 2311522325297017035, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: DropItem.Array.data[2]
+      value: 
+      objectReference: {fileID: 2845994366291492663, guid: 6f00dcae214ec854ea5ca70f55be9ad0, type: 3}
+    - target: {fileID: 2311522325297017035, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: DropItem.Array.data[3]
+      value: 
+      objectReference: {fileID: 2589923439071592740, guid: ad77f454114c7d54c8ff7222b4d12300, type: 3}
     - target: {fileID: 3623546233511251724, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -4595,6 +4619,10 @@ PrefabInstance:
       propertyPath: m_PixelsPerUnitMultiplier
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 7765043754897999550, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7766672092735065900, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
       propertyPath: Rhino
       value: 
@@ -4631,6 +4659,10 @@ PrefabInstance:
       propertyPath: DropItem.Array.data[3]
       value: 
       objectReference: {fileID: 2589923439071592740, guid: ad77f454114c7d54c8ff7222b4d12300, type: 3}
+    - target: {fileID: 8285115933198211128, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8285115933198211128, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
       propertyPath: m_IsActive
       value: 0

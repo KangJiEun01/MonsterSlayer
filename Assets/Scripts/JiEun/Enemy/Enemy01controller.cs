@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy01controller : MonoBehaviour
@@ -8,6 +9,7 @@ public class Enemy01controller : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] Transform bulletPos; //-z
     [SerializeField] GameObject detectionUi;
+    [SerializeField] GameObject[] DropItem;
 
     Transform botPos;
     Animator anim;
@@ -17,11 +19,13 @@ public class Enemy01controller : MonoBehaviour
     float chaseSpeed = 5f; //인식 후 추격 속도
     float bulletSpeed = 12f;
     float AttackAniSpeed = 2f; //공격 애니메이션 재생 속도
+    float hp;
 
     bool _patrol = true;
     bool movingRight = true;
     bool _collision = false;
     bool _attack = false;
+    bool _setActive = false;
     //bool bulletFire = false;
 
     float Time_current; //남은초
@@ -42,7 +46,7 @@ public class Enemy01controller : MonoBehaviour
     // mins edit
     float avoidanceDistance = 1.0f;
     float rayDistance = 1.0f;
-    
+
     private void Awake()
     {
         detectionUi.SetActive(false);
@@ -51,8 +55,8 @@ public class Enemy01controller : MonoBehaviour
     {
         //player = GameObject.FindGameObjectWithTag("Player");
         patrolEndPoint = endPoint.position;
-        patrolStartPoint= spawnPoint.position;
-        botPos=GetComponent<Transform>();
+        patrolStartPoint = spawnPoint.position;
+        botPos = GetComponent<Transform>();
         anim = GetComponent<Animator>();
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
@@ -62,28 +66,38 @@ public class Enemy01controller : MonoBehaviour
     {
         if (player != null)
         {
-            float distanceTarget = Vector3.Distance(transform.position, player.transform.position);
+            hp = GetComponent<Target>().Hp;
+            if (hp == 0)
+            {
+                _setActive = true;
+                anim.Play("Die");
+                Invoke("Die", 1.5f);
+            }
+            if (!_setActive)
+            {
+                float distanceTarget = Vector3.Distance(transform.position, player.transform.position);
 
-            if (distanceTarget <= attackRange)
-            {
-                // 범위체크 
-                Attack();
+                if (distanceTarget <= attackRange)
+                {
+                    // 범위체크 
+                    Attack();
+                }
+                else if (_patrol == true)
+                {
+                    // 순찰 중
+                    Patrol();
+                }
+                else
+                {
+                    // 추격 중
+                    Chase();
+                }
             }
-            else if (_patrol == true)
+            if (_attack)
             {
-                // 순찰 중
-                Patrol();
+                BulletFire();
+                detectionUi.SetActive(true);
             }
-            else
-            {
-                // 추격 중
-                Chase();
-            }
-        }
-        if(_attack)
-        {
-            BulletFire();
-            detectionUi.SetActive(true);
         }
     }
 
@@ -91,7 +105,7 @@ public class Enemy01controller : MonoBehaviour
     {
         _attack = true;
         transform.LookAt(player.transform);
-        
+
         //transform.LookAt(player.transform);
         //GetComponent<Animator>().Play("Reload");
         //Invoke("ShootAin",1.2f);
@@ -105,20 +119,23 @@ public class Enemy01controller : MonoBehaviour
     }
     void BulletFire()
     {
-        Time_current = Time.time - Time_start;
-        if (Time_current > Time_Sumcooltime)
+        if (!_setActive)
         {
-            //Vector3 attackst = new Vector3(VectorbulletPos.x + (-2.0f), VectorbulletPos.y+(+5.0f), VectorbulletPos.z + (-8.5f));
-            Vector3 attackst = new Vector3(VectorbulletPos.x, VectorbulletPos.y, VectorbulletPos.z); ;
-            GameObject temp = Instantiate(bullet);
-            //Vector3 worldPosition = bulletPos.TransformPoint(Vector3.zero);
-            Vector3 worldPosition = bulletPos.TransformPoint(attackst);
-            temp.transform.position = worldPosition;
-            //Vector3 dir =player.transform.position; 
-            Vector3 dir = transform.forward; //앞방향
-            temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
-            Time_current = Time_Sumcooltime;
-            Time_start = Time.time;
+            Time_current = Time.time - Time_start;
+            if (Time_current > Time_Sumcooltime)
+            {
+                //Vector3 attackst = new Vector3(VectorbulletPos.x + (-2.0f), VectorbulletPos.y+(+5.0f), VectorbulletPos.z + (-8.5f));
+                Vector3 attackst = new Vector3(VectorbulletPos.x, VectorbulletPos.y, VectorbulletPos.z); ;
+                GameObject temp = Instantiate(bullet);
+                //Vector3 worldPosition = bulletPos.TransformPoint(Vector3.zero);
+                Vector3 worldPosition = bulletPos.TransformPoint(attackst);
+                temp.transform.position = worldPosition;
+                //Vector3 dir =player.transform.position; 
+                Vector3 dir = transform.forward; //앞방향
+                temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
+                Time_current = Time_Sumcooltime;
+                Time_start = Time.time;
+            }
         }
     }
     void find()
@@ -129,23 +146,23 @@ public class Enemy01controller : MonoBehaviour
     {
         Time_LastShot += Time.deltaTime;
         if (Time_LastShot < Time_cool) return;
-        while(Time_LastShot < Time_bulletfire + Time_cool)
+        while (Time_LastShot < Time_bulletfire + Time_cool)
         {
-                Time_current = Time.time - Time_start;
-                    if (Time_current > Time_Sumcooltime)
-                    {
-         
-                       Vector3 attackst = new Vector3(VectorbulletPos.x, VectorbulletPos.y, VectorbulletPos.z); ;
-                        GameObject temp = Instantiate(bullet);
+            Time_current = Time.time - Time_start;
+            if (Time_current > Time_Sumcooltime)
+            {
 
-                        Vector3 worldPosition = bulletPos.TransformPoint(attackst);
-                        temp.transform.position = worldPosition;
+                Vector3 attackst = new Vector3(VectorbulletPos.x, VectorbulletPos.y, VectorbulletPos.z); ;
+                GameObject temp = Instantiate(bullet);
 
-                       Vector3 dir = transform.forward; //앞방향
-                       temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
-                       Time_current = Time_Sumcooltime;
-                       Time_start = Time.time;
-             }
+                Vector3 worldPosition = bulletPos.TransformPoint(attackst);
+                temp.transform.position = worldPosition;
+
+                Vector3 dir = transform.forward; //앞방향
+                temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
+                Time_current = Time_Sumcooltime;
+                Time_start = Time.time;
+            }
 
             Time_LastShot = Time_bulletfire + Time_cool;
         }
@@ -174,9 +191,9 @@ public class Enemy01controller : MonoBehaviour
         {
             // 왼쪽으로 이동
             if (!_collision)
-            { 
+            {
                 transform.position = Vector3.MoveTowards(transform.position, patrolStartPoint, patrolSpeed * Time.deltaTime);
-            }   
+            }
             transform.LookAt(spawnPoint.transform);
             // patrolStartPoint에 도달하면 이동 방향을 오른쪽으로 변경
             if (distanceToStart < 2f)
@@ -188,6 +205,14 @@ public class Enemy01controller : MonoBehaviour
     void Chase()
     {
         _patrol = false;
+    }
+    void Die()
+    {
+
+        int num = Random.Range(0, 4);
+        Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z), Quaternion.identity);
+        gameObject.SetActive(false);
+
     }
     // mins edit
     //void FixedUpdate()

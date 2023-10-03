@@ -71,6 +71,16 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         GenericSingleton<UIBase>.Instance.WeaponUIInit(_currentWeapon);
         //AllUnlock();                                //테스트용 모두 잠금해제
     }
+    public void WeaponLoad()
+    {
+        _currentWeapons[1] = _activeWeapons[1];                //권총기본무기설정
+        _currentWeapons[2] = _activeWeapons[0];                //근접기본무기설정
+        if (_currentWeapons[0] != null) _currentIdx = 0;
+        else _currentIdx = 1;
+        _currentWeapon = _currentWeapons[_currentIdx];                   //권총 들기
+        SetCurrentWeapon(_currentWeapon);
+        GenericSingleton<UIBase>.Instance.WeaponUIInit(_currentWeapon);
+    }
     void SwapWeapon()
     {
 
@@ -123,7 +133,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
    
         foreach(WeaponBase weapon in _weapons)
         {
-            if(weapon.WeaponIdx == item.Idx - 7)
+            if(weapon.WeaponIdx == item.ItemIdx - 7)
             {
                 _activeWeapons.Add(weapon);
                 GenericSingleton<UIBase>.Instance.WeaponSelectUIInit(weapon);

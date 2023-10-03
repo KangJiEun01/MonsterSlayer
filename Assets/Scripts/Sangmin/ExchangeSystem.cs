@@ -46,6 +46,7 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
   
         }
         reader.Close();
+        Debug.Log("reader : "+_recipes.ToString());
     }
     public void CalExchange()
     {
@@ -59,23 +60,23 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         bool[] mats = new bool[] { false, false, false, false };
         foreach (ItemData item in _invenData.Values)
         {
-            if (recipe.First.Idx == -1) mats[0] = true;
-            else if (recipe.First.Idx == item.Idx)
+            if (recipe.First.ItemIdx == -1) mats[0] = true;
+            else if (recipe.First.ItemIdx == item.ItemIdx)
             {
                 if(item.Count >= recipe.First.Count) mats[0] = true;   
             }
-            if (recipe.Second.Idx == -1) mats[1] = true;
-            else if(recipe.Second.Idx == item.Idx)
+            if (recipe.Second.ItemIdx == -1) mats[1] = true;
+            else if(recipe.Second.ItemIdx == item.ItemIdx )
             {
                 if (item.Count >= recipe.Second.Count) mats[1] = true;
             }
-            if (recipe.Third.Idx == -1) mats[2] = true;
-            else if(recipe.Third.Idx == item.Idx)
+            if (recipe.Third.ItemIdx == -1) mats[2] = true;
+            else if(recipe.Third.ItemIdx == item.ItemIdx)
             {
                 if (item.Count >= recipe.Third.Count) mats[2] = true;
             }
-            if (recipe.Fourth.Idx == -1) mats[3] = true;
-            else if(recipe.Fourth.Idx == item.Idx)
+            if (recipe.Fourth.ItemIdx == -1) mats[3] = true;
+            else if(recipe.Fourth.ItemIdx == item.ItemIdx)
             {
                 if (item.Count >= recipe.Fourth.Count) mats[3] = true;
             }
@@ -105,7 +106,7 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
             GenericSingleton<WeaponManager>.Instance.UnlockWeapon(recipe.Result);
             for(int i = 0; i < _recipes.Count; i++)
             {
-                if (_recipes[i].Result.Idx == recipe.Result.Idx)
+                if (_recipes[i].Result.ItemIdx == recipe.Result.ItemIdx)
                 {
                     _recipes.RemoveAt(i);// 무기는 교환 한번만
                     break;
@@ -129,9 +130,81 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         GenericSingleton<UIBase>.Instance.ExchangeUIInit();
     
     }
-    public void LoadRecipesData(List<Recipe> recipes)
+    public void LoadRecipesData(List<RecipeData> recipes)
     {
-        _recipes = recipes;
+        _recipes.Clear();
+        foreach(RecipeData recipe in recipes)
+        {
+            _recipes.Add(new Recipe(recipe._first, recipe._second, recipe._third, recipe._fourth, recipe._result, recipe._isWeapon));
+        }
+    }
+
+}
+
+[Serializable]
+public class RecipeWrapper
+{
+    public List<RecipeData> _datas = new List<RecipeData>();
+}
+
+[Serializable]
+public class RecipeData
+{
+    public ItemData _first;
+
+    public ItemData _second;
+
+    public ItemData _third;
+
+    public ItemData _fourth;
+
+    public  ItemData _result;
+
+    public  bool _isWeapon;
+    public RecipeData(ItemData first, ItemData second, ItemData third, ItemData fourth, ItemData result, bool isWeapon)
+    {
+        _first = first;
+        _second = second;
+        _third = third;
+        _fourth = fourth;
+        _result = result;
+        _isWeapon = isWeapon;
+    }
+}
+[Serializable]
+public class Recipe
+{
+
+    ItemData _first;
+    public ItemData First { get { return _first; } }
+    ItemData _second;
+    public ItemData Second { get { return _second; } }
+    ItemData _third;
+    public ItemData Third { get { return _third; } }
+    ItemData _fourth;
+    public ItemData Fourth { get { return _fourth; } }
+    ItemData _result;
+    public ItemData Result { get { return _result; } }
+
+    bool _isWeapon;
+    public bool IsWeapon { get { return _isWeapon; } }
+
+    bool[] _bools = new bool[0];
+    public bool[] Bools { get { return _bools; } }
+    bool _canExchange;
+    public bool CanExchange { get { return _canExchange; } }
+
+    public void SetCanExchange(bool canExchange) => _canExchange = canExchange;
+    public void SetBools(bool[] bools) => _bools = bools;
+
+    public Recipe(ItemData first, ItemData second, ItemData third, ItemData fourth, ItemData result, bool isWeapon)
+    {
+        _first = first;
+        _second = second;
+        _third = third;
+        _fourth = fourth;
+        _result = result;
+        _isWeapon = isWeapon;
     }
 
 }

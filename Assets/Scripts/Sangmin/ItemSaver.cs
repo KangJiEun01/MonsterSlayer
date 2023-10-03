@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ItemSaver : GenericSingleton<ItemSaver>
 {
-    ItemDataWrapper  datas = new ItemDataWrapper();
+    ItemDataWrapper datas = new ItemDataWrapper();
     public ItemDataWrapper Datas { get { return datas; } }
 
     public void Init()
@@ -20,52 +20,80 @@ public class ItemSaver : GenericSingleton<ItemSaver>
         datas._items.Add(5, new ItemData(5, 10));
         datas._items.Add(6, new ItemData(6, 10));
         datas._items.Add(7, new ItemData(7, 10));
-
+        foreach(var item in datas._itemDatas)
+        {
+            datas._items.Add(item.Idx, new ItemData(item.Idx,item.Count));
+        }
 
     }
     public void SubItem(ItemData item)
     {
-        if (datas._items.TryGetValue(item.Idx, out ItemData data))
+        if (datas._items.TryGetValue(item.ItemIdx, out ItemData data))
         {
             data.SetCount(data.Count - item.Count);
-            if (data.Count == 0) datas._items.Remove(item.Idx);
+            if (data.Count == 0) datas._items.Remove(item.ItemIdx);
         }
         else return;
 
     }
     public void AddItem(ItemData item)
     {
-        if (datas._items.TryGetValue(item.Idx, out ItemData data))
+        if (datas._items.TryGetValue(item.ItemIdx, out ItemData data))
         {
             data.SetCount(data.Count + item.Count);
         }
-        else datas._items.Add(item.Idx, item);
+        else datas._items.Add(item.ItemIdx, item);
     }
-    public void LoadItemData(Dictionary<int, ItemData> items)
+    public void LoadItemData(List<ItemSource> items)
     {
-        datas._items = items;
+        datas._items.Clear();
+        foreach (var item in items)
+        {
+            if (!datas._items.ContainsKey(item.Idx))
+            {
+                datas._items.Add(item.Idx, new ItemData(item.Idx, item.Count));
+            }
+        }   
     }
 
 }
 
 [Serializable]
+public class ItemSource
+{
+    public int Idx;
+    public int Count;
+    public ItemSource(int idx, int count)
+    {
+        Idx = idx;
+        Count = count;
+    }
+}
+[Serializable]
 public class ItemDataWrapper
 {
     public Dictionary<int, ItemData> _items = new Dictionary<int, ItemData>();
+    public List<ItemSource> _itemDatas = new List<ItemSource>();
 }
 [Serializable]
 public class ItemData
 {
     ItemType _type;
     public ItemType Type { get { return _type; } }
+
     int _itemIdx;
-    public int Idx { get { return _itemIdx; } }
+    public int ItemIdx { get { return _itemIdx; } }
+
     int _count;
+
     public int Count { get { return _count; } }
+
     string _name;
     public string Name { get { return _name; } }
+
     string _text;
     public string Text { get { return _text; } }
+    
     public ItemData(int idx,int count)
     {
         _itemIdx = idx;
@@ -102,19 +130,7 @@ public class ItemData
         reader.Close();
     }
 }
-//약초 = 0
-//고기 = 1
-//익힌 고기 = 2
-//비타500 = 3
-//과자 = 4
-//도시락 = 5 
-//톱니 = 6
-//건전지 = 7 
-//렌치 = 8
-//화약 = 9
-//라이터 = 10
-//열쇠 = 11
-//철판 = 12
+
 
 public enum ItemType
 {

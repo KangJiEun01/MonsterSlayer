@@ -45,7 +45,7 @@ public class Inventory : MonoBehaviour
         {
             GameObject temp = Instantiate(_item, _content);
             temp.GetComponent<Item>().Text.text = "X" + Item.Count.ToString();
-            temp.GetComponent<Item>().Image.sprite = _ItemIcon[Item.Idx];
+            temp.GetComponent<Item>().Image.sprite = _ItemIcon[Item.ItemIdx];
         }
         
     }

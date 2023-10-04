@@ -30,7 +30,8 @@ public class LoadingScene : MonoBehaviour
             //progressT.text = Mathf.Round(progress * 100) + "%";
             yield return null;
         }
-        //GenericSingleton<PlayerCon>.Instance.SetRotation(120);
+        GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(-13.5f, 8.75f, -375.3f));
+        GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
     }
 }
 

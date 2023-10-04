@@ -31,8 +31,8 @@ public class GameManager : GenericSingleton<GameManager>
         exchangeSystem.AddComponent<ExchangeSystem>();
         GenericSingleton<ItemSaver>.Instance.Init();
         GenericSingleton<ExchangeSystem>.Instance.Init();
-        GenericSingleton<UIBase>.Instance.Init();
         GenericSingleton<WeaponManager>.Instance.Init();
+        GenericSingleton<UIBase>.Instance.Init();
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<DataManager>.Instance.Init();
         SetGameState(GameState.InGame);

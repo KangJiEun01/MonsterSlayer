@@ -32,7 +32,11 @@ public class ItemSaver : GenericSingleton<ItemSaver>
         {
             data.SetCount(data.Count - item.Count);
             if (data.Count == 0) datas._items.Remove(item.ItemIdx);
+            GenericSingleton<ExchangeSystem>.Instance.CalExchange();
+            GenericSingleton<UIBase>.Instance.InventoryInit(datas._items);
+            GenericSingleton<UIBase>.Instance.ExchangeUIInit();
         }
+
         else return;
 
     }
@@ -43,6 +47,9 @@ public class ItemSaver : GenericSingleton<ItemSaver>
             data.SetCount(data.Count + item.Count);
         }
         else datas._items.Add(item.ItemIdx, item);
+        GenericSingleton<ExchangeSystem>.Instance.CalExchange();
+        GenericSingleton<UIBase>.Instance.InventoryInit(datas._items);
+        GenericSingleton<UIBase>.Instance.ExchangeUIInit();
     }
     public void LoadItemData(List<ItemSource> items)
     {

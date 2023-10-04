@@ -7,10 +7,10 @@ public class CrossHairUI : MonoBehaviour
     [SerializeField] GameObject[] _crosshairs;
     public void SetCrosshairs(int idx)
     {
-        Init();
+        AllOff();
         _crosshairs[idx].SetActive(true);
     }
-    public void Init()
+    public void AllOff()
     {
         foreach (var c in _crosshairs)
         {

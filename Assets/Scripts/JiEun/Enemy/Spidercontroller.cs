@@ -1,7 +1,11 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
+
+
 public class Spidercontroller : MonoBehaviour
 {
+    [SerializeField] GameObject deathEffect;
     GameObject player;
     GameObject camera;
     NavMeshAgent agent;
@@ -29,9 +33,10 @@ public class Spidercontroller : MonoBehaviour
         _hp = GetComponent<Target>().Hp;
         if (_hp <= 0)
         {
-            spiderDeath=true;
+            deathEffect.SetActive(true);
+            spiderDeath = true;
             Ani.Play("death1");
-            Invoke("Death", 1.3f);
+            Invoke("Death", 1.8f);
         }
         if (!spiderDeath)
         {

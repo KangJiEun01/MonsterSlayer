@@ -38,6 +38,8 @@ public class Enemy01controller : MonoBehaviour
     float Time_cool = 2f;
     float Time_LastShot = 0f;
 
+    int itemNum = 0;
+
     public bool Attacker { get { return _attack; } }
     public bool InSpawn { get { return _Spawn; } }
     public bool _damage = false;
@@ -46,10 +48,9 @@ public class Enemy01controller : MonoBehaviour
     Vector3 patrolEndPoint;
     Vector3 VectorbulletPos; //총알 시작위치 수정할것
 
-
     // mins edit
-    float avoidanceDistance = 1.0f;
-    float rayDistance = 1.0f;
+    //float avoidanceDistance = 1.0f;
+    //float rayDistance = 1.0f;
 
     private void Awake()
     {
@@ -65,10 +66,20 @@ public class Enemy01controller : MonoBehaviour
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
         Invoke("find", 1f);
+
     }
     private void OnEnable()
     {
-        //Enemy.GetComponent<Enemy01controller>().enabled = true;
+        Debug.Log("리스폰");
+        patrolEndPoint = endPoint.position;
+        patrolStartPoint = spawnPoint.position;
+        botPos = GetComponent<Transform>();
+        anim = GetComponent<Animator>();
+        VectorbulletPos = bulletPos.position;
+        anim.Play("WalkFront_Shoot_AR");
+        find();
+        _setActive = false;
+        itemNum = 0;
     }
     void Update()
     {
@@ -217,7 +228,11 @@ public class Enemy01controller : MonoBehaviour
     void Die()
     {
         int num = UnityEngine.Random.Range(0, 4);
-        Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z), Quaternion.identity);
+        if(itemNum==0)
+        {
+            Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z), Quaternion.identity);
+        }
+        itemNum++;
         _Spawn = false;
         //Enemy.GetComponent<Enemy01controller>().enabled = true;
         gameObject.SetActive(false);

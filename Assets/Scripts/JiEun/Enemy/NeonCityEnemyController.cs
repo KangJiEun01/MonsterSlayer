@@ -2,7 +2,7 @@ using UnityEngine;
 public class NeonCityEnemyController : MonoBehaviour
 {
     [SerializeField] GameObject[] Enemys;
-    [SerializeField] GameObject[] EnemyPos;
+    [SerializeField] float spawnTime;
 
     bool[] EnemysSpawn;
     int num = 0;
@@ -23,7 +23,7 @@ public class NeonCityEnemyController : MonoBehaviour
             if (!Enemys[i].activeSelf)
             {
                 num = i;
-                Invoke("Spawn", 5f);
+                Invoke("Spawn", spawnTime);
             }
         }
     }
@@ -31,7 +31,6 @@ public class NeonCityEnemyController : MonoBehaviour
     {
         Enemys[num].GetComponent<Target>().Hp= spawnHp;
         Enemys[num].SetActive(true);
-        EnemysSpawn[num] = true;
         EnemysSpawn[num] = true;
     }
 }

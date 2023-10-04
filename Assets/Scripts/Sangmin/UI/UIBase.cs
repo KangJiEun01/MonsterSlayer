@@ -15,8 +15,9 @@ public class UIBase : GenericSingleton<UIBase>
     [SerializeField] GameObject _inventoryUI;
     [SerializeField] GameObject _warningUI;
     [SerializeField] GameObject _crossHairs;
+    [SerializeField] GameObject _playerUI;
     [SerializeField] TextMeshProUGUI _fpsUI;
-    [SerializeField] Sprite[] _itemIcon; 
+    [SerializeField] Sprite[] _itemIcon;
     public Sprite[] ItemIcon { get { return _itemIcon; } }
 
     bool _weaponOn;
@@ -73,6 +74,10 @@ public class UIBase : GenericSingleton<UIBase>
         _exchangeUI.SetActive(ShowUI);
         _exchangeOn = ShowUI;
     }
+    public void ShowPlayerUI(bool ShowUI)
+    {
+        _playerUI.SetActive(ShowUI);
+    }
     public void ShowWarningUI(bool isShow)                         //데미지 받을때 UI
     {
         _warningUI.SetActive(isShow);
@@ -118,6 +123,10 @@ public class UIBase : GenericSingleton<UIBase>
     public void SetCrosshair(int idx)
     {
         _crossHairs.GetComponent<CrossHairUI>().SetCrosshairs(idx);
+    }
+    public void CrossHairOff()
+    {
+        _crossHairs.GetComponent<CrossHairUI>().AllOff();
     }
 
 

@@ -8,6 +8,7 @@ public class GameManager : GenericSingleton<GameManager>
     
     public enum GameState
     {
+        Loading,
         InGame,
         Paused,
         GameOver,
@@ -96,13 +97,22 @@ public class GameManager : GenericSingleton<GameManager>
         _currentState = newState;
         switch (_currentState)
         {
+
+            case GameState.Loading:
+                GenericSingleton<UIBase>.Instance.CrossHairOff();
+                GenericSingleton<UIBase>.Instance.ShowPlayerUI(false);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                break;
             case GameState.Paused:
                 Time.timeScale = 0;
+                GenericSingleton<UIBase>.Instance.CrossHairOff();
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 break;
             case GameState.InGame:
                 Time.timeScale = 1;
+                GenericSingleton<UIBase>.Instance.ShowPlayerUI(true);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 break;

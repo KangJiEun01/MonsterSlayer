@@ -18,6 +18,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     public WeaponBase CurrentWeapon { get { return _currentWeapon; } }
 
     [SerializeField] GameObject _syringe;
+    [SerializeField] ParticleSystem _healEffect;
     
     bool _isHeal;
     bool _isSwap;
@@ -47,6 +48,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     {
         AllOff();
         _isHeal = true;
+        //_healEffect.Play();
         _syringe.SetActive(true);
         _syringe.GetComponent<Animator>().Play("First_Aid");
         Invoke("SyringeOff", 3.5f);
@@ -72,6 +74,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         _currentIdx = 1;
         _currentWeapon = _currentWeapons[_currentIdx];                   //권총 들기
         _currentWeapon.Weapon.SetActive(true);
+        GenericSingleton<UIBase>.Instance.SetCrosshair(_currentWeapon.WeaponIdx);
         GenericSingleton<UIBase>.Instance.WeaponUIInit(_currentWeapon);
         //AllUnlock();                                //테스트용 모두 잠금해제
     }
@@ -138,6 +141,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         _currentWeapon = weapon;
         Debug.Log(weapon.name);
         weapon.Weapon.SetActive(true);
+        GenericSingleton<UIBase>.Instance.SetCrosshair(_currentWeapon.WeaponIdx);
         GenericSingleton<PlayerCon>.Instance.AnimatorUpdate();
         _isSwap = true;
         Invoke("SwapEnd",1f);
@@ -190,9 +194,8 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         Debug.Log(data._currentMainIdx);
         if (data._currentMainIdx != 0)
         {
-            SetMainWeapon(data._currentMainIdx);
             _currentIdx = 0;
-            SetCurrentWeapon(_currentWeapons[0]);
+            SetMainWeapon(data._currentMainIdx);
         }
         else
         {

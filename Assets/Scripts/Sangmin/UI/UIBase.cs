@@ -14,6 +14,7 @@ public class UIBase : GenericSingleton<UIBase>
 
     [SerializeField] GameObject _inventoryUI;
     [SerializeField] GameObject _warningUI;
+    [SerializeField] GameObject _crossHairs;
     [SerializeField] TextMeshProUGUI _fpsUI;
     [SerializeField] Sprite[] _itemIcon; 
     public Sprite[] ItemIcon { get { return _itemIcon; } }
@@ -44,6 +45,7 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _inventoryUI.GetComponent<Inventory>().Init();
         _exchangeUI.GetComponent<ExchangeUI>().Init();
+        CrosshairInit();
         WeaponSelectUIInit();
         AllUIOff();
     }
@@ -113,5 +115,13 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _weaponUI.GetComponent<WeaponUI>().UIUpdate(weapon);
     }
-    
+    public void SetCrosshair(int idx)
+    {
+        _crossHairs.GetComponent<CrossHairUI>().SetCrosshairs(idx);
+    }
+    public void CrosshairInit()
+    {
+        _crossHairs.GetComponent<CrossHairUI>().Init();
+    }
+
 }

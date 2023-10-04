@@ -12,8 +12,8 @@ public class Boss02NewAi : MonoBehaviour //보스 1 : 3초마다 따라와서 공격하고 3�
     bool Mode = false; //1, 2 공격모드
     bool _attack = false; //공격on, off상태
 
-    float BossSpeed = 6;
-    float _hp = 5;
+    float BossSpeed = 9;
+    float _hp = 15;
 
     void Start()
     {

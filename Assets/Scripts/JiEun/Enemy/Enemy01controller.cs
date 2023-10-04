@@ -1,9 +1,11 @@
-using Unity.VisualScripting;
+using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Enemy01controller : MonoBehaviour
 {
     GameObject player;
+    //[SerializeField] GameObject Enemy;
     [SerializeField] Transform spawnPoint;
     [SerializeField] Transform endPoint;
     [SerializeField] GameObject bullet;
@@ -26,6 +28,7 @@ public class Enemy01controller : MonoBehaviour
     bool _collision = false;
     bool _attack = false;
     bool _setActive = false;
+    bool _Spawn = true;
     //bool bulletFire = false;
 
     float Time_current; //≥≤¿∫√ 
@@ -36,6 +39,7 @@ public class Enemy01controller : MonoBehaviour
     float Time_LastShot = 0f;
 
     public bool Attacker { get { return _attack; } }
+    public bool InSpawn { get { return _Spawn; } }
     public bool _damage = false;
 
     Vector3 patrolStartPoint;
@@ -61,6 +65,10 @@ public class Enemy01controller : MonoBehaviour
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
         Invoke("find", 1f);
+    }
+    private void OnEnable()
+    {
+        //Enemy.GetComponent<Enemy01controller>().enabled = true;
     }
     void Update()
     {
@@ -208,11 +216,11 @@ public class Enemy01controller : MonoBehaviour
     }
     void Die()
     {
-
-        int num = Random.Range(0, 4);
+        int num = UnityEngine.Random.Range(0, 4);
         Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z), Quaternion.identity);
+        _Spawn = false;
+        //Enemy.GetComponent<Enemy01controller>().enabled = true;
         gameObject.SetActive(false);
-
     }
     // mins edit
     //void FixedUpdate()

@@ -3,31 +3,35 @@ public class NeonCityEnemyController : MonoBehaviour
 {
     [SerializeField] GameObject[] Enemys;
     [SerializeField] GameObject[] EnemyPos;
-    [SerializeField] GameObject[] DropItem;
 
-    bool[] itemSpawn;
+    bool[] EnemysSpawn;
+    int num = 0;
+    float spawnHp = 10;
 
     private void Start()
     {
-        itemSpawn = new bool[Enemys.Length];
+        EnemysSpawn = new bool[Enemys.Length];
         for(int i = 0; i < Enemys.Length; i++)
         {
-            itemSpawn[i] = false;
+            EnemysSpawn[i] = true;
         }
     }
     void Update()
     {
         for (int i = 0; i < Enemys.Length; i++)
         {
-            if (!Enemys[i].activeSelf && !itemSpawn[i])
+            if (!Enemys[i].activeSelf)
             {
-                int num = Random.Range(0, 4);
-                Transform ItemDrop = EnemyPos[i].transform;
-                Instantiate(DropItem[num]);
-                DropItem[num].transform.position = ItemDrop.transform.position;
-                Debug.Log(ItemDrop + "»ý¼º");
-                itemSpawn[i] = true;
+                num = i;
+                Invoke("Spawn", 5f);
             }
         }
+    }
+    void Spawn()
+    {
+        Enemys[num].GetComponent<Target>().Hp= spawnHp;
+        Enemys[num].SetActive(true);
+        EnemysSpawn[num] = true;
+        EnemysSpawn[num] = true;
     }
 }

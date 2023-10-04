@@ -47,15 +47,10 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // 상태 변수
     private bool _isRun = false;
     private bool _isGround = true;
-    private bool _isCrouch = false;
     private bool _isIdle = true;
     private bool _helperClose = false;
 
     // 앉았을 때 얼마나 앉을지 결정하는 변수
-    [SerializeField]
-    private float _crouchPosY;
-    private float _originPosY;
-    private float _applyCrouchPosY;
 
     [SerializeField] float m_HorizontalAngle, m_VerticalAngle;
     // 민감도
@@ -129,8 +124,6 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         // 초기화
         _speed = _walkSpeed;
         
-        _originPosY = _camera.transform.localPosition.y;
-        _applyCrouchPosY = _originPosY;
     }
     public void AnimatorUpdate()
     {
@@ -151,7 +144,6 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         TryJump();
         TryRun();
         TryDash();
-        TryCrouch();
         Rotate();
        // OpenHelper();
 
@@ -183,9 +175,6 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // 점프
     private void Jump()
     {
-        if (_isCrouch)  //웅크릴때 점프 x
-            Crouch();
-
         _rig.velocity = transform.up * _jumpForce;
     }
 
@@ -237,9 +226,6 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // 달리기
     private void Running()
     {
-        if (_isCrouch)
-            Crouch();
-
         _isRun = true;
         _speed = _runSpeed;
         if((_moveDirX != 0 || _moveDirZ != 0)&& !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.IsReload && !GenericSingleton<WeaponManager>.Instance.CurrentWeapon.InAttack && !GenericSingleton<WeaponManager>.Instance.IsSwap)
@@ -259,51 +245,8 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _runTimer = 0;
     }
 
-    // 앉기 시도
-    private void TryCrouch()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            Crouch();
-        }
-    }
 
-    // 앉기 동작
-    private void Crouch()
-    {
-        _isCrouch = !_isCrouch;  //토글식
-        if (_isCrouch)
-        {
-            _speed = _crouchSpeed;
-            _applyCrouchPosY = _crouchPosY;
-        }
-        else
-        {
-            _speed = _walkSpeed;
-            _applyCrouchPosY = _originPosY;
-        }
-
-        StartCoroutine(CrouchCoroutine());
-    }
-
-    // 부드러운 앉기 동작
-    IEnumerator CrouchCoroutine()
-    {
-        float _posY = _camera.transform.localPosition.y;
-        int count = 0;
-
-        while (_posY != _applyCrouchPosY)
-        {
-            count++;
-            _posY = Mathf.Lerp(_posY, _applyCrouchPosY, 0.2f);
-            CameraPosition.localPosition = new Vector3(0, _posY, 0);
-            if (count > 15)
-                break;
-            yield return null;
-        }
-        CameraPosition.localPosition = new Vector3(0, _applyCrouchPosY, 0);
-    }
-
+  
     private void Move()
     {
         _moveDirX = Input.GetAxisRaw("Horizontal");
@@ -335,22 +278,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _rig.AddForce( _velocity);
     }
 
-    //private void CameraRotation()
-    //{
-    //    float _xRotation = Input.GetAxisRaw("Mouse Y");
-    //    float _cameraRotationX = _xRotation * _lookSensitivity;
-    //    _currentCameraRotationX -= _cameraRotationX;
-    //    _currentCameraRotationX = Mathf.Clamp(_currentCameraRotationX, - _cameraRotationLimit, _cameraRotationLimit);
 
-    //    _camera.transform.localEulerAngles = new Vector3(_currentCameraRotationX, 0, 0);
-    //}
-
-    //private void CharacterRotation()
-    //{
-    //    float _yRotation = Input.GetAxisRaw("Mouse X");
-    //    Vector3 _characterRotationY = new Vector3(0f, _yRotation, 0f) * _lookSensitivity;
-    //    _rig.MoveRotation(_rig.rotation * Quaternion.Euler(_characterRotationY));
-    //}
     void Rotate()
     {
         // Turn player
@@ -406,7 +334,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
             GenericSingleton<UIBase>.Instance.HpUIInit();
             if (_hp > 0)
             {
-                _CA.GetComponent<NewCameraShake>().enabled = true;
+                _camera.GetComponent<NewCameraShake>().enabled = true;
                 _onDamage = true;
                 Invoke("DamageEnd", 0.5f);
             }

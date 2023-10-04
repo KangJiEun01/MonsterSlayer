@@ -5,32 +5,13 @@ using static PlayerCon;
 public class Rifle : HitScan
 {
 
-    [SerializeField] protected RectTransform _upCrosshair;
-    [SerializeField] protected RectTransform _rightCrosshair;
-    [SerializeField] protected RectTransform _downCrosshair;
-    [SerializeField] protected RectTransform _leftCrosshair;
+
 
   
 
 
 
 
-    void AimOpen()
-    {
-        _upCrosshair.anchoredPosition3D += Vector3.up * 2f;
-        _rightCrosshair.anchoredPosition3D += Vector3.left * 2f;
-        _downCrosshair.anchoredPosition3D += Vector3.down * 2f;
-        _leftCrosshair.anchoredPosition3D += Vector3.right * 2f;
-    }
-    void AimReturn()
-    {
-        _upCrosshair.anchoredPosition3D = new Vector3(0, 35, 0);
-        _rightCrosshair.anchoredPosition3D = new Vector3(-40, 0, 0f);
-        _downCrosshair.anchoredPosition3D = new Vector3(0, -35, 0);
-        _leftCrosshair.anchoredPosition3D = new Vector3(40, 0, 0 );
-    }
-
-   
    
     public override void Fire()
     {
@@ -44,7 +25,6 @@ public class Rifle : HitScan
             inAttack = true;
        
             _recoil.RecoilFire(_recoilForce); //¹Ýµ¿
-            AimOpen();           // aim¹ú¾îÁü
             
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 50f))
             {

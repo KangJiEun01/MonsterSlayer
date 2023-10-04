@@ -5177,11 +5177,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3ba8605e2fc1c4c389adb72e0588dc8f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e10e470cb8ac58346ab2adcf73cc6e93, type: 3}
---- !u!4 &351490116 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1790144493475995232, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-  m_PrefabInstance: {fileID: 1584711472}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &416071989
 GameObject:
   m_ObjectHideFlags: 0
@@ -5844,7 +5839,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPointGroup: {fileID: 416071991}
-  player: {fileID: 351490116}
 --- !u!195 &870822094
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5881,6 +5875,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &870822100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870822089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe56a583b2f09e345a49f93a07428d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 500
+  damageDelay: 0.5
 --- !u!1001 &924174848
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,9 +9,9 @@ public class UIBase : GenericSingleton<UIBase>
     [SerializeField] GameObject _exchangeUI;
     [SerializeField] GameObject _gamoverUI;
     [SerializeField] GameObject _runToggleUI;
+    [SerializeField] GameObject _dashCoolUI;
     [SerializeField] GameObject _HPBarUI;
-    public GameObject RunToggleUI { get { return _runToggleUI; } }
-
+    [SerializeField] GameObject _pauseUI;
     [SerializeField] GameObject _inventoryUI;
     [SerializeField] GameObject _warningUI;
     [SerializeField] GameObject _crossHairs;
@@ -25,12 +25,25 @@ public class UIBase : GenericSingleton<UIBase>
     public bool WeaponOn { get { return _weaponOn; } }
     bool _exchangeOn;
     public bool ExchangeOn { get { return _exchangeOn;} }
+    bool _pauseUIOn;
+    public bool PauseUIOn { get { return _pauseUIOn; } }
+
 
     float _timer = 0;
     int _frame = 0;
     private void Update()
     {
         CalFPS();
+        RunToggleUIUpdate();
+        DashCoolUIUIUpdate();
+    }
+    void RunToggleUIUpdate()
+    {
+        _runToggleUI.GetComponent<RunToggleUI>().RunToggleUIUpdate();
+    }
+    void DashCoolUIUIUpdate()
+    {
+        _dashCoolUI.GetComponent<DashCoolUI>().DashCoolUIUpdate();
     }
     void CalFPS()
     {
@@ -52,28 +65,45 @@ public class UIBase : GenericSingleton<UIBase>
         AllUIOff();
     }
     
-    public void ExchangeOff()             //닫기 버튼에 연결되는 함수
+    public void ShowPauseUI(bool ShowUI)
     {
-        _exchangeUI.SetActive(false);
-        _exchangeOn = false;
-        GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
-    }
-    public void WeaponSelectOff()          //닫기 버튼에 연결되는 함수
-    {
-        _weaponSelectUI.SetActive(false);
-        _weaponOn = false;
-        GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
+        _pauseUI.SetActive(ShowUI);
+        _pauseUIOn = ShowUI;
+        if (ShowUI)
+        {
+            GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.Paused);
+        }
+        else
+        {
+            GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
+        }
     }
     public void ShowWeaponSelectUI(bool ShowUI)
     {
         _weaponSelectUI.SetActive(ShowUI);
         _weaponOn = ShowUI;
+        if (ShowUI)
+        {
+            GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.Paused);
+        }
+        else
+        {
+            GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
+        }
     }
 
     public void ShowExchangeUI(bool ShowUI)
     {
         _exchangeUI.SetActive(ShowUI);
         _exchangeOn = ShowUI;
+        if (ShowUI)
+        {
+            GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.Paused);
+        }
+        else
+        {
+            GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
+        }
     }
     public void ShowPlayerUI(bool ShowUI)
     {
@@ -83,7 +113,7 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _warningUI.SetActive(isShow);
     }
-    public void GameOverUI(bool isShow)
+    public void ShowGameOverUI(bool isShow)
     {
         _gamoverUI.SetActive(isShow);
     }
@@ -91,8 +121,15 @@ public class UIBase : GenericSingleton<UIBase>
     {
         ShowExchangeUI(false);
         ShowWeaponSelectUI(false);
-        GameOverUI(false);
+        ShowPlayerUI(false);
+        ShowPauseUI(false);
+        ShowGameOverUI(false);
     }    
+    public void InvenWeaponOff()
+    {
+        ShowExchangeUI(false);
+        ShowWeaponSelectUI(false);
+    }
     public void Fadeout(bool isShow)
     {
         _fadeOut.GetComponent<FadeOut>().enabled = true;
@@ -135,6 +172,25 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _crossHairs.GetComponent<CrossHairUI>().AllOff();
     }
-
+    public void ShowOptionUI(bool isShow)
+    {
+        _pauseUI.GetComponent<PauseUI>().ShowOptionUI(isShow);
+    }
+    public void ShowQuitCheckUI(bool isShow)
+    {
+        _pauseUI.GetComponent<PauseUI>().ShowQuitCheckUI(isShow);
+    }
+    public void GoToMainMenu()
+    {
+        _pauseUI.GetComponent<PauseUI>().GoToMainMenu();
+    }
+    public void QuitCancle()
+    {
+        _pauseUI.GetComponent<PauseUI>().QuitCancle();
+    }
+    public void QuitGame()
+    {
+        _pauseUI.GetComponent<PauseUI>().QuitGame();
+    }
 
 }

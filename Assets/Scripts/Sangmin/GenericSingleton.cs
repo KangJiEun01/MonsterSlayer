@@ -10,9 +10,9 @@ public class GenericSingleton<T> : MonoBehaviour where T : class
     {
         if (_instance == null)
         {
-            OnAwake();
             DontDestroyOnLoad(gameObject);
             _instance = GetComponent<T>();
+            OnAwake();
         }
         else
         {

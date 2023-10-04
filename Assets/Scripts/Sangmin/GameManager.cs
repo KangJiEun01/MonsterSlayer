@@ -54,13 +54,16 @@ public class GameManager : GenericSingleton<GameManager>
         {
             if (!GenericSingleton<UIBase>.Instance.ExchangeOn)
             {
-                SetGameState(GameState.Paused);
-                GenericSingleton<UIBase>.Instance.AllUIOff();
-                GenericSingleton<UIBase>.Instance.ShowExchangeUI(true);
+                if (!GenericSingleton<UIBase>.Instance.PauseUIOn)
+                {
+                    
+                    GenericSingleton<UIBase>.Instance.InvenWeaponOff();
+                    GenericSingleton<UIBase>.Instance.ShowExchangeUI(true);
+                }
+                
             }
             else
-            {
-                SetGameState(GameState.InGame);
+            { 
                 GenericSingleton<UIBase>.Instance.ShowExchangeUI(false);
             }
         }
@@ -68,28 +71,40 @@ public class GameManager : GenericSingleton<GameManager>
         {
             if (!GenericSingleton<UIBase>.Instance.WeaponOn)
             {
-                SetGameState(GameState.Paused);
-                GenericSingleton<UIBase>.Instance.AllUIOff();
-                GenericSingleton<UIBase>.Instance.ShowWeaponSelectUI(true);
+                if (!GenericSingleton<UIBase>.Instance.PauseUIOn)
+                {
+                    GenericSingleton<UIBase>.Instance.InvenWeaponOff();
+                    GenericSingleton<UIBase>.Instance.ShowWeaponSelectUI(true);
+                }
+                
             }
-            else
+            else if (_currentState == GameState.Paused)
             {
-                SetGameState(GameState.InGame);
                 GenericSingleton<UIBase>.Instance.ShowWeaponSelectUI(false);
             }   
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SetGameState(GameState.InGame);
-            GenericSingleton<UIBase>.Instance.AllUIOff();
+            if(_currentState == GameState.Paused)
+            {
+                if(GenericSingleton<UIBase>.Instance.ExchangeOn || GenericSingleton<UIBase>.Instance.WeaponOn)
+                {
+                    GenericSingleton<UIBase>.Instance.InvenWeaponOff();
+                }
+                else
+                {
+                    GenericSingleton<UIBase>.Instance.ShowPauseUI(false);
+                }
+            }
+            else if (_currentState == GameState.InGame)
+            {
+                GenericSingleton<UIBase>.Instance.ShowPauseUI(true);
+            }
+            
+            
         }
-        float deltaTime = 0.0f;
 
-        void Update()
-        {
-            deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
-        }
 
     }
     public void SetGameState(GameState newState)

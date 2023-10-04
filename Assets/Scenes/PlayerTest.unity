@@ -1937,32 +1937,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIBase
       objectReference: {fileID: 0}
-    - target: {fileID: 4740806191709458299, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740806191709458299, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4740806193386332028, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4740806193386332028, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740806193537220128, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740806193537220128, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740806193537220128, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
-      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2021,6 +2001,10 @@ PrefabInstance:
     - target: {fileID: 6717542893286447464, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544086250526411257, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
+      propertyPath: _dashForce
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}

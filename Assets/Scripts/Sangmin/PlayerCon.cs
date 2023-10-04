@@ -25,6 +25,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _dashForce;
     [SerializeField] private float _dashCool;
+    public float DashCool { get { return _dashCool; } }
 
 
     //상태관리변수
@@ -38,6 +39,8 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     public float HpStat { get { return _hp; } }
 
     private bool _canDash = true;
+    float _lastDashTime;
+    public float LastDashTime { get { return _lastDashTime; } }
     private Vector3 _dirVector;
     float _moveDirX;
     float _moveDirZ;
@@ -211,6 +214,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
                 _canDash = false;
                 Invoke("DashTimer", _dashCool); ;
                 _rig.velocity = _dirVector * _dashForce;
+                _lastDashTime = Time.time;
             }
             else
             {
@@ -341,7 +345,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
             else
             {
                 GenericSingleton<GameManager>.Instance.SetGameState(GameState.GameOver);
-                GenericSingleton<UIBase>.Instance.GameOverUI(true);
+                GenericSingleton<UIBase>.Instance.ShowGameOverUI(true);
                 GenericSingleton<WeaponManager>.Instance.CurrentWeapon.Weapon.SetActive(false);
                 
             }

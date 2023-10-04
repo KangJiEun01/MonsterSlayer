@@ -2263,11 +2263,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &535679325 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1790144494692186842, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-  m_PrefabInstance: {fileID: 43157590}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &542963936
 GameObject:
   m_ObjectHideFlags: 0
@@ -4630,7 +4625,7 @@ PrefabInstance:
     - target: {fileID: 7766672092735065900, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 535679325}
+      objectReference: {fileID: 0}
     - target: {fileID: 8053901628418155518, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -13961,7 +13956,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: b6a8ebdfbb067954ab608e4fac6f8738, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

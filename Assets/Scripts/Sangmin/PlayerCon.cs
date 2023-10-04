@@ -136,7 +136,14 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     {
         _animator = GenericSingleton<WeaponManager>.Instance.CurrentWeapon.Animator;
     }
-   
+    public void SetPosition(Vector3 pos)
+    {
+        transform.localPosition = pos;
+    }
+    public void SetRotation(float rotY)
+    {
+        m_HorizontalAngle = rotY;
+    }
     void Update()
     {
         if (GenericSingleton<GameManager>.Instance.CurrentState != GameManager.GameState.InGame) return;
@@ -399,7 +406,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
             GenericSingleton<UIBase>.Instance.HpUIInit();
             if (_hp > 0)
             {
-                _camera.GetComponent<NewCameraShake>().enabled = true;
+                _CA.GetComponent<NewCameraShake>().enabled = true;
                 _onDamage = true;
                 Invoke("DamageEnd", 0.5f);
             }

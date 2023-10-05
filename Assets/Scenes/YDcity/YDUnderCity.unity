@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4936,42 +4936,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &256104266 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 256104266, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-  m_PrefabInstance: {fileID: 1604254449}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &256104269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256104266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9cbb71c8b7cba040936b2c4a2132ef0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimapCamera: {fileID: 1478793200}
---- !u!1 &257224229 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 257224229, guid: e10e470cb8ac58346ab2adcf73cc6e93, type: 3}
-  m_PrefabInstance: {fileID: 346107318}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &257224232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 257224229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9cbb71c8b7cba040936b2c4a2132ef0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimapCamera: {fileID: 1478793200}
 --- !u!1001 &346107318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6237,14 +6201,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 71113246, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-      propertyPath: m_Layer
-      value: 23
+    - target: {fileID: 256104267, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 256104266, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
-      propertyPath: m_Layer
-      value: 23
-      objectReference: {fileID: 0}
+    - target: {fileID: 256104269, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 1478793200}
     - target: {fileID: 6717542893286447462, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
       propertyPath: m_Name
       value: 'Player '

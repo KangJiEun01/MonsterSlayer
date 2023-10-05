@@ -19158,7 +19158,7 @@ GameObject:
   - component: {fileID: 8934854620851212904}
   m_Layer: 8
   m_Name: Pistol
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32009,7 +32009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.91
-  _attackDamage: 1
+  _attackDamage: 3
   _maxBullet: 10
   _impactForce: 1
   _recoilForce: 4
@@ -38972,7 +38972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.86
-  _attackDamage: 1
+  _attackDamage: 40
   _maxBullet: 0
   _impactForce: 0
   _recoilForce: 0
@@ -39030,7 +39030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.12
-  _attackDamage: 1
+  _attackDamage: 10
   _maxBullet: 30
   _impactForce: 10
   _recoilForce: 2.5
@@ -39091,7 +39091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.3
-  _attackDamage: 1
+  _attackDamage: 15
   _maxBullet: 12
   _impactForce: 10
   _recoilForce: 3
@@ -41163,7 +41163,7 @@ GameObject:
   - component: {fileID: 8934854620983041947}
   m_Layer: 8
   m_Name: Rifle
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41875,7 +41875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0
-  _attackDamage: 1
+  _attackDamage: 20
   _maxBullet: 1
   _impactForce: 10
   _recoilForce: 0
@@ -41969,13 +41969,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759edf6655ae2c540877fc0473445c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
+  _maxhp: 100
   _walkSpeed: 30
   _runSpeed: 40
   _crouchSpeed: 3
   _dashTimer: 2
   _jumpForce: 10
-  _dashForce: 45
+  _dashForce: 30
   _dashCool: 3
   m_HorizontalAngle: 0
   m_VerticalAngle: 0

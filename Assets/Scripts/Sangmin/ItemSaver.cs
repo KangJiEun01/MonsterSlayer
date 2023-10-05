@@ -25,14 +25,14 @@ public class ItemSaver : GenericSingleton<ItemSaver>
         }
 
     }
-    public void SubItem(ItemData item)
+    public void SubItem(ItemData item,int count)
     {
         if (datas._items.TryGetValue(item.ItemIdx, out ItemData data))
         {
-            data.SetCount(data.Count - item.Count);
+            data.SetCount(data.Count - count);
             if (data.Count == 0) datas._items.Remove(item.ItemIdx);
             GenericSingleton<ExchangeSystem>.Instance.CalExchange();
-            GenericSingleton<UIBase>.Instance.InventoryInit(datas._items);
+            GenericSingleton<UIBase>.Instance.InventoryInit();
             GenericSingleton<UIBase>.Instance.ExchangeUIInit();
         }
 
@@ -47,7 +47,7 @@ public class ItemSaver : GenericSingleton<ItemSaver>
         }
         else datas._items.Add(item.ItemIdx, item);
         GenericSingleton<ExchangeSystem>.Instance.CalExchange();
-        GenericSingleton<UIBase>.Instance.InventoryInit(datas._items);
+        GenericSingleton<UIBase>.Instance.InventoryInit();
         GenericSingleton<UIBase>.Instance.ExchangeUIInit();
     }
     public void LoadItemData(List<ItemSource> items)

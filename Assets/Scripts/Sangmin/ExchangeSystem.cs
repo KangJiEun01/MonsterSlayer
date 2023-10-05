@@ -102,10 +102,10 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
     {
         if (recipe.IsWeapon)
         {
-            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.First);
-            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Second);
-            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Third);
-            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.First,recipe.First.Count);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Second,recipe.Second.Count);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Third, recipe.Third.Count);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth, recipe.Fourth.Count);
 
             GenericSingleton<WeaponManager>.Instance.UnlockWeapon(recipe.Result);
             for(int i = 0; i < _recipes.Count; i++)
@@ -120,17 +120,17 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         }
         else
         {
-            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.First);
-            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Second);
-            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Third);
-            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.First, recipe.First.Count);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Second, recipe.Second.Count);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Third, recipe.Third.Count);
+            GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth, recipe.Fourth.Count);
 
             GenericSingleton<ItemSaver>.Instance.AddItem(recipe.Result);
         }
         
 
         CalExchange();
-        GenericSingleton<UIBase>.Instance.InventoryInit(_invenData);
+        GenericSingleton<UIBase>.Instance.InventoryInit();
         GenericSingleton<UIBase>.Instance.ExchangeUIInit();
     
     }

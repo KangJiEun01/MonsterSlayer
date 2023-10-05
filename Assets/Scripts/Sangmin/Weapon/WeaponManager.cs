@@ -16,7 +16,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
 
     WeaponBase _currentWeapon;
     public WeaponBase CurrentWeapon { get { return _currentWeapon; } }
-
+    int _syringeCount;
     [SerializeField] GameObject _syringe;
     [SerializeField] ParticleSystem _healEffect;
     
@@ -47,12 +47,27 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     }
     void Heal()
     {
-        AllOff();
-        _isHeal = true;
-        //_healEffect.Play();
-        _syringe.SetActive(true);
-        _syringe.GetComponent<Animator>().Play("First_Aid");
-        Invoke("SyringeOff", 3.5f);
+        foreach (KeyValuePair<int, ItemData> inven in GenericSingleton<ItemSaver>.Instance.Datas._items)
+        {
+            if (inven.Value.ItemIdx == 1)
+            {
+                if (inven.Value.Count > 1)
+                {
+                    AllOff();
+                    GenericSingleton<ItemSaver>.Instance.SubItem(inven.Value,1);
+                    GenericSingleton<UIBase>.Instance.InventoryInit();
+                    GenericSingleton<UIBase>.Instance.HealItemInit();
+                    GenericSingleton<PlayerCon>.Instance.Heal(10);
+                    _isHeal = true;
+                    //_healEffect.Play();
+                    _syringe.SetActive(true);
+                    _syringe.GetComponent<Animator>().Play("First_Aid");
+                    Invoke("SyringeOff", 3.5f);
+                }
+            }
+        }
+        
+        
     }
     void SyringeOff()
     {

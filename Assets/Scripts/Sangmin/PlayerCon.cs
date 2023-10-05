@@ -8,7 +8,8 @@ public class PlayerCon : GenericSingleton<PlayerCon>
 
     // 스피드 조정 변수
     [Header("플레이어 스탯")]
-    [SerializeField] private float _hp;
+     private float _hp;
+    [SerializeField] private float _maxhp;
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _runSpeed;
     [SerializeField] private float _crouchSpeed;
@@ -120,6 +121,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _rig = GetComponent<Rigidbody>();
         _animator = GenericSingleton<WeaponManager>.Instance.CurrentWeapon.Animator;
         _audioSource = GetComponent<AudioSource>();
+        _hp = _maxhp;
         // 초기화
         _speed = _walkSpeed;
         
@@ -135,6 +137,16 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     public void SetRotation(float rotY)
     {
         m_HorizontalAngle = rotY;
+    }
+    public void Heal(int amount)
+    {
+        _hp = _hp + amount;
+        if (_hp >= _maxhp)
+        {
+            _hp = _maxhp;
+        }
+        GenericSingleton<UIBase>.Instance.HpUIInit();
+
     }
     void Update()
     {

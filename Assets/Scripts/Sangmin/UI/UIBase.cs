@@ -12,6 +12,7 @@ public class UIBase : GenericSingleton<UIBase>
     [SerializeField] GameObject _dashCoolUI;
     [SerializeField] GameObject _HPBarUI;
     [SerializeField] GameObject _pauseUI;
+    [SerializeField] TextMeshProUGUI _healItemUI;
     [SerializeField] GameObject _inventoryUI;
     [SerializeField] GameObject _warningUI;
     [SerializeField] GameObject _crossHairs;
@@ -56,12 +57,26 @@ public class UIBase : GenericSingleton<UIBase>
             _frame = 0;
         }
     }
+    public void HealItemInit()
+    {
+        foreach(KeyValuePair<int,ItemData> inven in GenericSingleton<ItemSaver>.Instance.Datas._items)
+        {
+            if (inven.Value.ItemIdx == 1)
+            {
+                _healItemUI.text = inven.Value.Count.ToString();
+                return;
+            }
+        }
+        _healItemUI.text = "0";
+
+    }
     public void Init()
     {
         _inventoryUI.GetComponent<Inventory>().Init();
         _exchangeUI.GetComponent<ExchangeUI>().Init();
         SetCrosshair();
         WeaponSelectUIInit();
+        HealItemInit();
         AllUIOff();
     }
     
@@ -140,9 +155,9 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _HPBarUI.GetComponent<HpUI>().Init();
     }
-    public void InventoryInit(Dictionary<int, ItemData> InvenData)  //인벤 갱신
+    public void InventoryInit()  //인벤 갱신
     {
-        _inventoryUI.GetComponent<Inventory>().ReDrwing(InvenData);
+        _inventoryUI.GetComponent<Inventory>().ReDrwing(GenericSingleton<ItemSaver>.Instance.Datas._items);
     }
     public void ExchangeUIInit()                                  //거래 UI 갱신
     {

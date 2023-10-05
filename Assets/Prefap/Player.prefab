@@ -41975,7 +41975,7 @@ MonoBehaviour:
   _crouchSpeed: 3
   _dashTimer: 2
   _jumpForce: 10
-  _dashForce: 15
+  _dashForce: 45
   _dashCool: 3
   m_HorizontalAngle: 0
   m_VerticalAngle: 0

@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using static GameManager;
 
 public class BossLoading : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class BossLoading : MonoBehaviour
     IEnumerator LoadAsyncScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("YDBossStage"); // 로드할 씬 이름으로 변경
+        GenericSingleton<GameManager>.Instance.SetGameState(GameState.Loading);
 
         // 로딩 프로그레스 바를 업데이트하고 로딩 텍스트를 표시
         while (!asyncLoad.isDone)

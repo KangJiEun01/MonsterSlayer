@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using static GameManager;
 
 public class UnderLoding : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class UnderLoding : MonoBehaviour
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("YDUnderCity"); // 로드할 씬 이름으로 변경
         //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("YDNeonCity");
+        GenericSingleton<GameManager>.Instance.SetGameState(GameState.Loading);
 
         // 로딩 프로그레스 바를 업데이트하고 로딩 텍스트를 표시
         asyncLoad.allowSceneActivation = false;

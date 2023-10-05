@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static GameManager;
 
 public class PauseUI : MonoBehaviour
 {
@@ -18,7 +20,8 @@ public class PauseUI : MonoBehaviour
     }
     public void GoToMainMenu()
     {
-        //메인씬 가는함수
+        GenericSingleton<GameManager>.Instance.SetGameState(GameState.Loading);
+        SceneManager.LoadSceneAsync("GameStart");
     }
     public void QuitCancle()
     {

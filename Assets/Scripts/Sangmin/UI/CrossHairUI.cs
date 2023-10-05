@@ -5,10 +5,10 @@ using UnityEngine;
 public class CrossHairUI : MonoBehaviour
 {
     [SerializeField] GameObject[] _crosshairs;
-    public void SetCrosshairs(int idx)
+    public void SetCrosshairs()
     {
         AllOff();
-        _crosshairs[idx].SetActive(true);
+        _crosshairs[GenericSingleton<WeaponManager>.Instance.CurrentWeapon.WeaponIdx].SetActive(true);
     }
     public void AllOff()
     {

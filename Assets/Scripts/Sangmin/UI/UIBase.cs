@@ -60,7 +60,7 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _inventoryUI.GetComponent<Inventory>().Init();
         _exchangeUI.GetComponent<ExchangeUI>().Init();
-        SetCrosshair(GenericSingleton<WeaponManager>.Instance.CurrentWeapon.WeaponIdx);
+        SetCrosshair();
         WeaponSelectUIInit();
         AllUIOff();
     }
@@ -164,9 +164,9 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _weaponUI.GetComponent<WeaponUI>().UIUpdate(weapon);
     }
-    public void SetCrosshair(int idx)
+    public void SetCrosshair()
     {
-        _crossHairs.GetComponent<CrossHairUI>().SetCrosshairs(idx);
+        _crossHairs.GetComponent<CrossHairUI>().SetCrosshairs();
     }
     public void CrossHairOff()
     {

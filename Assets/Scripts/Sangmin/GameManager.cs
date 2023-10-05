@@ -146,12 +146,42 @@ public class GameManager : GenericSingleton<GameManager>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
        switch (scene.name)
-        {
+       {
             case "YDDesert":
                 SetGameState(GameState.InGame);
                 Debug.Log("사막신 로드완료");
+                GenericSingleton<UIBase>.Instance.SetCrosshair();
                 GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
+                GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
+                GenericSingleton<PlayerCon>.Instance.SetRotation(0);
+                break;
+            case "YDNeonCity":
+                SetGameState(GameState.InGame);
+                Debug.Log("네온시티신 로드완료");
+                GenericSingleton<UIBase>.Instance.SetCrosshair();
+                GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(-2.5f, 1.5f, -15));
+                GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
+                GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
+                GenericSingleton<PlayerCon>.Instance.SetRotation(0);
+                break;
+            case "YDUnderCity":
+                SetGameState(GameState.InGame);
+                Debug.Log("언더시티신 로드완료");
+                GenericSingleton<UIBase>.Instance.SetCrosshair();
+                GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(15, 1.5f, 46));
+                GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
+                GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
+                GenericSingleton<PlayerCon>.Instance.SetRotation(0);
+                break;
+            case "YDBossStage":
+                SetGameState(GameState.InGame);
+                Debug.Log("보스신 로드완료");
+                GenericSingleton<UIBase>.Instance.SetCrosshair();
+                GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(-27, 1.5f, 16));
+                GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
+                GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
+                GenericSingleton<PlayerCon>.Instance.SetRotation(90);
                 break;
         }
     }

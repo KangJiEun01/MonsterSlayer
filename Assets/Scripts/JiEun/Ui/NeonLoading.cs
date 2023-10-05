@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using static GameManager;
 
 public class NeonLoading : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class NeonLoading : MonoBehaviour
     {
         //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("YDUnderCity"); // 로드할 씬 이름으로 변경
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("YDNeonCity");
-
+        GenericSingleton<GameManager>.Instance.SetGameState(GameState.Loading);
         // 로딩 프로그레스 바를 업데이트하고 로딩 텍스트를 표시
         asyncLoad.allowSceneActivation = false;
         // while (!asyncLoad.isDone)
@@ -35,10 +36,10 @@ public class NeonLoading : MonoBehaviour
         }
         asyncLoad.allowSceneActivation = true;
         //GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(14.8f, 3f, 50.59f)); //언더시티
-        GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0f, 0f, 0f));
-        GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
-        GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(-11.47f, 7f, 2.26f)); //구네온시티
-        GenericSingleton<PlayerCon>.Instance.SetRotation(90);
+        //GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0f, 0f, 0f));
+        //GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
+        //GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(-11.47f, 7f, 2.26f)); //구네온시티
+        //GenericSingleton<PlayerCon>.Instance.SetRotation(90);
         
     }
 }

@@ -41,6 +41,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
+            
             Heal();
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : GenericSingleton<GameManager>
 {
@@ -36,74 +37,78 @@ public class GameManager : GenericSingleton<GameManager>
         GenericSingleton<UIBase>.Instance.Init();
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<DataManager>.Instance.Init();
-        SetGameState(GameState.InGame);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SetGameState(GameState.Loading);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha8))
+        //if (Input.GetKeyDown(KeyCode.Alpha8))
+        //{
+        //    GenericSingleton<DataManager>.Instance.SaveData(0);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha9))
+        //{
+        //    GenericSingleton<DataManager>.Instance.LoadData(0);
+        //}
+        if (_currentState != GameState.Loading)
         {
-            GenericSingleton<DataManager>.Instance.SaveData(0);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            GenericSingleton<DataManager>.Instance.LoadData(0);
-        }
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (!GenericSingleton<UIBase>.Instance.ExchangeOn)
+                {
+                    if (!GenericSingleton<UIBase>.Instance.PauseUIOn)
+                    {
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            if (!GenericSingleton<UIBase>.Instance.ExchangeOn)
-            {
-                if (!GenericSingleton<UIBase>.Instance.PauseUIOn)
-                {
-                    
-                    GenericSingleton<UIBase>.Instance.InvenWeaponOff();
-                    GenericSingleton<UIBase>.Instance.ShowExchangeUI(true);
-                }
-                
-            }
-            else
-            { 
-                GenericSingleton<UIBase>.Instance.ShowExchangeUI(false);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            if (!GenericSingleton<UIBase>.Instance.WeaponOn)
-            {
-                if (!GenericSingleton<UIBase>.Instance.PauseUIOn)
-                {
-                    GenericSingleton<UIBase>.Instance.InvenWeaponOff();
-                    GenericSingleton<UIBase>.Instance.ShowWeaponSelectUI(true);
-                }
-                
-            }
-            else if (_currentState == GameState.Paused)
-            {
-                GenericSingleton<UIBase>.Instance.ShowWeaponSelectUI(false);
-            }   
-        }
+                        GenericSingleton<UIBase>.Instance.InvenWeaponOff();
+                        GenericSingleton<UIBase>.Instance.ShowExchangeUI(true);
+                    }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(_currentState == GameState.Paused)
-            {
-                if(GenericSingleton<UIBase>.Instance.ExchangeOn || GenericSingleton<UIBase>.Instance.WeaponOn)
-                {
-                    GenericSingleton<UIBase>.Instance.InvenWeaponOff();
                 }
                 else
                 {
-                    GenericSingleton<UIBase>.Instance.ShowPauseUI(false);
+                    GenericSingleton<UIBase>.Instance.ShowExchangeUI(false);
                 }
             }
-            else if (_currentState == GameState.InGame)
+            if (Input.GetKeyDown(KeyCode.O))
             {
-                GenericSingleton<UIBase>.Instance.ShowPauseUI(true);
+                if (!GenericSingleton<UIBase>.Instance.WeaponOn)
+                {
+                    if (!GenericSingleton<UIBase>.Instance.PauseUIOn)
+                    {
+                        GenericSingleton<UIBase>.Instance.InvenWeaponOff();
+                        GenericSingleton<UIBase>.Instance.ShowWeaponSelectUI(true);
+                    }
+
+                }
+                else
+                {
+                    GenericSingleton<UIBase>.Instance.ShowWeaponSelectUI(false);
+                }
             }
-            
-            
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (_currentState == GameState.Paused)
+                {
+                    if (GenericSingleton<UIBase>.Instance.ExchangeOn || GenericSingleton<UIBase>.Instance.WeaponOn)
+                    {
+                        GenericSingleton<UIBase>.Instance.InvenWeaponOff();
+                    }
+                    else
+                    {
+                        GenericSingleton<UIBase>.Instance.ShowPauseUI(false);
+                    }
+                }
+                else if (_currentState == GameState.InGame)
+                {
+                    GenericSingleton<UIBase>.Instance.ShowPauseUI(true);
+                }
+
+
+            }
         }
+        
 
 
     }
@@ -138,5 +143,17 @@ public class GameManager : GenericSingleton<GameManager>
                 break;
         }
     }
-    
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+       switch (scene.name)
+        {
+            case "YDDesert":
+                SetGameState(GameState.InGame);
+                Debug.Log("사막신 로드완료");
+                GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0, 0, 0));
+                GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
+                break;
+        }
+    }
+
 }

@@ -42862,6 +42862,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseUI
       objectReference: {fileID: 0}
+    - target: {fileID: 9058350026998512044, guid: 19fdc724ae0431848a13c2f567d1a563, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9058350026998512048, guid: 19fdc724ae0431848a13c2f567d1a563, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -42995,6 +42999,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b244e2e7128dfc541bc4abc580037f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _quitCheckUI: {fileID: 0}
+  _optionUI: {fileID: 0}
 --- !u!1 &1809902319
 GameObject:
   m_ObjectHideFlags: 0

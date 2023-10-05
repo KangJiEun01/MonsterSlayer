@@ -101,7 +101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &256104267
 Transform:
   m_ObjectHideFlags: 0
@@ -38867,7 +38867,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 288
+    m_Bits: 289
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -41977,7 +41977,7 @@ MonoBehaviour:
   _jumpForce: 10
   _dashForce: 15
   _dashCool: 3
-  m_HorizontalAngle: 90
+  m_HorizontalAngle: 0
   m_VerticalAngle: 0
   _lookSensitivity: 1
   CameraPosition: {fileID: 6717542893835623862}

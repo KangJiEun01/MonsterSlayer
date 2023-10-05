@@ -9,13 +9,12 @@ public class FadeOut : MonoBehaviour
     float currentTime = 0f;
     void Start()
     {
-        fadeImage = GetComponent<Image>();
+        fadeImage=GetComponent<Image>();
     }
     private void OnEnable()
     {
-        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1f);
-        currentTime = 0f;
         Invoke("ActiveFalse", 5f);
+
     }
     void Update()
     {
@@ -30,6 +29,8 @@ public class FadeOut : MonoBehaviour
     void ActiveFalse()
     {
         fadeobj.GetComponent<FadeOut>().enabled = false;
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1f);
+        currentTime = 0f;
         fadeobj.SetActive(false);
     }
 }

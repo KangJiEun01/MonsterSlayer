@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-
-
 public class Spidercontroller : MonoBehaviour
 {
     [SerializeField] GameObject deathEffect;
@@ -11,6 +9,7 @@ public class Spidercontroller : MonoBehaviour
     Transform spiderpos;
     Animation Ani;
     float _hp;
+    float timer = 4;
 
     bool attack = false;
     bool spiderDeath = false;
@@ -24,8 +23,6 @@ public class Spidercontroller : MonoBehaviour
         Ani = GetComponent<Animation>();
         Ani.Play("walk");
     }
-
-    float timer = 4;
 
     void Update()
     {
@@ -59,7 +56,6 @@ public class Spidercontroller : MonoBehaviour
                 agent.SetDestination(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z));
                 if (Vector3.Distance(transform.position, player.transform.position) < 3f)
                 {
-                    Debug.Log("╬Нец");
                     //Ani.Play("attack2");
                     Invoke("walk", 2f);
                 }

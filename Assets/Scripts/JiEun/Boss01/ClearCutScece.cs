@@ -6,6 +6,7 @@ public class ClearCutScece : MonoBehaviour
 {
     void Start()
     {
+        //Invoke("EndCutScece", 30f);
         Invoke("EndCutScece", 30f);
     }
     void EndCutScece()

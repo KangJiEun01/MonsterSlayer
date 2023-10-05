@@ -84,7 +84,7 @@ public class Enemy01controller : MonoBehaviour
         if (player != null)
         {
             hp = GetComponent<Target>().Hp;
-            if (hp == 0)
+            if (hp <= 0)
             {
                 _setActive = true;
                 anim.Play("Die");
@@ -148,7 +148,8 @@ public class Enemy01controller : MonoBehaviour
                 Vector3 worldPosition = bulletPos.TransformPoint(attackst);
                 temp.transform.position = worldPosition;
                 //Vector3 dir =player.transform.position; 
-                Vector3 dir = transform.forward; //앞방향
+                //Vector3 dir = transform.forward; //앞방향
+                Vector3 dir = new Vector3(transform.forward.x, transform.forward.y-0.3f, transform.forward.z);
                 temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
                 Time_current = Time_Sumcooltime;
                 Time_start = Time.time;

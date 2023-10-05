@@ -121,7 +121,7 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
     void Skill() //거리가 멀때는 총알 발사
     {
         //GetComponent<Boss03Attack02>().enabled = true;
-        GetComponent<Boss03Skill02>().enabled = true;
+        //GetComponent<Boss03Skill02>().enabled = true;
     }
     void Attackhp00()
     {

@@ -183,6 +183,7 @@ public class UIBase : GenericSingleton<UIBase>
     public void GoToMainMenu()
     {
         _pauseUI.GetComponent<PauseUI>().GoToMainMenu();
+        ShowPauseUI(false);
     }
     public void QuitCancle()
     {

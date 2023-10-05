@@ -65,6 +65,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // 필요한 컴포넌트
     [SerializeField]
     private Camera _camera;
+    public Camera Camera { get { return _camera; } }
     [SerializeField] Camera _weaponCamera;
     private Rigidbody _rig;
     private CapsuleCollider _collider;

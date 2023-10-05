@@ -13,4 +13,13 @@ public class boss01ontrigger : MonoBehaviour
             //Debug.Log("ÄÆ¾ÀÀÌµ¿");
         } 
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            //bossPrefab.SetActive(true);
+            SceneManager.LoadScene("Boss01Scece 1");
+            //Debug.Log("ÄÆ¾ÀÀÌµ¿");
+        }
+    }
 }

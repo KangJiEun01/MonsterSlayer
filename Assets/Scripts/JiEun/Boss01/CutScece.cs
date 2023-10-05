@@ -13,7 +13,8 @@ public class CutScece : MonoBehaviour
     {
         //PlayerUi.SetActive(true);
         SceneManager.LoadScene("YDBossStage02");
-        GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(15f, -1f, 14f));
+        GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0, 0, 0));
+        GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(10f, 2f, 18f));
         GenericSingleton<PlayerCon>.Instance.SetRotation(90);
     }
 }

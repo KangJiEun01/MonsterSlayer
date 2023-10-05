@@ -120,6 +120,7 @@ public class GameManager : GenericSingleton<GameManager>
             case GameState.Loading:
                 GenericSingleton<UIBase>.Instance.CrossHairOff();
                 GenericSingleton<UIBase>.Instance.ShowPlayerUI(false);
+                GenericSingleton<PlayerCon>.Instance.Camera.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 break;
@@ -132,6 +133,7 @@ public class GameManager : GenericSingleton<GameManager>
             case GameState.InGame:
                 Time.timeScale = 1;
                 GenericSingleton<UIBase>.Instance.ShowPlayerUI(true);
+                GenericSingleton<PlayerCon>.Instance.Camera.gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 break;

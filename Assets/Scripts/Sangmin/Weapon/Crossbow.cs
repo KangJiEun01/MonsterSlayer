@@ -1,5 +1,4 @@
 
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Crossbow : Projectile

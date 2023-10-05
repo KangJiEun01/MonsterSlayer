@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class GenericSingleton<T> : MonoBehaviour where T : class

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Boss03Attack02 : MonoBehaviour
 {

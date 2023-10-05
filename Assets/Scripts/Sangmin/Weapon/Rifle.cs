@@ -1,6 +1,6 @@
-using System.Collections;
+
 using UnityEngine;
-using static PlayerCon;
+
 
 public class Rifle : HitScan
 {

@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45aa0a87d91709043be7e839273a4b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentState: 0
+  _startState: 1
 --- !u!1 &728147935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,6 +2026,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 256104269, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6717542893286447462, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2073,6 +2077,10 @@ PrefabInstance:
     - target: {fileID: 6717542893286447464, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544086250526411257, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
+      propertyPath: _dashForce
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}

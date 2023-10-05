@@ -38,12 +38,12 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         {
             _currentWeapon.OnUpdate();
             SwapWeapon();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Heal();
+            }
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            
-            Heal();
-        }
+        
     }
     void Heal()
     {
@@ -53,16 +53,16 @@ public class WeaponManager : GenericSingleton<WeaponManager>
             {
                 if (inven.Value.Count > 1)
                 {
-                    AllOff();
-                    GenericSingleton<ItemSaver>.Instance.SubItem(inven.Value,1);
-                    GenericSingleton<UIBase>.Instance.InventoryInit();
-                    GenericSingleton<UIBase>.Instance.HealItemInit();
-                    GenericSingleton<PlayerCon>.Instance.Heal(10);
                     _isHeal = true;
-                    //_healEffect.Play();
+                    AllOff();
                     _syringe.SetActive(true);
                     _syringe.GetComponent<Animator>().Play("First_Aid");
                     Invoke("SyringeOff", 3.5f);
+                    GenericSingleton<PlayerCon>.Instance.Heal(10);
+                    GenericSingleton<ItemSaver>.Instance.SubItem(inven.Value,1);
+                    GenericSingleton<UIBase>.Instance.InventoryInit();
+                    GenericSingleton<UIBase>.Instance.HealItemInit();
+                    //_healEffect.Play();
                 }
             }
         }

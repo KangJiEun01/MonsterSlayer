@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : GenericSingleton<GameManager>
 {
-    [SerializeField] GameState _currentState;
-    
+    GameState _currentState;
+    [SerializeField] GameState _startState;
     public enum GameState
     {
         Loading,
@@ -37,7 +37,7 @@ public class GameManager : GenericSingleton<GameManager>
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<DataManager>.Instance.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SetGameState(GameState.Loading);
+        SetGameState(_startState);
     }
 
     void Update()

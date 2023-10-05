@@ -80,7 +80,7 @@ public class UIBase : GenericSingleton<UIBase>
         AllUIOff();
     }
     
-    public void ShowPauseUI(bool ShowUI)
+    public void ShowPauseUI(bool ShowUI) 
     {
         _pauseUI.SetActive(ShowUI);
         _pauseUIOn = ShowUI;
@@ -91,6 +91,8 @@ public class UIBase : GenericSingleton<UIBase>
         else
         {
             GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
+            ShowOptionUI(false);
+            ShowQuitCheckUI(false);
         }
     }
     public void ShowWeaponSelectUI(bool ShowUI)
@@ -120,7 +122,7 @@ public class UIBase : GenericSingleton<UIBase>
             GenericSingleton<GameManager>.Instance.SetGameState(GameManager.GameState.InGame);
         }
     }
-    public void ShowPlayerUI(bool ShowUI)
+    public void ShowPlayerUI(bool ShowUI)                         //플레이어 UI
     {
         _playerUI.SetActive(ShowUI);
     }
@@ -128,7 +130,7 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _warningUI.SetActive(isShow);
     }
-    public void ShowGameOverUI(bool isShow)
+    public void ShowGameOverUI(bool isShow)                       //게임오버 UI
     {
         _gamoverUI.SetActive(isShow);
     }
@@ -179,32 +181,32 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _weaponUI.GetComponent<WeaponUI>().UIUpdate(weapon);
     }
-    public void SetCrosshair()
+    public void SetCrosshair()                                        //크로스헤어 갱신
     {
         _crossHairs.GetComponent<CrossHairUI>().SetCrosshairs();
     }
-    public void CrossHairOff()
+    public void CrossHairOff()                                      //크로스헤어 끄기
     {
         _crossHairs.GetComponent<CrossHairUI>().AllOff();
     }
-    public void ShowOptionUI(bool isShow)
+    public void ShowOptionUI(bool isShow)                             //옵션창 
     {
         _pauseUI.GetComponent<PauseUI>().ShowOptionUI(isShow);
     }
-    public void ShowQuitCheckUI(bool isShow)
+    public void ShowQuitCheckUI(bool isShow)                        //게임종료 확인창 
     {
         _pauseUI.GetComponent<PauseUI>().ShowQuitCheckUI(isShow);
     }
-    public void GoToMainMenu()
+    public void GoToMainMenu()                                        //메인메뉴 가기
     {
         _pauseUI.GetComponent<PauseUI>().GoToMainMenu();
         ShowPauseUI(false);
     }
-    public void QuitCancle()
+    public void QuitCancle()                                        //게임 종료 취소
     {
         _pauseUI.GetComponent<PauseUI>().QuitCancle();
     }
-    public void QuitGame()
+    public void QuitGame()                                            //게임 종료 
     {
         _pauseUI.GetComponent<PauseUI>().QuitGame();
     }

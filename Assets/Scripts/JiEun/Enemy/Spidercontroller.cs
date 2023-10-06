@@ -1,8 +1,18 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
+using System.Collections;
+
+
 public class Spidercontroller : MonoBehaviour
 {
-    [SerializeField] GameObject deathEffect;
+    public VisualEffect VFXGraph;
+    public SkinnedMeshRenderer skinnedMesh;
+    public float dissolveRate = 0.0125f;
+    public float refreshRate = 0.025f;
+    [SerializeField] private Material[] skinnedMaterials;
+
+    //[SerializeField] GameObject deathEffect;
     GameObject player;
     GameObject camera;
     NavMeshAgent agent;
@@ -15,6 +25,11 @@ public class Spidercontroller : MonoBehaviour
     bool spiderDeath = false;
     void Start()
     {
+        if (skinnedMesh != null)
+        {
+            skinnedMaterials = skinnedMesh.materials;
+        }
+
         camera = Camera.main.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log(player);
@@ -29,7 +44,8 @@ public class Spidercontroller : MonoBehaviour
         _hp = GetComponent<Target>().Hp;
         if (_hp <= 0)
         {
-            deathEffect.SetActive(true);
+            //deathEffect.SetActive(true);
+            StartCoroutine(DissolveCo());
             spiderDeath = true;
             Ani.Play("death1");
             Invoke("Death", 1.8f);
@@ -82,9 +98,33 @@ public class Spidercontroller : MonoBehaviour
     {
         //Destroy(gameObject);
         gameObject.SetActive(false); //¿À·ù****
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }
     void RedWaringActFalse()
     {
         GenericSingleton<UIBase>.Instance.ShowWarningUI(false);
+    }
+
+    IEnumerator DissolveCo()
+    {
+        if (VFXGraph != null)
+        {
+            VFXGraph.Play();
+        }
+
+        if (skinnedMaterials.Length > 0)
+        {
+            float counter = 0;
+
+            while (skinnedMaterials[0].GetFloat("_DissolveAmount") < 1)
+            {
+                counter += dissolveRate;
+                for (int i = 0; i < skinnedMaterials.Length; i++)
+                {
+                    skinnedMaterials[i].SetFloat("_DissolveAmount", counter);
+                }
+                yield return new WaitForSeconds(refreshRate);
+            }
+        }
     }
 }

@@ -8,7 +8,6 @@ public class Dissolve : MonoBehaviour
     public SkinnedMeshRenderer skinnedMesh;
     public float dissolveRate = 0.0125f;
     public float refreshRate = 0.025f;
-
     private Material[] skinnedMaterials;
 
 

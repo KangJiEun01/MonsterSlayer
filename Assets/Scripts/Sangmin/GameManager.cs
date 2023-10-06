@@ -38,6 +38,31 @@ public class GameManager : GenericSingleton<GameManager>
         SceneManager.sceneLoaded += OnSceneLoaded;
         SetGameState(_startState);
     }
+    public void StartNewGame()
+    {
+        GenericSingleton<ItemSaver>.Instance.Init();
+        GenericSingleton<ExchangeSystem>.Instance.Init();
+        GenericSingleton<WeaponManager>.Instance.Init();
+        GenericSingleton<PlayerCon>.Instance.Init();
+        GenericSingleton<UIBase>.Instance.Init();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SetGameState(GameState.Loading);
+    }
+    public void LoadGame()
+    {
+        GenericSingleton<DataManager>.Instance.LoadData(0);
+        GenericSingleton<PlayerCon>.Instance.Init();
+        GenericSingleton<UIBase>.Instance.Init();
+        SetGameState(GameState.Loading);
+    }
+    public void DemonScene()
+    {
+        StartNewGame();
+        GenericSingleton<ItemSaver>.Instance.DemoSceneItem();
+        GenericSingleton<ExchangeSystem>.Instance.Init();
+        GenericSingleton<PlayerCon>.Instance.Init();
+        GenericSingleton<UIBase>.Instance.Init();
+    }
 
     void Update()
     {
@@ -175,7 +200,7 @@ public class GameManager : GenericSingleton<GameManager>
                 GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(15, 1.5f, 46));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
                 GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
-                GenericSingleton<PlayerCon>.Instance.SetRotation(0);
+                GenericSingleton<PlayerCon>.Instance.SetRotation(180);
                 break;
             case "YDBossStage":
                 SetGameState(GameState.InGame);

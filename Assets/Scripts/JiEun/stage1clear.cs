@@ -7,6 +7,7 @@ public class stage1clear : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GenericSingleton<DataManager>.Instance.SaveData(0);
             SceneManager.LoadScene("NeonCityLoadingScene");
         }
     }

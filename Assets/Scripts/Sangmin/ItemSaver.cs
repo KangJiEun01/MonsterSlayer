@@ -11,6 +11,15 @@ public class ItemSaver : GenericSingleton<ItemSaver>
     public void Init()
     {
         datas._items = new Dictionary<int, ItemData>();
+        
+        foreach(var item in datas._itemDatas)
+        {
+            datas._items.Add(item._idx, new ItemData(item._idx,item._count));
+        }
+
+    }
+    public void DemoSceneItem()
+    {
         datas._items.Add(0, new ItemData(0, 10));
         datas._items.Add(1, new ItemData(1, 10));
         datas._items.Add(2, new ItemData(2, 10));
@@ -19,11 +28,6 @@ public class ItemSaver : GenericSingleton<ItemSaver>
         datas._items.Add(5, new ItemData(5, 10));
         datas._items.Add(6, new ItemData(6, 10));
         datas._items.Add(7, new ItemData(7, 10));
-        foreach(var item in datas._itemDatas)
-        {
-            datas._items.Add(item._idx, new ItemData(item._idx,item._count));
-        }
-
     }
     public void SubItem(ItemData item,int count)
     {

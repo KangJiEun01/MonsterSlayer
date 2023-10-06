@@ -5,14 +5,21 @@ using UnityEngine;
 
 public class DataManager : GenericSingleton<DataManager>
 {
-    GameDataWrapper _gameDatas = new GameDataWrapper();
+    GameDataWrapper _gameDatas = null;
     public void Init()
     {
-        _gameDatas._datas.Add(new GameData());
+        string filePath = Path.Combine(Application.persistentDataPath, "GameData.json");
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            _gameDatas = JsonUtility.FromJson<GameDataWrapper>(json);
+        }      
     }
     public void SaveData(int idx)
     {
         Debug.Log("데이터 저장");
+        _gameDatas = new GameDataWrapper();
+        _gameDatas._datas.Add(new GameData());
         GameData data = _gameDatas._datas[idx];
         data.SaveWeaponData();
         data.SaveRecipeData(GenericSingleton<ExchangeSystem>.Instance.Recipes);
@@ -24,13 +31,16 @@ public class DataManager : GenericSingleton<DataManager>
 
 
     }
+    public GameDataWrapper Data()
+    {
+        return _gameDatas;
+    }
     public void LoadData(int idx)
     {
         string filePath = Path.Combine(Application.persistentDataPath, "GameData.json");
         string json = File.ReadAllText(filePath);
         _gameDatas = JsonUtility.FromJson<GameDataWrapper>(json);
 
-        Debug.Log("데이터 로드");
 
         GameData data = _gameDatas._datas[idx];
         GenericSingleton<ExchangeSystem>.Instance.LoadRecipesData(data._recipeDatas);
@@ -40,9 +50,6 @@ public class DataManager : GenericSingleton<DataManager>
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
         GenericSingleton<WeaponManager>.Instance.UIUpdate();
-
-
-
     }
 }
 

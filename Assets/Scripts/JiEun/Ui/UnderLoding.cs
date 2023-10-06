@@ -40,9 +40,9 @@ public class UnderLoding : MonoBehaviour
         //GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(-14.8f, 20f, -112.5f)); //언더시티
         //GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(-15.47f, 5f, 2.26f)); //네온시티
         //GenericSingleton<ParentSingleTon>.Instance.SetRotation(180);
-        GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0f, 0f, 0f));
-        GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
-        GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(14.3f, 3.5f, 46.8f)); //구네온시티
-        GenericSingleton<PlayerCon>.Instance.SetRotation(-180);
+        //GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0f, 0f, 0f));
+        //GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
+        //GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(14.3f, 3.5f, 46.8f)); //구네온시티
+        //GenericSingleton<PlayerCon>.Instance.SetRotation(-180);
     }
 }

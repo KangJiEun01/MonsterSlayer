@@ -1521,8 +1521,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f038eca21917e8a4b8b3fae275990700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRotate: 1
-  speed: 10
 --- !u!114 &56226320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13677,8 +13675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f038eca21917e8a4b8b3fae275990700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRotate: 1
-  speed: 10
 --- !u!114 &657446665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15853,6 +15849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manualUi: {fileID: 1483146123}
+  _loadButton: {fileID: 1706874103}
 --- !u!4 &739957891
 Transform:
   m_ObjectHideFlags: 0
@@ -16684,6 +16681,10 @@ PrefabInstance:
     - target: {fileID: 4169150593454754477, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
       propertyPath: m_Name
       value: UIBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 5486020258350762123, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
@@ -32695,8 +32696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f038eca21917e8a4b8b3fae275990700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRotate: 1
-  speed: 10
 --- !u!114 &1403546324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39390,7 +39389,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 739957890}
         m_TargetAssemblyTypeName: ButtonControll, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: ClickLoadButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

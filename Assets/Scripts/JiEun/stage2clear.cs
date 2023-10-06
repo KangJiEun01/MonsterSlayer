@@ -7,6 +7,7 @@ public class stage2clear : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GenericSingleton<DataManager>.Instance.SaveData(0);
             SceneManager.LoadScene("UnderCityLoadingScene");
         }
     }

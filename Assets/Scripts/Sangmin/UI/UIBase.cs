@@ -96,6 +96,13 @@ public class UIBase : GenericSingleton<UIBase>
             ShowQuitCheckUI(false);
         }
     }
+    void PauseUIOff()
+    {
+        _pauseUI.SetActive(false);
+        _pauseUIOn = false  ;
+        ShowOptionUI(false);
+        ShowQuitCheckUI(false);
+    }
     public void ShowWeaponSelectUI(bool ShowUI)
     {
         _weaponSelectUI.SetActive(ShowUI);
@@ -206,8 +213,8 @@ public class UIBase : GenericSingleton<UIBase>
     public void GoToMainMenu()                                        //메인메뉴 가기
     {
         ShowWarningUI(false);
-        ShowPauseUI(false);
         ShowGameOverUI(false);
+        PauseUIOff();
         _pauseUI.GetComponent<PauseUI>().GoToMainMenu();
     }
     public void QuitCancle()                                        //게임 종료 취소

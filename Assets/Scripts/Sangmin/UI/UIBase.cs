@@ -12,6 +12,7 @@ public class UIBase : GenericSingleton<UIBase>
     [SerializeField] GameObject _dashCoolUI;
     [SerializeField] GameObject _HPBarUI;
     [SerializeField] GameObject _pauseUI;
+    [SerializeField] GameObject _pickUpUI;
     [SerializeField] TextMeshProUGUI _healItemUI;
     [SerializeField] GameObject _inventoryUI;
     [SerializeField] GameObject _warningUI;
@@ -133,6 +134,10 @@ public class UIBase : GenericSingleton<UIBase>
     public void ShowPlayerUI(bool ShowUI)                         //플레이어 UI
     {
         _playerUI.SetActive(ShowUI);
+    }
+    public void ShowPickUpUI(bool ShowUI)                         //픽업 UI
+    {
+        _pickUpUI.SetActive(ShowUI);
     }
     public void ShowWarningUI(bool isShow)                         //데미지 받을때 UI
     {

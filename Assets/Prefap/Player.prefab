@@ -38868,7 +38868,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 289
+    m_Bits: 288
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -38927,6 +38927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _syringe: {fileID: 5039069784403856515}
   _healEffect: {fileID: 1837015061260710474}
+  _healAmount: 20
 --- !u!1 &6717542892865054097
 GameObject:
   m_ObjectHideFlags: 0
@@ -41762,7 +41763,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 3738839
+    m_Bits: 3742935
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -41938,10 +41939,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 5d49a8fe211bdff449a63b2fbaefbc64, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.55
-  m_Height: 1.94
+  m_Radius: 0.5500001
+  m_Height: 3.3149278
   m_Direction: 1
-  m_Center: {x: 0, y: -0.5, z: 0.5}
+  m_Center: {x: 0, y: 0.25280225, z: 0.5}
 --- !u!54 &1762593558407861039
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -156,7 +156,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         TryRun();
         TryDash();
         Rotate();
-       // OpenHelper();
+        PickPlant();
 
     }
     private void FixedUpdate()
@@ -195,14 +195,14 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            //if(!_runToggle)GenericSingleton<UIBase>.Instance.ShowRunToggleUI(true);
+            
             Running();
             _runTimer += Time.deltaTime;
             if (_runTimer > 2)
             {
                 _runTimer = 0;
                 _runToggle = true;
-                //GenericSingleton<UIBase>.Instance.ShowRunToggleUI(false);
+                
             }
         }
         else if (_runToggle)  Running(); 
@@ -251,7 +251,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     // 달리기 취소
     private void RunningCancel()
     {
-        //GenericSingleton<UIBase>.Instance.ShowRunToggleUI(false);
+        
         _isRun = false;
         _speed = _walkSpeed;
         _runTimer = 0;
@@ -293,7 +293,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
 
     void Rotate()
     {
-        // Turn player
+
         float turnPlayer = Input.GetAxis("Mouse X") * _lookSensitivity;
         m_HorizontalAngle = m_HorizontalAngle + turnPlayer;
 
@@ -304,7 +304,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         currentAngles.y = m_HorizontalAngle;
         transform.localEulerAngles = currentAngles;
 
-        // Camera look up/down
+       
         var turnCam = -Input.GetAxis("Mouse Y");
         turnCam = turnCam * _lookSensitivity;
         m_VerticalAngle = Mathf.Clamp(turnCam + m_VerticalAngle, -89.0f, 89.0f);
@@ -313,31 +313,25 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         CameraPosition.transform.localEulerAngles = currentAngles;
         //GameObject.Find("MinimapCamera").GetComponent<MinimapCamera>().RotateMinCam();
     }
-    //void OpenHelper()
-    //{
-    //    RaycastHit hit;
-    //    if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.F)) && _helperClose)
-    //    {
-    //        Debug.Log("인벤꺼짐");
-    //        GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("open");
-    //        GenericSingleton<UIBase>.Instance.ShowInvenUI(false);
-    //        _helperClose = false;
-    //        return;
-    //    }
-    //    Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-    //    if (Physics.Raycast(ray, out hit, 5f, 1 << LayerMask.NameToLayer("Helper")))
-    //    {
-    //        if(!_helperClose)GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(true);
-    //        if (Input.GetKeyDown(KeyCode.F))
-    //        {
-    //            GenericSingleton<HelperAI>.Instance.GetComponent<Animator>().Play("close");
-    //            _helperClose = true;
-    //            Debug.Log("인벤켜짐");
-    //            GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(false);
-    //            GenericSingleton<UIBase>.Instance.ShowInvenUI(true);
-    //        }
-    //    }else GenericSingleton<UIBase>.Instance.ShowInvenCheckUI(false);
-    //}
+    
+    void PickPlant()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        if (Physics.Raycast(ray, out hit, 5f, 1 << LayerMask.NameToLayer("Plant")))
+        {
+            
+            GenericSingleton<UIBase>.Instance.ShowPickUpUI(true);
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                Debug.Log("약초 주움");
+                GenericSingleton<UIBase>.Instance.ShowPickUpUI(false);
+                hit.transform.gameObject.SetActive(false);
+                GenericSingleton<ItemSaver>.Instance.AddItem(new ItemData(0,1));
+            }
+        }
+        else GenericSingleton<UIBase>.Instance.ShowPickUpUI(false);
+    }
     void OnDamage(float damage)
     {
         if (!_onDamage)

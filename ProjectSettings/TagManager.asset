@@ -14,6 +14,7 @@ TagManager:
   - PlusIcon
   - Arrow
   - PlayerPos
+  - Plant
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - 
   - Bullet
   - Target
-  - 
+  - Plant
   - 
   - 
   - 

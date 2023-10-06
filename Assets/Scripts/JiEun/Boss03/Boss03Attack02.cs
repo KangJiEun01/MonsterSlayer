@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Boss03Attack02 : MonoBehaviour
 {
-    [SerializeField] GameObject player; //플레이어만 태그 찾아서 수정
+    GameObject player;
     [SerializeField] GameObject bullet;
     [SerializeField] Transform bulletPos;
     [SerializeField] float bulletSpeed;

@@ -13,6 +13,7 @@ public class FadeOut : MonoBehaviour
     }
     private void OnEnable()
     {
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1f);
         Invoke("ActiveFalse", 5f);
     }
     void Update()

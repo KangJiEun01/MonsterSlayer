@@ -6,5 +6,6 @@ public class StartStage : MonoBehaviour
     void Start()
     {
         Fadeout.SetActive(true);
+        Fadeout.GetComponent<FadeOut>().enabled = true;
     }
 }

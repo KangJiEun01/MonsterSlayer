@@ -107,6 +107,7 @@ public class GameManager : GenericSingleton<GameManager>
 
             }
         }
+        Debug.Log(_currentState);
         
 
 

@@ -19,6 +19,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     int _syringeCount;
     [SerializeField] GameObject _syringe;
     [SerializeField] ParticleSystem _healEffect;
+    [SerializeField] int _healAmount = 20;
     
     bool _isHeal;
     bool _isSwap;
@@ -58,16 +59,21 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                     _syringe.SetActive(true);
                     _syringe.GetComponent<Animator>().Play("First_Aid");
                     Invoke("SyringeOff", 3.5f);
-                    GenericSingleton<PlayerCon>.Instance.Heal(10);
+                    Invoke("HealEffect", 1.5f);
+                    GenericSingleton<PlayerCon>.Instance.Heal(_healAmount);
                     GenericSingleton<ItemSaver>.Instance.SubItem(inven.Value,1);
                     GenericSingleton<UIBase>.Instance.InventoryInit();
                     GenericSingleton<UIBase>.Instance.HealItemInit();
-                    //_healEffect.Play();
+                    
                 }
             }
         }
         
         
+    }
+    void HealEffect()
+    {
+        _healEffect.Play();
     }
     void SyringeOff()
     {

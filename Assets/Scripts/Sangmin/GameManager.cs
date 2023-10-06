@@ -139,8 +139,10 @@ public class GameManager : GenericSingleton<GameManager>
                 break;
             case GameState.GameOver:
                 Time.timeScale = 0;
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
+                GenericSingleton<UIBase>.Instance.CrossHairOff();
+                GenericSingleton<UIBase>.Instance.ShowPlayerUI(false);
+                Cursor.visible = true;
                 break;
         }
     }

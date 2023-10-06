@@ -19,8 +19,9 @@ public class PauseUI : MonoBehaviour
     }
     public void GoToMainMenu()
     {
-        SceneManager.LoadSceneAsync("GameStart");
         GenericSingleton<GameManager>.Instance.SetGameState(GameState.Loading);
+        SceneManager.LoadSceneAsync("GameStart");
+        
     }
     public void QuitCancle()
     {

@@ -205,8 +205,10 @@ public class UIBase : GenericSingleton<UIBase>
     }
     public void GoToMainMenu()                                        //메인메뉴 가기
     {
-        _pauseUI.GetComponent<PauseUI>().GoToMainMenu();
+        ShowWarningUI(false);
         ShowPauseUI(false);
+        ShowGameOverUI(false);
+        _pauseUI.GetComponent<PauseUI>().GoToMainMenu();
     }
     public void QuitCancle()                                        //게임 종료 취소
     {

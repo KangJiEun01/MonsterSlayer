@@ -132,7 +132,8 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
         CalExchange();
         GenericSingleton<UIBase>.Instance.InventoryInit();
         GenericSingleton<UIBase>.Instance.ExchangeUIInit();
-    
+        GenericSingleton<UIBase>.Instance.HealItemInit();
+
     }
     public void LoadRecipesData(List<RecipeData> recipes)
     {

@@ -33,6 +33,8 @@ public class GameManager : GenericSingleton<GameManager>
         GenericSingleton<ExchangeSystem>.Instance.Init();
         GenericSingleton<WeaponManager>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
+        GenericSingleton<UIBase>.Instance.MasterVolume += MasterSoundVolume;
+        GenericSingleton<WeaponManager>.Instance.SoundInit();
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<DataManager>.Instance.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -158,6 +160,7 @@ public class GameManager : GenericSingleton<GameManager>
             case GameState.InGame:
                 Time.timeScale = 1;
                 GenericSingleton<UIBase>.Instance.ShowPlayerUI(true);
+                GenericSingleton<UIBase>.Instance.SetCrosshair();
                 GenericSingleton<PlayerCon>.Instance.Camera.gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -211,7 +214,12 @@ public class GameManager : GenericSingleton<GameManager>
                 GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<PlayerCon>.Instance.SetRotation(90);
                 break;
-        }
+       }
     }
+    void MasterSoundVolume(float volume)
+    {
+        AudioListener.volume = volume;
+    }
+
 
 }

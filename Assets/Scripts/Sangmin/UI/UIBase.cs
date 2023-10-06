@@ -31,6 +31,48 @@ public class UIBase : GenericSingleton<UIBase>
     bool _pauseUIOn;
     public bool PauseUIOn { get { return _pauseUIOn; } }
 
+    public delegate void SliderUI(float value);
+
+    // 각각의 델리게이트 인스턴스
+    public SliderUI MasterVolume;
+    public SliderUI EffectVolume;
+    public SliderUI MusicVolume;
+    public SliderUI MouseSense;
+
+
+
+    public void MasterSoundSlider(float value)
+    {
+        // 슬라이더 값에 따라 델리게이트 호출
+        if (MasterVolume != null)
+        {
+            MasterVolume(value);
+        }
+    }
+    public void EffectSoundSlider(float value)
+    {
+        // 슬라이더 값에 따라 델리게이트 호출
+        if (EffectVolume != null)
+        {
+            EffectVolume(value);
+        }
+    }
+    public void MusicSoundSlider(float value)
+    {
+        // 슬라이더 값에 따라 델리게이트 호출
+        if (MusicVolume != null)
+        {
+            MusicVolume(value);
+        }
+    }
+    public void MouseSlider(float value)
+    {
+        // 슬라이더 값에 따라 델리게이트 호출
+        if (MouseSense != null)
+        {
+            MouseSense(value);
+        }
+    }
 
     float _timer = 0;
     int _frame = 0;

@@ -98,9 +98,14 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         _currentWeapon.Weapon.SetActive(true);
         GenericSingleton<UIBase>.Instance.SetCrosshair();
         GenericSingleton<UIBase>.Instance.WeaponUIInit(_currentWeapon);
-        //AllUnlock();                                //테스트용 모두 잠금해제
     }
-   
+   public void SoundInit()
+   {
+        foreach (WeaponBase weapon in _weapons)
+        {
+            GenericSingleton<UIBase>.Instance.EffectVolume += weapon.Sound;
+        }
+   }
     void SwapWeapon()
     {
 
@@ -312,7 +317,11 @@ public abstract class WeaponBase :MonoBehaviour
         _currentIdx = _maxBullet;
         GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
     }
-   
+    public void Sound(float volume)
+    {
+        AudioSource.volume = volume;
+    }
+ 
 
 
 }

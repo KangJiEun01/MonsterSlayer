@@ -54,7 +54,8 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     [SerializeField] float m_HorizontalAngle, m_VerticalAngle;
     // 민감도
     [SerializeField]
-    private float _lookSensitivity;
+    private float _lookSensitivity = 3f;
+    float _mouseSense = 0.33f;
     [SerializeField]
     Transform CameraPosition;
 
@@ -122,6 +123,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _animator = GenericSingleton<WeaponManager>.Instance.CurrentWeapon.Animator;
         _audioSource = GetComponent<AudioSource>();
         _hp = _maxhp;
+        GenericSingleton<UIBase>.Instance.MouseSense += MouseSense;
         // 초기화
         _speed = _walkSpeed;
         
@@ -294,7 +296,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     void Rotate()
     {
 
-        float turnPlayer = Input.GetAxis("Mouse X") * _lookSensitivity;
+        float turnPlayer = Input.GetAxis("Mouse X") * _lookSensitivity * _mouseSense;
         m_HorizontalAngle = m_HorizontalAngle + turnPlayer;
 
         if (m_HorizontalAngle > 360) m_HorizontalAngle -= 360.0f;
@@ -306,7 +308,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
 
        
         var turnCam = -Input.GetAxis("Mouse Y");
-        turnCam = turnCam * _lookSensitivity;
+        turnCam = turnCam * _lookSensitivity * _mouseSense;
         m_VerticalAngle = Mathf.Clamp(turnCam + m_VerticalAngle, -89.0f, 89.0f);
         currentAngles = CameraPosition.transform.localEulerAngles;
         currentAngles.x = m_VerticalAngle;
@@ -387,6 +389,10 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         {
             OnDamage(10);
         }
+    }
+    void MouseSense(float value)
+    {
+        _mouseSense = Mathf.Clamp(value,0.1f,1);
     }
 }
 

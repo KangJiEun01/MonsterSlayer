@@ -14,7 +14,6 @@ public class FadeOut : MonoBehaviour
     private void OnEnable()
     {
         Invoke("ActiveFalse", 5f);
-
     }
     void Update()
     {

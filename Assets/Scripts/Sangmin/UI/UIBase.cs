@@ -19,6 +19,7 @@ public class UIBase : GenericSingleton<UIBase>
     [SerializeField] GameObject _playerUI;
     [SerializeField] TextMeshProUGUI _fpsUI;
     [SerializeField] GameObject _fadeOut;
+    [SerializeField] GameObject _loadGame;
     [SerializeField] Sprite[] _itemIcon;
     public Sprite[] ItemIcon { get { return _itemIcon; } }
 
@@ -134,6 +135,10 @@ public class UIBase : GenericSingleton<UIBase>
     {
         _gamoverUI.SetActive(isShow);
     }
+    public void ShowLodingSceneUI(bool isShow)
+    {
+        _loadGame.SetActive(isShow);
+    }
     public void AllUIOff()                                         //¸ðµç UI²ô±â
     {
         ShowExchangeUI(false);
@@ -141,6 +146,7 @@ public class UIBase : GenericSingleton<UIBase>
         ShowPlayerUI(false);
         ShowPauseUI(false);
         ShowGameOverUI(false);
+        ShowLodingSceneUI(false);
     }    
     public void InvenWeaponOff()
     {

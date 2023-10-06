@@ -1521,6 +1521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f038eca21917e8a4b8b3fae275990700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canRotate: 1
+  speed: 10
 --- !u!114 &56226320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13675,6 +13677,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f038eca21917e8a4b8b3fae275990700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canRotate: 1
+  speed: 10
 --- !u!114 &657446665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14386,11 +14390,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677319736}
   m_CullTransparentMesh: 0
---- !u!1 &678897236 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7903408415661230062, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
-  m_PrefabInstance: {fileID: 761818010}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &682151083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15854,7 +15853,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manualUi: {fileID: 1483146123}
-  fadeOut: {fileID: 678897236}
 --- !u!4 &739957891
 Transform:
   m_ObjectHideFlags: 0
@@ -16599,6 +16597,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1447140956285919255, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447140956285919255, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309656528303801291, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4169150593454754473, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -16686,6 +16696,26 @@ PrefabInstance:
     - target: {fileID: 4169150593454754477, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
       propertyPath: m_Name
       value: UIBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 4169150593454754477, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4957492104207850769, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239307517299363058, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656778256225691072, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656778256225691072, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe156b41ebd36b44eae585f6c3687c51, type: 3}
@@ -32697,6 +32727,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f038eca21917e8a4b8b3fae275990700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canRotate: 1
+  speed: 10
 --- !u!114 &1403546324
 MonoBehaviour:
   m_ObjectHideFlags: 0

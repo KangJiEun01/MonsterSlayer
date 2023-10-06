@@ -83,23 +83,6 @@ public class Spidercontroller : MonoBehaviour
         //Destroy(gameObject);
         gameObject.SetActive(false); //¿À·ù****
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            CameraMove();
-            RedWaring();
-        }
-    }
-    void CameraMove()
-    {
-        camera.GetComponent<NewCameraShake>().enabled = true;
-    }
-    void RedWaring()
-    {
-        GenericSingleton<UIBase>.Instance.ShowWarningUI(true);
-        Invoke("RedWaringActFalse", 0.3f);
-    }
     void RedWaringActFalse()
     {
         GenericSingleton<UIBase>.Instance.ShowWarningUI(false);

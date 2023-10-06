@@ -25,6 +25,10 @@ public class MinimapCamera : MonoBehaviour
         Vector3 position = new Vector3(target.transform.position.x, 1, target.transform.position.z)
                            + targetForwardVector * offsetRatio * cam.orthographicSize;
         transform.position = position;
+    }
+
+    public void RotateMinCam()
+    {
         transform.eulerAngles = new Vector3(90, 0, -target.eulerAngles.y);
     }
 

@@ -311,6 +311,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         currentAngles = CameraPosition.transform.localEulerAngles;
         currentAngles.x = m_VerticalAngle;
         CameraPosition.transform.localEulerAngles = currentAngles;
+        GameObject.Find("MinimapCamera").GetComponent<MinimapCamera>().RotateMinCam();
     }
     //void OpenHelper()
     //{

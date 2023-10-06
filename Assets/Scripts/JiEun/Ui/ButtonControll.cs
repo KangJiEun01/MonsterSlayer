@@ -9,7 +9,6 @@ public class ButtonControll : MonoBehaviour
     {
         manualUi.SetActive(false);
 
-
         if (GenericSingleton<DataManager>.Instance.Data() != null)
         {
             _loadButton.SetActive(true);
@@ -21,7 +20,6 @@ public class ButtonControll : MonoBehaviour
     }
     public void ClickStartButton()
     {
-        GenericSingleton<UIBase>.Instance.ShowLodingSceneUI(true);
         GenericSingleton<GameManager>.Instance.StartNewGame();
         SceneManager.LoadScene("LoadingScene");
         // Debug.Log("게임스타트");

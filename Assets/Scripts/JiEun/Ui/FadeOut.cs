@@ -9,10 +9,11 @@ public class FadeOut : MonoBehaviour
     float currentTime = 0f;
     void Start()
     {
-        fadeImage=GetComponent<Image>();
+        //fadeImage=GetComponent<Image>();
     }
     private void OnEnable()
     {
+        fadeImage = GetComponent<Image>();
         fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1f);
         Invoke("ActiveFalse", 5f);
     }

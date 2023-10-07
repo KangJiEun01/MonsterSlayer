@@ -158,7 +158,8 @@ MonoBehaviour:
   skinnedMesh: {fileID: 6283025572054316575}
   dissolveRate: 0.0125
   refreshRate: 0.025
-  skinnedMaterials: []
+  skinnedMaterials:
+  - {fileID: 2100000, guid: ef4657281049d2a439c987f170821279, type: 2}
 --- !u!1 &6283025572040718997
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6283025572040353461}
   - component: {fileID: 6283025572054316575}
+  - component: {fileID: 748474975}
   m_Layer: 0
   m_Name: Spider01
   m_TagString: Untagged
@@ -211,7 +213,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1035394dba39c5b41a002d49c4b0cb88, type: 2}
+  - {fileID: 2100000, guid: ef4657281049d2a439c987f170821279, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -279,6 +281,23 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.017701447, y: 0.083572865, z: -0.25971434}
     m_Extent: {x: 1.202162, y: 1.1836692, z: 1.0153924}
   m_DirtyAABB: 0
+--- !u!114 &748474975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6283025572040718997}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c42fb26b87b709548b8751c5453788b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VFXGraph: {fileID: 149290606820510501, guid: a28e79f07aae2854db4f898938254cba, type: 3}
+  skinnedMesh: {fileID: 6283025572054316575}
+  dissolveRate: 0.0125
+  refreshRate: 0.025
+  anim: {fileID: 6283025572046463711}
 --- !u!1 &6283025572040718999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,6 +2548,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 149290606820510501, guid: a28e79f07aae2854db4f898938254cba, type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[0].m_Value
+      value: 
+      objectReference: {fileID: 6283025572054316575}
     - target: {fileID: 149290606820510502, guid: a28e79f07aae2854db4f898938254cba, type: 3}
       propertyPath: m_Enabled
       value: 0

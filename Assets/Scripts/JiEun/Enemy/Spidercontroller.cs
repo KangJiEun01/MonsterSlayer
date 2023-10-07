@@ -47,6 +47,11 @@ public class Spidercontroller : MonoBehaviour
             //deathEffect.SetActive(true);
             StartCoroutine(DissolveCo());
             spiderDeath = true;
+            Transform childPrefab = transform.Find("VFXGraph_CharacterDissolve"); // "ChildPrefabName"을 프리팹의 이름으로 바꿔주세요.
+            if (childPrefab != null)
+            {
+                childPrefab.gameObject.SetActive(true);
+            }
             Ani.Play("death1");
             Invoke("Death", 1.8f);
         }

@@ -453,12 +453,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90bcc867fea723344958534b93455376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemys:
+  enemies:
   - {fileID: 1101530464}
   - {fileID: 1172509058}
   - {fileID: 728148530}
   - {fileID: 1144559657}
   spawnTime: 7
+  spawnHp: 10
 --- !u!1 &93414495
 GameObject:
   m_ObjectHideFlags: 0

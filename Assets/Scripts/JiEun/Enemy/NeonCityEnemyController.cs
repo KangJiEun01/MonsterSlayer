@@ -1,36 +1,38 @@
 using UnityEngine;
 public class NeonCityEnemyController : MonoBehaviour
 {
-    [SerializeField] GameObject[] Enemys;
-    [SerializeField] float spawnTime;
+    [SerializeField] private GameObject[] enemies;
+    [SerializeField] private float spawnTime;
+    [SerializeField] private float spawnHp = 10f;
 
-    bool[] EnemysSpawn;
-    int num = 0;
-    float spawnHp = 10;
-
-    private void Start()
+    void Start()
     {
-        EnemysSpawn = new bool[Enemys.Length];
-        for(int i = 0; i < Enemys.Length; i++)
-        {
-            EnemysSpawn[i] = true;
-        }
+        StartCoroutine(SpawnEnemies());
     }
-    void Update()
+
+    System.Collections.IEnumerator SpawnEnemies()
     {
-        for (int i = 0; i < Enemys.Length; i++)
+        while (true)
         {
-            if (!Enemys[i].activeSelf)
+            yield return new WaitForSeconds(spawnTime);
+
+            GameObject inactiveEnemy = GetInactiveEnemy();
+            if (inactiveEnemy != null)
             {
-                num = i;
-                Invoke("Spawn", spawnTime);
+                inactiveEnemy.GetComponent<Target>().Hp = spawnHp;
+                inactiveEnemy.SetActive(true);
             }
         }
     }
-    void Spawn()
+    GameObject GetInactiveEnemy()
     {
-        Enemys[num].GetComponent<Target>().Hp= spawnHp;
-        Enemys[num].SetActive(true);
-        EnemysSpawn[num] = true;
+        foreach (var enemy in enemies)
+        {
+            if (!enemy.activeSelf)
+            {
+                return enemy;
+            }
+        }
+        return null;
     }
 }

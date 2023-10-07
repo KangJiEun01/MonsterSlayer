@@ -224,7 +224,7 @@ public class Enemy01controller : MonoBehaviour
         int num = UnityEngine.Random.Range(0, 4);
         if(itemNum==0)
         {
-            Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z), Quaternion.identity);
+            Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
         }
         itemNum++;
         _Spawn = false;

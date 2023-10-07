@@ -115,6 +115,7 @@ public class UIBase : GenericSingleton<UIBase>
         _exchangeUI.GetComponent<ExchangeUI>().Init();
         SetCrosshair();
         WeaponSelectUIInit();
+        HpUIInit();
         HealItemInit();
         AllUIOff();
     }

@@ -154,7 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4aaa462c028274884672bd05f9fbb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathEffect: {fileID: 5171539189274289679}
+  VFXGraph: {fileID: 149290606820510501, guid: a28e79f07aae2854db4f898938254cba, type: 3}
+  skinnedMesh: {fileID: 6283025572054316575}
+  dissolveRate: 0.0125
+  refreshRate: 0.025
+  skinnedMaterials: []
 --- !u!1 &6283025572040718997
 GameObject:
   m_ObjectHideFlags: 0
@@ -2542,10 +2546,5 @@ PrefabInstance:
 --- !u!4 &5171539189274289676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 149290606820510500, guid: a28e79f07aae2854db4f898938254cba, type: 3}
-  m_PrefabInstance: {fileID: 5032381681657605416}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5171539189274289679 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 149290606820510503, guid: a28e79f07aae2854db4f898938254cba, type: 3}
   m_PrefabInstance: {fileID: 5032381681657605416}
   m_PrefabAsset: {fileID: 0}

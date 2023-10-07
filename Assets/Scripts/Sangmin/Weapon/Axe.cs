@@ -22,7 +22,6 @@ public class Axe : Melee
      
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, _attackRange))
         {
-            Debug.Log(hit.transform.name);
             Target target = hit.transform.GetComponent<Target>();
             target?.OnDamage(_attackDamage);
             hit.transform.parent = hit.transform;

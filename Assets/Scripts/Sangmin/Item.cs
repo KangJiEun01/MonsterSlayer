@@ -9,9 +9,7 @@ public class Item : MonoBehaviour
     [SerializeField] int _count = 1;
     [SerializeField] int _idx = 1;
     [SerializeField] Image _image;
-    //[SerializeField] Text _text;
     [SerializeField] TextMeshProUGUI _text;
-    //[SerializeField] TextMesh _text;
 
 
 

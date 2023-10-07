@@ -17,15 +17,14 @@ public class DataManager : GenericSingleton<DataManager>
     }
     public void SaveData(int idx)
     {
-        Debug.Log("데이터 저장");
         _gameDatas = new GameDataWrapper();
         _gameDatas._datas.Add(new GameData());
         GameData data = _gameDatas._datas[idx];
         data.SaveWeaponData();
+        data.SaveCurrentStage(GenericSingleton<GameManager>.Instance.CurrentStage);
         data.SaveRecipeData(GenericSingleton<ExchangeSystem>.Instance.Recipes);
         data.SaveItemData(GenericSingleton<ItemSaver>.Instance.Datas._items);
         string json = JsonUtility.ToJson(_gameDatas);
-        Debug.Log(json);
         string filePath = Path.Combine(Application.persistentDataPath, "GameData.json");
         File.WriteAllText(filePath, json);
 
@@ -50,6 +49,7 @@ public class DataManager : GenericSingleton<DataManager>
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
         GenericSingleton<WeaponManager>.Instance.UIUpdate();
+        GenericSingleton<GameManager>.Instance.SetCurrentStage(data._currentStage);
     }
 }
 
@@ -66,6 +66,7 @@ public class GameData
     public List<ItemSource> _itemDatas = new List<ItemSource>();
     public List<RecipeData> _recipeDatas = new List<RecipeData>();
     public WeaponData _weaponData;
+    public int _currentStage =1;
 
     public void SaveRecipeData(List<Recipe> recipes)
     {
@@ -77,7 +78,10 @@ public class GameData
         }
 
     }
-
+    public void SaveCurrentStage(int idx)
+    {
+        _currentStage = idx;
+    }
     public void SaveItemData(Dictionary<int, ItemData> items)
     {
         _itemDatas.Clear();

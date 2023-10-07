@@ -29,7 +29,6 @@ public class PauseUI : MonoBehaviour
     }
     public void QuitGame()
     {
-        Debug.Log("게임종료");
         Application.Quit();
     }
 }

@@ -18,7 +18,6 @@ public class Crossbow : Projectile
             _currentBullet = _bulletPool[_poolIndex++];
             _currentBullet.SetActive(true);
             Vector3 dirVector = Camera.main.transform.forward;
-            Debug.Log(Camera.main.transform.up);
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 50f))
             {
                  dirVector = hit.point - _firePosition.position;

@@ -21,7 +21,6 @@ public class NewCameraShake : MonoBehaviour
     public void OnEnable()
     {
         currentShakeDuration = 2f;
-        Debug.Log("카메라켜짐");
     }
 
     void Update()

@@ -164,9 +164,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
     public void SetCurrentWeapon(WeaponBase weapon)
     {
         AllOff();
-        Debug.Log(weapon.name);
         _currentWeapon = weapon;
-        Debug.Log(weapon.name);
         weapon.Weapon.SetActive(true);
         GenericSingleton<UIBase>.Instance.SetCrosshair();
         GenericSingleton<PlayerCon>.Instance.AnimatorUpdate();
@@ -188,10 +186,8 @@ public class WeaponManager : GenericSingleton<WeaponManager>
             if (weapon == idx)
             {
                 _currentWeapons[0] = _weapons[idx];
-                Debug.Log($"{idx}번 무기 장착완료");
             }
         }
-        Debug.Log(_currentIdx);
         if (_currentIdx == 0)
         {
             SetCurrentWeapon(_currentWeapons[_currentIdx]);
@@ -214,11 +210,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         _activeWeaponsIdx.Clear();
         _activeWeaponsIdx = data._activeWeaponIdx;
         CurrentWeapons[0] = null;
-        foreach (int i in data._activeWeaponIdx)
-        {
-            Debug.Log(i);
-        }
-        Debug.Log(data._currentMainIdx);
+
         if (data._currentMainIdx != 0)
         {
             _currentIdx = 0;
@@ -227,7 +219,6 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         else
         {
             SetCurrentWeapon(_currentWeapons[1]);
-            Debug.Log(_currentWeapons[1].name);
         }
 
     }
@@ -248,7 +239,6 @@ public class WeaponManager : GenericSingleton<WeaponManager>
 
 public abstract class WeaponBase :MonoBehaviour
 {
-    // Start is called before the first frame update
 
     [SerializeField] protected float _attackSpeed = 0.167f;
     [SerializeField] protected float _attackDamage = 1;
@@ -286,11 +276,11 @@ public abstract class WeaponBase :MonoBehaviour
     public virtual void  Init()
     {
        
-        _animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>(true);
         
-        _effect = GetComponentInChildren<ParticleSystem>();
+        _effect = GetComponentInChildren<ParticleSystem>(true);
         
-        _audioSource = GetComponentInChildren<AudioSource>();
+        _audioSource = GetComponentInChildren<AudioSource>(true);
         _recoil = GenericSingleton<Recoil>.Instance.GetComponent<Recoil>();
         _currentIdx = _maxBullet;
         
@@ -308,10 +298,8 @@ public abstract class WeaponBase :MonoBehaviour
         
         for (float f = _reloadTime; f > 0; f -= 0.1f)
         {
-            Debug.Log("장전중입니다");
             yield return new WaitForSeconds(0.1f);
         }
-        Debug.Log("장전완료");
         
         _isReload = false;
         _currentIdx = _maxBullet;
@@ -319,7 +307,7 @@ public abstract class WeaponBase :MonoBehaviour
     }
     public void Sound(float volume)
     {
-        AudioSource.volume = volume;
+        _audioSource.volume = volume;
     }
  
 

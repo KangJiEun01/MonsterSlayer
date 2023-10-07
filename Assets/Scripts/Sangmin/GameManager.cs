@@ -5,6 +5,8 @@ public class GameManager : GenericSingleton<GameManager>
 {
     GameState _currentState;
     [SerializeField] GameState _startState;
+    int _currentStage;
+    public int CurrentStage { get { return _currentStage; } }
     public enum GameState
     {
         Loading,
@@ -38,6 +40,7 @@ public class GameManager : GenericSingleton<GameManager>
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<DataManager>.Instance.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
+        _currentStage = 1;
         SetGameState(_startState);
     }
     public void StartNewGame()
@@ -48,14 +51,16 @@ public class GameManager : GenericSingleton<GameManager>
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
+        _currentStage = 1;
         SetGameState(GameState.Loading);
     }
-    public void LoadGame()
+    public int LoadGame()
     {
         GenericSingleton<DataManager>.Instance.LoadData(0);
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
         SetGameState(GameState.Loading);
+        return _currentStage;
     }
     public void DemonScene()
     {
@@ -65,17 +70,13 @@ public class GameManager : GenericSingleton<GameManager>
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
     }
-
+    public void SetCurrentStage(int idx)
+    {
+        _currentStage = idx;
+    }
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Alpha8))
-        //{
-        //    GenericSingleton<DataManager>.Instance.SaveData(0);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha9))
-        //{
-        //    GenericSingleton<DataManager>.Instance.LoadData(0);
-        //}
+
         if (_currentState != GameState.Loading)
         {
             if (Input.GetKeyDown(KeyCode.I))
@@ -133,7 +134,6 @@ public class GameManager : GenericSingleton<GameManager>
 
             }
         }
-        Debug.Log(_currentState);
     }
     public void SetGameState(GameState newState)
     {
@@ -174,9 +174,8 @@ public class GameManager : GenericSingleton<GameManager>
     {
        switch (scene.name)
        {
-            case "YDDesert":
+            case "YDDesert": 
                 SetGameState(GameState.InGame);
-                Debug.Log("사막신 로드완료");
                 GenericSingleton<UIBase>.Instance.SetCrosshair();
                 GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
@@ -185,7 +184,6 @@ public class GameManager : GenericSingleton<GameManager>
                 break;
             case "YDNeonCity":
                 SetGameState(GameState.InGame);
-                Debug.Log("네온시티신 로드완료");
                 GenericSingleton<UIBase>.Instance.SetCrosshair();
                 GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(-2.5f, 1.5f, -15));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
@@ -194,7 +192,6 @@ public class GameManager : GenericSingleton<GameManager>
                 break;
             case "YDUnderCity":
                 SetGameState(GameState.InGame);
-                Debug.Log("언더시티신 로드완료");
                 GenericSingleton<UIBase>.Instance.SetCrosshair();
                 GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(15, 2.0f, 46));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
@@ -203,7 +200,6 @@ public class GameManager : GenericSingleton<GameManager>
                 break;
             case "YDBossStage":
                 SetGameState(GameState.InGame);
-                Debug.Log("보스신 로드완료");
                 GenericSingleton<UIBase>.Instance.SetCrosshair();
                 GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(-27, 1.5f, 16));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);

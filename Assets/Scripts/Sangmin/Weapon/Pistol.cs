@@ -17,13 +17,11 @@ public class Pistol : HitScan
       
             _recoil.RecoilFire(_recoilForce); //¹Ýµ¿ 
 
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward*30, Color.red, 3f);
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 30f))
             {
                 
                 Target target = hit.transform.GetComponent<Target>();
                 target?.OnDamage(_attackDamage);
-                Debug.Log(hit.transform.name);
                 hit.rigidbody?.AddForce(-hit.normal * _impactForce);
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
                 {

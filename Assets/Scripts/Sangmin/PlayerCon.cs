@@ -77,42 +77,6 @@ public class PlayerCon : GenericSingleton<PlayerCon>
     float soundTimer;
     [Header("Sounds")]
     [SerializeField] AudioClip[] _walking;
-
-    //PlayerState _currentState;
-    //public enum PlayerState
-    //{
-    //    Idle,
-    //    Walk,
-    //    Run,
-    //    Attack,
-    //    Reload,
-    //    Get,
-    //}
-    //public void SetPlayerState(PlayerState newState)
-    //{
-    //    _currentState = newState;
-    //    switch (_currentState)
-    //    {
-    //        case PlayerState.Idle:
-    //            _animator.Play("Idle");
-    //            break;
-    //        case PlayerState.Walk:
-    //            _animator.Play("Walk");
-    //            break;
-    //        case PlayerState.Run:
-    //            _animator.Play("Run");
-    //            break;
-    //        case PlayerState.Attack:
-    //            _animator.Play("Shot");
-    //            break;
-    //        case PlayerState.Reload:
-    //            _animator.Play("Reload");
-    //            break;
-    //        case PlayerState.Get:
-    //            _animator.Play("Get");
-    //            break;
-    //    }
-    //}
     public void Init()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -124,6 +88,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         _audioSource = GetComponent<AudioSource>();
         _hp = _maxhp;
         GenericSingleton<UIBase>.Instance.MouseSense += MouseSense;
+        GenericSingleton<UIBase>.Instance.EffectVolume += Sound;
         // 초기화
         _speed = _walkSpeed;
         
@@ -226,10 +191,6 @@ public class PlayerCon : GenericSingleton<PlayerCon>
                 _rig.velocity = _dirVector * _dashForce;
                 _lastDashTime = Time.time;
             }
-            else
-            {
-                Debug.Log("대쉬 쿨 입니다");
-            }
             
         }
     }
@@ -287,8 +248,8 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         Vector3 _moveHorizontal = transform.right * _moveDirX;
         Vector3 _moveVertical = transform.forward * _moveDirZ;
         _dirVector = (_moveHorizontal + _moveVertical).normalized;
-        Vector3 _velocity =  _dirVector * _speed;
-
+        Vector3 _velocity =  _dirVector * _speed ;
+        _velocity.y = _rig.velocity.y;
         _rig.AddForce( _velocity);
     }
 
@@ -326,7 +287,6 @@ public class PlayerCon : GenericSingleton<PlayerCon>
             GenericSingleton<UIBase>.Instance.ShowPickUpUI(true);
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                Debug.Log("약초 주움");
                 GenericSingleton<UIBase>.Instance.ShowPickUpUI(false);
                 hit.transform.gameObject.SetActive(false);
                 GenericSingleton<ItemSaver>.Instance.AddItem(new ItemData(0,1));
@@ -355,6 +315,10 @@ public class PlayerCon : GenericSingleton<PlayerCon>
                 
             }
         }
+    }
+    void Sound(float volume)
+    {
+        _audioSource.volume = volume;
     }
     void DamageEnd()
     {

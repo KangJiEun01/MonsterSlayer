@@ -106,8 +106,7 @@ public class ItemData
     }
     void LoadItemData()
     {
-        // CSV 파일 로드 및 파싱
-        TextAsset itemDataCSV = Resources.Load<TextAsset>("ItemData"); // "ItemData"는 CSV 파일명
+        TextAsset itemDataCSV = Resources.Load<TextAsset>("ItemData");
         
         StringReader reader = new StringReader(itemDataCSV.text);
         reader.ReadLine();

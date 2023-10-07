@@ -24,7 +24,6 @@ public class Shotgun : HitScan
             {
                 if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-_spread, _spread), Random.Range(-_spread, _spread), Random.Range(-_spread, _spread)), out hit, 15f))
                 {
-                    Debug.Log(hit.transform.name);
                     Target target = hit.transform.GetComponent<Target>();
                     target?.OnDamage(_attackDamage);
                     hit.rigidbody?.AddForce(-hit.normal * _impactForce);
@@ -84,9 +83,6 @@ public class Shotgun : HitScan
             yield return new WaitForSeconds(0.1f);
 
         }
-
-
-        Debug.Log("장전완료");
         _isReload = false;
         GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
     }

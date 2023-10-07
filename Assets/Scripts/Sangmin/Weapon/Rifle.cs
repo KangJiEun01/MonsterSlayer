@@ -28,7 +28,6 @@ public class Rifle : HitScan
             
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 50f))
             {
-                Debug.Log(hit.transform.name);
                 Target target = hit.transform.GetComponent<Target>();
                 target?.OnDamage(_attackDamage);
                 hit.rigidbody?.AddForce(-hit.normal * _impactForce);
@@ -62,25 +61,5 @@ public class Rifle : HitScan
       
         inAttack = false;
     }
-    //void Shot()
-    //{
-    //    float angle = Random.Range(0.0f, _spreadAngle * 0.5f);
-    //    Vector2 angleDir = Random.insideUnitCircle * Mathf.Tan(angle * Mathf.Deg2Rad);
-
-    //    Vector3 dir = Endpoint.transform.forward + (Vector3)angleDir;
-    //    dir.Normalize();
-    //    _bulletPool[_poolIndex].gameObject.SetActive(true);
-    //    _bulletPool[_poolIndex].Launch(dir, 200);
-    //}
-    //void Launch(Vector3 direction, float force)
-    //{
-    //    m_Owner = launcher;
-
-    //    transform.position = launcher.GetCorrectedMuzzlePlace();
-    //    transform.forward = launcher.EndPoint.forward;
-
-    //    gameObject.SetActive(true);
-    //    m_TimeSinceLaunch = 0.0f;
-    //    m_Rigidbody.AddForce(direction * force);
-    //}
+   
 }

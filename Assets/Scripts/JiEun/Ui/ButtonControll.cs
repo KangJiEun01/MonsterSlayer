@@ -22,14 +22,27 @@ public class ButtonControll : MonoBehaviour
     {
         GenericSingleton<GameManager>.Instance.StartNewGame();
         SceneManager.LoadScene("LoadingScene");
-        // Debug.Log("게임스타트");
-        //SceneManager.LoadScene("MapSelect");
     }
     public void ClickLoadButton()
     {
         GenericSingleton<UIBase>.Instance.ShowLodingSceneUI(true);
-        GenericSingleton<GameManager>.Instance.LoadGame();
-        SceneManager.LoadScene("LoadingScene");
+        int currentStage = GenericSingleton<GameManager>.Instance.LoadGame();
+        switch (currentStage)
+        {
+            case 1:
+                SceneManager.LoadScene("LoadingScene");
+                break;
+            case 2:
+                SceneManager.LoadScene("NeonCityLoadingScene");
+                break;
+            case 3:
+                SceneManager.LoadScene("UnderCityLoadingScene");
+                break;
+            case 4:
+                SceneManager.LoadScene("BossStageLoadingScene");
+                break;
+        }
+        
     }
     public void ClickbackButton() 
     {

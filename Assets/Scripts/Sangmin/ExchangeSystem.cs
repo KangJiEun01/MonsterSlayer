@@ -26,8 +26,8 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
     }
     void LoadRecipeData()
     {
-        // CSV 파일 로드 및 파싱
-        TextAsset RecipeDataCSV = Resources.Load<TextAsset>("RecipeData"); // "ItemData"는 CSV 파일명
+
+        TextAsset RecipeDataCSV = Resources.Load<TextAsset>("RecipeData");
 
         StringReader reader = new StringReader(RecipeDataCSV.text);
         reader.ReadLine();

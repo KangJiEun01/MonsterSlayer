@@ -42,7 +42,6 @@ public class UIBase : GenericSingleton<UIBase>
 
     public void MasterSoundSlider(float value)
     {
-        // 슬라이더 값에 따라 델리게이트 호출
         if (MasterVolume != null)
         {
             MasterVolume(value);
@@ -50,7 +49,6 @@ public class UIBase : GenericSingleton<UIBase>
     }
     public void EffectSoundSlider(float value)
     {
-        // 슬라이더 값에 따라 델리게이트 호출
         if (EffectVolume != null)
         {
             EffectVolume(value);
@@ -58,7 +56,6 @@ public class UIBase : GenericSingleton<UIBase>
     }
     public void MusicSoundSlider(float value)
     {
-        // 슬라이더 값에 따라 델리게이트 호출
         if (MusicVolume != null)
         {
             MusicVolume(value);
@@ -66,7 +63,6 @@ public class UIBase : GenericSingleton<UIBase>
     }
     public void MouseSlider(float value)
     {
-        // 슬라이더 값에 따라 델리게이트 호출
         if (MouseSense != null)
         {
             MouseSense(value);

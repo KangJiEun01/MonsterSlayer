@@ -56,7 +56,6 @@ public class ZombieAI : MonoBehaviour
         // 추적 범위 내에 플레이어가 있을 때
         if (Vector3.Distance(transform.position, player.position) <= chaseRange)
         {
-            Debug.Log(Vector3.Distance(transform.position, player.position));
             // 공격 범위 내에 플레이어가 있을 때
             if (Vector3.Distance(transform.position, player.position) <= attackRange)
             {

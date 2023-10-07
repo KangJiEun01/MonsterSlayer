@@ -19,7 +19,6 @@ public class UIBase : GenericSingleton<UIBase>
     [SerializeField] GameObject _crossHairs;
     [SerializeField] GameObject _playerUI;
     [SerializeField] TextMeshProUGUI _fpsUI;
-    [SerializeField] GameObject _fadeOut;
     [SerializeField] GameObject _loadGame;
     [SerializeField] Sprite[] _itemIcon;
     public Sprite[] ItemIcon { get { return _itemIcon; } }
@@ -206,12 +205,6 @@ public class UIBase : GenericSingleton<UIBase>
     {
         ShowExchangeUI(false);
         ShowWeaponSelectUI(false);
-    }
-    public void Fadeout(bool isShow)
-    {
-        _fadeOut.GetComponent<FadeOut>().enabled = true;
-        _fadeOut.SetActive(isShow);
-        
     }
     public void HpUIInit()
     {

@@ -6616,6 +6616,10 @@ PrefabInstance:
       propertyPath: minimapCamera
       value: 
       objectReference: {fileID: 1478793200}
+    - target: {fileID: 3176753215713104492, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.119
+      objectReference: {fileID: 0}
     - target: {fileID: 6717542893286447462, guid: fc4c3ea7920c02c468596a813f137f2b, type: 3}
       propertyPath: m_Name
       value: 'Player '

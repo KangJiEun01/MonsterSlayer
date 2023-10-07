@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class GenericSingleton<T> : MonoBehaviour where T : class

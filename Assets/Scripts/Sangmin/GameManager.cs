@@ -134,16 +134,12 @@ public class GameManager : GenericSingleton<GameManager>
             }
         }
         Debug.Log(_currentState);
-        
-
-
     }
     public void SetGameState(GameState newState)
     {
         _currentState = newState;
         switch (_currentState)
         {
-
             case GameState.Loading:
                 GenericSingleton<UIBase>.Instance.CrossHairOff();
                 GenericSingleton<UIBase>.Instance.ShowPlayerUI(false);
@@ -200,7 +196,7 @@ public class GameManager : GenericSingleton<GameManager>
                 SetGameState(GameState.InGame);
                 Debug.Log("언더시티신 로드완료");
                 GenericSingleton<UIBase>.Instance.SetCrosshair();
-                GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(15, 1.5f, 46));
+                GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(15, 2.0f, 46));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
                 GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<PlayerCon>.Instance.SetRotation(180);

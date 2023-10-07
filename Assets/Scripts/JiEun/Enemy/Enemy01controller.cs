@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class Enemy01controller : MonoBehaviour
 {
     GameObject player;
@@ -64,7 +63,6 @@ public class Enemy01controller : MonoBehaviour
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
         Invoke("find", 1f);
-
     }
     private void OnEnable()
     {
@@ -93,7 +91,6 @@ public class Enemy01controller : MonoBehaviour
             if (!_setActive)
             {
                 float distanceTarget = Vector3.Distance(transform.position, player.transform.position);
-
                 if (distanceTarget <= attackRange)
                 {
                     // 범위체크 
@@ -149,7 +146,7 @@ public class Enemy01controller : MonoBehaviour
                 temp.transform.position = worldPosition;
                 //Vector3 dir =player.transform.position; 
                 //Vector3 dir = transform.forward; //앞방향
-                Vector3 dir = new Vector3(transform.forward.x, transform.forward.y-0.3f, transform.forward.z);
+                Vector3 dir = new Vector3(transform.forward.x+0.07f, transform.forward.y-0.3f, transform.forward.z);
                 temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
                 Time_current = Time_Sumcooltime;
                 Time_start = Time.time;
@@ -169,7 +166,6 @@ public class Enemy01controller : MonoBehaviour
             Time_current = Time.time - Time_start;
             if (Time_current > Time_Sumcooltime)
             {
-
                 Vector3 attackst = new Vector3(VectorbulletPos.x, VectorbulletPos.y, VectorbulletPos.z); ;
                 GameObject temp = Instantiate(bullet);
 
@@ -213,7 +209,6 @@ public class Enemy01controller : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, patrolStartPoint, patrolSpeed * Time.deltaTime);
             }
             transform.LookAt(spawnPoint.transform);
-            // patrolStartPoint에 도달하면 이동 방향을 오른쪽으로 변경
             if (distanceToStart < 2f)
             {
                 movingRight = true;

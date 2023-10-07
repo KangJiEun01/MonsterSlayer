@@ -50,7 +50,7 @@ public class TypingEffect : MonoBehaviour
 
     IEnumerator TypeText(string text)
     {
-        float typingSpeed = 0.15f;
+        float typingSpeed = 0.05f;
         for (int i = 0; i <= text.Length; i++)
         {
             tx.text = text.Substring(0, i);

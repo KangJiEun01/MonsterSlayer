@@ -5,7 +5,7 @@ public class GameManager : GenericSingleton<GameManager>
 {
     GameState _currentState;
     [SerializeField] GameState _startState;
-    int _currentStage;
+    int _currentStage = 0;
     public int CurrentStage { get { return _currentStage; } }
     public enum GameState
     {
@@ -35,12 +35,12 @@ public class GameManager : GenericSingleton<GameManager>
         GenericSingleton<ExchangeSystem>.Instance.Init();
         GenericSingleton<WeaponManager>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
+        GenericSingleton<BGMManager>.Instance.Init();
         GenericSingleton<UIBase>.Instance.MasterVolume += MasterSoundVolume;
         GenericSingleton<WeaponManager>.Instance.SoundInit();
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<DataManager>.Instance.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
-        _currentStage = 1;
         SetGameState(_startState);
     }
     public void StartNewGame()
@@ -51,7 +51,6 @@ public class GameManager : GenericSingleton<GameManager>
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
-        _currentStage = 1;
         SetGameState(GameState.Loading);
     }
     public int LoadGame()
@@ -176,14 +175,17 @@ public class GameManager : GenericSingleton<GameManager>
        {
             case "YDDesert": 
                 SetGameState(GameState.InGame);
+                SetCurrentStage(1);
+                GenericSingleton<BGMManager>.Instance.SetBgm(_currentStage);
                 GenericSingleton<UIBase>.Instance.SetCrosshair();
-                GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0, 0, 0));
+                GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0, -7.6f, 0));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
                 GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<PlayerCon>.Instance.SetRotation(0);
                 break;
             case "YDNeonCity":
                 SetGameState(GameState.InGame);
+                GenericSingleton<BGMManager>.Instance.SetBgm(_currentStage);
                 GenericSingleton<UIBase>.Instance.SetCrosshair();
                 GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(-2.5f, 1.5f, -15));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
@@ -192,6 +194,7 @@ public class GameManager : GenericSingleton<GameManager>
                 break;
             case "YDUnderCity":
                 SetGameState(GameState.InGame);
+                GenericSingleton<BGMManager>.Instance.SetBgm(_currentStage);
                 GenericSingleton<UIBase>.Instance.SetCrosshair();
                 GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(15, 2.0f, 46));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
@@ -200,6 +203,7 @@ public class GameManager : GenericSingleton<GameManager>
                 break;
             case "YDBossStage":
                 SetGameState(GameState.InGame);
+                GenericSingleton<BGMManager>.Instance.SetBgm(_currentStage);
                 GenericSingleton<UIBase>.Instance.SetCrosshair();
                 GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(-27, 1.5f, 16));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);

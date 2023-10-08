@@ -43,10 +43,10 @@ public class Spidercontroller : MonoBehaviour
         _hp = GetComponent<Target>().Hp;
         if (_hp <= 0)
         {
+            spiderDeath = true;
             spider.enabled = false;
             //deathEffect.SetActive(true);
             StartCoroutine(DissolveCo());
-            spiderDeath = true;
             Transform childPrefab = transform.Find("VFXGraph_CharacterDissolve"); // "ChildPrefabName"을 프리팹의 이름으로 바꿔주세요.
             if (childPrefab != null)
             {

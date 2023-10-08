@@ -65,6 +65,7 @@ public class Enemy01controller : MonoBehaviour
     }
     private void OnEnable()
     {
+        GetComponent<EnemyActive>().enabled = false;
         hp = 100;
         gameObject.GetComponent<Target>().Hp = hp;
         Debug.Log("¸®½ºÆù");

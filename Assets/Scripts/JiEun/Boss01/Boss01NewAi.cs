@@ -4,6 +4,8 @@ using UnityEngine;
 public class Boss01NewAi : MonoBehaviour
 {
     [SerializeField] GameObject bossMat;
+    //[SerializeField] AudioClip bossAudio;
+    //AudioSource audioSource;
     Renderer bossRend;
     GameObject player;
     Animator animator;
@@ -20,6 +22,7 @@ public class Boss01NewAi : MonoBehaviour
         transform.LookAt(player.transform);
         BossHp = GetComponent<Target>().GetHP();
         animator = GetComponent<Animator>();
+        //audioSource=GetComponent<AudioSource>();
         animator.Play("In");
         Invoke("StartRout", 4.7f);
     }
@@ -89,7 +92,13 @@ public class Boss01NewAi : MonoBehaviour
     }
     void Atk02()
     {
+        //Invoke("AttackSound",1f);
+        //audioSource.PlayOneShot(bossAudio);
         GetComponent<BossAttack02>().enabled = true;
+    }
+    void AttackSound()
+    {
+        //audioSource.PlayOneShot(bossAudio);
     }
     void Atk01()
     {

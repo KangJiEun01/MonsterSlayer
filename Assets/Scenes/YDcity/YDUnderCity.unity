@@ -5949,7 +5949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45aa0a87d91709043be7e839273a4b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startState: 0
+  _startState: 1
 --- !u!4 &747372407
 Transform:
   m_ObjectHideFlags: 0
@@ -9246,6 +9246,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8943377099902434767, guid: cc9f1364608a9cc4c8bc7eb4d020e8b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8943377101001449816, guid: cc9f1364608a9cc4c8bc7eb4d020e8b5, type: 3}
       propertyPath: m_Name
       value: UnderCity

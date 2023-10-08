@@ -11,8 +11,8 @@ public class MinimapCamera : MonoBehaviour
 
     void Start()
     {
-        indicator = GameObject.FindGameObjectWithTag("Player").transform;
-        target = GameObject.FindGameObjectWithTag("Player").transform; // "Player" 태그를 가진 오브젝트를 찾아서 플레이어로 설정
+        indicator = GameObject.FindGameObjectWithTag("player").transform;
+        target = GameObject.FindGameObjectWithTag("player").transform; // "Player" 태그를 가진 오브젝트를 찾아서 플레이어로 설정
         cam = GetComponent<Camera>();
         size = new Vector2(cam.orthographicSize, cam.orthographicSize * cam.aspect);
     }

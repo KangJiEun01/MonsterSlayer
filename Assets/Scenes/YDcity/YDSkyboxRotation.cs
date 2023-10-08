@@ -5,7 +5,7 @@ public class YDSkyboxRotation : MonoBehaviour
 
     void Update()
     {
-      // RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyboxRotationSpeed);
+      RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyboxRotationSpeed);
     }
 }
 

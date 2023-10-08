@@ -141,7 +141,7 @@ public class Enemy01controller : MonoBehaviour
     void Attack()
     {
         _attack = true;
-        transform.LookAt(player.transform);
+        transform.LookAt(new Vector3(player.transform.position.x, player.transform.position.y - 1.5f, player.transform.position.z));
         ShootAin();
     }
     void ShootAin()
@@ -161,7 +161,7 @@ public class Enemy01controller : MonoBehaviour
                 Vector3 worldPosition = bulletPos.TransformPoint(attackst);
                 temp.transform.position = worldPosition;
                 //Vector3 dir = transform.forward; //æ’πÊ«‚
-                Vector3 dir = new Vector3(transform.forward.x+0.07f, transform.forward.y-0.3f, transform.forward.z);
+                Vector3 dir = new Vector3(transform.forward.x+0.07f, transform.forward.y, transform.forward.z);
                 temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
                 Time_current = Time_Sumcooltime;
                 Time_start = Time.time;

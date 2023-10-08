@@ -327,6 +327,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 24
       objectReference: {fileID: 0}
+    - target: {fileID: 3021342465804655952, guid: c07df91c560f0da4eac98d61037c6838, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 3021342465804655965, guid: c07df91c560f0da4eac98d61037c6838, type: 3}
       propertyPath: EnemyRend
       value: 

@@ -520,6 +520,7 @@ GameObject:
   - component: {fileID: 3021342465804655952}
   - component: {fileID: 3021342465804655953}
   - component: {fileID: 3021342465804655965}
+  - component: {fileID: 7009502249165434285}
   m_Layer: 0
   m_Name: Enemy01
   m_TagString: Untagged
@@ -616,7 +617,21 @@ MonoBehaviour:
   bullet: {fileID: 2516759553313999166, guid: d53d55bccbc81ff40990002d3415e075, type: 3}
   bulletPos: {fileID: 1060164488254806804}
   detectionUi: {fileID: 0}
+  DropItem: []
+  bulletFire: {fileID: 0}
   _damage: 0
+--- !u!114 &7009502249165434285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060164488255162112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5e3ebaee6076f49bde6e64d4754f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1060164488255162114
 GameObject:
   m_ObjectHideFlags: 0

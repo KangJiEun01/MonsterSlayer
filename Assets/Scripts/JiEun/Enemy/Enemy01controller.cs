@@ -20,7 +20,7 @@ public class Enemy01controller : MonoBehaviour
     float chaseSpeed = 5f; //인식 후 추격 속도
     float bulletSpeed = 12f;
     float AttackAniSpeed = 2f; //공격 애니메이션 재생 속도
-    float hp;
+    float hp = 100;
 
     bool _patrol = true;
     bool movingRight = true;
@@ -61,11 +61,11 @@ public class Enemy01controller : MonoBehaviour
         anim.Play("WalkFront_Shoot_AR");
         bulletSource = GetComponent<AudioSource>();
         GenericSingleton<UIBase>.Instance.EffectVolume += Sound;
-        enemyCollider = GetComponent<Collider>();
         Invoke("find", 1f);
     }
     private void OnEnable()
     {
+        gameObject.GetComponent<Target>().Hp = hp;
         Debug.Log("리스폰");
         patrolEndPoint = endPoint.position;
         patrolStartPoint = spawnPoint.position;
@@ -74,7 +74,6 @@ public class Enemy01controller : MonoBehaviour
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
         Invoke("find", 1f);
-        enemyCollider.enabled = true;
         _setActive = false;
         itemNum = 0;
     }
@@ -85,7 +84,6 @@ public class Enemy01controller : MonoBehaviour
             hp = GetComponent<Target>().Hp;
             if (hp <= 0&& _setActive==false)
             {
-                enemyCollider.enabled = false;
                 _setActive = true;
                 anim.Play("Die");
                 Invoke("Die", 1.5f);
@@ -225,6 +223,8 @@ public class Enemy01controller : MonoBehaviour
         }
         itemNum++;
         _Spawn = false;
+        GetComponent<EnemyActive>().enabled = true;
+        GetComponent<Enemy01controller>().enabled = false;
         gameObject.SetActive(false);
     }
     void OnDestroy()

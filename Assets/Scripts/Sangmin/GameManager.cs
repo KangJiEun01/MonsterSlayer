@@ -34,14 +34,28 @@ public class GameManager : GenericSingleton<GameManager>
         GenericSingleton<ItemSaver>.Instance.Init();
         GenericSingleton<ExchangeSystem>.Instance.Init();
         GenericSingleton<WeaponManager>.Instance.Init();
+        SoundSetting();
+        MouseSenseSetting();
         GenericSingleton<UIBase>.Instance.Init();
         GenericSingleton<BGMManager>.Instance.Init();
-        GenericSingleton<UIBase>.Instance.MasterVolume += MasterSoundVolume;
         GenericSingleton<WeaponManager>.Instance.SoundInit();
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<DataManager>.Instance.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
+        
         SetGameState(_startState);
+    }
+    void SoundSetting()
+    {
+        if (!PlayerPrefs.HasKey("MasterVolume")) PlayerPrefs.SetFloat("MasterVolume", 0.5f);
+        if (!PlayerPrefs.HasKey("EffectVolume")) PlayerPrefs.SetFloat("EffectVolume", 0.5f);
+        if (!PlayerPrefs.HasKey("MusicVolume")) PlayerPrefs.SetFloat("MusicVolume", 0.5f);
+        GenericSingleton<UIBase>.Instance.MasterVolume += MasterSoundVolume;
+        MasterSoundVolume(PlayerPrefs.GetFloat("EffectVolume"));
+    }
+    void MouseSenseSetting()
+    {
+        if (!PlayerPrefs.HasKey("MouseSense")) PlayerPrefs.SetFloat("MouseSense", 0.33f);
     }
     public void StartNewGame()
     {

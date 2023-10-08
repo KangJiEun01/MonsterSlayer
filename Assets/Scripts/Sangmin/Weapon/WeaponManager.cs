@@ -281,6 +281,7 @@ public abstract class WeaponBase :MonoBehaviour
         _effect = GetComponentInChildren<ParticleSystem>(true);
         
         _audioSource = GetComponentInChildren<AudioSource>(true);
+        Sound(PlayerPrefs.GetFloat("EffectVolume"));
         _recoil = GenericSingleton<Recoil>.Instance.GetComponent<Recoil>();
         _currentIdx = _maxBullet;
         

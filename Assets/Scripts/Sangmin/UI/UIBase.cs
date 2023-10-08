@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class UIBase : GenericSingleton<UIBase>
 {
@@ -21,6 +22,10 @@ public class UIBase : GenericSingleton<UIBase>
     [SerializeField] TextMeshProUGUI _fpsUI;
     [SerializeField] GameObject _loadGame;
     [SerializeField] Sprite[] _itemIcon;
+    [SerializeField] Slider _masterVolume;
+    [SerializeField] Slider _effectVolume;
+    [SerializeField] Slider _musicVolume;
+    [SerializeField] Slider _mouseSense;
     public Sprite[] ItemIcon { get { return _itemIcon; } }
 
     bool _weaponOn;
@@ -46,6 +51,7 @@ public class UIBase : GenericSingleton<UIBase>
         {
             MasterVolume(value);
         }
+        PlayerPrefs.SetFloat("MasterVolume",value);
     }
     public void EffectSoundSlider(float value)
     {
@@ -53,6 +59,7 @@ public class UIBase : GenericSingleton<UIBase>
         {
             EffectVolume(value);
         }
+        PlayerPrefs.SetFloat("EffectVolume", value);
     }
     public void MusicSoundSlider(float value)
     {
@@ -60,6 +67,7 @@ public class UIBase : GenericSingleton<UIBase>
         {
             MusicVolume(value);
         }
+        PlayerPrefs.SetFloat("MusicVolume", value);
     }
     public void MouseSlider(float value)
     {
@@ -67,6 +75,7 @@ public class UIBase : GenericSingleton<UIBase>
         {
             MouseSense(value);
         }
+        PlayerPrefs.SetFloat("MouseSense", value);
     }
 
     float _timer = 0;
@@ -118,6 +127,10 @@ public class UIBase : GenericSingleton<UIBase>
         HpUIInit();
         HealItemInit();
         AllUIOff();
+        _masterVolume.value = PlayerPrefs.GetFloat("MasterVolume");
+        _effectVolume.value = PlayerPrefs.GetFloat("EffectVolume");
+        _musicVolume.value = PlayerPrefs.GetFloat("MusicVolume");
+        _mouseSense.value = PlayerPrefs.GetFloat("MouseSense");
     }
     
     public void ShowPauseUI(bool ShowUI) 

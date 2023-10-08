@@ -1,4 +1,6 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
+
 public class Enemy01controller : MonoBehaviour
 {
     GameObject player;
@@ -61,6 +63,7 @@ public class Enemy01controller : MonoBehaviour
         anim.Play("WalkFront_Shoot_AR");
         bulletSource = GetComponent<AudioSource>();
         GenericSingleton<UIBase>.Instance.EffectVolume += Sound;
+        Sound(PlayerPrefs.GetFloat("EffectVolume"));
         Invoke("find", 1f);
     }
     private void OnEnable()

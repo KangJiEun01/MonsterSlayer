@@ -10,6 +10,7 @@ public class BGMManager : GenericSingleton<BGMManager>
     {
         _audioSource = GetComponent<AudioSource>();
         GenericSingleton<UIBase>.Instance.MusicVolume += Sound;
+        Sound(PlayerPrefs.GetFloat("MusicVolume"));
         SetBgm(0);
     }
     public void SetBgm(int stage)

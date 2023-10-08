@@ -7,10 +7,7 @@ public class Test_GetItem : MonoBehaviour
     {
         if (other.CompareTag("player"))
         {
-            GenericSingleton<ItemSaver>.Instance.DemoSceneItem();
-            GenericSingleton<ExchangeSystem>.Instance.Init();
-            GenericSingleton<PlayerCon>.Instance.Init();
-            GenericSingleton<UIBase>.Instance.Init();
+            GenericSingleton<WeaponManager>.Instance.AllUnlock();
         }
     }
 }

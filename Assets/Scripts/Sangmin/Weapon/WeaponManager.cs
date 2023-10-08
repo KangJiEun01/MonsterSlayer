@@ -193,7 +193,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
             SetCurrentWeapon(_currentWeapons[_currentIdx]);
         }
     }
-    void AllUnlock()
+    public void AllUnlock()
     {
         foreach (WeaponBase weapon in _weapons)
         {

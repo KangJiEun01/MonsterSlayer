@@ -3,16 +3,7 @@ using UnityEngine;
 
 
 public class Rifle : HitScan
-{
-
-
-
-  
-
-
-
-
-   
+{  
     public override void Fire()
     {
         if (_currentIdx > 0 && !_isReload)

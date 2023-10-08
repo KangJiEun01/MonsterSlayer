@@ -15,6 +15,7 @@ TagManager:
   - Arrow
   - PlayerPos
   - Plant
+  - player
   layers:
   - Default
   - TransparentFX

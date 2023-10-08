@@ -159,7 +159,7 @@ public class Enemy01controller : MonoBehaviour
     }
     void find()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("player");
     }
     void BulletFire2()
     {

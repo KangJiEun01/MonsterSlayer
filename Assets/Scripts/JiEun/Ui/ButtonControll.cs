@@ -25,7 +25,6 @@ public class ButtonControll : MonoBehaviour
     }
     public void ClickLoadButton()
     {
-        GenericSingleton<UIBase>.Instance.ShowLodingSceneUI(true);
         int currentStage = GenericSingleton<GameManager>.Instance.LoadGame();
         switch (currentStage)
         {
@@ -54,7 +53,6 @@ public class ButtonControll : MonoBehaviour
     }
     public void ClickDemeVersion()
     {
-        GenericSingleton<UIBase>.Instance.ShowLodingSceneUI(true);
         GenericSingleton<GameManager>.Instance.DemonScene();
         SceneManager.LoadScene("BossStageLoadingScene");
     }

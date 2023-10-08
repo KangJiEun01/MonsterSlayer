@@ -64,15 +64,12 @@ public class GameManager : GenericSingleton<GameManager>
         GenericSingleton<WeaponManager>.Instance.Init();
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SetGameState(GameState.Loading);
     }
     public int LoadGame()
     {
         GenericSingleton<DataManager>.Instance.LoadData(0);
         GenericSingleton<PlayerCon>.Instance.Init();
         GenericSingleton<UIBase>.Instance.Init();
-        SetGameState(GameState.Loading);
         return _currentStage;
     }
     public void DemonScene()
@@ -224,6 +221,10 @@ public class GameManager : GenericSingleton<GameManager>
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
                 GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<PlayerCon>.Instance.SetRotation(90);
+                break;
+            case "GameStart":
+                SetGameState(GameState.Loading);
+                GenericSingleton<BGMManager>.Instance.SetBgm(_currentStage);
                 break;
        }
     }

@@ -13,6 +13,7 @@ public class Enemy01controller : MonoBehaviour
 
     Transform botPos;
     Animator anim;
+    Collider enemyCollider;
 
     float attackRange = 7f;//인식범위
     float patrolSpeed = 2f; //순찰속도
@@ -51,7 +52,7 @@ public class Enemy01controller : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
         patrolEndPoint = endPoint.position;
         patrolStartPoint = spawnPoint.position;
         botPos = GetComponent<Transform>();
@@ -59,7 +60,9 @@ public class Enemy01controller : MonoBehaviour
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
         bulletSource = GetComponent<AudioSource>();
-        //Invoke("find", 1f);
+        GenericSingleton<UIBase>.Instance.EffectVolume += Sound;
+        enemyCollider = GetComponent<Collider>();
+        Invoke("find", 1f);
     }
     private void OnEnable()
     {
@@ -70,7 +73,8 @@ public class Enemy01controller : MonoBehaviour
         anim = GetComponent<Animator>();
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
-        find();
+        Invoke("find", 1f);
+        enemyCollider.enabled = true;
         _setActive = false;
         itemNum = 0;
     }
@@ -81,6 +85,7 @@ public class Enemy01controller : MonoBehaviour
             hp = GetComponent<Target>().Hp;
             if (hp <= 0&& _setActive==false)
             {
+                enemyCollider.enabled = false;
                 _setActive = true;
                 anim.Play("Die");
                 Invoke("Die", 1.5f);
@@ -111,7 +116,10 @@ public class Enemy01controller : MonoBehaviour
             }
         }
     }
-
+    public void Sound(float volume)
+    {
+        bulletSource.volume = volume;
+    }
     void Attack()
     {
         _attack = true;
@@ -218,5 +226,9 @@ public class Enemy01controller : MonoBehaviour
         itemNum++;
         _Spawn = false;
         gameObject.SetActive(false);
+    }
+    void OnDestroy()
+    {
+        GenericSingleton<UIBase>.Instance.EffectVolume -= Sound;
     }
 }

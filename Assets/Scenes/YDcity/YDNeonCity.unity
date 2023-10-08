@@ -2268,6 +2268,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_testpoint
       objectReference: {fileID: 0}
+    - target: {fileID: 2311522325297017030, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2311522325297017035, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
       propertyPath: endPoint
       value: 

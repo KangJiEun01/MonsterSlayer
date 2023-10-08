@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Enemy01controller : MonoBehaviour
 {
@@ -12,10 +11,10 @@ public class Enemy01controller : MonoBehaviour
     [SerializeField] GameObject[] DropItem;
     [SerializeField] AudioClip bulletFire;
     AudioSource bulletSource;
+    Rigidbody rb;
 
     Transform botPos;
     Animator anim;
-    Collider enemyCollider;
 
     float attackRange = 7f;//인식범위
     float patrolSpeed = 2f; //순찰속도
@@ -62,12 +61,15 @@ public class Enemy01controller : MonoBehaviour
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
         bulletSource = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody>();
         GenericSingleton<UIBase>.Instance.EffectVolume += Sound;
         Sound(PlayerPrefs.GetFloat("EffectVolume"));
         Invoke("find", 1f);
     }
     private void OnEnable()
     {
+        //gameObject.GetComponent<BoxCollider>().enabled = true;
+        //gameObject.GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<EnemyActive>().enabled = false;
         hp = 100;
         gameObject.GetComponent<Target>().Hp = hp;
@@ -91,6 +93,8 @@ public class Enemy01controller : MonoBehaviour
             {
                 _setActive = true;
                 anim.Play("Die");
+                //gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                //gameObject.GetComponent<BoxCollider>().enabled = false;
                 Invoke("Die", 1.5f);
             }
             if (!_setActive)

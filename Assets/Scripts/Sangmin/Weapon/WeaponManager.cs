@@ -319,7 +319,6 @@ public abstract class HitScan : WeaponBase
 {
     [SerializeField] protected GameObject _bulletHole;
     [SerializeField] protected Transform _firePosition;
-    [SerializeField] protected GameObject _bulletParent;
 
 
     public override void OnUpdate()
@@ -343,7 +342,6 @@ public abstract class Projectile : WeaponBase
     
     [SerializeField] protected GameObject _bullet;
     [SerializeField] protected Transform _firePosition;
-    [SerializeField] protected GameObject _bulletParent;
     [SerializeField] protected float _bulletSpeed;
 
     public override void OnUpdate()

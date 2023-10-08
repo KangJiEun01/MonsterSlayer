@@ -12205,37 +12205,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!1 &1780832807273007271
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5002845732807483363}
-  m_Layer: 6
-  m_Name: bulletParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5002845732807483363
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780832807273007271}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6717542893286447464}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1802277027124274201
 GameObject:
   m_ObjectHideFlags: 0
@@ -32021,7 +31990,6 @@ MonoBehaviour:
   _reloadSound: {fileID: 8300000, guid: fff164fe3d6b2c645a9e27803abb2e6d, type: 3}
   _bulletHole: {fileID: 4017957564823273164, guid: e04227cbbdf9ffe4b89f031ef4c8b55e, type: 3}
   _firePosition: {fileID: 5039069783463656939}
-  _bulletParent: {fileID: 1780832807273007271}
   _reloadDelay: 1.2
   _spread: 0.1
 --- !u!1 &5039069783463656938
@@ -39046,7 +39014,6 @@ MonoBehaviour:
   _reloadSound: {fileID: 8300000, guid: 0190f85a9b46c814083405f52fec89f4, type: 3}
   _bulletHole: {fileID: 6806566221236301188, guid: 244cd6b4bfdb96241869f42fdcf7e57f, type: 3}
   _firePosition: {fileID: 6717542893406095957}
-  _bulletParent: {fileID: 1780832807273007271}
 --- !u!1 &6717542893271907133
 GameObject:
   m_ObjectHideFlags: 0
@@ -39108,7 +39075,6 @@ MonoBehaviour:
   _reloadSound: {fileID: 8300000, guid: aa52fa2111d1a8b488dc49016efc9b80, type: 3}
   _bulletHole: {fileID: 6806566221236301188, guid: 244cd6b4bfdb96241869f42fdcf7e57f, type: 3}
   _firePosition: {fileID: 6915393943174468651}
-  _bulletParent: {fileID: 1780832807273007271}
 --- !u!1 &6717542893286447462
 GameObject:
   m_ObjectHideFlags: 0
@@ -39139,7 +39105,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3176753215713104492}
-  - {fileID: 5002845732807483363}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41889,7 +41854,6 @@ MonoBehaviour:
   _reloadSound: {fileID: 8300000, guid: d8e84e53899a8234e8ad5f2dbb473da4, type: 3}
   _bullet: {fileID: 7218770782559998244, guid: dddc385f413ba624399ca7b98711359c, type: 3}
   _firePosition: {fileID: 6717542893887227918}
-  _bulletParent: {fileID: 1780832807273007271}
   _bulletSpeed: 5
 --- !u!1 &7448101651848558538
 GameObject:

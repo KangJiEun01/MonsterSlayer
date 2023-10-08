@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 790484504719592037}
   - component: {fileID: 1809906959580181314}
   - component: {fileID: 1338473912279963387}
-  m_Layer: 5
+  m_Layer: 21
   m_Name: 'CharHPbar '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 1833477421047979494}
   - component: {fileID: 7588487358278725467}
   - component: {fileID: 7766672092735065900}
-  m_Layer: 5
+  m_Layer: 21
   m_Name: HPbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 6109331027760513321}
   - component: {fileID: 6594713792555406993}
   - component: {fileID: 1862821852362023361}
-  m_Layer: 5
+  m_Layer: 21
   m_Name: Icon_Warning 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

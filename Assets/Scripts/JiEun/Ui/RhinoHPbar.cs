@@ -22,7 +22,7 @@ public class RhinoHPbar : MonoBehaviour
         //m_goHpBar.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 0.8f, 0));
         HpBar.transform.position =new Vector3( Rhino.transform.position.x, Rhino.transform.position.y + 2.15f, Rhino.transform.position.z);
         detection.transform.position = new Vector3(Rhino.transform.position.x, Rhino.transform.position.y + 2.7f, Rhino.transform.position.z);
-        float hp= Rhino.GetComponent<Target>().GetHP() * 0.1f;
+        float hp= Rhino.GetComponent<Target>().GetHP() * 0.01f;
         target.fillAmount = hp;
     }
 

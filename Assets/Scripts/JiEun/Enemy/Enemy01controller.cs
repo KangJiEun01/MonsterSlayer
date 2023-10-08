@@ -65,6 +65,7 @@ public class Enemy01controller : MonoBehaviour
     }
     private void OnEnable()
     {
+        hp = 100;
         gameObject.GetComponent<Target>().Hp = hp;
         Debug.Log("¸®½ºÆù");
         patrolEndPoint = endPoint.position;

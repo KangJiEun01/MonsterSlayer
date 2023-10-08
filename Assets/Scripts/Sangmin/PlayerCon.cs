@@ -288,8 +288,8 @@ public class PlayerCon : GenericSingleton<PlayerCon>
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 GenericSingleton<UIBase>.Instance.ShowPickUpUI(false);
-                hit.transform.gameObject.SetActive(false);
-                GenericSingleton<ItemSaver>.Instance.AddItem(new ItemData(0,1));
+                hit.transform.GetComponent<Plant>()?.TurnOffAndOn(7);
+               
             }
         }
         else GenericSingleton<UIBase>.Instance.ShowPickUpUI(false);

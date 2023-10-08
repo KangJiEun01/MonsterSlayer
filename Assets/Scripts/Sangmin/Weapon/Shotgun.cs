@@ -22,7 +22,7 @@ public class Shotgun : HitScan
             int spread = 0;
             while (spread < 10)
             {
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-_spread, _spread), Random.Range(-_spread, _spread), Random.Range(-_spread, _spread)), out hit, 15f))
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-_spread, _spread), Random.Range(-_spread, _spread), Random.Range(-_spread, _spread)), out hit, 10f))
                 {
                     Target target = hit.transform.GetComponent<Target>();
                     target?.OnDamage(_attackDamage);

@@ -32009,7 +32009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.91
-  _attackDamage: 3
+  _attackDamage: 5
   _maxBullet: 10
   _impactForce: 1
   _recoilForce: 4
@@ -38974,7 +38974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.86
-  _attackDamage: 40
+  _attackDamage: 35
   _maxBullet: 0
   _impactForce: 0
   _recoilForce: 0
@@ -39032,7 +39032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.12
-  _attackDamage: 10
+  _attackDamage: 7
   _maxBullet: 30
   _impactForce: 10
   _recoilForce: 2.5
@@ -39093,7 +39093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.3
-  _attackDamage: 15
+  _attackDamage: 10
   _maxBullet: 12
   _impactForce: 10
   _recoilForce: 3
@@ -41877,7 +41877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0
-  _attackDamage: 20
+  _attackDamage: 100
   _maxBullet: 1
   _impactForce: 10
   _recoilForce: 0

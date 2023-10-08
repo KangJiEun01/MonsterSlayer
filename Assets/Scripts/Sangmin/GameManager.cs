@@ -64,6 +64,7 @@ public class GameManager : GenericSingleton<GameManager>
     public void DemonScene()
     {
         StartNewGame();
+        SetCurrentStage(4);
         GenericSingleton<ItemSaver>.Instance.DemoSceneItem();
         GenericSingleton<ExchangeSystem>.Instance.Init();
         GenericSingleton<PlayerCon>.Instance.Init();

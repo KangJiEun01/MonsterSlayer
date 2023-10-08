@@ -38,7 +38,7 @@ public class UIBase : GenericSingleton<UIBase>
     public SliderUI MusicVolume;
     public SliderUI MouseSense;
 
-
+   
 
     public void MasterSoundSlider(float value)
     {

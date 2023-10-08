@@ -1,38 +1,25 @@
 using UnityEngine;
 public class NeonCityEnemyController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] enemies;
-    [SerializeField] private float spawnTime;
-    [SerializeField] private float spawnHp = 10f;
+    [SerializeField] GameObject[] enemies;
+    [SerializeField] float spawnHp = 10f;
 
-    void Start()
+    void Update()
     {
-        StartCoroutine(SpawnEnemies());
-    }
-
-    System.Collections.IEnumerator SpawnEnemies()
-    {
-        while (true)
+        for (int i = 0; i < enemies.Length; i++)
         {
-            yield return new WaitForSeconds(spawnTime);
-
-            GameObject inactiveEnemy = GetInactiveEnemy();
-            if (inactiveEnemy != null)
+            if (!enemies[i].activeSelf)
             {
-                inactiveEnemy.GetComponent<Target>().Hp = spawnHp;
-                inactiveEnemy.SetActive(true);
+                StartCoroutine(RespawnEnemy(i)); //죽었다면 7초 뒤 리스폰
             }
         }
     }
-    GameObject GetInactiveEnemy()
+    System.Collections.IEnumerator RespawnEnemy(int index)
     {
-        foreach (var enemy in enemies)
-        {
-            if (!enemy.activeSelf)
-            {
-                return enemy;
-            }
-        }
-        return null;
+        yield return new WaitForSeconds(7f); // 7초
+
+        GameObject inactiveEnemy = enemies[index];
+        inactiveEnemy.GetComponent<Target>().Hp = spawnHp;
+        inactiveEnemy.SetActive(true);
     }
 }

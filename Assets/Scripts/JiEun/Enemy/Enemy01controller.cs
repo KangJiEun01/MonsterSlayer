@@ -2,7 +2,6 @@ using UnityEngine;
 public class Enemy01controller : MonoBehaviour
 {
     GameObject player;
-    //[SerializeField] GameObject Enemy;
     [SerializeField] Transform spawnPoint;
     [SerializeField] Transform endPoint;
     [SerializeField] GameObject bullet;
@@ -26,7 +25,6 @@ public class Enemy01controller : MonoBehaviour
     bool _attack = false;
     bool _setActive = false;
     bool _Spawn = true;
-    //bool bulletFire = false;
 
     float Time_current; //남은초
     float Time_start; //+까지 남은 초
@@ -45,24 +43,20 @@ public class Enemy01controller : MonoBehaviour
     Vector3 patrolEndPoint;
     Vector3 VectorbulletPos; //총알 시작위치 수정할것
 
-    // mins edit
-    //float avoidanceDistance = 1.0f;
-    //float rayDistance = 1.0f;
-
     private void Awake()
     {
         detectionUi.SetActive(false);
     }
     void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         patrolEndPoint = endPoint.position;
         patrolStartPoint = spawnPoint.position;
         botPos = GetComponent<Transform>();
         anim = GetComponent<Animator>();
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
-        Invoke("find", 1f);
+        //Invoke("find", 1f);
     }
     private void OnEnable()
     {
@@ -87,6 +81,7 @@ public class Enemy01controller : MonoBehaviour
                 _setActive = true;
                 anim.Play("Die");
                 Invoke("Die", 1.5f);
+                itemNum++;
             }
             if (!_setActive)
             {
@@ -119,17 +114,11 @@ public class Enemy01controller : MonoBehaviour
     {
         _attack = true;
         transform.LookAt(player.transform);
-
-        //transform.LookAt(player.transform);
-        //GetComponent<Animator>().Play("Reload");
-        //Invoke("ShootAin",1.2f);
         ShootAin();
     }
     void ShootAin()
     {
-        //GetComponent<Animator>().Play("Shoot_SingleShot_AR");
         anim.Play("Shoot_BurstShot_AR");
-        //anim.Play("Shoot_Autoshot_AR");
     }
     void BulletFire()
     {
@@ -138,13 +127,10 @@ public class Enemy01controller : MonoBehaviour
             Time_current = Time.time - Time_start;
             if (Time_current > Time_Sumcooltime)
             {
-                //Vector3 attackst = new Vector3(VectorbulletPos.x + (-2.0f), VectorbulletPos.y+(+5.0f), VectorbulletPos.z + (-8.5f));
                 Vector3 attackst = new Vector3(VectorbulletPos.x, VectorbulletPos.y, VectorbulletPos.z); ;
                 GameObject temp = Instantiate(bullet);
-                //Vector3 worldPosition = bulletPos.TransformPoint(Vector3.zero);
                 Vector3 worldPosition = bulletPos.TransformPoint(attackst);
                 temp.transform.position = worldPosition;
-                //Vector3 dir =player.transform.position; 
                 //Vector3 dir = transform.forward; //앞방향
                 Vector3 dir = new Vector3(transform.forward.x+0.07f, transform.forward.y-0.3f, transform.forward.z);
                 temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
@@ -190,7 +176,7 @@ public class Enemy01controller : MonoBehaviour
         anim.Play("WalkFront_Shoot_AR");
         if (movingRight == true)
         {
-            // 오른쪽으로 이동
+            // 오른쪽 이동
             if (!_collision)
             {
                 transform.position = Vector3.MoveTowards(transform.position, patrolEndPoint, patrolSpeed * Time.deltaTime);
@@ -203,7 +189,7 @@ public class Enemy01controller : MonoBehaviour
         }
         else
         {
-            // 왼쪽으로 이동
+            // 왼쪽 이동
             if (!_collision)
             {
                 transform.position = Vector3.MoveTowards(transform.position, patrolStartPoint, patrolSpeed * Time.deltaTime);
@@ -226,41 +212,7 @@ public class Enemy01controller : MonoBehaviour
         {
             Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
         }
-        itemNum++;
         _Spawn = false;
-        //Enemy.GetComponent<Enemy01controller>().enabled = true;
         gameObject.SetActive(false);
     }
-    // mins edit
-    //void FixedUpdate()
-    //{
-    //    RaycastHit hit;
-    //    if (Physics.Raycast(transform.position, transform.forward, out hit, rayDistance))
-    //    {
-    //        if (hit.distance < avoidanceDistance)
-    //        {
-    //            _collision = true;
-    //            Vector3 avoid = transform.position + transform.right * Random.Range(-1.0f, 1.0f);
-    //            Vector3 direction = avoid - transform.position;
-    //            GetComponent<Rigidbody>().AddForce(direction * patrolSpeed);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        GetComponent<Rigidbody>().AddForce(transform.right * patrolSpeed);
-    //        _collision = false;
-    //    }
-    //}
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Obstacle")
-    //    {
-    //        Debug.Log(" 충돌");
-    //        Vector3 avoid = transform.position + transform.right * Random.Range(-1.0f, 1.0f);
-    //        Vector3 direction = avoid - transform.position;
-    //        GetComponent<Rigidbody>().AddForce(direction * patrolSpeed);
-    //    }
-    //}
-    //
 }

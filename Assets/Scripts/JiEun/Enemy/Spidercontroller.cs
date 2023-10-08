@@ -14,7 +14,7 @@ public class Spidercontroller : MonoBehaviour
 
     //[SerializeField] GameObject deathEffect;
     GameObject player;
-    GameObject camera;
+    Collider spider;
     NavMeshAgent agent;
     Transform spiderpos;
     Animation Ani;
@@ -29,8 +29,6 @@ public class Spidercontroller : MonoBehaviour
         {
             skinnedMaterials = skinnedMesh.materials;
         }
-
-        camera = Camera.main.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log(player);
         agent = GetComponent<NavMeshAgent>();
@@ -44,6 +42,7 @@ public class Spidercontroller : MonoBehaviour
         _hp = GetComponent<Target>().Hp;
         if (_hp <= 0)
         {
+            spider.GetComponent<Collider>().enabled = false;
             //deathEffect.SetActive(true);
             StartCoroutine(DissolveCo());
             spiderDeath = true;

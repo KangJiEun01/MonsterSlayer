@@ -68,8 +68,8 @@ public class Enemy01controller : MonoBehaviour
     }
     private void OnEnable()
     {
-        //gameObject.GetComponent<BoxCollider>().enabled = true;
-        //gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<EnemyActive>().enabled = false;
         hp = 100;
         gameObject.GetComponent<Target>().Hp = hp;
@@ -93,8 +93,8 @@ public class Enemy01controller : MonoBehaviour
             {
                 _setActive = true;
                 anim.Play("Die");
-                //gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                //gameObject.GetComponent<BoxCollider>().enabled = false;
+                gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                gameObject.GetComponent<BoxCollider>().enabled = false;
                 Invoke("Die", 1.5f);
             }
             if (!_setActive)

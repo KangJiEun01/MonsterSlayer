@@ -342,6 +342,10 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         {
             OnDamage(10);
         }
+        if (collision.collider.CompareTag("Item"))
+        {
+            GenericSingleton<ItemSaver>.Instance.AddItem(collision.collider.GetComponent<Item>().GetItem());
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -349,10 +353,7 @@ public class PlayerCon : GenericSingleton<PlayerCon>
         {
             OnDamage(10);
         }
-        if (other.CompareTag("Item"))
-        {
-            GenericSingleton<ItemSaver>.Instance.AddItem(other.GetComponent<Item>().GetItem());
-        }
+       
     }
     void MouseSense(float value)
     {

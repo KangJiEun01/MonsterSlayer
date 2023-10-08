@@ -22,16 +22,12 @@ public class Rifle : HitScan
                 Target target = hit.transform.GetComponent<Target>();
                 target?.OnDamage(_attackDamage);
                 hit.rigidbody?.AddForce(-hit.normal * _impactForce);
-                
-                _currentBullet = _bulletPool[_poolIndex++];
-                _currentBullet.SetActive(true);
-                _currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
-                _currentBullet.transform.position = hit.point + hit.normal*0.1f;
-                _currentBullet.transform.parent = hit.transform;
-                _currentBullet.GetComponent<VisualEffect>()?.SendEvent("Shot");
-                IndexCheck();
-                
-                
+
+                GameObject temp = Instantiate(_bulletHole);
+                temp.transform.rotation = Quaternion.LookRotation(hit.normal);
+                temp.transform.position = hit.point + hit.normal * 0.1f;
+                temp.GetComponent<VisualEffect>()?.SendEvent("Shot");
+                Destroy(temp, 2f);
             }           
             Invoke("StopAttack", _attackSpeed);
             if (_currentIdx == 0)

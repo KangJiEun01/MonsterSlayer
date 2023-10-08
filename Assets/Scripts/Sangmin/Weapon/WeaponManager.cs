@@ -52,7 +52,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         {
             if (inven.Value.ItemIdx == 1)
             {
-                if (inven.Value.Count > 1)
+                if (inven.Value.Count > 0)
                 {
                     _isHeal = true;
                     AllOff();
@@ -64,6 +64,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                     GenericSingleton<ItemSaver>.Instance.SubItem(inven.Value,1);
                     GenericSingleton<UIBase>.Instance.InventoryInit();
                     GenericSingleton<UIBase>.Instance.HealItemInit();
+                    return;
                     
                 }
             }
@@ -321,43 +322,12 @@ public abstract class HitScan : WeaponBase
     [SerializeField] protected GameObject _bulletParent;
 
 
-    
-    protected float _aimTime;
-    protected GameObject _currentBullet;
-
-    protected GameObject[] _bulletPool;
-    protected int _poolIndex;
-    public void IndexCheck()
-    {
-        if (_poolIndex == 100) _poolIndex = 0;
-    }
-    public void InstBullet()
-    {
-        _bulletPool = new GameObject[100];
-        for (int i = 0; i < _bulletPool.Length; i++)
-        {
-            GameObject gameObject = Instantiate(_bulletHole, _bulletParent.transform);
-            _bulletPool[i] = gameObject;
-            gameObject.SetActive(false);
-        }
-    }
-    public override void Init()
-    {
-        base.Init();
-        InstBullet();
-    }
     public override void OnUpdate()
     {
         
         if (Input.GetMouseButton(0))
         {
-            _aimTime += Time.deltaTime;
             if (inAttack == false) Fire();
-            
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            _aimTime = 0;
             
         }
         if (Input.GetKeyDown(KeyCode.R) && _currentIdx < _maxBullet && !_isReload)
@@ -376,32 +346,6 @@ public abstract class Projectile : WeaponBase
     [SerializeField] protected GameObject _bulletParent;
     [SerializeField] protected float _bulletSpeed;
 
-    
-   
-    protected GameObject _currentBullet;
-
-    protected GameObject[] _bulletPool;
-    protected int _poolIndex;
-    protected float _aimTime;
-    public void IndexCheck()
-    {
-        if (_poolIndex == 50) _poolIndex = 0;
-    }
-    public void InstBullet()
-    {
-        _bulletPool = new GameObject[50];
-        for (int i = 0; i < _bulletPool.Length; i++)
-        {
-            GameObject gameObject = Instantiate(_bullet, _bulletParent.transform);
-            _bulletPool[i] = gameObject;
-            gameObject.SetActive(false);
-        }
-    }
-    public override void Init()
-    {
-        base.Init();
-        InstBullet();
-    }
     public override void OnUpdate()
     {
 

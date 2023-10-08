@@ -15,19 +15,18 @@ public class Crossbow : Projectile
             _audioSource.PlayOneShot(_shotSound[Random.Range(0, _shotSound.Length)], 1f);
 
             inAttack = true;
-            _currentBullet = _bulletPool[_poolIndex++];
-            _currentBullet.SetActive(true);
             Vector3 dirVector = Camera.main.transform.forward;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 50f))
             {
                  dirVector = hit.point - _firePosition.position;
             }
-            _currentBullet.transform.position = _firePosition.position;
-            _currentBullet.GetComponent<BoxCollider>().enabled = true;
-            _currentBullet.transform.rotation = Quaternion.LookRotation(dirVector);
-            _currentBullet.GetComponent<Rigidbody>().AddForce(dirVector.normalized * _bulletSpeed, ForceMode.Impulse);
-           
-            IndexCheck();
+            GameObject temp = Instantiate(_bullet);
+            temp.transform.position = _firePosition.position;
+            temp.GetComponent<BoxCollider>().enabled = true;
+            temp.transform.rotation = Quaternion.LookRotation(dirVector);
+            temp.GetComponent<Rigidbody>().AddForce(dirVector.normalized * _bulletSpeed, ForceMode.Impulse);
+            Destroy(temp, 10f);
+
             Invoke("StopAttack", _attackSpeed);
         }
         else if (_currentIdx <= 0 && !_isReload)

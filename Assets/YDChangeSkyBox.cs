@@ -8,6 +8,7 @@ public class YDChangeSkyBox : MonoBehaviour
 
     private float timer = 0f;
     public float changeInterval = 30f; // 30초마다 Skybox 변경
+    public float skyboxRotationSpeed = 1.0f;
 
     void Start()
     {
@@ -22,6 +23,9 @@ public class YDChangeSkyBox : MonoBehaviour
 
     void Update()
     {
+        // Skybox 회전
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyboxRotationSpeed);
+
         timer += Time.deltaTime;
 
         // 일정 간격으로 Skybox 변경

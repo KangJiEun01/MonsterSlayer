@@ -76,12 +76,11 @@ public class Enemy01controller : MonoBehaviour
         if (player != null)
         {
             hp = GetComponent<Target>().Hp;
-            if (hp <= 0)
+            if (hp <= 0&& _setActive==false)
             {
                 _setActive = true;
                 anim.Play("Die");
                 Invoke("Die", 1.5f);
-                itemNum++;
             }
             if (!_setActive)
             {
@@ -212,6 +211,7 @@ public class Enemy01controller : MonoBehaviour
         {
             Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
         }
+        itemNum++;
         _Spawn = false;
         gameObject.SetActive(false);
     }

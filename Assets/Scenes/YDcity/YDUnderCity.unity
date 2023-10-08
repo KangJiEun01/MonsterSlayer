@@ -11085,14 +11085,22 @@ PrefabInstance:
     - target: {fileID: 7981364438955459554, guid: e468be419cd3fe54bba9be5ecde0a115, type: 3}
       propertyPath: indicator
       value: 
-      objectReference: {fileID: 7981364440161621011}
+      objectReference: {fileID: 1604254450}
     - target: {fileID: 7981364438955459554, guid: e468be419cd3fe54bba9be5ecde0a115, type: 3}
       propertyPath: offsetRatio
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7981364438955459577, guid: e468be419cd3fe54bba9be5ecde0a115, type: 3}
       propertyPath: m_Name
       value: MinimapCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981364438955459580, guid: e468be419cd3fe54bba9be5ecde0a115, type: 3}
+      propertyPath: far clip plane
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7981364438955459580, guid: e468be419cd3fe54bba9be5ecde0a115, type: 3}
+      propertyPath: orthographic size
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7981364438955459581, guid: e468be419cd3fe54bba9be5ecde0a115, type: 3}
       propertyPath: m_RootOrder
@@ -11140,8 +11148,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e468be419cd3fe54bba9be5ecde0a115, type: 3}
---- !u!4 &7981364440161621011 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7981364438955459581, guid: e468be419cd3fe54bba9be5ecde0a115, type: 3}
-  m_PrefabInstance: {fileID: 7981364440161621010}
-  m_PrefabAsset: {fileID: 0}

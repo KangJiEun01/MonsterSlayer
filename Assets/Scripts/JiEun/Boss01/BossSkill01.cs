@@ -16,7 +16,7 @@ public class BossSkill01 : MonoBehaviour
     float _BossHp;
     void Start()
     {
-        player02 = GameObject.FindGameObjectWithTag("Player");
+        player02 = GameObject.FindGameObjectWithTag("player");
     }
     private void OnEnable()
     {

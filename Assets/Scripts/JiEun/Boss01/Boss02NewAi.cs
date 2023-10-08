@@ -17,7 +17,7 @@ public class Boss02NewAi : MonoBehaviour //보스 1 : 3초마다 따라와서 공격하고 3�
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("player");
         transform.LookAt(player.transform);
         animator = GetComponent<Animator>();
         animator.Play("In"); //추후에 인으로 바꿈 

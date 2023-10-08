@@ -14,7 +14,7 @@ public class Boss02Attack01 : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("player");
         camera = Camera.main.gameObject;
     }
     // Update is called once per frame

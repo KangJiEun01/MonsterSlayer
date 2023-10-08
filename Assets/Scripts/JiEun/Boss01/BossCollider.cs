@@ -13,7 +13,7 @@ public class BossCollider : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("player"))
         {
             CameraMove();
             RedWaring();

@@ -13,7 +13,7 @@ public class Boss03NewAi : MonoBehaviour
     bool isAttacking = true;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("player").transform;
         animator = GetComponent<Animator>();
         animator.Play("In");
         Invoke("AttackAct", 7.8f);

@@ -10,7 +10,7 @@ public class Boss03Attack02 : MonoBehaviour
     Vector3 VectorbulletPos;
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("player");
         VectorbulletPos = bulletPos.position;
     }
     private void OnEnable()

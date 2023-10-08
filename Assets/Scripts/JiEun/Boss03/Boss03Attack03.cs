@@ -11,7 +11,7 @@ public class Boss03Attack03 : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("player");
         camera = Camera.main.gameObject;
     }
     void EnabledFalse()

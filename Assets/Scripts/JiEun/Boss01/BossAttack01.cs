@@ -15,7 +15,7 @@ public class BossAttack01 : MonoBehaviour
     }
     void Start()
     {
-        player02 = GameObject.FindGameObjectWithTag("Player");
+        player02 = GameObject.FindGameObjectWithTag("player");
     }
     void Update()
     {

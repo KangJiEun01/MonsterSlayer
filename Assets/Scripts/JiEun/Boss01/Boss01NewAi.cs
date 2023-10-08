@@ -17,7 +17,7 @@ public class Boss01NewAi : MonoBehaviour
     public bool _attack = false; //공격on, off상태
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("player");
         bossRend = bossMat.GetComponent<Renderer>();
         transform.LookAt(player.transform);
         BossHp = GetComponent<Target>().GetHP();

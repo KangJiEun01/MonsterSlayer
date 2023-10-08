@@ -18,6 +18,7 @@ public class Spidercontroller : MonoBehaviour
     NavMeshAgent agent;
     Transform spiderpos;
     Animation Ani;
+    Coroutine _co;
     float _hp;
     float timer = 4;
 
@@ -45,8 +46,10 @@ public class Spidercontroller : MonoBehaviour
         {
             spiderDeath = true;
             spider.enabled = false;
+            //agent.velocity = Vector3.zero;
+            agent.isStopped = true; //네비 움직임 멈춤
             //deathEffect.SetActive(true);
-            StartCoroutine(DissolveCo());
+            _co = StartCoroutine(DissolveCo());
             Transform childPrefab = transform.Find("VFXGraph_CharacterDissolve"); // "ChildPrefabName"을 프리팹의 이름으로 바꿔주세요.
             if (childPrefab != null)
             {

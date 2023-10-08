@@ -4,7 +4,7 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
     GameObject player;
     Animator animator;
 
-    float BossSpeed = 5f; // 보스 몬스터 이동 속도
+    float BossSpeed = 10f; // 보스 몬스터 이동 속도
     float attackRange = 30f;   // 공격 범위
     float attackCooldown = 3f; // 공격 쿨다운 시간 //공격패턴에 따라 시간 주고 받기
     float _hp;
@@ -50,7 +50,6 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
                 Attacking = true;
                 GetComponent<Boss03Attack01>().enabled = false;
                 GetComponent<Boss03Skill01>().enabled = false;
-                GetComponent<Boss03Attack02>().enabled = false;
                 GetComponent<Boss03Skill02>().enabled = false;
                 GetComponent<Boss03Attack03>().enabled = false;
                 GetComponent<Boss03Dead>().enabled = true;
@@ -73,7 +72,7 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
     void DisCheck()
     {
         transform.LookAt(player.transform);
-       
+
         if (Attacking == false && !GetComponent<Target>().InDamage)
         {
             transform.LookAt(player.transform);
@@ -91,7 +90,7 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
             }
             else if (Vector3.Distance(player.transform.position, transform.position) <= 7f)//플레이어와의 범위 내 공격
             {
-                if (_hp > 70&& HpMode==false)
+                if (_hp > 70 && HpMode == false)
                 {
                     Attackhp00();
                     //Attacking = true;
@@ -108,12 +107,11 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
                 }
             }
         }
-        else if (Attacking && GetComponent<Boss03Attack02>().enabled == false)
+        else if (Attacking)
         {
             Attacking = false;
             GetComponent<Boss03Attack01>().enabled = false;
             GetComponent<Boss03Skill01>().enabled = false;
-            GetComponent<Boss03Attack02>().enabled = false;
             GetComponent<Boss03Skill02>().enabled = false;
             GetComponent<Boss03Attack03>().enabled = false;
         }
@@ -157,12 +155,12 @@ public class Boss03NewAi : MonoBehaviour //***************쿨타임 지우고 트루펄스
     {
         Invoke("HpModeTrue", 2.0f);
         int rand = Random.Range(0, 2);
-        if (rand == 0&& GetComponent<Boss03Attack03>().enabled == false)
+        if (rand == 0 && GetComponent<Boss03Attack03>().enabled == false)
         {
             GetComponent<Boss03Attack01>().enabled = true;
             GetComponent<Boss03Attack03>().enabled = false;
         }
-        else if (rand == 1&& GetComponent<Boss03Attack01>().enabled == false)
+        else if (rand == 1 && GetComponent<Boss03Attack01>().enabled == false)
         {
             GetComponent<Boss03Attack03>().enabled = true;
             GetComponent<Boss03Attack01>().enabled = false;

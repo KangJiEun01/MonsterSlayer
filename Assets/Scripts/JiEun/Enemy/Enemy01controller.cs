@@ -8,6 +8,8 @@ public class Enemy01controller : MonoBehaviour
     [SerializeField] Transform bulletPos; //-z
     [SerializeField] GameObject detectionUi;
     [SerializeField] GameObject[] DropItem;
+    [SerializeField] AudioClip bulletFire;
+    AudioSource bulletSource;
 
     Transform botPos;
     Animator anim;
@@ -56,6 +58,7 @@ public class Enemy01controller : MonoBehaviour
         anim = GetComponent<Animator>();
         VectorbulletPos = bulletPos.position;
         anim.Play("WalkFront_Shoot_AR");
+        bulletSource = GetComponent<AudioSource>();
         //Invoke("find", 1f);
     }
     private void OnEnable()
@@ -126,6 +129,7 @@ public class Enemy01controller : MonoBehaviour
             Time_current = Time.time - Time_start;
             if (Time_current > Time_Sumcooltime)
             {
+                bulletSource.PlayOneShot(bulletFire);
                 Vector3 attackst = new Vector3(VectorbulletPos.x, VectorbulletPos.y, VectorbulletPos.z); ;
                 GameObject temp = Instantiate(bullet);
                 Vector3 worldPosition = bulletPos.TransformPoint(attackst);

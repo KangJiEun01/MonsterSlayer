@@ -61,28 +61,9 @@ public class Boss01NewAi : MonoBehaviour
                 Mode = false;
             }
         }
-        //else if(BossHp<30)
-        //{
-        //    if (Mode == false) //회전공격
-        //    {
-        //        if (_attack == false)
-        //        {
-        //            _attack = true;
-        //            GetComponent<BossSkill01>().enabled = true;
-        //            _attack = false;
-        //        }
-        //        Mode = true;
-        //    }
-
-        //}
     }
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    BossHp = 10;
-        //    GetComponent<BossSkill01>().enabled = true;
-        //}
         if (startAttack)
         {
             float BossHp = GetComponent<Target>().GetHP();

@@ -25,6 +25,7 @@ public class Spidercontroller : MonoBehaviour
     bool spiderDeath = false;
     void Start()
     {
+        spider= GetComponent<Collider>();
         if (skinnedMesh != null)
         {
             skinnedMaterials = skinnedMesh.materials;
@@ -42,7 +43,7 @@ public class Spidercontroller : MonoBehaviour
         _hp = GetComponent<Target>().Hp;
         if (_hp <= 0)
         {
-            spider.GetComponent<Collider>().enabled = false;
+            spider.enabled = false;
             //deathEffect.SetActive(true);
             StartCoroutine(DissolveCo());
             spiderDeath = true;

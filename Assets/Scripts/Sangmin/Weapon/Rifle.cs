@@ -1,6 +1,6 @@
 
 using UnityEngine;
-
+using UnityEngine.VFX;
 
 public class Rifle : HitScan
 {  
@@ -28,6 +28,7 @@ public class Rifle : HitScan
                 _currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
                 _currentBullet.transform.position = hit.point + hit.normal*0.1f;
                 _currentBullet.transform.parent = hit.transform;
+                _currentBullet.GetComponent<VisualEffect>()?.SendEvent("Shot");
                 IndexCheck();
                 
                 

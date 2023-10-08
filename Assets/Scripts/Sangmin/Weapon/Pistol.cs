@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Pistol : HitScan
 {
@@ -23,15 +24,15 @@ public class Pistol : HitScan
                 Target target = hit.transform.GetComponent<Target>();
                 target?.OnDamage(_attackDamage);
                 hit.rigidbody?.AddForce(-hit.normal * _impactForce);
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
-                {
-                    _currentBullet = _bulletPool[_poolIndex++];
-                    _currentBullet.SetActive(true);
-                    _currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
-                    _currentBullet.transform.position = hit.point + hit.normal * 0.1f;
-                    _currentBullet.transform.parent = hit.transform;
-                    IndexCheck();
-                }
+
+                _currentBullet = _bulletPool[_poolIndex++];
+                _currentBullet.SetActive(true);
+                _currentBullet.transform.rotation = Quaternion.LookRotation(hit.normal);
+                _currentBullet.transform.position = hit.point + hit.normal * 0.1f;
+                _currentBullet.transform.parent = hit.transform;
+                _currentBullet.GetComponent<VisualEffect>()?.SendEvent("Shot");
+                IndexCheck();
+
 
             }
             Invoke("StopAttack", _attackSpeed);

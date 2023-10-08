@@ -80,7 +80,7 @@ public class Boss02NewAi : MonoBehaviour //보스 1 : 3초마다 따라와서 공격하고 3�
             {
                 GetComponent<Boss02Hit>().enabled = true;
             }
-            else if (_hp == 0)
+            else if (_hp <= 0)
             {
                 GetComponent<Boss02Dead>().enabled = true;
                 GetComponent<Boss02NewAi>().enabled = false;

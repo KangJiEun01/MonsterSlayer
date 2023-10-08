@@ -10,9 +10,10 @@ public class Enemy01controller : MonoBehaviour
     [SerializeField] GameObject detectionUi;
     [SerializeField] GameObject[] DropItem;
     [SerializeField] AudioClip bulletFire;
+    [SerializeField] Renderer EnemyRend;
+
     AudioSource bulletSource;
     Rigidbody rb;
-
     Transform botPos;
     Animator anim;
 
@@ -62,6 +63,7 @@ public class Enemy01controller : MonoBehaviour
         anim.Play("WalkFront_Shoot_AR");
         bulletSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+        //EnemyRend = GetComponent<Renderer>();
         GenericSingleton<UIBase>.Instance.EffectVolume += Sound;
         Sound(PlayerPrefs.GetFloat("EffectVolume"));
         Invoke("find", 1f);
@@ -99,6 +101,11 @@ public class Enemy01controller : MonoBehaviour
             }
             if (!_setActive)
             {
+                if(hp > 0 && GetComponent<Target>().InDamage)
+                {
+                    EnemyRend.material.color = Color.red;
+                    Invoke("MatColor", 0.1f);
+                }
                 float distanceTarget = Vector3.Distance(transform.position, player.transform.position);
                 if (distanceTarget <= attackRange)
                 {
@@ -122,6 +129,10 @@ public class Enemy01controller : MonoBehaviour
                 detectionUi.SetActive(true);
             }
         }
+    }
+    void MatColor()
+    {
+        EnemyRend.material.color = Color.white;
     }
     public void Sound(float volume)
     {
@@ -225,12 +236,11 @@ public class Enemy01controller : MonoBehaviour
     }
     void Die()
     {
-        int num = UnityEngine.Random.Range(0, 4);
-        if(itemNum==0)
+        for(int i=0; i <3; i++)
         {
+            int num = UnityEngine.Random.Range(0, 4);
             Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
         }
-        itemNum++;
         _Spawn = false;
         GetComponent<EnemyActive>().enabled = true;
         GetComponent<Enemy01controller>().enabled = false;

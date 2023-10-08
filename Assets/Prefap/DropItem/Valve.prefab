@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4103269459714482417}
   - component: {fileID: 4386344366118583715}
   - component: {fileID: 4086429413375549775}
-  m_Layer: 0
+  - component: {fileID: 4154561600459599920}
+  m_Layer: 25
   m_Name: Valve
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -94,7 +95,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2589923439071592740}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.114532344, y: 0.053369902, z: 0.11453234}
@@ -116,6 +117,22 @@ MonoBehaviour:
   _idx: 3
   _image: {fileID: 0}
   _text: {fileID: 0}
+--- !u!54 &4154561600459599920
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589923439071592740}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4361790034521598460
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +144,7 @@ GameObject:
   - component: {fileID: 4071507118986266261}
   - component: {fileID: 6545091267655739195}
   - component: {fileID: 2355342089399464840}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4939,7 +4956,7 @@ GameObject:
   - component: {fileID: 5071333806741710911}
   - component: {fileID: 2616111841358382573}
   - component: {fileID: 2703478517857697532}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}

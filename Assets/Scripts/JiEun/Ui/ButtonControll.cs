@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 public class ButtonControll : MonoBehaviour
 {
     [SerializeField] GameObject manualUi;
+    [SerializeField] GameObject creditUi;
+    [SerializeField] GameObject creditScripts;
     [SerializeField] GameObject _loadButton;
     private void Start()
     {
@@ -63,5 +65,15 @@ public class ButtonControll : MonoBehaviour
     public void ManualActive()
     {
         manualUi.SetActive(false);
+    }
+    public void ClickACredit()
+    {
+        creditUi.SetActive(true);
+        creditScripts.GetComponent<Credit>().enabled = true;
+    }
+    public void CreditActive()
+    {
+        creditUi.SetActive(false);
+        creditScripts.GetComponent<Credit>().enabled = false;
     }
 }

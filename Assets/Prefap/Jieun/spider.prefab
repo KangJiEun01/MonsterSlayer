@@ -259,6 +259,7 @@ MonoBehaviour:
   refreshRate: 0.025
   skinnedMaterials:
   - {fileID: 2100000, guid: ef4657281049d2a439c987f170821279, type: 2}
+  item: {fileID: 5363711343350715541, guid: babcf3b4833cf5449abb0b568f01a808, type: 3}
 --- !u!1 &6283025572040718997
 GameObject:
   m_ObjectHideFlags: 0

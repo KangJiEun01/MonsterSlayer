@@ -10,6 +10,7 @@ public class Spidercontroller : MonoBehaviour
     public float dissolveRate = 0.0125f;
     public float refreshRate = 0.025f;
     [SerializeField] private Material[] skinnedMaterials;
+    [SerializeField] GameObject item;
 
     //[SerializeField] GameObject deathEffect;
     GameObject player;
@@ -104,6 +105,7 @@ public class Spidercontroller : MonoBehaviour
     void Death()
     {
         //Destroy(gameObject);
+        Instantiate(item, transform.position, Quaternion.identity);
         gameObject.SetActive(false); //¿À·ù****
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }

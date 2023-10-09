@@ -154,7 +154,7 @@ public class WeaponManager : GenericSingleton<WeaponManager>
    
         foreach(WeaponBase weapon in _weapons)
         {
-            if(weapon.WeaponIdx == item.ItemIdx - 7)
+            if(weapon.WeaponIdx == item.ItemIdx - 8)
             {
                 _activeWeaponsIdx.Add(weapon.WeaponIdx);
                 GenericSingleton<UIBase>.Instance.WeaponSelectUIUnlock(weapon);

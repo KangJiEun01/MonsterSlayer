@@ -31,6 +31,7 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
 
         StringReader reader = new StringReader(RecipeDataCSV.text);
         reader.ReadLine();
+        List<Recipe> temp = new List<Recipe>();
         while (reader.Peek() != -1)
         {
             string line = reader.ReadLine();
@@ -46,10 +47,11 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
             int ResultItemIdx = int.Parse(values[13]);
             int ResultItemCount = int.Parse(values[14]);
             bool isWeapon = (values[15] == "1") ? true : false;
-    
-            _recipes.Add(new Recipe(new ItemData(firstItemIdx, firstItemCount), new ItemData(SecondItemIdx, SecondItemCount), new ItemData(ThirdItemIdx, ThirdItemCount), new ItemData(FourthItemIdx, FourthItemCount), new ItemData(ResultItemIdx, ResultItemCount),isWeapon));
+
+            temp.Add(new Recipe(new ItemData(firstItemIdx, firstItemCount), new ItemData(SecondItemIdx, SecondItemCount), new ItemData(ThirdItemIdx, ThirdItemCount), new ItemData(FourthItemIdx, FourthItemCount), new ItemData(ResultItemIdx, ResultItemCount),isWeapon));
   
         }
+        _recipes = temp;
         reader.Close();
     }
     public void CalExchange()

@@ -7,12 +7,10 @@ public class MinimapCamera : GenericSingleton<MinimapCamera>
 
     Camera cam;
     Vector2 size;
-    //public Transform indicator;
 
     void Start()
     {
-        //indicator = GameObject.FindGameObjectWithTag("").transform;
-        target = GameObject.FindGameObjectWithTag("MiniMapFind").transform; // "Player" 태그를 가진 오브젝트를 찾아서 플레이어로 설정
+        target = GameObject.FindGameObjectWithTag("MiniMapFind").transform;
         cam = GetComponent<Camera>();
         size = new Vector2(cam.orthographicSize, cam.orthographicSize * cam.aspect);
     }
@@ -21,52 +19,19 @@ public class MinimapCamera : GenericSingleton<MinimapCamera>
     {
         if (target != null)
         {
+            Vector3 position = target.position;
+            position.y = transform.position.y; 
+
+            transform.LookAt(position + Vector3.up, Vector3.up);
+
             Vector3 targetForwardVector = target.forward;
             targetForwardVector.y = 0;
             targetForwardVector.Normalize();
+            Vector3 cameraPosition = position + targetForwardVector * offsetRatio * cam.orthographicSize;
+            transform.position = cameraPosition;
 
-            Vector3 position = new Vector3(target.transform.position.x, 1, target.transform.position.z)
-                               + targetForwardVector * offsetRatio * cam.orthographicSize;
-            transform.position = position;
+            transform.rotation = Quaternion.Euler(90, 0, -target.eulerAngles.y);
         }
     }
 
-    public void RotateMinCam()
-    {
-        if (target != null)
-        {
-            transform.eulerAngles = new Vector3(90, 0, -target.eulerAngles.y);
-        }
-    }
-
-    //public void ShowBorderIndicator(Vector3 position)
-    //{
-    //    if (target != null)
-    //    {
-    //        float reciprocal;
-    //        float rotation;
-    //        Vector2 distance = new Vector3(transform.position.x - position.x, transform.position.z - position.z);
-
-    //        distance = Quaternion.Euler(0, 0, target.eulerAngles.y) * distance;
-
-    //        if (Mathf.Abs(distance.x) > Mathf.Abs(distance.y))
-    //        {
-    //            reciprocal = Mathf.Abs(size.x / distance.x);
-    //            rotation = (distance.x > 0) ? 90 : -90;
-    //        }
-    //        else
-    //        {
-    //            reciprocal = Mathf.Abs(size.y / distance.y);
-    //            rotation = (distance.y > 0) ? 180 : 0;
-    //        }
-
-    //        indicator.localPosition = new Vector3(distance.x * -reciprocal, distance.y * -reciprocal, 1);
-    //        indicator.localEulerAngles = new Vector3(0, 0, rotation);
-    //    }
-    //}
-
-    //public void HideBorderIncitator()
-    //{
-    //    indicator.gameObject.SetActive(false);
-    //}
 }

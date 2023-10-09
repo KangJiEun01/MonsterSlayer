@@ -7,15 +7,6 @@ public class Boss02Hit : MonoBehaviour
         GetComponent<Animator>().Play("2_Hit");
         Invoke("EnabledFalse", 0.04f);
     }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
     void EnabledFalse()
     {
         //GetComponent<Animator>().Play("2_Run");

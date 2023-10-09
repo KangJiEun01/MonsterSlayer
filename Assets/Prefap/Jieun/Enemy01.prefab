@@ -554,6 +554,7 @@ GameObject:
   - component: {fileID: 7009502249165434285}
   - component: {fileID: 1687353091729955556}
   - component: {fileID: 8223491606426000216}
+  - component: {fileID: 8251388835173460619}
   m_Layer: 0
   m_Name: Enemy01
   m_TagString: Boss
@@ -657,6 +658,7 @@ MonoBehaviour:
   - {fileID: 2845994366291492663, guid: 6f00dcae214ec854ea5ca70f55be9ad0, type: 3}
   - {fileID: 2589923439071592740, guid: ad77f454114c7d54c8ff7222b4d12300, type: 3}
   bulletFire: {fileID: 8300000, guid: 4ba2dff0a4b4fc74c976b7df14ac2945, type: 3}
+  mat: {fileID: 0}
   _damage: 0
 --- !u!114 &7009502249165434285
 MonoBehaviour:
@@ -780,6 +782,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 100
   damageDelay: 2
+--- !u!212 &8251388835173460619
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060164488255162112}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1060164488255162114
 GameObject:
   m_ObjectHideFlags: 0

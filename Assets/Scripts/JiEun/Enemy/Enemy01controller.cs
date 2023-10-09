@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy01controller : MonoBehaviour
@@ -10,7 +11,8 @@ public class Enemy01controller : MonoBehaviour
     [SerializeField] GameObject detectionUi;
     [SerializeField] GameObject[] DropItem;
     [SerializeField] AudioClip bulletFire;
-    [SerializeField] Renderer EnemyRend;
+    [SerializeField] Renderer[] mat;
+    //[SerializeField] Material[] mat;
 
     AudioSource bulletSource;
     Rigidbody rb;
@@ -63,6 +65,7 @@ public class Enemy01controller : MonoBehaviour
         anim.Play("WalkFront_Shoot_AR");
         bulletSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+        //mat = GetComponent<Material>();
         //EnemyRend = GetComponent<Renderer>();
         GenericSingleton<UIBase>.Instance.EffectVolume += Sound;
         Sound(PlayerPrefs.GetFloat("EffectVolume"));
@@ -91,7 +94,7 @@ public class Enemy01controller : MonoBehaviour
         if (player != null)
         {
             hp = GetComponent<Target>().Hp;
-            if (hp <= 0&& _setActive==false)
+            if (hp <= 0 && _setActive == false)
             {
                 _setActive = true;
                 anim.Play("Die");
@@ -101,10 +104,14 @@ public class Enemy01controller : MonoBehaviour
             }
             if (!_setActive)
             {
-                if(hp > 0 && GetComponent<Target>().InDamage)
+                if (hp > 0 && GetComponent<Target>().InDamage)
                 {
-                    EnemyRend.material.color = Color.red;
-                    Invoke("MatColor", 0.1f);
+                    for (int i = 0; i < mat.Length; i++)
+                    {
+                        mat[i].material.color = Color.red;
+                        //EnemyRend.material.color = Color.red;
+                        Invoke("MatColor", 0.01f);
+                    }
                 }
                 float distanceTarget = Vector3.Distance(transform.position, player.transform.position);
                 if (distanceTarget <= attackRange)
@@ -132,7 +139,10 @@ public class Enemy01controller : MonoBehaviour
     }
     void MatColor()
     {
-        EnemyRend.material.color = Color.white;
+        for (int i = 0; i < mat.Length; i++)
+        {
+            mat[i].material.color = Color.white;
+        }
     }
     public void Sound(float volume)
     {
@@ -161,7 +171,7 @@ public class Enemy01controller : MonoBehaviour
                 Vector3 worldPosition = bulletPos.TransformPoint(attackst);
                 temp.transform.position = worldPosition;
                 //Vector3 dir = transform.forward; //¾Õ¹æÇâ
-                Vector3 dir = new Vector3(transform.forward.x+0.07f, transform.forward.y, transform.forward.z);
+                Vector3 dir = new Vector3(transform.forward.x + 0.07f, transform.forward.y, transform.forward.z);
                 temp.GetComponent<FireBullet>().Init(dir, bulletSpeed);
                 Time_current = Time_Sumcooltime;
                 Time_start = Time.time;
@@ -236,7 +246,7 @@ public class Enemy01controller : MonoBehaviour
     }
     void Die()
     {
-        for(int i=0; i <3; i++)
+        for (int i = 0; i < 3; i++)
         {
             int num = UnityEngine.Random.Range(0, 4);
             Instantiate(DropItem[num], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);

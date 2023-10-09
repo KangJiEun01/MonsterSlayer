@@ -999,6 +999,10 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 2090699285}
+    - target: {fileID: 8927943923063453390, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: damageDelay
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
 --- !u!1 &457758023
@@ -2277,6 +2281,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 891080738}
     - target: {fileID: 2311522325297017035, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+      propertyPath: EnemyRend
+      value: 
+      objectReference: {fileID: 1564033745}
+    - target: {fileID: 2311522325297017035, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
       propertyPath: bulletFire
       value: 
       objectReference: {fileID: 8300000, guid: 4ba2dff0a4b4fc74c976b7df14ac2945, type: 3}
@@ -3132,6 +3140,11 @@ Transform:
   m_Father: {fileID: 1817269470}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &1564033745 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 526831297090168788, guid: 8473b0adeca22b74b917211740d611cd, type: 3}
+  m_PrefabInstance: {fileID: 1101530463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1607417878
 GameObject:
   m_ObjectHideFlags: 0

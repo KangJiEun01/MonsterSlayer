@@ -14,6 +14,7 @@ public class Boss03NewAi : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("player").transform;
+        transform.LookAt(player.position);
         animator = GetComponent<Animator>();
         animator.Play("In");
         Invoke("AttackAct", 7.8f);
@@ -28,10 +29,15 @@ public class Boss03NewAi : MonoBehaviour
             GetComponent<Boss03Attack01>().enabled = false;
             GetComponent<Boss03Skill01>().enabled = false;
             GetComponent<Boss03Attack03>().enabled = false;
+            GetComponent<Boss03Hit>().enabled = false;
             GetComponent<Boss03Dead>().enabled = true;
         }
+        if (_hp > 0 && GetComponent<Target>().InDamage)
+        {
+            GetComponent<Boss03Hit>().enabled = true;
+        }
 
-        if (_hp > 0&&!isAttacking)
+        else if (_hp > 0&&!isAttacking)
         {
             transform.LookAt(player.position);
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -50,7 +56,6 @@ public class Boss03NewAi : MonoBehaviour
 
     void StartAttack()
     {
-        // 공격 상태로 전환하고 일정 시간 뒤에 공격이 끝났다고 표시
         isAttacking = true;
         Invoke("StopAttack", attackCooldown);
         int rand = Random.Range(0, 3); //공격랜덤

@@ -25,6 +25,7 @@ public class NewCameraShake : MonoBehaviour
 
     void Update()
     {
+        if (GenericSingleton<GameManager>.Instance.CurrentState != GameManager.GameState.InGame) return;
         if (currentShakeDuration > 0)
         {
             Shake();

@@ -196,7 +196,7 @@ public class GameManager : GenericSingleton<GameManager>
                 GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<PlayerCon>.Instance.SetRotation(0);
                 GenericSingleton<PlayerCon>.Instance.Init();
-                GenericSingleton<UIBase>.Instance.Init();
+                GenericSingleton<UIBase>.Instance.HpUIInit();
                 break;
             case "YDNeonCity":
                 SetGameState(GameState.InGame);
@@ -207,7 +207,7 @@ public class GameManager : GenericSingleton<GameManager>
                 GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<PlayerCon>.Instance.SetRotation(0);
                 GenericSingleton<PlayerCon>.Instance.Init();
-                GenericSingleton<UIBase>.Instance.Init();
+                GenericSingleton<UIBase>.Instance.HpUIInit();
                 break;
             case "YDUnderCity":
                 SetGameState(GameState.InGame);
@@ -218,7 +218,7 @@ public class GameManager : GenericSingleton<GameManager>
                 GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<PlayerCon>.Instance.SetRotation(180);
                 GenericSingleton<PlayerCon>.Instance.Init();
-                GenericSingleton<UIBase>.Instance.Init();
+                GenericSingleton<UIBase>.Instance.HpUIInit();
                 break;
             case "YDBossStage":
                 SetGameState(GameState.InGame);
@@ -229,7 +229,7 @@ public class GameManager : GenericSingleton<GameManager>
                 GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<PlayerCon>.Instance.SetRotation(90);
                 GenericSingleton<PlayerCon>.Instance.Init();
-                GenericSingleton<UIBase>.Instance.Init();
+                GenericSingleton<UIBase>.Instance.HpUIInit();
                 break;
             case "GameStart":
                 SetGameState(GameState.Loading);

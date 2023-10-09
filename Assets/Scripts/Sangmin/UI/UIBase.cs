@@ -270,6 +270,7 @@ public class UIBase : GenericSingleton<UIBase>
         ShowGameOverUI(false);
         PauseUIOff();
         _pauseUI.GetComponent<PauseUI>().GoToMainMenu();
+        ShowGameOverUI(false);
     }
     public void QuitCancle()                                        //게임 종료 취소
     {

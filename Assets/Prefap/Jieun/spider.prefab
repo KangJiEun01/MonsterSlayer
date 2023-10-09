@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9cbb71c8b7cba040936b2c4a2132ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimapCamera: {fileID: 0}
+  minimapCamera: {fileID: 7981364438955459554, guid: e468be419cd3fe54bba9be5ecde0a115, type: 3}
 --- !u!1 &6283025572040718995
 GameObject:
   m_ObjectHideFlags: 0

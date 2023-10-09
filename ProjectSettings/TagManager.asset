@@ -17,6 +17,7 @@ TagManager:
   - Plant
   - player
   - MiniMapFind
+  - Portal
   layers:
   - Default
   - TransparentFX

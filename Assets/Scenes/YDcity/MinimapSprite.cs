@@ -17,13 +17,13 @@ public class MinimapSprite : MonoBehaviour
         transform.rotation = Quaternion.Euler(90, transform.parent.eulerAngles.y, 0);
         transform.position = new Vector3(transform.parent.position.x, 0, transform.parent.position.z);
 
-        if(spriteRenderer.isVisible == false)
-        {
-            minimapCamera.ShowBorderIndicator(transform.position);
-        }
-        else
-        {
-            minimapCamera.HideBorderIncitator();
-        }
+        //if(spriteRenderer.isVisible == false)
+        //{
+        //    minimapCamera.ShowBorderIndicator(transform.position);
+        //}
+        //else
+        //{
+        //    minimapCamera.HideBorderIncitator();
+        //}
     }
 }

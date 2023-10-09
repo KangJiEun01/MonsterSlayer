@@ -126,15 +126,14 @@ public class ExchangeSystem : GenericSingleton<ExchangeSystem>
             GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Second, recipe.Second.Count);
             GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Third, recipe.Third.Count);
             GenericSingleton<ItemSaver>.Instance.SubItem(recipe.Fourth, recipe.Fourth.Count);
-
             GenericSingleton<ItemSaver>.Instance.AddItem(recipe.Result);
-        }
-        
 
+        }
         CalExchange();
         GenericSingleton<UIBase>.Instance.InventoryInit();
         GenericSingleton<UIBase>.Instance.ExchangeUIInit();
         GenericSingleton<UIBase>.Instance.HealItemInit();
+     
 
     }
     public void LoadRecipesData(List<RecipeData> recipes)

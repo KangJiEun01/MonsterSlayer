@@ -45,13 +45,19 @@ public class ItemSaver : GenericSingleton<ItemSaver>
     }
     public void AddItem(ItemData item)
     {
+
         if (datas._items.TryGetValue(item.ItemIdx, out ItemData data))
         {
-            data.SetCount(data.Count + item.Count);
+            datas._items.Remove(data.ItemIdx);
+            ItemData newItem = new ItemData(item.ItemIdx,data.Count + item.Count);
+            datas._items.Add(newItem.ItemIdx, newItem);
         }
         else datas._items.Add(item.ItemIdx, item);
+
         GenericSingleton<ExchangeSystem>.Instance.CalExchange();
+
         GenericSingleton<UIBase>.Instance.InventoryInit();
+
         GenericSingleton<UIBase>.Instance.ExchangeUIInit();
     }
     public void LoadItemData(List<ItemSource> items)

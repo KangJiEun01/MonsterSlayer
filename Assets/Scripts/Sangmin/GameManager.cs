@@ -84,7 +84,7 @@ public class GameManager : GenericSingleton<GameManager>
     {
         _currentStage = idx;
     }
-    void Update()
+    void Update()  
     {
 
         if (_currentState != GameState.Loading)

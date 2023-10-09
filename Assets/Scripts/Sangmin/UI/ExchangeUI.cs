@@ -53,7 +53,7 @@ public class ExchangeUI : MonoBehaviour
             temp.name = recipe.Result.Name;
             bool[] bools = recipe.Bools;
             Item[] items = temp.GetComponentsInChildren<Item>();
-            if (!bools[0]) SetAlpha(items[0].Image, 0.2f);     // 각재료가 부족하다면 레시피가 반투명해짐     
+            if (!bools[0]) SetAlpha(items[0].Image, 0.6f);     // 각재료가 부족하다면 레시피가 반투명해짐     
             else SetAlpha(items[0].Image, 1);
             items[0].Image.sprite = _itemIcon[recipe.First.ItemIdx];
             items[0].Text.text = "X" + recipe.First.Count.ToString();
@@ -71,7 +71,7 @@ public class ExchangeUI : MonoBehaviour
             else
             {
                 temp.GetComponent<RecipeUI>().Plus[0].SetActive(true);
-                if (!bools[1]) SetAlpha(items[1].Image, 0.2f);
+                if (!bools[1]) SetAlpha(items[1].Image, 0.6f);
                 else SetAlpha(items[1].Image, 1);
                 items[1].Image.sprite = _itemIcon[recipe.Second.ItemIdx];
                 items[1].Text.text = "X" + recipe.Second.Count.ToString();
@@ -85,7 +85,7 @@ public class ExchangeUI : MonoBehaviour
             {
                
                 temp.GetComponent<RecipeUI>().Plus[1].SetActive(true);
-                if (!bools[2]) SetAlpha(items[2].Image, 0.2f);
+                if (!bools[2]) SetAlpha(items[2].Image, 0.6f);
                 else SetAlpha(items[2].Image, 1);
                 items[2].Image.sprite = _itemIcon[recipe.Third.ItemIdx];
                 items[2].Text.text = "X" + recipe.Third.Count.ToString();
@@ -98,7 +98,7 @@ public class ExchangeUI : MonoBehaviour
             else
             {
                 temp.GetComponent<RecipeUI>().Plus[2].SetActive(true);
-                if (!bools[3]) SetAlpha(items[3].Image, 0.2f);
+                if (!bools[3]) SetAlpha(items[3].Image, 0.6f);
                 else SetAlpha(items[3].Image, 1);
                 items[3].Image.sprite = _itemIcon[recipe.Fourth.ItemIdx];
                 items[3].Text.text = "X" + recipe.Fourth.Count.ToString();
@@ -133,14 +133,15 @@ public class ExchangeUI : MonoBehaviour
         else
         {
             _resultEffect.SetActive(false);
-            SetAlpha(_resultItem.GetComponent<Item>().Image, 0.2f);
-            SetAlpha(ExchangeBtn.GetComponent<Image>(), 0.2f);
+            SetAlpha(_resultItem.GetComponent<Item>().Image, 0.6f);
+            SetAlpha(ExchangeBtn.GetComponent<Image>(), 0.6f);
             ExchangeBtn.GetComponent<Button>().interactable = false;
         }
 
     }
     public void ExChangeBtn()
     {
+        Debug.Log(_currentRecipe.Result.Count);
         GenericSingleton<ExchangeSystem>.Instance.Exchange(_currentRecipe);
     }
 

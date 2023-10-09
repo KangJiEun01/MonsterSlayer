@@ -3,7 +3,6 @@ using UnityEngine.AI;
 using UnityEngine.VFX;
 using System.Collections;
 
-
 public class Spidercontroller : MonoBehaviour
 {
     public VisualEffect VFXGraph;
@@ -31,7 +30,7 @@ public class Spidercontroller : MonoBehaviour
         {
             skinnedMaterials = skinnedMesh.materials;
         }
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("player");
         Debug.Log(player);
         agent = GetComponent<NavMeshAgent>();
         spiderpos = GetComponent<Transform>();

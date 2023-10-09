@@ -4,7 +4,7 @@ public class EnemyActive : MonoBehaviour
 {
     private void OnEnable()
     {
-        Invoke("EnemySpawn", 7f);
+        Invoke("EnemySpawn", 14f);
     }
     void EnemySpawn()
     {

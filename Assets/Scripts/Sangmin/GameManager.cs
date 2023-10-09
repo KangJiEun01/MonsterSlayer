@@ -67,9 +67,8 @@ public class GameManager : GenericSingleton<GameManager>
     }
     public int LoadGame()
     {
-        GenericSingleton<DataManager>.Instance.LoadData(0);
         GenericSingleton<PlayerCon>.Instance.Init();
-        GenericSingleton<UIBase>.Instance.Init();
+        GenericSingleton<DataManager>.Instance.LoadData(0);
         return _currentStage;
     }
     public void DemonScene()

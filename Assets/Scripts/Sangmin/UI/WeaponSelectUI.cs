@@ -53,7 +53,7 @@ public class WeaponSelectUI : MonoBehaviour
             _buttons[idx - 2].GetComponent<Button>().interactable = false;
             _buttons[idx - 2].GetComponent<Image>().sprite = _blueImage;
         }
-        
+       
 
 
     }

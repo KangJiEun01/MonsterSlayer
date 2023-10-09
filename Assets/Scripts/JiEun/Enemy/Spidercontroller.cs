@@ -21,6 +21,7 @@ public class Spidercontroller : MonoBehaviour
     Coroutine _co;
     float _hp;
     float timer = 4;
+    int itemNum = 0;
 
     bool attack = false;
     bool spiderDeath = false;
@@ -105,7 +106,11 @@ public class Spidercontroller : MonoBehaviour
     void Death()
     {
         //Destroy(gameObject);
-        Instantiate(item, transform.position, Quaternion.identity);
+        if(itemNum==0)
+        {
+            Instantiate(item, transform.position, Quaternion.identity);
+        }
+        itemNum++;
         gameObject.SetActive(false); //¿À·ù****
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }

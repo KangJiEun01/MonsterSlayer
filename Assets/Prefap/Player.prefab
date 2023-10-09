@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 71113248}
   m_Layer: 23
   m_Name: MINIICON (1)
-  m_TagString: player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39087,7 +39087,7 @@ GameObject:
   - component: {fileID: 3144186920232606460}
   m_Layer: 6
   m_Name: Player
-  m_TagString: player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

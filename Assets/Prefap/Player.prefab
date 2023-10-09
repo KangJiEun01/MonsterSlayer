@@ -39065,7 +39065,7 @@ MonoBehaviour:
   _impactForce: 10
   _recoilForce: 3
   _weapon: {fileID: 3120975088488576371}
-  _reloadTime: 1.7
+  _reloadTime: 1.5
   _weaponIdx: 1
   _shotSound:
   - {fileID: 8300000, guid: 7292a38da27669444a54b903e8c2fea0, type: 3}
@@ -41847,7 +41847,7 @@ MonoBehaviour:
   _impactForce: 10
   _recoilForce: 0
   _weapon: {fileID: 1412089289742389024}
-  _reloadTime: 2.8
+  _reloadTime: 2.5
   _weaponIdx: 4
   _shotSound:
   - {fileID: 8300000, guid: 481b17e1a5d929140b4a56cbdcf72584, type: 3}

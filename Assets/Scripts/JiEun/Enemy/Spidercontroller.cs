@@ -42,7 +42,7 @@ public class Spidercontroller : MonoBehaviour
     void Update()
     {
         _hp = GetComponent<Target>().Hp;
-        if (_hp <= 0)
+        if (_hp <= 0 && !spiderDeath)
         {
             spiderDeath = true;
             spider.enabled = false;

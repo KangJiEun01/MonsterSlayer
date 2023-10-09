@@ -1,4 +1,5 @@
 
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -19,6 +20,8 @@ public class Arrow : MonoBehaviour
             transform.position = collision.GetContact(0).point;
             StickToTarget(collision.transform);
         }
+        Target target = collision.transform.GetComponent<Target>();
+        target?.OnDamage(100);
     }
 
     void StickToTarget(Transform target)

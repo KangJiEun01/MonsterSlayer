@@ -28,13 +28,11 @@ public class Crossbow : Projectile
             Destroy(temp, 10f);
 
             Invoke("StopAttack", _attackSpeed);
-        }
-        else if (_currentIdx <= 0 && !_isReload)
-        {
             _isReload = true;
+            GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
             StartCoroutine(Reload());
         }
-        GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
+        
     }
 
     void StopAttack()

@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3ÃÊ ´ë±â
-    //º¸½º 2 : °è¼Ó µû¶ó¿Í¼­ °ø°ÝÇÏ°í ÃÑ¾Ë È÷Æ®ÇÏ¸é È÷Æ®¾Ö´Ï¸Þ´Ï¼Ç Àç»ý°ú ÇÔ²² Àá½Ã Á¤Áö. ´Ù½Ã µû¶ó¿È (¸ÂÃß¸é¼­ µµ¸ÁÃÄ¾ß Å¬¸®¾î °¡´É)
+                                         //º¸½º 2 : °è¼Ó µû¶ó¿Í¼­ °ø°ÝÇÏ°í ÃÑ¾Ë È÷Æ®ÇÏ¸é È÷Æ®¾Ö´Ï¸Þ´Ï¼Ç Àç»ý°ú ÇÔ²² Àá½Ã Á¤Áö. ´Ù½Ã µû¶ó¿È (¸ÂÃß¸é¼­ µµ¸ÁÃÄ¾ß Å¬¸®¾î °¡´É)
 {
     GameObject player;
     Animator animator;
@@ -26,7 +26,7 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
         //animator.Play("2_Hit");
         //animator.Play("2_Run"); 
         //animator.Play("2_Idle");
-        Invoke("UpdateAttack", 10f);
+        Invoke("UpdateAttack", 9.2f);
     }
     void UpdateAttack()
     {
@@ -38,26 +38,26 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
     {
         int Rand = Random.Range(0, 2);
         Debug.Log(Rand);
-            if (Rand == 0|| Rand == 1) //2¹ø °ø°Ý
+        if (Rand == 0|| Rand == 1) //2¹ø °ø°Ý
+        {
+            if (_attack == false)
             {
-                if (_attack == false)
-                {
-                    _attack = true;
-                    Atk02();
-                    _attack = false;
-                }
-                Mode = true;
+                _attack = true;
+                Atk02();
+                _attack = false;
             }
-            //else if (Rand == 1)//1¹ø °ø°Ý
-            //{ 
-            //    if (_attack == false)
-            //    {
-            //        _attack = true;
-            //        Atk01();
-            //        _attack = false;
-            //    }
-            //    Mode = false;
-            //}
+            Mode = true;
+        }
+        //else if (Rand == 1)//1¹ø °ø°Ý
+        //{
+        //    if (_attack == false)
+        //    {
+        //        _attack = true;
+        //        Atk01();
+        //        _attack = false;
+        //    }
+        //    Mode = false;
+        //}
         void Atk02()
         {
             GetComponent<Boss02Attack02>().enabled = true;
@@ -71,7 +71,7 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
             //Invoke("CameraSk", 0.5f);
         }
     }
-        void Update()
+    void Update()
     {
         if (startAttackHP)
         {
@@ -95,7 +95,7 @@ public class Boss02NewAi : MonoBehaviour //º¸½º 1 : 3ÃÊ¸¶´Ù µû¶ó¿Í¼­ °ø°ÝÇÏ°í 3Ã
                 Vector3 playerVector = new Vector3(player.transform.position.x, 0, player.transform.position.z);
                 if (GetComponent<Boss02Attack01>().enabled == false && GetComponent<Boss02Attack02>().enabled == false && GetComponent<Boss02Hit>().enabled == false && GetComponent<Boss02Dead>().enabled == false)
                 {
-                    if (Vector3.Distance(player.transform.position, transform.position) > 10f) //YÃà »©°í µû¶ó¿À°Ô ¹Ù²Ù±â new Ve3
+                    if (Vector3.Distance(player.transform.position, transform.position) > 6f) //YÃà »©°í µû¶ó¿À°Ô ¹Ù²Ù±â new Ve3
                     {
                         animator.Play("2_Run");
                         transform.position = Vector3.MoveTowards(transform.position, playerVector, BossSpeed * Time.deltaTime);

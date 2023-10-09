@@ -17,7 +17,7 @@ public class Boss03NewAi : MonoBehaviour
         transform.LookAt(player.position);
         animator = GetComponent<Animator>();
         animator.Play("In");
-        Invoke("AttackAct", 7.8f);
+        Invoke("AttackAct", 7.6f);
         //InvokeRepeating("CheckDistance", 7.8f, 0.5f); //몇초뒤실행//몇초마다 반복
     }
 

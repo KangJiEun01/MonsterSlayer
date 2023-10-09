@@ -152,6 +152,7 @@ public class GameManager : GenericSingleton<GameManager>
         switch (_currentState)
         {
             case GameState.Loading:
+                Time.timeScale = 1;
                 GenericSingleton<UIBase>.Instance.CrossHairOff();
                 GenericSingleton<UIBase>.Instance.ShowPlayerUI(false);
                 GenericSingleton<PlayerCon>.Instance.Camera.gameObject.SetActive(false);

@@ -26,6 +26,7 @@ public class UIBase : GenericSingleton<UIBase>
     [SerializeField] Slider _effectVolume;
     [SerializeField] Slider _musicVolume;
     [SerializeField] Slider _mouseSense;
+    [SerializeField] GameObject _miniMapCamera;
     public Sprite[] ItemIcon { get { return _itemIcon; } }
 
     bool _weaponOn;
@@ -42,7 +43,10 @@ public class UIBase : GenericSingleton<UIBase>
     public SliderUI EffectVolume;
     public SliderUI MusicVolume;
     public SliderUI MouseSense;
-
+    public void SetMiniMapCameraPos(Vector3 pos)
+    {
+        _miniMapCamera.transform.position = pos;
+    }
    
 
     public void MasterSoundSlider(float value)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MinimapCamera : MonoBehaviour
+public class MinimapCamera : GenericSingleton<MinimapCamera>
 {
     public Transform target;
     public float offsetRatio;
@@ -11,7 +11,7 @@ public class MinimapCamera : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("player").transform; // "Player" 태그를 가진 오브젝트를 찾아서 플레이어로 설정
+        target = GameObject.FindGameObjectWithTag("MiniMapFind").transform; // "Player" 태그를 가진 오브젝트를 찾아서 플레이어로 설정
         cam = GetComponent<Camera>();
         size = new Vector2(cam.orthographicSize, cam.orthographicSize * cam.aspect);
     }

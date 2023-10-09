@@ -190,7 +190,7 @@ public class GameManager : GenericSingleton<GameManager>
                 SetCurrentStage(1);
                 GenericSingleton<BGMManager>.Instance.SetBgm(_currentStage);
                 GenericSingleton<UIBase>.Instance.SetCrosshair();
-                GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(0, -7.6f, 0));
+                GenericSingleton<ParentSingleTon>.Instance.SetPosition(new Vector3(-9, -11.6f, 0));
                 GenericSingleton<ParentSingleTon>.Instance.SetRotation(0);
                 GenericSingleton<PlayerCon>.Instance.SetPosition(new Vector3(0, 0, 0));
                 GenericSingleton<PlayerCon>.Instance.SetRotation(0);

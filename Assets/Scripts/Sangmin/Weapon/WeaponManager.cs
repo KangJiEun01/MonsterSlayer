@@ -38,10 +38,13 @@ public class WeaponManager : GenericSingleton<WeaponManager>
         if (!_isHeal)
         {
             _currentWeapon.OnUpdate();
-            SwapWeapon();
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Heal();
+            }
+            if (!_currentWeapon.IsReload)
+            {
+                SwapWeapon();
             }
         }
         
@@ -127,7 +130,6 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                 _currentIdx = 1;
                 if (_currentWeapon != _currentWeapons[_currentIdx])
                 {
-
                     SetCurrentWeapon(_currentWeapons[_currentIdx]);
                 }
                 break;
@@ -136,7 +138,6 @@ public class WeaponManager : GenericSingleton<WeaponManager>
                 _currentIdx = 2;
                 if (_currentWeapon != _currentWeapons[_currentIdx])
                 {
-
                     SetCurrentWeapon(_currentWeapons[_currentIdx]);
                 }
                 break;
@@ -268,12 +269,17 @@ public abstract class WeaponBase :MonoBehaviour
 
     protected AudioSource _audioSource;
     public AudioSource AudioSource { get { return _audioSource; } }
-
+    public Coroutine _reload;
     protected Recoil _recoil;
+  
     public Recoil Recoil { get {  return _recoil; } }
     [Header("Sound")]
     [SerializeField] protected AudioClip[] _shotSound;
     [SerializeField] protected AudioClip _reloadSound;
+    public void ReloadCancle()
+    {
+        _isReload = false;
+    }
     public virtual void  Init()
     {
        
@@ -332,7 +338,7 @@ public abstract class HitScan : WeaponBase
         if (Input.GetKeyDown(KeyCode.R) && _currentIdx < _maxBullet && !_isReload)
         {
             _isReload = true;
-            StartCoroutine(Reload());
+            _reload = StartCoroutine(Reload());
         }
 
     }

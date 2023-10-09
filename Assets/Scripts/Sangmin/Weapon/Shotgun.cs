@@ -7,13 +7,13 @@ public class Shotgun : HitScan
 {
     [SerializeField] float _reloadDelay = 1.2f;
     [SerializeField] float _spread = 0.05f;
-
     public override void Fire()
     {
         if (_currentIdx > 0 && !_isReload)
         {
             RaycastHit hit;
             _currentIdx--;
+            GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
             _effect.Play();
             _audioSource.PlayOneShot(_shotSound[Random.Range(0, _shotSound.Length)], 1f);
             _animator.Play("Shot");
@@ -40,15 +40,24 @@ public class Shotgun : HitScan
             if(_currentIdx == 0)
             {
                 _isReload = true;
-                StartCoroutine(Reload());
+                _reload = StartCoroutine(Reload());
+            }
+        }
+        else if (_currentIdx > 0 && _isReload)
+        {
+            if (_reload != null)
+            {
+                Debug.Log("장전 종료");
+                StopCoroutine(_reload);
+                _isReload=false;
             }
         }
         else if (_currentIdx <= 0 && !_isReload)
         {
             _isReload = true;
-            StartCoroutine(Reload());
+            _reload = StartCoroutine(Reload());
         }
-        GenericSingleton<UIBase>.Instance.SetCurrentBullet(_currentIdx);
+        
     }
     public override IEnumerator Reload()
     {

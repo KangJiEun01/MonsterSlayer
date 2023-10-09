@@ -38,7 +38,7 @@ public class Boss02NewAi : MonoBehaviour //보스 1 : 3초마다 따라와서 공격하고 3�
     {
         int Rand = Random.Range(0, 2);
         Debug.Log(Rand);
-            if (Rand == 0) //2번 공격
+            if (Rand == 0|| Rand == 1) //2번 공격
             {
                 if (_attack == false)
                 {
@@ -48,16 +48,16 @@ public class Boss02NewAi : MonoBehaviour //보스 1 : 3초마다 따라와서 공격하고 3�
                 }
                 Mode = true;
             }
-            else if (Rand == 1)//1번 공격
-            { 
-                if (_attack == false)
-                {
-                    _attack = true;
-                    Atk01();
-                    _attack = false;
-                }
-                Mode = false;
-            }
+            //else if (Rand == 1)//1번 공격
+            //{ 
+            //    if (_attack == false)
+            //    {
+            //        _attack = true;
+            //        Atk01();
+            //        _attack = false;
+            //    }
+            //    Mode = false;
+            //}
         void Atk02()
         {
             GetComponent<Boss02Attack02>().enabled = true;

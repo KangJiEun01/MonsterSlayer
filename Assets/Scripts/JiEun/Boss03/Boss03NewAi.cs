@@ -6,8 +6,8 @@ public class Boss03NewAi : MonoBehaviour
 
     float _hp = 100;
     float chaseDistance = 70f; // 플레이어 최대거리
-    float attackDistance = 6f; // 공격거리
-    float attackCooldown = 3.3f; // 공격쿨다운
+    float attackDistance = 7f; // 공격거리
+    float attackCooldown = 3.1f; // 공격쿨다운
     float bossSpeed = 18f;
 
     bool isAttacking = true;

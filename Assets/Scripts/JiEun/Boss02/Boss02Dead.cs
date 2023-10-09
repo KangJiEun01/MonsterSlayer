@@ -13,7 +13,7 @@ public class Boss02Dead : MonoBehaviour
     }
     void Boss2Dead()
     {
-        Boss03.GetComponent<Boss03NewAi>().enabled = true;
+        Boss03.GetComponent<Boss03LastAi>().enabled = true;
         Boss03.SetActive(true);
         Destroy(gameObject);
     }

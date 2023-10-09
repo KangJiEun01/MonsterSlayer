@@ -82,12 +82,12 @@ public class Boss02NewAi : MonoBehaviour //보스 1 : 3초마다 따라와서 공격하고 3�
             }
             else if (_hp <= 0)
             {
-                GetComponent<Boss02Dead>().enabled = true;
                 GetComponent<Boss02NewAi>().enabled = false;
                 GetComponent<Boss02Attack01>().enabled = false;
                 GetComponent<Boss02Attack02>().enabled = false;
                 GetComponent<Boss02Hit>().enabled = false;
                 GetComponent<Target>().enabled = false;
+                GetComponent<Boss02Dead>().enabled = true;
             }
             if (_hp > 0 && startAtt)
             {
